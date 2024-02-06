@@ -2,7 +2,7 @@ import './App.css';
 
 function App() {
   return (
-    <h1>Template</h1>
+    <h1>Template (dev branch)</h1>
   );
 }
 
