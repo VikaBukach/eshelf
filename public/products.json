@@ -1,0 +1,213 @@
+[
+    {
+        "category": "smartphones",
+        "brands": [
+            {
+                "brand": "Apple",
+                "models": [
+                    {
+                        "model": "iPhone 15",
+                        "image": "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118417287",
+                        "specifications": {
+                            "display": {
+                                "screen diagonal": "6.1",
+                                "display resolution": "2556 x 1179",
+                                "display matrix type": "Retina Display",
+                                "refresh rate": ""
+                            },
+                            "operating system": {
+                                "type": "Apple iOS"
+                            },
+                            "processor": {
+                                "type": "A16 Bionic chip",
+                                "number of cores": "16",
+                                "frequency": "60 Hz"
+                            },
+                            "memory": {
+                                "RAM": "6GB"
+                            },
+                            "camera": {
+                                "number of cameras": "2",
+                                "main camera": "48 MP",
+                                "front camera": "12 MP",
+                                "functions": [
+                                    "Dual-LED dual-tone flash",
+                                    "Smart HDR 5",
+                                    "Cinematic mode",
+                                    "Deep Fusion",
+                                    "Next-generation portraits with Focus and Depth Control",
+                                    "Portrait Lighting with six effects",
+                                    "Night mode",
+                                    "Auto image stabilization",
+                                    "4K video recording",
+                                    "Night mode Time-lapse",
+                                    "Lens correction"
+                                ]
+                            },
+                            "battery": {
+                                "capacity": "3349 mAh"
+                            }
+                        },
+                        "colors": [
+                            {
+                                "color": "black",
+                                "images": [
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354432",
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354463",
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354464"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 578893,
+                                        "capacity": "128GB",
+                                        "quantity": 95,
+                                        "price": 899,
+                                        "discount price": 799
+                                    },
+                                    {
+                                        "article": 578805,
+                                        "capacity": "256GB",
+                                        "quantity": 150,
+                                        "price": 999,
+                                        "discount price": 899
+                                    },
+                                    {
+                                        "article": 578824,
+                                        "capacity": "512GB",
+                                        "quantity": 20,
+                                        "price": 1199,
+                                        "discount price": 1099
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "blue",
+                                "images": [
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354472",
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354473",
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354474"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 578894,
+                                        "capacity": "128GB",
+                                        "quantity": 45,
+                                        "price": 899,
+                                        "discount price": 799
+                                    },
+                                    {
+                                        "article": 578804,
+                                        "capacity": "256GB",
+                                        "quantity": 77,
+                                        "price": 999,
+                                        "discount price": 899
+                                    },
+                                    {
+                                        "article": 578825,
+                                        "capacity": "512GB",
+                                        "quantity": 2,
+                                        "price": 1199,
+                                        "discount price": 1099
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "pink",
+                                "images": [
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354465",
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354466",
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354467"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 578895,
+                                        "capacity": "128GB",
+                                        "quantity": 85,
+                                        "price": 899,
+                                        "discount price": 799
+                                    },
+                                    {
+                                        "article": 578803,
+                                        "capacity": "256GB",
+                                        "quantity": 12,
+                                        "price": 999,
+                                        "discount price": 899
+                                    },
+                                    {
+                                        "article": 578826,
+                                        "capacity": "512GB",
+                                        "quantity": 22,
+                                        "price": 1199,
+                                        "discount price": 1099
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "yellow",
+                                "images": [
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354468",
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354469",
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354471"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 578896,
+                                        "capacity": "128GB",
+                                        "quantity": 45,
+                                        "price": 899,
+                                        "discount price": 799
+                                    },
+                                    {
+                                        "article": 578802,
+                                        "capacity": "256GB",
+                                        "quantity": 10,
+                                        "price": 999,
+                                        "discount price": 899
+                                    },
+                                    {
+                                        "article": 578827,
+                                        "capacity": "512GB",
+                                        "quantity": 88,
+                                        "price": 1199,
+                                        "discount price": 1099
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "green",
+                                "images": [
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354499",
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354542",
+                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354543"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 578897,
+                                        "capacity": "128GB",
+                                        "quantity": 33,
+                                        "price": 899,
+                                        "discount price": 799
+                                    },
+                                    {
+                                        "article": 578801,
+                                        "capacity": "256GB",
+                                        "quantity": 54,
+                                        "price": 999,
+                                        "discount price": 899
+                                    },
+                                    {
+                                        "article": 578828,
+                                        "capacity": "512GB",
+                                        "quantity": 23,
+                                        "price": 1199,
+                                        "discount price": 1099
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
