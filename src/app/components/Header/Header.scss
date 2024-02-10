@@ -1,0 +1,14 @@
+header {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    background-color: pink;
+}
+
+.menu {
+    display: none;
+}
+
+.open {
+    display: block;
+}
