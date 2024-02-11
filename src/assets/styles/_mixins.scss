@@ -8,7 +8,7 @@
 
 // Adaptive value: @include adaptiveValue("padding-top", 30, 70)
 $minScreen: 32rem;
-$maxScreen: 168rem;
+$maxScreen: 171.2rem;
 
 @mixin adaptiveValue ($property, $minValue, $maxValue) {
     #{$property}: clamp(rem($minValue), (((rem($maxValue) - rem($minValue)) * 100 / ($maxScreen - $minScreen)) * 1vw) + (($minScreen * rem($maxValue)) - ($maxScreen * rem($minValue))) / ($minScreen - $maxScreen), rem($maxValue));

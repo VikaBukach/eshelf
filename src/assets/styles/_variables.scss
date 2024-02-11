@@ -23,11 +23,11 @@ $main-gradient: linear-gradient(to bottom right, #A2ACFF 0%, #CAADF9 100%);;
 /** TYPOGRAPHY **/
 
 // Break points
-$desktop: 991.98px;
-$tablet: 767.98px;
-$mobile: 479.98px;
+$desktopFull: 1712px;
+$desktop: 1024px;
+$tablet: 768px;
+$mobile: 320px;
 
 // Screen width
-$minWidthScreen: 320px;
-$maxWidthScreen: 1680px;
+$maxWidthScreen: 1712px;
 
