@@ -1,3 +1,4 @@
+import "../assets/styles/style.scss";
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "./pages/Layout";

@@ -16,6 +16,18 @@ $secondary-color-grey: #8D8D8D;
 $secondary-color-grey-light: #A0A0A0;
 $secondary-color-orange: #FFAF12;
 
-// Gradient colors 
+// Gradient colors
+$main-background: #A2ACFF;
+$main-gradient: linear-gradient(to bottom right, #A2ACFF 0%, #CAADF9 100%);;
 
 /** TYPOGRAPHY **/
+
+// Break points
+$desktop: 991.98px;
+$tablet: 767.98px;
+$mobile: 479.98px;
+
+// Screen width
+$minWidthScreen: 320px;
+$maxWidthScreen: 1680px;
+
