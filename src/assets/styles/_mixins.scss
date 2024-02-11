@@ -54,7 +54,7 @@ $maxScreen: 168rem;
     }
 }
 
-@mixin header-h4 {
+@mixin header-h5 {
     font-size: 14px;
     font-weight: 600;
     @media (min-width: $desktop) {
@@ -62,7 +62,7 @@ $maxScreen: 168rem;
     }
 }
 
-@mixin header-h5 {
+@mixin header-h6 {
     font-size: 14px;
     font-weight: 600;
     @media (min-width: $desktop) {
