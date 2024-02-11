@@ -1,0 +1,12 @@
+footer {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    
+    
+    @include gradient;
+    @include adaptiveValue("padding-bottom", 30, 100);
+    //@include adaptiveValue("font-size", 14, 20);
+
+    @include header-h4;
+}
