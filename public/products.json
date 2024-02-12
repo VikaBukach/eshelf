@@ -7,30 +7,30 @@
                 "models": [
                     {
                         "model": "iPhone 15",
-                        "image": "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118417287",
+                        "image": "assets/images/Products/Smartphones/Apple/iPhone15/all.jpg",
                         "specifications": {
                             "display": {
                                 "screen diagonal": "6.1",
                                 "display resolution": "2556 x 1179",
-                                "display matrix type": "Retina Display",
-                                "refresh rate": ""
+                                "display matrix type": "Super Retina XDR display",
+                                "frequency": "60 Hz"
                             },
                             "operating system": {
                                 "type": "Apple iOS"
                             },
                             "processor": {
                                 "type": "A16 Bionic chip",
-                                "number of cores": "16",
-                                "frequency": "60 Hz"
+                                "number of cores": "16"
                             },
                             "memory": {
                                 "RAM": "6GB"
                             },
                             "camera": {
-                                "number of cameras": "2",
+                                "number of cameras": "3",
                                 "main camera": "48 MP",
                                 "front camera": "12 MP",
                                 "functions": [
+                                    ".5x, 1x, 2x optical zoom options",
                                     "Dual-LED dual-tone flash",
                                     "Smart HDR 5",
                                     "Cinematic mode",
@@ -45,16 +45,21 @@
                                 ]
                             },
                             "battery": {
-                                "capacity": "3349 mAh"
+                                "capacity": "3349 mAh",
+                                "charging port": "USB-C"
+                            },
+                            "other": {
+                                "weight": "171 g",
+                                "dimension": "147.6 x 71.6 x 7.8"
                             }
                         },
                         "colors": [
                             {
                                 "color": "black",
                                 "images": [
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354432",
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354463",
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354464"
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/black/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/black/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/black/3.jpg"
                                 ],
                                 "products": [
                                     {
@@ -83,9 +88,9 @@
                             {
                                 "color": "blue",
                                 "images": [
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354472",
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354473",
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354474"
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/blue/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/blue/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/blue/3.jpg"
                                 ],
                                 "products": [
                                     {
@@ -114,9 +119,9 @@
                             {
                                 "color": "pink",
                                 "images": [
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354465",
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354466",
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354467"
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/pink/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/pink/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/pink/3.jpg"
                                 ],
                                 "products": [
                                     {
@@ -145,9 +150,9 @@
                             {
                                 "color": "yellow",
                                 "images": [
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354468",
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354469",
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354471"
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/yellow/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/yellow/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/yellow/3.jpg"
                                 ],
                                 "products": [
                                     {
@@ -176,9 +181,9 @@
                             {
                                 "color": "green",
                                 "images": [
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354499",
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354542",
-                                    "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118354543"
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/green/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/green/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15/green/3.jpg"
                                 ],
                                 "products": [
                                     {
@@ -200,6 +205,725 @@
                                         "capacity": "512GB",
                                         "quantity": 23,
                                         "price": 1199,
+                                        "discount price": 1099
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "model": "iPhone 15 Pro",
+                        "image": "assets/images/Products/Smartphones/Apple/iPhone15Pro/all.jpg",
+                        "specifications": {
+                            "display": {
+                                "screen diagonal": "6.1",
+                                "display resolution": "2556 x 1179",
+                                "display matrix type": "Super Retina XDR display",
+                                "frequency": "120Hz"
+                            },
+                            "operating system": {
+                                "type": "Apple iOS"
+                            },
+                            "processor": {
+                                "type": "A17 Pro chip",
+                                "number of cores": "16"
+                            },
+                            "memory": {
+                                "RAM": "6GB"
+                            },
+                            "camera": {
+                                "number of cameras": "4",
+                                "main camera": "48 MP",
+                                "front camera": "12 MP",
+                                "functions": [
+                                    ".5x, 1x, 2x, 3x optical zoom options",
+                                    "Digital zoom up to 15x",
+                                    "Adaptive True Tone flash",
+                                    "Smart HDR 5",
+                                    "Cinematic mode",
+                                    "Deep Fusion",
+                                    "Next-generation portraits with Focus and Depth Control",
+                                    "Portrait Lighting with six effects",
+                                    "Night mode",
+                                    "Night mode portraits",
+                                    "Second-generation sensor-shift optical image stabilisation",
+                                    "4K video recording",
+                                    "Night mode Time-lapse",
+                                    "Lens correction",
+                                    "Macro photography",
+                                    "Apple ProRAW"
+                                ]
+                            },
+                            "battery": {
+                                "capacity": "3274 mAh",
+                                "charging port": "USB-C"
+                            },
+                            "other": {
+                                "weight": "187 g",
+                                "dimension": "146.6 x 70.6 x 8.25"
+                            }
+                        },
+                        "colors": [
+                            {
+                                "color": "black titanium",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/black/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/black/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/black/3.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/black/4.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/black/5.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 568223,
+                                        "capacity": "128GB",
+                                        "quantity": 230,
+                                        "price": 1199,
+                                        "discount price": 999
+                                    },
+                                    {
+                                        "article": 566345,
+                                        "capacity": "256GB",
+                                        "quantity": 190,
+                                        "price": 1299,
+                                        "discount price": 1099
+                                    },
+                                    {
+                                        "article": 563452,
+                                        "capacity": "512GB",
+                                        "quantity": 120,
+                                        "price": 1499,
+                                        "discount price": 1299
+                                    },
+                                    {
+                                        "article": 563113,
+                                        "capacity": "1TB",
+                                        "quantity": 40,
+                                        "price": 1699,
+                                        "discount price": 1499
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "white titanium",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/white/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/white/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/white/3.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/white/4.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/white/5.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 568224,
+                                        "capacity": "128GB",
+                                        "quantity": 60,
+                                        "price": 1199,
+                                        "discount price": 999
+                                    },
+                                    {
+                                        "article": 566346,
+                                        "capacity": "256GB",
+                                        "quantity": 47,
+                                        "price": 1299,
+                                        "discount price": 1099
+                                    },
+                                    {
+                                        "article": 563453,
+                                        "capacity": "512GB",
+                                        "quantity": 19,
+                                        "price": 1499,
+                                        "discount price": 1299
+                                    },
+                                    {
+                                        "article": 563114,
+                                        "capacity": "1TB",
+                                        "quantity": 12,
+                                        "price": 1699,
+                                        "discount price": 1499
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "blue titanium",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/blue/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/blue/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/blue/3.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/blue/4.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/blue/5.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 568225,
+                                        "capacity": "128GB",
+                                        "quantity": 80,
+                                        "price": 1199,
+                                        "discount price": 999
+                                    },
+                                    {
+                                        "article": 566347,
+                                        "capacity": "256GB",
+                                        "quantity": 129,
+                                        "price": 1299,
+                                        "discount price": 1099
+                                    },
+                                    {
+                                        "article": 563454,
+                                        "capacity": "512GB",
+                                        "quantity": 57,
+                                        "price": 1499,
+                                        "discount price": 1299
+                                    },
+                                    {
+                                        "article": 563115,
+                                        "capacity": "1TB",
+                                        "quantity": 74,
+                                        "price": 1699,
+                                        "discount price": 1499
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "natural titanium",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/natural/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/natural/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/natural/3.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/natural/4.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15Pro/natural/5.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 568226,
+                                        "capacity": "128GB",
+                                        "quantity": 58,
+                                        "price": 1199,
+                                        "discount price": 999
+                                    },
+                                    {
+                                        "article": 566348,
+                                        "capacity": "256GB",
+                                        "quantity": 95,
+                                        "price": 1299,
+                                        "discount price": 1099
+                                    },
+                                    {
+                                        "article": 563455,
+                                        "capacity": "512GB",
+                                        "quantity": 63,
+                                        "price": 1499,
+                                        "discount price": 1299
+                                    },
+                                    {
+                                        "article": 563116,
+                                        "capacity": "1TB",
+                                        "quantity": 5,
+                                        "price": 1699,
+                                        "discount price": 1499
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "model": "iPhone 15 Pro Max",
+                        "image": "assets/images/Products/Smartphones/Apple/iPhone15ProMax/all.jpg",
+                        "specifications": {
+                            "display": {
+                                "screen diagonal": "6.7",
+                                "display resolution": "2796 x 1290",
+                                "display matrix type": "Super Retina XDR display",
+                                "frequency": "120Hz"
+                            },
+                            "operating system": {
+                                "type": "Apple iOS"
+                            },
+                            "processor": {
+                                "type": "A17 Pro chip",
+                                "number of cores": "16"
+                            },
+                            "memory": {
+                                "RAM": "8GB"
+                            },
+                            "camera": {
+                                "number of cameras": "4",
+                                "main camera": "48 MP",
+                                "front camera": "12 MP",
+                                "functions": [
+                                    ".5x, 1x, 2x, 5x optical zoom options",
+                                    "Digital zoom up to 25x",
+                                    "Adaptive True Tone flash",
+                                    "Smart HDR 5",
+                                    "Cinematic mode",
+                                    "Deep Fusion",
+                                    "Next-generation portraits with Focus and Depth Control",
+                                    "Portrait Lighting with six effects",
+                                    "Night mode",
+                                    "Night mode portraits",
+                                    "Second-generation sensor-shift optical image stabilisation",
+                                    "4K video recording",
+                                    "Night mode Time-lapse",
+                                    "Lens correction",
+                                    "Macro photography",
+                                    "Apple ProRAW"
+                                ]
+                            },
+                            "battery": {
+                                "capacity": "4422 mAh",
+                                "charging port": "USB-C"
+                            },
+                            "other": {
+                                "weight": "221 g",
+                                "dimension": "159.9 x 76.7 x 8.25"
+                            }
+                        },
+                        "colors": [
+                            {
+                                "color": "black titanium",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/black/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/black/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/black/3.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/black/4.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/black/5.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 598345,
+                                        "capacity": "256GB",
+                                        "quantity": 70,
+                                        "price": 1399,
+                                        "discount price": 1199
+                                    },
+                                    {
+                                        "article": 595452,
+                                        "capacity": "512GB",
+                                        "quantity": 90,
+                                        "price": 1599,
+                                        "discount price": 1399
+                                    },
+                                    {
+                                        "article": 595113,
+                                        "capacity": "1TB",
+                                        "quantity": 10,
+                                        "price": 1799,
+                                        "discount price": 1599
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "white titanium",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/white/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/white/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/white/3.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/white/4.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/white/5.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 598346,
+                                        "capacity": "256GB",
+                                        "quantity": 46,
+                                        "price": 1399,
+                                        "discount price": 1199
+                                    },
+                                    {
+                                        "article": 595453,
+                                        "capacity": "512GB",
+                                        "quantity": 36,
+                                        "price": 1599,
+                                        "discount price": 1399
+                                    },
+                                    {
+                                        "article": 595114,
+                                        "capacity": "1TB",
+                                        "quantity": 9,
+                                        "price": 1799,
+                                        "discount price": 1599
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "blue titanium",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/blue/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/blue/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/blue/3.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/blue/4.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/blue/5.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 598347,
+                                        "capacity": "256GB",
+                                        "quantity": 45,
+                                        "price": 1399,
+                                        "discount price": 1199
+                                    },
+                                    {
+                                        "article": 595454,
+                                        "capacity": "512GB",
+                                        "quantity": 38,
+                                        "price": 1599,
+                                        "discount price": 1399
+                                    },
+                                    {
+                                        "article": 595116,
+                                        "capacity": "1TB",
+                                        "quantity": 16,
+                                        "price": 1799,
+                                        "discount price": 1599
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "natural titanium",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/natural/1.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/natural/2.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/natural/3.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/natural/4.jpg",
+                                    "assets/images/Products/Smartphones/Apple/iPhone15ProMax/natural/5.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 598348,
+                                        "capacity": "256GB",
+                                        "quantity": 64,
+                                        "price": 1399,
+                                        "discount price": 1199
+                                    },
+                                    {
+                                        "article": 595455,
+                                        "capacity": "512GB",
+                                        "quantity": 38,
+                                        "price": 1599,
+                                        "discount price": 1399
+                                    },
+                                    {
+                                        "article": 595117,
+                                        "capacity": "1TB",
+                                        "quantity": 27,
+                                        "price": 1799,
+                                        "discount price": 1599
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "brand": "Samsung",
+                "models": [
+                    {
+                        "model": "Galaxy S24+",
+                        "image": "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/all.jpg",
+                        "specifications": {
+                            "display": {
+                                "screen diagonal": "6.7",
+                                "display resolution": "3120 x 1440",
+                                "display matrix type": "Dynamic AMOLED 2X Display",
+                                "frequency": "120 Hz"
+                            },
+                            "operating system": {
+                                "type": "Android 14"
+                            },
+                            "processor": {
+                                "type": "Qualcomm Snapdragon 8 Gen 3 SM8650",
+                                "number of cores": "10"
+                            },
+                            "memory": {
+                                "RAM": "12GB"
+                            },
+                            "camera": {
+                                "number of cameras": "4",
+                                "main camera": "50 MP",
+                                "front camera": "12 MP",
+                                "functions": [
+                                    "Optical Zoom 3x",
+                                    "Optical quality Zoom 2x (Enabled by Adaptive Pixel sensor)",
+                                    "Digital Zoom up to 30x"
+                                ]
+                            },
+                            "battery": {
+                                "capacity": "4900 mAh",
+                                "charging port": "USB-C"
+                            },
+                            "other": {
+                                "weight": "196 g",
+                                "dimension": "158.5 x 75.9 x 7.7"
+                            }
+                        },
+                        "colors": [
+                            {
+                                "color": "black",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/black/1.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/black/2.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/black/3.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/black/4.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 467742,
+                                        "capacity": "256GB",
+                                        "quantity": 125,
+                                        "price": 449,
+                                        "discount price": 399
+                                    },
+                                    {
+                                        "article": 467332,
+                                        "capacity": "512GB",
+                                        "quantity": 110,
+                                        "price": 649,
+                                        "discount price": 499
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "gold",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/gold/1.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/gold/2.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/gold/3.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/gold/4.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 467743,
+                                        "capacity": "256GB",
+                                        "quantity": 65,
+                                        "price": 449,
+                                        "discount price": 399
+                                    },
+                                    {
+                                        "article": 467333,
+                                        "capacity": "512GB",
+                                        "quantity": 20,
+                                        "price": 649,
+                                        "discount price": 499
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "violet",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/violet/1.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/violet/2.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/violet/3.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/violet/4.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 467744,
+                                        "capacity": "256GB",
+                                        "quantity": 35,
+                                        "price": 449,
+                                        "discount price": 399
+                                    },
+                                    {
+                                        "article": 467334,
+                                        "capacity": "512GB",
+                                        "quantity": 40,
+                                        "price": 649,
+                                        "discount price": 499
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "gray",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/gray/1.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/gray/2.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/gray/3.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Plus/gray/4.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 467745,
+                                        "capacity": "256GB",
+                                        "quantity": 75,
+                                        "price": 449,
+                                        "discount price": 399
+                                    },
+                                    {
+                                        "article": 467335,
+                                        "capacity": "512GB",
+                                        "quantity": 150,
+                                        "price": 649,
+                                        "discount price": 499
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "model": "Galaxy S24 Ultra",
+                        "image": "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/all.jpg",
+                        "specifications": {
+                            "display": {
+                                "screen diagonal": "6.8",
+                                "display resolution": "3120 x 1440",
+                                "display matrix type": "Dynamic AMOLED 2X Display",
+                                "frequency": "120 Hz"
+                            },
+                            "operating system": {
+                                "type": "Android 14"
+                            },
+                            "processor": {
+                                "type": "Snapdragon 8 Gen 3",
+                                "number of cores": "10"
+                            },
+                            "memory": {
+                                "RAM": "12GB"
+                            },
+                            "camera": {
+                                "number of cameras": "5",
+                                "main camera": "50 MP",
+                                "front camera": "12 MP",
+                                "functions": [
+                                    "Optical Zoom 3x and 5x",
+                                    "Optical quality Zoom 2x and 10x (Enabled by Adaptive Pixel sensor)",
+                                    "Digital Zoom up to 100x"
+                                ]
+                            },
+                            "battery": {
+                                "capacity": "5000 mAh",
+                                "charging port": "USB-C"
+                            },
+                            "other": {
+                                "weight": "232 g",
+                                "dimension": "162.3 x 79.0 x 8.6"
+                            }
+                        },
+                        "colors": [
+                            {
+                                "color": "black",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/black/1.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/black/2.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/black/3.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/black/4.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 456742,
+                                        "capacity": "256GB",
+                                        "quantity": 145,
+                                        "price": 899,
+                                        "discount price": 699
+                                    },
+                                    {
+                                        "article": 423542,
+                                        "capacity": "512GB",
+                                        "quantity": 130,
+                                        "price": 999,
+                                        "discount price": 799
+                                    },
+                                    {
+                                        "article": 453232,
+                                        "capacity": "1TB",
+                                        "quantity": 50,
+                                        "price": 1299,
+                                        "discount price": 1099
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "gold",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/gold/1.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/gold/2.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/gold/3.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/gold/4.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 456743,
+                                        "capacity": "256GB",
+                                        "quantity": 185,
+                                        "price": 899,
+                                        "discount price": 699
+                                    },
+                                    {
+                                        "article": 423543,
+                                        "capacity": "512GB",
+                                        "quantity": 130,
+                                        "price": 999,
+                                        "discount price": 799
+                                    },
+                                    {
+                                        "article": 453233,
+                                        "capacity": "1TB",
+                                        "quantity": 20,
+                                        "price": 1299,
+                                        "discount price": 1099
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "violet",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/violet/1.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/violet/2.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/violet/3.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/violet/4.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 456744,
+                                        "capacity": "256GB",
+                                        "quantity": 35,
+                                        "price": 899,
+                                        "discount price": 699
+                                    },
+                                    {
+                                        "article": 423544,
+                                        "capacity": "512GB",
+                                        "quantity": 10,
+                                        "price": 999,
+                                        "discount price": 799
+                                    },
+                                    {
+                                        "article": 453234,
+                                        "capacity": "1TB",
+                                        "quantity": 2,
+                                        "price": 1299,
+                                        "discount price": 1099
+                                    }
+                                ]
+                            },
+                            {
+                                "color": "gray",
+                                "images": [
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/gray/1.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/gray/2.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/gray/3.jpg",
+                                    "assets/images/Products/Smartphones/Samsung/GalaxyS24Ultra/gray/4.jpg"
+                                ],
+                                "products": [
+                                    {
+                                        "article": 456745,
+                                        "capacity": "256GB",
+                                        "quantity": 35,
+                                        "price": 899,
+                                        "discount price": 699
+                                    },
+                                    {
+                                        "article": 423545,
+                                        "capacity": "512GB",
+                                        "quantity": 10,
+                                        "price": 999,
+                                        "discount price": 799
+                                    },
+                                    {
+                                        "article": 453235,
+                                        "capacity": "1TB",
+                                        "quantity": 2,
+                                        "price": 1299,
                                         "discount price": 1099
                                     }
                                 ]

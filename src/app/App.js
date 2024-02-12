@@ -14,8 +14,7 @@ import { Notfound } from "./pages/Notfound";
 function App() {
   return (
     <>
-      <Provider store={store}>
-        <BrowserRouter>
+     
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
@@ -26,8 +25,6 @@ function App() {
               <Route path="*" element={<Notfound />} />
             </Route>
           </Routes>
-        </BrowserRouter>
-      </Provider>
     </>
   );
 }
