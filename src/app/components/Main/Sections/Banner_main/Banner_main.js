@@ -9,7 +9,7 @@ function Arrow(props) {
     return (
         <div
             className={className}
-            style={{ ...style, display: "block", background: "black" }}
+            style={{ ...style, display: "block", background: "gray" }}
             onClick={onClick}
         />
     );
@@ -56,12 +56,16 @@ function BannerMain(props) {
                 <div className="banner_main-slider-item-1">
                     <h1 className="banner_main-title">Phantom 4 Pro V2.0</h1>
                     <p className="banner_main-descr">Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and
-                        20MP
-                        photos, the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom. A wide array of
-                        intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial
-                        imaging solution, designed for the professional creator.
-                    </p>
-                    <img className="banner_main-img" src="https://content.rozetka.com.ua/goods/images/original/372992054.jpg" width="100" height="100" alt="Quadcopter"/>
+                        20MP photos...</p>
+                    {/*<p className="banner_main-descr">Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and*/}
+                    {/*    20MP*/}
+                    {/*    photos, the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom. A wide array of*/}
+                    {/*    intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial*/}
+                    {/*    imaging solution, designed for the professional creator.*/}
+                    {/*</p>*/}
+                    <img className="banner_main-img"
+                         src="/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png"
+                         alt="Quadcopter"/>
                     <div className="banner_main-old-price">₴ 71 999</div>
                     <div className="banner_main-new-price">₴ 65 999</div>
                     <p className="banner_main-text">The offer is valid from 12.11 to 29.12</p>
