@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Comparing = () => {
-  return (
-    <div>Comparing Page</div>
-  )
-}
+  return <div>Comparing Page</div>;
+};
 
-export {Comparing};
+export { Comparing };
