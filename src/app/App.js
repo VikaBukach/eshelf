@@ -1,8 +1,6 @@
+import "../assets/styles/style.scss";
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Comparing } from "./pages/Comparing";

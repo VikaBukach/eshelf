@@ -39,7 +39,7 @@ const Header = () => {
           </ul>
         </nav>
 
-        <span>eShelf</span>
+        <span className="logo">eShelf</span>
 
         <input type="search" name="search" placeholder="Search..." />
 
