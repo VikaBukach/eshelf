@@ -58,8 +58,8 @@ function BannerMain(props) {
                     <p className="banner_main-descr">Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and
                         20MP photos...</p>
                     <div className="banner_main-img-container">
-                        <div>
-                            <svg className="banner_main-svg-l banner_main-svg-activ" width="25" height="25" viewBox="0 0 25 25" fill="none"
+                        <div className="banner_main-svg-l banner_main-svg-activ">
+                            <svg  width="25" height="25" viewBox="0 0 25 25" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14.8752 5.75L8.12524 12.5L14.8752 19.25" stroke="#333333" stroke-opacity="0.2"
                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -68,8 +68,8 @@ function BannerMain(props) {
                         <img className="banner_main-img"
                             src="/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png"
                             alt="Quadcopter"/>
-                        <div>
-                            <svg className="banner_main-svg-r banner_main-svg-active" width="9" height="17" viewBox="0 0 9 17" fill="none"
+                        <div className="banner_main-svg-r banner_main-svg-active">
+                            <svg  width="9" height="17" viewBox="0 0 9 17" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.12476 15.25L7.87476 8.5L1.12476 1.75" stroke="#333333" stroke-opacity="0.2"
                                       stroke-linecap="round" stroke-linejoin="round"/>
