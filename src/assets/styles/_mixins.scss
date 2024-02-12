@@ -1,0 +1,71 @@
+@mixin logo {
+    color:$primary-color-blue;
+};
+
+@function rem($px) {
+    @return calc($px / 10) * 1rem;
+}
+
+// Adaptive value: @include adaptiveValue("padding-top", 30, 70)
+$minScreen: 32rem;
+$maxScreen: 171.2rem;
+
+@mixin adaptiveValue ($property, $minValue, $maxValue) {
+    #{$property}: clamp(rem($minValue), (((rem($maxValue) - rem($minValue)) * 100 / ($maxScreen - $minScreen)) * 1vw) + (($minScreen * rem($maxValue)) - ($maxScreen * rem($minValue))) / ($minScreen - $maxScreen), rem($maxValue));
+}
+
+// Gradient
+@mixin gradient {
+    background: $main-background;
+    background: $main-gradient;
+}
+
+// Headers
+
+@mixin header-h1 {
+    font-size: 20px;
+    font-weight: 600;
+    @media (min-width: $desktop) {
+        font-size: 36px;
+    }
+}
+
+@mixin header-h2 {
+    font-size: 18px;
+    font-weight: 600;
+    @media (min-width: $desktop) {
+        font-size: 32px;
+    }
+}
+
+@mixin header-h3 {
+    font-size: 16px;
+    font-weight: 600;
+    @media (min-width: $desktop) {
+        font-size: 24px;
+    }
+}
+
+@mixin header-h4 {
+    font-size: 14px;
+    font-weight: 600;
+    @media (min-width: $desktop) {
+        font-size: 20px;
+    }
+}
+
+@mixin header-h5 {
+    font-size: 14px;
+    font-weight: 600;
+    @media (min-width: $desktop) {
+        font-size: 18px;
+    }
+}
+
+@mixin header-h6 {
+    font-size: 14px;
+    font-weight: 600;
+    @media (min-width: $desktop) {
+        font-size: 16px;
+    }
+}
