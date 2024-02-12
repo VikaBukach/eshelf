@@ -12,16 +12,17 @@ import { Notfound } from "./pages/Notfound";
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/comparing" element={<Comparing />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="*" element={<Notfound />} />
-        </Route>
-      </Routes>
+     
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="/comparing" element={<Comparing />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="*" element={<Notfound />} />
+            </Route>
+          </Routes>
     </>
   );
 }
