@@ -6,10 +6,10 @@ import './Main.scss';
 
 const Main = () => {
     return (
-        <>
+        <div className="container">
             <BannerMain />
             <Top_Brands />
-        </>
+        </div>
     );
 };
 
