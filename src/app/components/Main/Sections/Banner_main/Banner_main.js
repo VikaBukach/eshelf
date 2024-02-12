@@ -51,52 +51,55 @@ function BannerMain(props) {
         ]
     };
     return (
-        <div className="slider-container banner_main ">
+        <div className="banner_main slider-container">
             <Slider {...settings}>
-                <div className="banner_main-slider-item-1">
+                <div className=" banner_main-slider-item banner_main-slider-item-1">
                     <h1 className="banner_main-title">Phantom 4 Pro V2.0</h1>
                     <p className="banner_main-descr">Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and
                         20MP photos...</p>
-                    {/*<p className="banner_main-descr">Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and*/}
-                    {/*    20MP*/}
-                    {/*    photos, the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom. A wide array of*/}
-                    {/*    intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial*/}
-                    {/*    imaging solution, designed for the professional creator.*/}
-                    {/*</p>*/}
-                    <img className="banner_main-img"
-                         src="/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png"
-                         alt="Quadcopter"/>
-                    <div className="banner_main-old-price">₴ 71 999</div>
-                    <div className="banner_main-new-price">₴ 65 999</div>
+                    <div className="banner_main-img">
+                        <img
+                             src="/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png"
+                             alt="Quadcopter"/>
+                    </div>
+                    <div className="banner_main-price">
+                        <div className="banner_main-old-price">₴ 71 999</div>
+                        <div className="banner_main-new-price">₴ 65 999</div>
+                    </div>
                     <p className="banner_main-text">The offer is valid from 12.11 to 29.12</p>
                 </div>
-                <div className="banner_main-slider-item-2">
-                    <h1 className="banner_main-title">Phantom 5 Pro V2.0</h1>
+                <div className="banner_main-slider-item banner_main-slider-item-2">
+                    <h1 className="banner_main-title">Phantom 5 Pro V2.5</h1>
                     <p className="banner_main-descr">Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and
-                        20MP
-                        photos, the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom. A wide array of
-                        intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial
-                        imaging solution, designed for the professional creator.
-                    </p>
-                    <img className="banner_main-img" src="https://content.rozetka.com.ua/goods/images/big_tile/378482958.png" width="100" height="100" alt=""/>
-                    <div className="banner_main-old-price">₴ 71 999</div>
-                    <div className="banner_main-new-price">₴ 65 999</div>
-                    <p className="banner_main-text">The offer is valid from 12.11 to 29.12</p>
+                        20MP photos...</p>
+                    <div className="banner_main-img">
+                        <img
+                            src="/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png"
+                            alt="Quadcopter"/>
+                    </div>
+                    <div className="banner_main-price">
+                        <div className="banner_main-old-price">₴ 31 999</div>
+                        <div className="banner_main-new-price">₴ 20 999</div>
+                    </div>
+                    <p className="banner_main-text">The offer is valid from 15.12 to 31.12</p>
                 </div>
-                <div className="banner_main-slider-item-3">
-                    <h1 className="banner_main-title">Phantom 6 Pro V2.0</h1>
+                <div className="banner_main-slider-item banner_main-slider-item-3">
+                    <h1 className="banner_main-title">Phantom 6 Pro V3.0</h1>
                     <p className="banner_main-descr">Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and
-                        20MP
-                        photos, the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom. A wide array of
-                        intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial
-                        imaging solution, designed for the professional creator.
-                    </p>
-                    <img className="banner_main-img" src="https://content2.rozetka.com.ua/goods/images/big/261571768.jpg" width="100" height="100" alt=""/>
-                    <div className="banner_main-old-price">₴ 71 999</div>
-                    <div className="banner_main-new-price">₴ 65 999</div>
+                        20MP photos...</p>
+                    <div className="banner_main-img">
+                        <img
+                            src="/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png"
+                            alt="Quadcopter"/>
+                    </div>
+                    <div className="banner_main-price">
+                        <div className="banner_main-old-price">₴ 99 999</div>
+                        <div className="banner_main-new-price">₴ 77 999</div>
+                    </div>
                     <p className="banner_main-text">The offer is valid from 12.11 to 29.12</p>
                 </div>
             </Slider>
+
         </div>
     );
 }
