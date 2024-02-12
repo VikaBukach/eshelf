@@ -8,6 +8,7 @@ import { Users } from "./pages/Users";
 import { Cart } from "./pages/Cart";
 import { Favorites } from "./pages/Favorites";
 import { Notfound } from "./pages/Notfound";
+import { ProductList } from "./pages/ProductList";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="*" element={<Notfound />} />
         </Route>
+        <Route path="/products" element={<ProductList />} />
       </Routes>
     </>
   );

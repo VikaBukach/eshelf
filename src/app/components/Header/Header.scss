@@ -1,21 +1,89 @@
-@import "../../../assets/styles/variables";
-@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/style.scss";
 
-header {
-    display: flex;
-    width: 50%;
-    justify-content: space-between;
+.header {
+    width: 100%;
+    height: 56px;
+    padding: 8px 16px;
     background-color: $primary-color-gray;
+    .header__logo,
+    .header__link-comparing,
+    .header__link-favorites,
+    .header__link-users {
+        display: none;
+    }
+
+    @media (min-width: $tablet) {
+        .header__logo,
+        .header__link-comparing,
+        .header__link-favorites,
+        .header__link-users {
+            display: flex;
+        }
+
+        background-color: red;
+       
+    }
+
+    @media (min-width: $desktop) {
+        height: 88px;
+        background-color: green;
+       
+    }
+
+    @media (min-width: $desktopFull) {
+        background-color: blue;
+       
+    }
+    
 }
 
-.logo {
+.header__content-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+
+}
+
+
+.header__logo {
     @include logo;
 }
 
-.menu {
+.header__menu {
     display: none;
 }
 
 .open {
     display: block;
+}
+
+.header__search-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content:flex-end;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 0px 12px 0px 8px;
+    height: 40px;
+
+    @media (min-width: $tablet) {
+        width: 323px;
+       
+    }
+
+    @media (min-width: $desktop) {
+        width: 712px;
+        height: 48px;
+       
+    }
+}
+
+.search-icon {
+    display: none;
+
+    @media (min-width: $tablet) {
+        display: inline-block;
+       
+    }
 }
