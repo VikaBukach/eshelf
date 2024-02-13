@@ -8,6 +8,7 @@ import { Users } from "./pages/Users";
 import { Cart } from "./pages/Cart";
 import { Favorites } from "./pages/Favorites";
 import { Notfound } from "./pages/Notfound";
+import { Catalog } from "./pages/Catalog";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
+              <Route path="/сatalog" element={<Catalog />} />
               <Route path="/comparing" element={<Comparing />} />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/cart" element={<Cart />} />
