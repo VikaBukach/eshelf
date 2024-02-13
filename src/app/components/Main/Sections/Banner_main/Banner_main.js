@@ -9,7 +9,7 @@ function BannerMain(props) {
     const slides = [
         {
             title: "Phantom 4 Pro V2.0",
-            description: "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos...",
+            description: "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom.  A wide array of intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial imaging solution, designed for the professional creator.",
             oldPrice: "₴ 71 999",
             newPrice: "₴ 65 999",
             validOffer: "The offer is valid from 12.11 to 29.12",
@@ -17,7 +17,7 @@ function BannerMain(props) {
         },
         {
             title: "Phantom 5 Pro V2.5",
-            description: "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos...",
+            description: "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom.  A wide array of intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial imaging solution, designed for the professional creator.",
             oldPrice: "₴ 31 999",
             newPrice: "₴ 20 999",
             validOffer: "The offer is valid from 15.12 to 31.12",
@@ -25,7 +25,7 @@ function BannerMain(props) {
         },
         {
             title: "Phantom 6 Pro V3.0",
-            description: "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos...",
+            description: "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom.  A wide array of intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial imaging solution, designed for the professional creator.",
             oldPrice: "₴ 99 999",
             newPrice: "₴ 77 999",
             validOffer: "The offer is valid from 12.11 to 29.12",
