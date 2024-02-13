@@ -1,14 +1,9 @@
-
-
 .banner_main {
   margin: 24px 0;
-
   .banner_main-slider-item {
-
-  padding: 8px 17px;
+    padding: 8px 17px;
 
   &-1 {
-
     background: #c2adfa;
   }
   &-2 {
@@ -35,7 +30,7 @@
     opacity: 0.9;
   }
   .banner_main-img-container {
-
+    position: relative;
     padding-top: 16px;
     padding-bottom: 8px;
     display: flex;
@@ -78,5 +73,4 @@
     flex-direction: row;
     margin-bottom: 8px;
   }
-
 }

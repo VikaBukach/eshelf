@@ -1,0 +1,20 @@
+.banner_main-svg {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.banner_main-svg-prev {
+  cursor: pointer;
+  display: block;
+  left: 30px;
+  transform: translateY(-350%) translateX(90%);
+}
+
+.banner_main-svg-next {
+  cursor: pointer;
+  display: block;
+  right: 0;
+  transform: translateY(400%) translateX(-100%);
+}

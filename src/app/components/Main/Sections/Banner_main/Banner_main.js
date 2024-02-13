@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './Banner_main.scss';
-import Arrow from "./Arrow";
+import Arrow from "./Arrow/Arrow";
 
 function BannerMain(props) {
     const slides = [
@@ -31,8 +31,7 @@ function BannerMain(props) {
             validOffer: "The offer is valid from 12.11 to 29.12",
             imagePath: "/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png"
         },
-        // Add other slides here
-    ];
+    ]; //add sliders
 
     const sliderRef = useRef(null);
 
@@ -42,8 +41,6 @@ function BannerMain(props) {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        nextArrow: <Arrow direction="next" />,
-        prevArrow: <Arrow direction="prev" />
     };
 
     return (
@@ -53,9 +50,11 @@ function BannerMain(props) {
                     <div key={index} className={`banner_main-slider-item banner_main-slider-item-${index + 1}`}>
                         <h1 className="banner_main-title">{slide.title}</h1>
                         <p className="banner_main-descr">{slide.description}</p>
+                        <Arrow direction="next" onClick={() => sliderRef.current.slickNext()}/>
                         <div className="banner_main-img-container">
                             <img className="banner_main-img" src={slide.imagePath} alt="Quadcopter"/>
                         </div>
+                        <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()} />
                         <div className="banner_main-price">
                             <div className="banner_main-old-price">{slide.oldPrice}</div>
                             <div className="banner_main-new-price">{slide.newPrice}</div>
