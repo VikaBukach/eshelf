@@ -1,14 +1,27 @@
+@import "../../../../../../assets/styles/style";
+
 .banner_main-svg {
   cursor: pointer;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+
+  @media (min-width: $desktop) {
+    left: 0;
+  }
 }
 
 .banner_main-svg-prev {
   cursor: pointer;
   left: 30px;
   transform: translateY(-350%) translateX(90%);
+
+  @media (min-width: $desktop) {
+
+    display: inline-block;
+    text-align: left;
+    transform: translateY(200%) translateX(110%);
+  }
 }
 
 .banner_main-svg-next {
@@ -16,4 +29,10 @@
   display: flex;
   right: 0;
   transform: translateY(400%) translateX(-100%);
+
+  @media (min-width: $desktop) {
+    transform: translateY(855%) translateX(-100%);
+    display: inline-block;
+    text-align: right;
+  }
 }

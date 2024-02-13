@@ -49,7 +49,7 @@ function BannerMain(props) {
                 {slides.map((slide, index) => (
                     <div key={index} className={`banner_main-slider-item banner_main-slider-item-${index + 1}`}>
                         <h1 className="banner_main-title">{slide.title}</h1>
-                        <p className="banner_main-descr">{slide.description}</p>
+                        <h4 className="banner_main-descr">{slide.description}</h4>
                         <Arrow direction="next" onClick={() => sliderRef.current.slickNext()}/>
                         <div className="banner_main-img-container">
                             <img className="banner_main-img" src={slide.imagePath} alt="Quadcopter"/>

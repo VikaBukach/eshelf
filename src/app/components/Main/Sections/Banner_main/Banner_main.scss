@@ -2,17 +2,22 @@
 
 .banner_main {
   margin: 24px 0;
+
+
   .banner_main-slider-item {
     padding: 0 17px;
+    @media (min-width: $desktop) {
+      position: relative;
+    }
 
   &-1 {
-    background: #c2adfa;
+    background: $secondary-color-purple-light;
   }
   &-2 {
-    background: linear-gradient(117.07deg, #A2ACFF 0%, #CAADF9 99.79%);
+    background: $main-gradient;
   }
   &-3 {
-    background: linear-gradient(117.07deg, #A2ACFF 0%, #CAADF9 99.79%);
+    background: $main-gradient;
   }
 }
   .banner_main-title {
@@ -22,7 +27,7 @@
     font-weight: 600;
     font-size: 20px;
     line-height: 1.5;
-    color: #fff;
+    color: $secondary-color-white;
   }
   .banner_main-descr {
     margin: 0 auto;
@@ -45,7 +50,7 @@
       width: 665px;
       margin: 0 auto;
       margin-right: 52px;
-      margin-bottom: 50px;
+      margin-bottom: 24px;
       overflow: initial;
       text-align: center;
     }
@@ -78,7 +83,7 @@
     font-size: 14px;
     line-height: 1.5;
     text-decoration: line-through;
-    color: #fff;
+    color: $secondary-color-white;
     opacity: 0.56;
     margin-right: 8px;
   }
@@ -86,13 +91,13 @@
     font-weight: 700;
     font-size: 16px;
     line-height: 1.5;
-    color: #8119b1;
+    color: $secondary-color-purple;
   }
   .banner_main-text {
     font-weight: 500;
     font-size: 12px;
     line-height: 1.5;
-    color: #fff;
+    color: $secondary-color-white;
     display: flex;
     align-items: flex-start;
     justify-content: center;
