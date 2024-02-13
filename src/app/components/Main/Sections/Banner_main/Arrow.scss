@@ -1,0 +1,24 @@
+.banner_main-svg {
+
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.banner_main-svg-prev {
+  cursor: pointer;
+  justify-content: space-around;
+  display: flex;
+  right: 0px;
+  transform: translateY(-50%) translateX(50%);
+}
+
+.banner_main-svg-next {
+  cursor: pointer;
+  justify-content: space-around;
+  display: flex;
+  right: 0;
+  transform: translateY(50%) translateX(-50%);
+}
