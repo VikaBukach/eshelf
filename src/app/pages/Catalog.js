@@ -7,7 +7,7 @@ const Catalog = () => {
     useEffect(() => {
         async function fetchProducts() {
             try {
-                const response = await axios.get("http://localhost:5000/products");
+                const response = await axios.get("http://localhost:5000/smartphones");
                 setProducts(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -17,12 +17,26 @@ const Catalog = () => {
         fetchProducts();
     }, []);
 
+    let productItems = [];
+
+    products.forEach((product) => {
+        product.colors.forEach((color) => {
+            const productItem = {};
+            productItem.fullName = product.brand + " " + product.model + " " + color.color;
+            productItem.index = product._id + color.color;
+
+            productItems.push(productItem);
+        })
+        
+    })
+
     return (
         <div>
             <h1>Catalog Page</h1>
             <ul>
-                {products.map((product, index) => (
-                    <li key={index}>{product.model}</li>
+                {productItems.map((productItem, index) => (
+                    
+                    <li key={productItem.index}>{productItem.fullName}</li>
                 ))}
             </ul>
         </div>
