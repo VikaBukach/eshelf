@@ -27,6 +27,9 @@
     @media (min-width: $tablet) {
       display: none;
     }
+    @media (min-width: $desktop) {
+      display: flex;
+    }
   }
 
   .section_top-brands-logo {
@@ -34,9 +37,6 @@
     margin-right: 40px;
     height: auto;
     align-items: center;
-    @media (min-width: $tablet) {
-
-    }
   }
 
   .section_top-brands-logo:nth-child(4),
@@ -49,6 +49,9 @@
     @media (min-width: $tablet) {
       display: flex;
       flex-wrap: wrap;
+      @media (min-width: $desktop) {
+        display: none;
+      }
     }
     .section_top-brands-logo-tablet1 {
       margin: 0 auto;
