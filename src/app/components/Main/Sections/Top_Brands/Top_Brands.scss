@@ -12,28 +12,57 @@
     font-size: 18px;
     line-height: 1.5;
     color: $primary-color-black;
+    @media (min-width: $tablet) {
+      text-align: left;
+      font-size: 20px;
+    }
   }
-   &-items{
+   &-items {
      height: 109px;
      display: flex;
-    flex-wrap: wrap;
+     flex-wrap: wrap;
      justify-content: space-between;
      padding: 0 16px;
+     @media (min-width: $tablet) {
+       display: none;
+     }
    }
+
   .section_top-brands-logo {
     display: flex;
     margin-right: 40px;
     height: auto;
     align-items: center;
+    @media (min-width: $tablet) {
+
+    }
   }
     .section_top-brands-logo:nth-child(4),
     .section_top-brands-logo:nth-child(8){
       margin-right: 0;
     }
 
-    .section_top-brands-logo-img {
+  .section_top-brands-items-tablet {
+    display: none;
+    @media (min-width: $tablet) {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      width: 614px;
+      padding: 0 25px 34px;
       display: flex;
+      flex-wrap: wrap;
 
+      //justify-content: space-around;
+    }
+
+    .section_top-brands-items-tablet:nth-child(2){
+
+      //margin-right: 124px;
+      //margin-left: 124px;
     }
   }
+}
+
+
 
