@@ -1,6 +1,7 @@
 import React from 'react';
+import Button from "../../Button/Button";
 
-function EspeciallyForYou(props) {
+function EspeciallyForYou( btnClass, onClick, text ) {
     return (
         <div className="section_especially">
             <h6 className="ssection_especially-title">
@@ -10,8 +11,11 @@ function EspeciallyForYou(props) {
                 <div></div>
                 <div></div>
             </div>
-            <button>See more</button>
-
+           <Button
+               btnClass="section_especially-products-btn"
+               text={'See more'}
+               // onClick={}
+           />
         </div>
     );
 }
