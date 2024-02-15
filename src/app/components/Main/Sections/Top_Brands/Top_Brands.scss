@@ -47,19 +47,22 @@
   .section_top-brands-items-tablet {
     display: none;
     @media (min-width: $tablet) {
-
-
       display: flex;
       flex-wrap: wrap;
     }
     .section_top-brands-logo-tablet1 {
       margin: 0 auto;
-      @media (min-width: $tablet) {
-        padding: 0 25px 34px;
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-      }
+      padding: 0 25px 34px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+
+    }
+    .section_top-brands-logo-tablet2 {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 25px 34px;
+      width: 100%;
     }
 
 
