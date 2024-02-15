@@ -34,28 +34,23 @@ function TopBrands(props) {
                 </div>
             </div>
             <div className="section_top-brands-items-tablet">
-                <div className="section_top-brands-logo">
+                <div className="section_top-brands-logo-tablet1">
                     <img className="section_top-brands-logo-img" src="/img/logo_tablet/acer.png" alt="acer"/>
-                </div>
-                <div className="section_top-brands-logo">
+
                     <img className="section_top-brands-logo-img" src="/img/logo_tablet/lenovo.png" alt="lenovo"/>
-                </div>
-                <div className="section_top-brands-logo">
+
                     <img className="section_top-brands-logo-img" src="/img/logo_tablet/samsung.png" alt="samsung"/>
                 </div>
-                <div className="section_top-brands-logo">
+
+                <div className="section_top-brands-logo-tablet2">
                     <img className="section_top-brands-logo-img" src="/img/logo_tablet/mi.png" alt="mi-xiaomi"/>
-                </div>
-                <div className="section_top-brands-logo">
+
                     <img className="section_top-brands-logo-img" src="/img/logo_tablet/jbl.png" alt="jbl"/>
-                </div>
-                <div className="section_top-brands-logo">
+
                     <img className="section_top-brands-logo-img" src="/img/logo_tablet/huawei.png" alt="huawei"/>
-                </div>
-                <div className="section_top-brands-logo">
+
                     <img className="section_top-brands-logo-img" src="/img/logo_tablet/hp.png" alt="hp"/>
-                </div>
-                <div className="section_top-brands-logo">
+
                     <img className="section_top-brands-logo-img" src="/img/logo_tablet/apple.png" alt="apple"/>
                 </div>
             </div>

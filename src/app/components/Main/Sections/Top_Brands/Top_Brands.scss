@@ -17,16 +17,17 @@
       font-size: 20px;
     }
   }
-   &-items {
-     height: 109px;
-     display: flex;
-     flex-wrap: wrap;
-     justify-content: space-between;
-     padding: 0 16px;
-     @media (min-width: $tablet) {
-       display: none;
-     }
-   }
+
+  &-items {
+    height: 109px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 16px;
+    @media (min-width: $tablet) {
+      display: none;
+    }
+  }
 
   .section_top-brands-logo {
     display: flex;
@@ -37,32 +38,35 @@
 
     }
   }
-    .section_top-brands-logo:nth-child(4),
-    .section_top-brands-logo:nth-child(8){
-      margin-right: 0;
-    }
+
+  .section_top-brands-logo:nth-child(4),
+  .section_top-brands-logo:nth-child(8) {
+    margin-right: 0;
+  }
 
   .section_top-brands-items-tablet {
     display: none;
     @media (min-width: $tablet) {
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      width: 614px;
-      padding: 0 25px 34px;
+
+
       display: flex;
       flex-wrap: wrap;
-
-      //justify-content: space-around;
+    }
+    .section_top-brands-logo-tablet1 {
+      margin: 0 auto;
+      @media (min-width: $tablet) {
+        padding: 0 25px 34px;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+      }
     }
 
-    .section_top-brands-items-tablet:nth-child(2){
 
-      //margin-right: 124px;
-      //margin-left: 124px;
+
     }
   }
-}
+
 
 
 
