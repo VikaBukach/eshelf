@@ -2,7 +2,7 @@ import React from 'react'
 import { CatalogProductList } from '../CatalogProductList/CatalogProductList';
 import { CatalogFilter } from '../CatalogFilter/CatalogFilter';
 
-const CatalogLayout = ({title}) => {
+const CatalogLayout = ({title, filterCriteria}) => {
   return (
     <div className='catalog'>
       <div className='catalog__head-line'>
@@ -10,7 +10,7 @@ const CatalogLayout = ({title}) => {
         <h4>СОРТУВАННЯ</h4>
       </div>
       <div className='catalog__body'>
-        <CatalogFilter />
+        <CatalogFilter filterCriteria="brand"/>
         <CatalogProductList />
       </div>
         
