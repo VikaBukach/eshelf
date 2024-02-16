@@ -21,13 +21,13 @@ connectToDb((err) => {
     }
   });
 
-  app.get("/products", (req, res) => {
+  const handleCollectionRequest = ("/smartphones", (collection, req, res) => {
     const products = [];
   
     db
-      .collection("smartphones")
+      .collection(collection)
       .find()
-      .sort({ title: 1 })
+      .sort({ model: 1 })
       .forEach((product) => products.push(product))
       .then(() => {
         res
@@ -39,4 +39,13 @@ connectToDb((err) => {
           .status(500)
           .json({ error: "Something goes wrong..." })
       })
+  });
+
+
+  app.get("/smartphones", (req, res) => {
+    handleCollectionRequest("smartphones", req, res);
+  });
+
+  app.get("/laptops", (req, res) => {
+    handleCollectionRequest("laptops", req, res);
   });

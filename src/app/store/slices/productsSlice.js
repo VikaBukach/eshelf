@@ -1,29 +1,45 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const fetchDataOfProducts = createAsyncThunk("products/fetchDataOfProducts", async (_, { dispatch }) => {
-  try {
-    const response = await fetch("./products.json");
-    const productsDatabase = await response.json();
-
-    console.log(productsDatabase);
-
-    dispatch(setProducts(productsDatabase));
-
-    return productsDatabase;
-  } catch (e) {
-    console.log("Помилка при виконанні fetch-запиту із завантаження бази товарів: ", e);
+export const fetchDataOfProducts = createAsyncThunk(
+  "products/fetchDataOfProducts",
+  async (collection, { dispatch }) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/${collection}`);
+      dispatch(setProducts(response.data));
+      return response.data;
+    } catch (err) {
+      console.log("Error fetching products:", err);
+      throw err; 
+    }
   }
-});
+);
 
 const productsSlice = createSlice({
   name: "products",
   initialState: {
     data: [],
+    status: "idle",
+    error: null, 
   },
   reducers: {
     setProducts: (state, action) => {
       state.data = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchDataOfProducts.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchDataOfProducts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = action.payload;
+      })
+      .addCase(fetchDataOfProducts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 
