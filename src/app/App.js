@@ -7,25 +7,26 @@ import { Comparing } from "./pages/Comparing";
 import { Users } from "./pages/Users";
 import { Favorites } from "./pages/Favorites";
 import { Notfound } from "./pages/Notfound";
-import { createContext, useState } from "react";
-
-export const Context = createContext();
+import { Catalog } from "./pages/Catalog";
 
 function App() {
   const [data, setData] = useState();
 
   return (
-    <Context.Provider value={[data, setData]}>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/comparing" element={<Comparing />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="*" element={<Notfound />} />
-        </Route>
-      </Routes>
-    </Context.Provider>
+    <>
+     
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="/сatalog" element={<Catalog />} />
+              <Route path="/comparing" element={<Comparing />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="*" element={<Notfound />} />
+            </Route>
+          </Routes>
+    </>
   );
 }
 
