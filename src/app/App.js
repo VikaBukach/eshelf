@@ -8,6 +8,7 @@ import { Users } from "./pages/Users";
 import { Favorites } from "./pages/Favorites";
 import { Notfound } from "./pages/Notfound";
 import { createContext, useState } from "react";
+import { Order } from "./pages/Order";
 
 export const Context = createContext();
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/comparing" element={<Comparing />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/order" element={<Order />} />
           <Route path="*" element={<Notfound />} />
         </Route>
       </Routes>

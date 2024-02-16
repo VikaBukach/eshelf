@@ -1,8 +1,7 @@
-$black: #333;
-$gray: #8d8d8d;
+@import '../../../assets/styles/variables';
+
 $silver: #a0a0a08f;
-$secondary: #8119b1;
-$card: #eceff1;
+
 
 * {
   box-sizing: border-box;
@@ -16,15 +15,13 @@ $card: #eceff1;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  color: $primary-color-black;
 
-  * {
-    color: $black;
-  }
 
   .line {
     display: block;
     height: 1px;
-    background-color: $card;
+    background-color: $secondary-color-grey-card;
     margin: 0 0 2rem 0;
   }
 
@@ -67,11 +64,11 @@ $card: #eceff1;
     line-height: 1;
   }
 
-  & > h3 {
+  &>h3 {
     margin-bottom: 0.9rem;
   }
 
-  & > p {
+  &>p {
     margin-bottom: 2.2rem;
   }
 
@@ -85,13 +82,6 @@ $card: #eceff1;
   font-weight: bold;
 }
 
-.btn {
-  background-color: $secondary;
-  color: #fff;
-  font-size: 1.6rem;
-  padding: 1.2rem 8rem;
-  border-radius: 0.5rem;
-}
 
 .productQuantity {
   display: flex;
@@ -110,7 +100,7 @@ $card: #eceff1;
   font-size: 2.4rem;
   font-weight: bold;
 
-  & > div {
+  &>div {
     margin-right: 4rem;
   }
 
@@ -124,7 +114,7 @@ $card: #eceff1;
     }
 
     * {
-      color: $gray;
+      color: $secondary-color-grey;
     }
   }
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Modal from "../Modal";
 import style from "./Cart.module.scss";
 import { useModal } from "../../hooks/useModal";
+import { Link } from "react-router-dom";
 
 const products = [];
 
@@ -35,6 +36,8 @@ const CartItem = ({ item }) => {
 };
 
 const Cart = ({ activator }) => {
+  const { active, open, close } = useModal();
+
   const footerRef = useRef();
   const headerRef = useRef();
 
@@ -43,7 +46,9 @@ const Cart = ({ activator }) => {
       <span className={style.line}></span>
       <div className={style.footer}>
         <p className={style.price}>499$</p>
-        <button className={style.btn}>Continue</button>
+        <Link to="/order" onClick={close} className="primary-btn">
+          Continue
+        </Link>
       </div>
     </div>
   );
@@ -98,8 +103,6 @@ const Cart = ({ activator }) => {
       ))}
     </div>
   );
-
-  const { active, open, close } = useModal();
 
   return (
     <>

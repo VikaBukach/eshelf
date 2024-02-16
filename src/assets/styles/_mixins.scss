@@ -11,12 +11,9 @@ $minScreen: 32rem;
 $maxScreen: 171.2rem;
 
 @mixin adaptiveValue($property, $minValue, $maxValue) {
-  #{$property}: clamp(
-    rem($minValue),
-    (((rem($maxValue) - rem($minValue)) * 100 / ($maxScreen - $minScreen)) * 1vw) +
-      (($minScreen * rem($maxValue)) - ($maxScreen * rem($minValue))) / ($minScreen - $maxScreen),
-    rem($maxValue)
-  );
+  #{$property}: clamp(rem($minValue),
+      (((rem($maxValue) - rem($minValue)) * 100 / ($maxScreen - $minScreen)) * 1vw) + (($minScreen * rem($maxValue)) - ($maxScreen * rem($minValue))) / ($minScreen - $maxScreen),
+      rem($maxValue));
 }
 
 // Gradient
@@ -30,6 +27,7 @@ $maxScreen: 171.2rem;
 @mixin header-h1 {
   font-size: 20px;
   font-weight: 600;
+
   @media (min-width: $desktop) {
     font-size: 36px;
   }
@@ -38,6 +36,7 @@ $maxScreen: 171.2rem;
 @mixin header-h2 {
   font-size: 18px;
   font-weight: 600;
+
   @media (min-width: $desktop) {
     font-size: 32px;
   }
@@ -46,6 +45,7 @@ $maxScreen: 171.2rem;
 @mixin header-h3 {
   font-size: 16px;
   font-weight: 600;
+
   @media (min-width: $desktop) {
     font-size: 24px;
   }
@@ -54,6 +54,7 @@ $maxScreen: 171.2rem;
 @mixin header-h4 {
   font-size: 14px;
   font-weight: 600;
+
   @media (min-width: $desktop) {
     font-size: 20px;
   }
@@ -62,6 +63,7 @@ $maxScreen: 171.2rem;
 @mixin header-h5 {
   font-size: 14px;
   font-weight: 600;
+
   @media (min-width: $desktop) {
     font-size: 18px;
   }
@@ -70,6 +72,7 @@ $maxScreen: 171.2rem;
 @mixin header-h6 {
   font-size: 14px;
   font-weight: 600;
+
   @media (min-width: $desktop) {
     font-size: 16px;
   }
