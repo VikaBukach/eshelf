@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Favorites = () => {
-  return (
-    <div>Favorites Page</div>
-  )
-}
+  return <div>Favorites Page</div>;
+};
 
-export {Favorites};
+export { Favorites };

@@ -5,12 +5,13 @@ import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Comparing } from "./pages/Comparing";
 import { Users } from "./pages/Users";
-import { Cart } from "./pages/Cart";
 import { Favorites } from "./pages/Favorites";
 import { Notfound } from "./pages/Notfound";
 import { Catalog } from "./pages/Catalog";
 
 function App() {
+  const [data, setData] = useState();
+
   return (
     <>
      

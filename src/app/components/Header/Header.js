@@ -5,6 +5,7 @@ import { FaRegHeart, FaOpencart } from "react-icons/fa6";
 import { FaBars, FaRegUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../../store/slices/NavMenuSlice";
+import Cart from "../Cart";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -50,9 +51,7 @@ const Header = () => {
         <NavLink to="/favorites">
           <FaRegHeart />
         </NavLink>
-        <NavLink to="/cart">
-          <FaOpencart />
-        </NavLink>
+        <Cart activator={<FaOpencart />} />
         <NavLink to="/users">
           <FaRegUserCircle />
         </NavLink>

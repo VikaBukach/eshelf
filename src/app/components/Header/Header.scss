@@ -2,20 +2,20 @@
 @import "../../../assets/styles/mixins";
 
 header {
-    display: flex;
-    width: 50%;
-    justify-content: space-between;
-    background-color: $primary-color-gray;
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  background-color: $primary-color-gray;
 }
 
 .logo {
-    @include logo;
+  @include logo;
 }
 
 .menu {
-    display: none;
+  display: none;
 }
 
 .open {
-    display: block;
+  display: block;
 }

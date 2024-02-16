@@ -1,22 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchDataOfProducts = createAsyncThunk(
-  "products/fetchDataOfProducts",
-  async (_, { dispatch }) => {
-    try {
-      const response = await fetch("./products.json");
-      const productsDatabase = await response.json();
+export const fetchDataOfProducts = createAsyncThunk("products/fetchDataOfProducts", async (_, { dispatch }) => {
+  try {
+    const response = await fetch("./products.json");
+    const productsDatabase = await response.json();
 
-      console.log(productsDatabase);
+    console.log(productsDatabase);
 
-      dispatch(setProducts(productsDatabase));
+    dispatch(setProducts(productsDatabase));
 
-      return productsDatabase;
-    } catch (e) {
-      console.log("Помилка при виконанні fetch-запиту із завантаження бази товарів: ", e);
-    }
+    return productsDatabase;
+  } catch (e) {
+    console.log("Помилка при виконанні fetch-запиту із завантаження бази товарів: ", e);
   }
-);
+});
 
 const productsSlice = createSlice({
   name: "products",
