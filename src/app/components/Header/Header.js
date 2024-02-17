@@ -50,10 +50,10 @@ const Header = () => {
                     <span>Catalog (mobile)</span>
                     <ul>
                       <li>
-                        <NavLink to="/products">Smartphones</NavLink>
+                        <NavLink to="/smartphones">Smartphones</NavLink>
                       </li>
                       <li>
-                        <NavLink to="/products">Laptops</NavLink>
+                        <NavLink to="/laptops">Laptops</NavLink>
                       </li>
                     </ul>
                   </nav>
@@ -71,10 +71,10 @@ const Header = () => {
             <span>Catalog</span>
             <ul>
               <li>
-                <NavLink to="/products">Smartphones</NavLink>
+                <NavLink to="/smartphones">Smartphones</NavLink>
               </li>
               <li>
-                <NavLink to="/products">Laptops</NavLink>
+                <NavLink to="/laptops">Laptops</NavLink>
               </li>
             </ul>
           </nav>
