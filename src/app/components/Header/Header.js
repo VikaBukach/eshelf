@@ -11,6 +11,7 @@ import { ReactComponent as CartIcon } from "../../../assets/images/Cart.svg";
 import { ReactComponent as UserIcon } from "../../../assets/images/Profile page.svg";
 
 import useWindowWidth from "../../../hooks/useWindowWidth";
+import Cart from "../Cart";
 
 const Header = () => {
   const dispatch = useDispatch();
