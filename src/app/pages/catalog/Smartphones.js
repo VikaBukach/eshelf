@@ -16,7 +16,7 @@ const Smartphones = () => {
         title="Smartphones"
         filterCriterias={[
             { title: "Brand", keyword: "brand" },
-            // { title: "Battery capacity", keyword: "capacity" },
+            { title: "Battery Capacity", keyword: "capacity" },
             // { title: "Color", keyword: "color" }
           ]}
       />

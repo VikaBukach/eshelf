@@ -7,7 +7,7 @@ const CatalogFilter = ({filterCriterias}) => {
 
   // [
   //   { title: "Brand", keyword: "brand" },
-  //   { title: "Battery capacity", keyword: "capacity" },
+  //   { title: "Battery Capacity", keyword: "specifications.battery.capacity" },
   //   { title: "Color", keyword: "color" }
   // ]
 
@@ -23,25 +23,39 @@ const CatalogFilter = ({filterCriterias}) => {
 
 
     const addTypesToFilterCriterias = () => {
-
-      const aaa = [];
+      const updatedFilterCriterias = [];
 
       filterCriterias.forEach((сriteria) => {
         сriteria.types = [];
-  
+
         products.forEach((product) => {
-  
-          if (!сriteria.types.includes(product[сriteria.keyword])) {
-            сriteria.types.push(product[сriteria.keyword]);
-          };
-          
+
+          const keywordValue = findValueByKeyword(product, сriteria.keyword);
+          if (!сriteria.types.includes(keywordValue)) {
+            сriteria.types.push(keywordValue);
+          }
         });
-        aaa.push(сriteria);
-        
+        updatedFilterCriterias.push(сriteria);
       });
 
-return aaa;
+      return updatedFilterCriterias;
+    };
 
+    const findValueByKeyword = (product, keyword) => {
+      if (product.hasOwnProperty(keyword)) {
+        return product[keyword];
+      }
+
+      for (const characteristic in product) {
+        if (typeof product[characteristic] === "object") {
+
+          const result = findValueByKeyword(product[characteristic], keyword);
+            if (result !== undefined) {
+                return result;
+            }
+          
+        }
+      }
     };
 
     

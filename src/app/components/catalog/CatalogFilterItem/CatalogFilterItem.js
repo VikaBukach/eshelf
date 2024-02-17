@@ -16,6 +16,8 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames }) => {
 
     filterSettingsToUpdate[filterTitle][name] = checked;
     dispatch(setFilterSettings(filterSettingsToUpdate));
+
+    console.log(filterSettings);
   };
 
   return (
@@ -23,7 +25,7 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames }) => {
       <h5 className="filter__name">{filterTitle}</h5>
       {checkBoxNames.map((checkBoxName) => {
         return (
-          <label key={checkBoxName}>
+          <label key={checkBoxName + 1}>
             <input  type="checkbox" name={checkBoxName} onChange={handleCheckboxChange} />
             {checkBoxName}
           </label>
