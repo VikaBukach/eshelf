@@ -4,22 +4,11 @@ import { CatalogFilterItem } from '../CatalogFilterItem/CatalogFilterItem';
 
 const CatalogFilter = ({filterCriterias}) => {
 
-
-  // [
-  //   { title: "Brand", keyword: "brand" },
-  //   { title: "Battery Capacity", keyword: "specifications.battery.capacity" },
-  //   { title: "Color", keyword: "color" }
-  // ]
-
     const products = useSelector((state) => state.products.data);
     const filteredProducts = useSelector(state => state.filteredProducts.data);
+    const filterSettings = useSelector(state => state.filterSettings.checkboxes);
 
     const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
-
-
-    
-
-    
 
 
     const addTypesToFilterCriterias = () => {
@@ -29,11 +18,13 @@ const CatalogFilter = ({filterCriterias}) => {
         сriteria.types = [];
 
         products.forEach((product) => {
+          const keywordValues = findValueByKeyword(product, сriteria.keyword);
 
-          const keywordValue = findValueByKeyword(product, сriteria.keyword);
-          if (!сriteria.types.includes(keywordValue)) {
-            сriteria.types.push(keywordValue);
-          }
+          keywordValues.forEach((keywordValue) => {
+            if (!сriteria.types.includes(keywordValue)) {
+              сriteria.types.push(keywordValue);
+            }
+          });
         });
         updatedFilterCriterias.push(сriteria);
       });
@@ -41,24 +32,45 @@ const CatalogFilter = ({filterCriterias}) => {
       return updatedFilterCriterias;
     };
 
+    // const findValueByKeyword = (product, keyword) => {
+
+
+    //   if (product.hasOwnProperty(keyword)) {
+    //     return product[keyword];
+    //   }
+
+    //   for (const characteristic in product) {
+    //     if (typeof product[characteristic] === "object") {
+    //       const result = findValueByKeyword(product[characteristic], keyword);
+    //       if (result !== undefined) {
+    //         return result;
+    //       }
+    //     }
+    //   }
+    // };
+
+
     const findValueByKeyword = (product, keyword) => {
-      if (product.hasOwnProperty(keyword)) {
-        return product[keyword];
-      }
+      const result = [];
 
-      for (const characteristic in product) {
-        if (typeof product[characteristic] === "object") {
-
-          const result = findValueByKeyword(product[characteristic], keyword);
-            if (result !== undefined) {
-                return result;
-            }
-          
+      const searchCycle = (product) => {
+        for (const characteristic in product) {
+          if (characteristic === keyword) {
+            result.push(product[characteristic]);
+          } else if (typeof product[characteristic] === "object") {
+            searchCycle(product[characteristic]);
+          }
         }
-      }
+      };
+
+      searchCycle(product);
+
+      return result;
     };
 
-    
+    const onFilterSubmit = () => {
+      console.log(filterSettings);
+    };
 
 
     useEffect(() => {
@@ -66,15 +78,15 @@ const CatalogFilter = ({filterCriterias}) => {
     }, [filterCriterias, products]);
 
 
-
-
-
     return (
       <div className='filter'>
         {filterCriteriasWithTypes.map((criteria) => (
+          <>
           <CatalogFilterItem key={criteria.title} filterTitle={criteria.title} checkBoxNames={criteria.types} />
+          <p>-----------------</p>
+          </>
         ))}
-        <button className='filter__submit'>FILTER</button>
+        <button onSubmit={onFilterSubmit()} className='filter__submit'>FILTER</button>
       </div>
     );
 
