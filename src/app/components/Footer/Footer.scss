@@ -10,3 +10,7 @@ footer {
 
     @include header-h4;
 }
+
+footer.mobile {
+    display: none;
+}
