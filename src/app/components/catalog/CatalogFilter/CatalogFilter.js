@@ -20,13 +20,13 @@ const CatalogFilter = ({filterCriterias}) => {
         products.forEach((product) => {
           const keywordValues = findValueByPath(product, сriteria.path);
 
-      //     keywordValues.forEach((keywordValue) => {
-      //       if (!сriteria.types.includes(keywordValue)) {
-      //         сriteria.types.push(keywordValue);
-      //       }
-      //     });
+          keywordValues.forEach((keywordValue) => {
+            if (!сriteria.types.includes(keywordValue)) {
+              сriteria.types.push(keywordValue);
+            }
+          });
         });
-      //   updatedFilterCriterias.push(сriteria);
+        updatedFilterCriterias.push(сriteria);
       });
 
       return updatedFilterCriterias;
@@ -78,8 +78,6 @@ const CatalogFilter = ({filterCriterias}) => {
       };
 
       searchCycle(product);
-
-      console.log(result);
       return result;
     };
 
@@ -88,52 +86,24 @@ const CatalogFilter = ({filterCriterias}) => {
 
 
 const filterProducts = () => {
-  const filteredProducts = products.forEach((product) => {
+
+  console.log(filterSettings);
+
+  const filteredProducts = [];
+
+
+  products.forEach((product) => {
 
     for (const filterCharacteristic in filterSettings) {
 
       const findValues = findValueByPath(product, filterCharacteristic);
 
-      if (findValues.length === 1 && !filterSettings[filterCharacteristic][findValues]) {
-        console.log(findValues);
-        return false;
-      }
-
-      
+      console.log(findValues);
 
 
     };
 
-    
-
   })
-
-  // const productItems = [];
-
-  // products.color.forEach((color) => {
-
-  //   for (const filterCharacteristic in filterSettings) {}
-
-
-
-  // });
-
-  // for (const filterCharacteristic in filterSettings) {
-
-  //   products.color.forEach((color) => {
-  //     const productItem = {};
-
-  //     findValueByKeyword
-
-      
-  //   })
-
-
-  //   console.log(filterSettings[filterCharacteristic]);
-
-
-  //   }
-  
 };
 
 

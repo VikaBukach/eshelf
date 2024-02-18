@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setFilterSettings } from "../../../store/slices/filterSettingsSlice";
 
 
-const CatalogFilterItem = ({ filterTitle, checkBoxNames, keyword: criteriaPath }) => {
+const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
 
   const dispatch = useDispatch();
   const filterSettings = useSelector(state => state.filterSettings.checkboxes);
