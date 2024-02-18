@@ -3,21 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setFilterSettings } from "../../../store/slices/filterSettingsSlice";
 
 
-const CatalogFilterItem = ({ filterTitle, checkBoxNames }) => {
+const CatalogFilterItem = ({ filterTitle, checkBoxNames, keyword: criteriaPath }) => {
 
   const dispatch = useDispatch();
   const filterSettings = useSelector(state => state.filterSettings.checkboxes);
 
   const filterSettingsToUpdate = { ...filterSettings };
-  filterSettingsToUpdate[filterTitle] = {...filterSettingsToUpdate[filterTitle]};
+  filterSettingsToUpdate[criteriaPath] = {...filterSettingsToUpdate[criteriaPath]};
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
 
-    filterSettingsToUpdate[filterTitle][name] = checked;
+    filterSettingsToUpdate[criteriaPath][name] = checked;
     dispatch(setFilterSettings(filterSettingsToUpdate));
-
-    console.log(filterSettings);
   };
 
   return (

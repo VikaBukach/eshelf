@@ -3,12 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const filterSettingsSlice = createSlice({
   name: "filterSettings",
   initialState: {
-    checkboxes: {
-      test: {
-        one: true,
-        two: false
-      }
-    },
+    checkboxes: {},
   },
   reducers: {
     setFilterSettings: (state, action) => {
