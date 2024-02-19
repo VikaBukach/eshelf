@@ -18,11 +18,12 @@ const CatalogFilter = ({filterCriterias}) => {
         сriteria.types = [];
 
         products.forEach((product) => {
-          const keywordValues = findValueByPath(product, сriteria.path);
+          const { findValues } = findValueByPath(product, сriteria.path);
 
-          keywordValues.forEach((keywordValue) => {
-            if (!сriteria.types.includes(keywordValue)) {
-              сriteria.types.push(keywordValue);
+
+          findValues.forEach((findValue) => {
+            if (!сriteria.types.includes(findValue)) {
+              сriteria.types.push(findValue);
             }
           });
         });
@@ -49,6 +50,7 @@ const CatalogFilter = ({filterCriterias}) => {
       };
 
       let i = 0;
+      let isContainArrayOfObjects = false;
       const searchCycle = (product) => {
         for (const characteristic in product) {
           const valueOfCharacteristic = product[keywords[i]];
@@ -58,6 +60,7 @@ const CatalogFilter = ({filterCriterias}) => {
             valueOfCharacteristic.every((value) => typeof value === "object" && value !== null)
           ) {
             i++;
+            isContainArrayOfObjects = true;
 
             for (const oneObjectOfValue of valueOfCharacteristic) {
               searchCycle(oneObjectOfValue);
@@ -78,7 +81,7 @@ const CatalogFilter = ({filterCriterias}) => {
       };
 
       searchCycle(product);
-      return result;
+      return { findValues: result, isContainArrayOfObjects };
     };
 
 
@@ -87,21 +90,52 @@ const CatalogFilter = ({filterCriterias}) => {
 
 const filterProducts = () => {
 
-  console.log(filterSettings);
+  
+
+  // console.log(filterSettings);
 
   const filteredProducts = [];
 
 
   products.forEach((product) => {
 
+    const arrOfResults = [];
+
     for (const filterCharacteristic in filterSettings) {
 
-      const findValues = findValueByPath(product, filterCharacteristic);
+      const { findValues, isContainArrayOfObjects } = findValueByPath(product, filterCharacteristic);
+      const isContainsChecked = Object.values(filterSettings[filterCharacteristic]).some((value) => value === true);
+      const trueCharacteristics = Object.entries(filterSettings[filterCharacteristic])
+        .filter(([key, value]) => value === true)
+        .map(([key, value]) => key);
 
-      console.log(findValues);
+      // const pushToResult = (value) => {
+      //   console.log(filterSettings[filterCharacteristic]);
+      //   if (filterSettings[filterCharacteristic][value]) {
+      //     arrOfResults.push(true);
+      //   } else {
+      //     arrOfResults.push(false);
+      //   }
+      // };
 
 
-    };
+      if (isContainsChecked) {
+        const isContainsAllOfChecked = trueCharacteristics.every(value => findValues.includes(value));
+        arrOfResults.push(isContainsAllOfChecked);
+        
+
+
+        
+      }
+      
+
+
+    }
+
+
+
+
+    console.log(arrOfResults);
 
   })
 };
