@@ -5,7 +5,7 @@ export const RadioGroup = ({ options, selectedOption, onChange }) => {
   return (
     <div className={style.radioGroupWrapper}>
       {options.map((option) => (
-        <Radio {...{ ...option }} selectedOption={selectedOption} onChange={onChange} />
+        <Radio key={option.value} {...{ ...option }} selectedOption={selectedOption} onChange={onChange} />
       ))}
     </div>
   );

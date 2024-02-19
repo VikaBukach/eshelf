@@ -1,24 +1,18 @@
-import { useRef } from "react";
 import style from "./Radio.module.scss";
+import { classNames } from "../../../utils/classNames";
 
 export const Radio = ({ label, onChange, value, selectedOption }) => {
-  const inputRef = useRef();
-
   return (
     <div className={style.inputWrapper}>
-      <input
-        className={style.input}
-        onChange={(e) => onChange(e.target.value)}
-        ref={inputRef}
-        type="radio"
-        value={value}
-        checked={value == selectedOption}
-      />
+      <div
+        onClick={() => onChange(value)}
+        className={classNames(style.radio, value === selectedOption ? style.radioActive : "")}
+      ></div>
       <label
         style={{
           alignSelf: "start",
         }}
-        onClick={() => inputRef.current.click()}
+        onClick={() => onChange(value)}
       >
         {label}
       </label>
