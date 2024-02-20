@@ -3,7 +3,7 @@ const cors = require('cors');
 const { connectToDb, getDb } = require('./db');
 
 
-const PORT = 3000;
+const PORT = 3001;
 const app = express();
 
 app.use(cors());
