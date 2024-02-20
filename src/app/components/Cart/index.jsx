@@ -93,6 +93,7 @@ const Cart = ({ activator }) => {
           style={{
             fontSize: "2rem",
             fontWeight: "bold",
+            textAlign: "center",
           }}
         >
           Cart is empty!

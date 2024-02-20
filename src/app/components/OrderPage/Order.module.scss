@@ -8,12 +8,18 @@ $silver: #a0a0a08f;
     --gap: 4rem;
 
     background: $secondary-color-grey-card;
-    padding: 3.2rem 3.2rem 3.2rem 9.6rem;
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
     gap: var(--gap);
     justify-content: space-between;
+    margin-bottom: 3rem;
+    padding: 2rem;
+
+    @media screen and (min-width: 768px) {
+        padding: 3.2rem 3.2rem 3.2rem 9.6rem;
+
+    }
 
     &>* {
         width: 100%;
@@ -43,6 +49,7 @@ $silver: #a0a0a08f;
     font-weight: 500;
     position: relative;
     margin-bottom: 2.4rem;
+    left: 6.4rem;
 
     &::before {
         position: absolute;
@@ -54,9 +61,23 @@ $silver: #a0a0a08f;
         align-items: center;
         justify-content: center;
         top: 50%;
-        left: -6.4rem;
+        right: calc(100% + 2.4rem);
         transform: translate(0, -50%);
         color: #fff;
+    }
+
+
+    @media screen and (min-width: 768px) {
+
+        & {
+
+            left: 0;
+        }
+
+        &::before {
+            left: -6.4rem;
+        }
+
     }
 
     &[data-index="1"] {
@@ -219,4 +240,87 @@ $silver: #a0a0a08f;
             color: $secondary-color-grey;
         }
     }
+}
+
+.cart {
+
+    h3 {
+        font-size: 2.4rem;
+    }
+
+    font-size: 1.8rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &>div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    button {
+        margin-inline: 10%;
+    }
+
+    &>p {
+        color: $secondary-color-grey;
+
+        a {
+            color: $secondary-color-grey;
+            text-decoration: underline;
+        }
+    }
+}
+
+.totals {
+
+    span {
+        font-weight: 700;
+    }
+
+}
+
+.successModalWrapper {
+    width: max-content;
+    min-width: unset;
+    padding: 4rem 2rem;
+    max-width: 90vw;
+}
+
+.successModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    h4 {
+        font-size: 2.4rem;
+        margin-bottom: 0.8rem;
+    }
+
+    ul {
+        margin-bottom: 8rem;
+    }
+
+    a {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding-inline: 3rem;
+        cursor: pointer;
+    }
+
+}
+
+.successIcon {
+    width: 7.6rem;
+    aspect-ratio: 1;
+    background: $secondary-color-purple;
+    border-radius: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3.2rem;
 }

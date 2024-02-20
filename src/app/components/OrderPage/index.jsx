@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Delivery } from "./components/Delivery";
 import { Payment } from "./components/Payment";
 import { ContactDetails } from "./components/ContactDetails";
+import { useModal } from "../../hooks/useModal";
+import Modal from "../Modal";
+import { Link } from "react-router-dom";
 
 const OrderPage = () => {
   const [state, setState] = useState({
@@ -49,6 +52,59 @@ const OrderPage = () => {
     );
   };
 
+  const Cart = () => {
+    const { active, close, open } = useModal();
+
+    return (
+      <>
+        <div className={style.cart}>
+          <h3>Total payable</h3>
+          <div>
+            <p>{1} product for the amount of</p>
+            <span>4676</span>
+          </div>
+          <div>
+            <p>The cost of delivery</p>
+            <span>0</span>
+          </div>
+
+          <div className={style.totals}>
+            <p>Total</p>
+            <span>343645</span>
+          </div>
+          <button onClick={open} className="primary-btn">
+            <img src="" alt="" />
+            <span>Buy now</span>
+          </button>
+          <p>
+            By confirming the order, I accept{" "}
+            <a href="">the terms of the regulation on the collection and protection of personal data</a>
+          </p>
+        </div>
+        <Modal active={active} onClose={close} wrapperStyles={style.successModalWrapper}>
+          {
+            <div className={style.successModal}>
+              <div className={style.successIcon}>
+                <img src="../../../assets/icons/arrow-back-large.svg" alt="" />
+              </div>
+
+              <h4>You have successfully ordered the product</h4>
+
+              <ul>
+                <li>SAMSUNG Galaxy S22 Ultra 8/128GB Phantom Black</li>
+              </ul>
+
+              <Link to={"/"} className={"primary-btn"}>
+                <img src="../../../assets/icons/arrow-back-small.svg" alt="" />
+                <span>Back to products</span>
+              </Link>
+            </div>
+          }
+        </Modal>
+      </>
+    );
+  };
+
   return (
     <div className="container">
       <h1 className={style.pageTitle}>Details</h1>
@@ -79,6 +135,7 @@ const OrderPage = () => {
           {products.map((item) => (
             <CartItem key={item.id} item={item} />
           ))}
+          <Cart />
         </div>
       </div>
     </div>
