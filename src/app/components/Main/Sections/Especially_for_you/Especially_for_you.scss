@@ -18,15 +18,22 @@
     font: 500 18px / 1.5 "Inter", sans-serif;
     color: #333;
   }
+  &-products-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    @media (min-width: $desktop) {
+      display: none;
+    }
+  }
   &-products{
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
-
-    @media (min-width: $tablet) {
-
-    }
 
     .section-especially-item{
       display: flex;
