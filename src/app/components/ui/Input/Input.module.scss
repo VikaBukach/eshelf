@@ -1,17 +1,17 @@
 .inputWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-size: 1.6rem;
 }
 
 .input {
-    background: #fff;
-    padding: 0.8rem 1.6rem;
-    border-radius: 1rem;
-    max-width: 100%;
+  background: #fff;
+  padding: 0.8rem 1.6rem;
+  border-radius: 1rem;
+  max-width: 100%;
 
-    &::placeholder {
-        color: rgba(51, 51, 51, 0.2);
-    }
+  &::placeholder {
+    color: rgba(51, 51, 51, 0.2);
+  }
 }
