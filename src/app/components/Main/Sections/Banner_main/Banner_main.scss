@@ -1,0 +1,107 @@
+@import "../../../../../assets/styles/style";
+
+.banner_main {
+  margin: 24px 0;
+
+
+  .banner_main-slider-item {
+    padding: 0 17px;
+    @media (min-width: $desktop) {
+      position: relative;
+    }
+
+  &-1 {
+    background: $secondary-color-purple-light;
+  }
+  &-2 {
+    background: $main-gradient;
+  }
+  &-3 {
+    background: $main-gradient;
+  }
+}
+  .banner_main-title {
+    padding-top: 16px;
+    padding-bottom: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.5;
+    color: $secondary-color-white;
+  }
+  .banner_main-descr {
+    margin: 0 auto;
+    font-weight: 400;
+    color: $secondary-color-white;
+    opacity: 0.9;
+
+    @media (min-width: $mobile) {
+      width: 287px;
+      font-size: 14px;
+      line-height: 1.5;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    @media (min-width: $tablet) {
+      width: 665px;
+      margin: 0 auto;
+      margin-right: 52px;
+      margin-bottom: 24px;
+      overflow: initial;
+      text-align: center;
+    }
+    @media (min-width: $desktop) {
+      margin: 0 auto;
+      overflow: initial;
+      width: 938px;
+      font-size: 20px;
+      margin-bottom: 50px;
+    }
+  }
+  .banner_main-img-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .banner_main-img{
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+  .banner_main-price {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .banner_main-old-price {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.5;
+    text-decoration: line-through;
+    color: $secondary-color-white;
+    opacity: 0.56;
+    margin-right: 8px;
+  }
+  .banner_main-new-price {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $secondary-color-purple;
+  }
+  .banner_main-text {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.5;
+    color: $secondary-color-white;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 8px;
+  }
+}
