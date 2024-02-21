@@ -27,7 +27,6 @@ function App() {
           <Route path="/order" element={<Order />} />
           <Route path="*" element={<Notfound />} />
         </Route>
-        <Route path="/products" element={<ProductList />} />
       </Routes>
     </>
   );
