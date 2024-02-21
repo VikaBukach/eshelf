@@ -1,0 +1,23 @@
+@import '../../../assets/styles/variables';
+
+.comparing {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.comparingBody {
+    padding: 2.4rem 4rem;
+    background: #ECEFF1;
+    border-radius: 1rem;
+
+
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    width: min(100%, 96rem);
+    gap: 2rem;
+}

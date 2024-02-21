@@ -5,12 +5,12 @@ export const fetchDataOfProducts = createAsyncThunk(
   "products/fetchDataOfProducts",
   async (collection, { dispatch }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/${collection}`);
+      const response = await axios.get(`http://localhost:5500/${collection}`);
       dispatch(setProducts(response.data));
       return response.data;
     } catch (err) {
       console.log("Error fetching products:", err);
-      throw err; 
+      throw err;
     }
   }
 );
@@ -20,7 +20,7 @@ const productsSlice = createSlice({
   initialState: {
     data: [],
     status: "idle",
-    error: null, 
+    error: null,
   },
   reducers: {
     setProducts: (state, action) => {
