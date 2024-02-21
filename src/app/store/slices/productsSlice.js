@@ -10,7 +10,7 @@ export const fetchDataOfProducts = createAsyncThunk(
       return response.data;
     } catch (err) {
       console.log("Error fetching products:", err);
-      throw err; 
+      throw err;
     }
   }
 );
@@ -20,7 +20,7 @@ const productsSlice = createSlice({
   initialState: {
     data: [],
     status: "idle",
-    error: null, 
+    error: null,
   },
   reducers: {
     setProducts: (state, action) => {
