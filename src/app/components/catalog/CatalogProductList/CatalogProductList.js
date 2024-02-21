@@ -17,11 +17,13 @@ const CatalogProductList = () => {
   });
 
   return (
-      <ul className="product-list">
-        {productItems.map((productItem) => (
-          <li className="product-list__item" key={productItem.index}>{productItem.fullName}</li>
-        ))}
-      </ul>
+    <ul className="product-list">
+      {productItems.map((productItem) => (
+        <li className="product-list__item" key={productItem.index}>
+          {productItem.fullName}
+        </li>
+      ))}
+    </ul>
   );
 };
 
