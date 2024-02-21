@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "../../Button/Button";
 import ProductCard from "../../../ProductCard/ProductCard";
 import './Especially_for_you.scss';
-import Arrow from "../../Arrow/Arrow";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { fetchDataOfProducts } from "../../../../store/slices/productsSlice";
