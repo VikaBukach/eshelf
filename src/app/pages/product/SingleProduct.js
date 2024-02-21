@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProduct } from "../../store/slices/singleProductSlice";
 import { Link } from 'react-router-dom';
+
+import { fetchDataOfProducts } from '../../store/slices/productsSlice'; 
 
 const SingleProduct = () => {
 
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.data);
+  const products = useSelector((state) => state.products.data);
 
   //console.log(products);
 
   useEffect(() => {
-    dispatch(getProduct())
+    dispatch(fetchDataOfProducts("smartphones"));
   }, [dispatch])
   
   return (
@@ -20,7 +21,7 @@ const SingleProduct = () => {
         {
           products.map(({ model, _id }) => (
             <li key={_id}>
-              <Link to={`product/${_id}`}>{model}</Link>
+              <Link to={`/smartphones/${_id}`}>{model}</Link>
             </li>
           ))
         }

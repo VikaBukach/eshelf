@@ -1,41 +1,21 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
-export const getProduct = createAsyncThunk(
-    "product/getProduct",
-    async (_, thunkAPI) => {
-        try {
-            const response = await axios.get(`http://localhost:5000/smartphones`);
-            //console.log(response.data);
-            return response.data;
-        } catch (err) {
-            console.log(err);
-            return thunkAPI.rejectWithValue(err)
-        }
-    }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 const singleProductSlice = createSlice({
   name: "product",
   initialState: {
-    data: [],
+    tabs: "About the product",
     status: "idle",
   },
 
-  extraReducers: (builder) => {
-    builder
-      .addCase(getProduct.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(getProduct.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.data = action.payload;
-      })
-      .addCase(getProduct.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      });
+  reducers: {
+    changeTabs: (state, action) => {
+      state.tabs = action.payload
+    }
   },
+
+ 
 });
+
+export const { changeTabs } = singleProductSlice.actions;
 
 export default singleProductSlice.reducer;
