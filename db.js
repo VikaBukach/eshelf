@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 
-const URL = process.env.DB_URL;
+const URL = "mongodb+srv://finalprojectfe23:finalprojectfe23@project.x9zghkg.mongodb.net/products";
 
 let dbConnection;
 

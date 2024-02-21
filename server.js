@@ -1,10 +1,8 @@
-const evn = require("dotenv");
-evn.config();
 const express = require("express");
 const cors = require("cors");
 const { connectToDb, getDb } = require("./db");
 
-const PORT = process.env.PORT;
+const PORT = 5500;
 const app = express();
 
 app.use(cors());
