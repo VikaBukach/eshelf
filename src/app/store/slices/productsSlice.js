@@ -5,7 +5,7 @@ export const fetchDataOfProducts = createAsyncThunk(
   "products/fetchDataOfProducts",
   async (collection, { dispatch }) => {
     try {
-      const response = await axios.get(`http://localhost:3001/${collection}`);
+      const response = await axios.get(`http://localhost:5000/${collection}`);
       dispatch(setProducts(response.data));
       return response.data;
     } catch (err) {
@@ -18,7 +18,7 @@ export const fetchDataOfProducts = createAsyncThunk(
 const productsSlice = createSlice({
   name: "products",
   initialState: {
-    data: [],
+    data: [ ],
     status: "idle",
     error: null,
   },
@@ -35,6 +35,7 @@ const productsSlice = createSlice({
       .addCase(fetchDataOfProducts.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.data = action.payload;
+        state.error = null;
       })
       .addCase(fetchDataOfProducts.rejected, (state, action) => {
         state.status = "failed";
