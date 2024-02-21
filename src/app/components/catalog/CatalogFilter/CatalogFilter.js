@@ -1,10 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const CatalogFilter = () => {
-  return (
-    <div className='filter'>
-    </div>
-  )
-}
+  return <div className="filter"></div>;
+};
 
-export {CatalogFilter};
+export { CatalogFilter };
