@@ -25,9 +25,9 @@
     flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
-    @media (min-width: $desktop) {
-      display: none;
-    }
+    //@media (min-width: $desktop) {
+    //  display: none;
+    //}
   }
   &-products{
     display: flex;

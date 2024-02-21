@@ -50,15 +50,14 @@ function EspeciallyForYou() {
                         {status === 'failed' && <div>Error: {error} </div>}
                         {status === 'succeeded' && data.length > 0 ? (
                             data.slice(0, itemsToShow).map((item, index) => {
-
-                               return <div className= "section-especially-item" key={index}>
+                                return <div className= "section-especially-item" key={index}>
                                    {item && (
                                    <ProductCard
-                                       id={item.id}
-                                       imageURL={item.imageURL}
-                                       category={item.category}
-                                       title={item.title}
-                                       price={item.price}
+                                       id={item._id}
+                                       imageURL={item.colors[0].images[0]}
+                                       category={'Smartphones'}
+                                       title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity}
+                                       price={item.colors[0].products[0].price}
                                        discountPrice={item.discountPrice}
                                    />
                                        )}
