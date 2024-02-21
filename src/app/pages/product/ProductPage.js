@@ -28,25 +28,26 @@ const ProductPage = () => {
     <>
       <div>Breadcrumbs</div>
       <section className="product-details">
-        <h1 className="product-details__title">{product.model}</h1>
+        <div className="container">
+          <h1 className="product-details__title">{product.model}</h1>
 
-        <h2>{tabs}</h2>
-        <ul>
-          {["About the product", "Characteristic", "Reviews", "Photo and video"].map((item, id) => (
-            <li
-              className={`${tabs === item ? "product-details__tabs-active" : ""}`}
-              key={id}
-              onClick={() => dispatch(changeTabs(item))}
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-        <div className="product-details__body">
-          {tabs === "About the product" && <p>{product.image}</p>}
-          {tabs === "Characteristic" && <p>{product.brand}</p>}
-          {tabs === "Reviews" && <p>{product._id}</p>}
-          {tabs === "Photo and video" && <p>{product.model}</p>}
+          <ul className="product-details__tabs">
+            {["About the product", "Characteristic", "Reviews", "Photo and video"].map((item, id) => (
+              <li
+                className={`product-details__tabs-item ${tabs === item ? "product-details__tabs-active" : ""}`}
+                key={id}
+                onClick={() => dispatch(changeTabs(item))}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+          <div className="product-details__body">
+            {tabs === "About the product" && <p>{product.image}</p>}
+            {tabs === "Characteristic" && <p>{product.brand}</p>}
+            {tabs === "Reviews" && <p>{product._id}</p>}
+            {tabs === "Photo and video" && <p>{product.model}</p>}
+          </div>
         </div>
       </section>
     </>
