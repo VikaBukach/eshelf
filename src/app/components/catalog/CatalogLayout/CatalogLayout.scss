@@ -1,12 +1,12 @@
 .catalog {
-    width: 1200px;
-    background-color: rgb(163, 163, 163);
-    &__head-line {
-        display: flex;
-        justify-content: space-between;
-    }
-    &__body {
-        display: flex;
-        justify-content: space-between;
-    }
+  width: 1200px;
+  background-color: rgb(163, 163, 163);
+  &__head-line {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__body {
+    display: flex;
+    justify-content: space-between;
+  }
 }

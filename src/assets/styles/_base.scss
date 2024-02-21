@@ -2,6 +2,11 @@ html {
   font-size: 62.5%;
 }
 
+img {
+  display: block;
+  max-width: 100%;
+}
+
 body {
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -12,6 +17,7 @@ body {
 
 .container {
   max-width: $maxWidthScreen;
+  width: 100%;
   padding: 0 16px;
   margin: 0 auto;
 }
@@ -34,4 +40,6 @@ body {
 
 main {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
