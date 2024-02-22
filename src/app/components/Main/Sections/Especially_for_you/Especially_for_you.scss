@@ -53,8 +53,11 @@
 
   .section_especially-products-desktop {
       width: 100%;
+    position: relative;
 
-    &-container {
+    &-arrows {
+      position: absolute;
+      right: 0;
 
     }
 

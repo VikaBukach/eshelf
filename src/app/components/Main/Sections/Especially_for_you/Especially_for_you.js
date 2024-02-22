@@ -109,7 +109,7 @@ function EspeciallyForYou() {
                                                     category={'Smartphones'}
                                                     title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity}
                                                     price={item.colors[0].products[0].price}
-                                                    discountPrice={item.discountPrice}
+                                                    discountPrice={item.colors[0].products[0]['discount_price']}
                                                 />
                                             )}
                                         </div>
