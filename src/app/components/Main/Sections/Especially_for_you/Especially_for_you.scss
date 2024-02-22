@@ -51,14 +51,14 @@
   }
 
   .section_especially-products-desktop {
+    display: none;
 
-
-
+    @media (min-width: $desktop) {
+      display: inline-block;
       width: 100%;
       position: relative;
 
-
-    &-arrows {
+      &-arrows {
       display: flex;
       flex-direction: row;
       width: 80px;
@@ -66,6 +66,7 @@
       position: absolute;
       right: -20px;
       top: -55px;
+
 
       .especially_arrow-svg-container-next {
         cursor: pointer;
@@ -76,14 +77,6 @@
         cursor: pointer;
       }
     }
-
-    .section_especially-products-desktop-container {
-
-
-      .section-especially-item-desktop {
-
-
-      }
     }
   }
 }
