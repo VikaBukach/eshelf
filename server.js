@@ -21,7 +21,7 @@ connectToDb((err) => {
     }
   });
 
-  const handleCollectionRequest = ("/smartphones", (collection, req, res) => {
+  const handleCollectionRequest = ("/products", (collection, req, res) => {
     const products = [];
   
     db
