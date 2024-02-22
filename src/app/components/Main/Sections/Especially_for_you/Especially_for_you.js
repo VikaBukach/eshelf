@@ -54,6 +54,7 @@ function EspeciallyForYou() {
                     <h6 className="section_especially-title">
                         Especially for you
                     </h6>
+
                 </div>
                 <div className="section_especially-products-mobile">
                     <div className="section_especially-products">

@@ -1,6 +1,6 @@
 @import "../../../../assets/styles/style";
 
-.banner_main-svg {
+.arrow-svg-container {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -11,7 +11,7 @@
   }
 }
 
-.banner_main-svg-prev {
+.arrow-svg-container-prev {
   cursor: pointer;
   left: 30px;
   transform: translateY(-350%) translateX(90%);
@@ -24,7 +24,7 @@
   }
 }
 
-.banner_main-svg-next {
+.arrow-svg-container-next {
   cursor: pointer;
   display: flex;
   right: 0;

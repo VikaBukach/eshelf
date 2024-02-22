@@ -28,6 +28,7 @@
     @media (min-width: $desktop) {
       display: none;
     }
+
   }
   &-products{
     display: flex;
@@ -55,11 +56,7 @@
       width: 100%;
     position: relative;
 
-    &-arrows {
-      position: absolute;
-      right: 0;
 
-    }
 
     .section-especially-item-desktop {
 
