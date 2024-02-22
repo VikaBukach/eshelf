@@ -54,7 +54,6 @@ function EspeciallyForYou() {
                     <h6 className="section_especially-title">
                         Especially for you
                     </h6>
-
                 </div>
                 <div className="section_especially-products-mobile">
                     <div className="section_especially-products">
@@ -92,13 +91,17 @@ function EspeciallyForYou() {
 
                 <div className="section_especially-products-desktop">
                     <div className="section_especially-products-desktop-arrows">
-                        <Arrow direction="next" onClick={() => sliderRef.current.slickNext()}/>
-                        <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()}/>
+                        <div className="especially_arrow-svg-container-next">
+                            <Arrow direction="next" onClick={() => sliderRef.current.slickNext()}/>
+                        </div>
+                        <div className="especially_arrow-svg-container-prev">
+                            <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()}/>
+                        </div>
                     </div>
                     <div className="section_especially-products-desktop-container slider-container">
                         <Slider {...settings} ref={sliderRef}>
 
-                                {status === 'loading' && <div>Loading...</div>}
+                        {status === 'loading' && <div>Loading...</div>}
                                 {status === 'failed' && <div>Error: {error} </div>}
                                 {status === 'succeeded' && data.length > 0 ? (
                                     data.slice(0, itemsToShow).map((item, index) => {

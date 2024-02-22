@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, {useRef} from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -50,11 +50,16 @@ function BannerMain(props) {
                     <div key={index} className={`banner_main-slider-item banner_main-slider-item-${index + 1}`}>
                         <h1 className="banner_main-title">{slide.title}</h1>
                         <h4 className="banner_main-descr">{slide.description}</h4>
-                        <Arrow direction="next" onClick={() => sliderRef.current.slickNext()}/>
+                        <div className="arrow-svg-container-next">
+                            <Arrow direction="next" onClick={() => sliderRef.current.slickNext()}/>
+                        </div>
+
                         <div className="banner_main-img-container">
                             <img className="banner_main-img" src={slide.imagePath} alt="Quadcopter"/>
                         </div>
-                        <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()} />
+                        <div className="arrow-svg-container-prev">
+                            <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()}/>
+                        </div>
                         <div className="banner_main-price">
                             <div className="banner_main-old-price">{slide.oldPrice}</div>
                             <div className="banner_main-new-price">{slide.newPrice}</div>

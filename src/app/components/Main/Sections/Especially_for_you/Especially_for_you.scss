@@ -8,16 +8,18 @@
   gap: 16px;
   align-items: center;
 
-  &-wrap{
+  &-wrap {
     width: 100%;
     margin-bottom: 16px;
 
   }
-  &-title{
+
+  &-title {
     padding: 0 16px;
     font: 500 18px / 1.5 "Inter", sans-serif;
     color: #333;
   }
+
   &-products-mobile {
     display: flex;
     flex-direction: column;
@@ -30,13 +32,14 @@
     }
 
   }
-  &-products{
+
+  &-products {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
 
-    .section-especially-item{
+    .section-especially-item {
       display: flex;
 
       @media (min-width: $tablet) {
@@ -44,26 +47,68 @@
       }
     }
   }
+
   .section_especially-products-btn {
     border: 1px solid #8119b1;
-     border-radius: 5px;
-     padding: 12px 32px;
+    border-radius: 5px;
+    padding: 12px 32px;
     width: 288px;
     height: 40px;
   }
 
   .section_especially-products-desktop {
-      width: 100%;
+    width: 100%;
     position: relative;
 
+    &-arrows {
+      display: flex;
+      flex-direction: row;
+      width: 80px;
+      height: 32px;
+      position: absolute;
+      right: -20px;
+      top: -55px;
+
+      .especially_arrow-svg-container-next {
+        cursor: pointer;
+      }
+
+      .especially_arrow-svg-container-prev {
+        margin-left: 30px;
+        cursor: pointer;
+      }
+    }
 
 
     .section-especially-item-desktop {
 
 
-
     }
   }
 
+  .especially_arrow-svg-container-prev {
+    //cursor: pointer;
+    //left: 30px;
+    //transform: translateY(-350%) translateX(90%);
+    //
+    //@media (min-width: $desktop) {
+    //
+    //  display: inline-block;
+    //  text-align: left;
+    //  transform: translateY(200%) translateX(110%);
+    //}
+  }
 
+  .especially_arrow-svg-container-next {
+    //cursor: pointer;
+    //right: 0;
+    //display: flex;
+    //transform: translateY(400%) translateX(-100%);
+    //
+    //@media (min-width: $desktop) {
+    //  transform: translateY(855%) translateX(-100%);
+    //  display: inline-block;
+    //  text-align: right;
+    //}
+  }
 }
