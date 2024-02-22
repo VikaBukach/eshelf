@@ -101,27 +101,27 @@ function EspeciallyForYou() {
                     <div className="section_especially-products-desktop-container slider-container">
                         <Slider {...settings} ref={sliderRef}>
 
-                        {status === 'loading' && <div>Loading...</div>}
-                                {status === 'failed' && <div>Error: {error} </div>}
-                                {status === 'succeeded' && data.length > 0 ? (
-                                    data.slice(0, itemsToShow).map((item, index) => {
-                                        return <div className="section-especially-item-desktop " key={index}>
-                                            {item && (
-                                                <ProductCard
-                                                    id={item._id}
-                                                    imageURL={item.colors[0].images[0]}
-                                                    category={'Smartphones'}
-                                                    title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity}
-                                                    price={item.colors[0].products[0].price}
-                                                    discountPrice={item.colors[0].products[0]['discount_price']}
-                                                />
-                                            )}
-                                        </div>
-                                    })
+                            {status === 'loading' && <div>Loading...</div>}
+                            {status === 'failed' && <div>Error: {error} </div>}
+                            {status === 'succeeded' && data.length > 0 ? (
+                                data.slice(0, itemsToShow).map((item, index) => {
+                                    return <div className="section-especially-item-desktop " key={index}>
+                                        {item && (
+                                            <ProductCard
+                                                id={item._id}
+                                                imageURL={item.colors[0].images[0]}
+                                                category={'Smartphones'}
+                                                title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity}
+                                                price={item.colors[0].products[0].price}
+                                                discountPrice={item.colors[0].products[0]['discount_price']}
+                                            />
+                                        )}
+                                    </div>
+                                })
 
-                                ) : (
-                                    <div>No data available</div>
-                                )}
+                            ) : (
+                                <div>No data available</div>
+                            )}
 
                         </Slider>
                     </div>
