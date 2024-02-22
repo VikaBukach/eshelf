@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CatalogFilterItem } from '../CatalogFilterItem/CatalogFilterItem';
+import { setFilteredProducts } from '../../../store/slices/filteredProductsSlice';
 
 const CatalogFilter = ({filterCriterias}) => {
+
+  const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products.data);
   const filteredProducts = useSelector(state => state.filteredProducts.data);
@@ -113,7 +116,7 @@ const CatalogFilter = ({filterCriterias}) => {
 
 
   const filterProducts = () => {
-    const filteredProducts = [];
+    const filteredProductsArray = [];
     const entriesOfFilterSettings = Object.entries(filterSettings);
 
     products.forEach((product) => {
@@ -125,9 +128,10 @@ const CatalogFilter = ({filterCriterias}) => {
         const { value, arrayOfObjects } = findValueByPath(product, path);
 
         // Відмічаємо "false" ті продукти, або частини продуктів, які нам НЕ підходять:
+        if (value && trueValues.length > 0) {
 
         // Якщо це значення з одним варіантом вибору
-        if (value.length === 1 && value && !trueValues.includes(value[0]) && !arrayOfObjects) {
+        if (value.length === 1 && !trueValues.includes(value[0]) && !arrayOfObjects) {
           isMatch = false;
         }
         // Якщо це массив значень (Наприклад, список функцій)
@@ -144,18 +148,29 @@ const CatalogFilter = ({filterCriterias}) => {
           }
         } 
         // Якщо є массив об'єктів: фільтрація по іншим критеріям
-        else if (arrayOfObjects && trueValues.some((trueValue) => value.includes(trueValue))) {
+        else if (arrayOfObjects && !trueValues.some((trueValue) => value.includes(trueValue))) {
           isMatch = false;
+          console.log("1");
         } 
-        // Прибираємо всі продукти з пустими значаннями
+        // Прибираємо всі продукти з пустими значаннями, якщо такі є
         else if (value.length < 1) {
           isMatch = false;
         }
+        
+
+        }
+
+
+        
+        
+        
       }
       if (isMatch) {
-        console.log(product);
+        filteredProductsArray.push(product);
       }
     });
+    console.log(filteredProductsArray);
+    dispatch(setFilteredProducts(filteredProductsArray));
   };
 
   const onFilterSubmit = () => {
