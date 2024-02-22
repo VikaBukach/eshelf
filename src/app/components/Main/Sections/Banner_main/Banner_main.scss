@@ -120,9 +120,9 @@
     transform: translateY(-350%) translateX(90%);
 
     @media (min-width: $desktop) {
-
       display: inline-block;
       text-align: left;
+      margin-left: 30px;
       transform: translateY(200%) translateX(110%);
     }
   }
@@ -137,6 +137,7 @@
       transform: translateY(855%) translateX(-100%);
       display: inline-block;
       text-align: right;
+      margin-left: 10px;
     }
   }
 }
