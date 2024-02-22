@@ -127,7 +127,7 @@ const CatalogFilter = ({filterCriterias}) => {
         // Відмічаємо "false" ті продукти, або частини продуктів, які нам НЕ підходять:
 
         // Якщо це значення з одним варіантом вибору
-        if (value.length === 1 && !trueValues.includes(value[0]) && !arrayOfObjects) {
+        if (value.length === 1 && value && !trueValues.includes(value[0]) && !arrayOfObjects) {
           isMatch = false;
         }
         // Якщо це массив значень (Наприклад, список функцій)
@@ -142,8 +142,13 @@ const CatalogFilter = ({filterCriterias}) => {
           } else {
             product = { ...product, colors: filteredColors };
           }
-          // Якщо є массив об'єктів: фільтрація по іншим критеріям
-        } else if (arrayOfObjects && trueValues.some((trueValue) => value.includes(trueValue))) {
+        } 
+        // Якщо є массив об'єктів: фільтрація по іншим критеріям
+        else if (arrayOfObjects && trueValues.some((trueValue) => value.includes(trueValue))) {
+          isMatch = false;
+        } 
+        // Прибираємо всі продукти з пустими значаннями
+        else if (value.length < 1) {
           isMatch = false;
         }
       }
