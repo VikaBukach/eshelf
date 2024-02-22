@@ -1,0 +1,44 @@
+@import "../../../../../assets/styles/style";
+
+.banner_top-product {
+  background-color: $secondary-color-purple-light;
+  margin-top: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 16px;
+
+  &-title {
+    font: 600 20px / 1.5 "Inter", sans-serif;
+    text-align: center;
+    color: $secondary-color-white;
+
+  }
+  &-img {
+    padding-bottom: 16px;
+  }
+
+  &-subtitle {
+    padding: 0 16px;
+    font: 400 14px / 1.5 "Inter", sans-serif;
+    color: $secondary-color-white;
+    opacity: 0.9;
+  }
+  .banner_top-product-pre-order-btn {
+    margin-top: 16px;
+    background-color: $secondary-color-purple;
+    border-radius: 5px;
+    padding: 12px 32px;
+    width: 288px;
+    height: 40px;
+  }
+.btn-text {
+  color: $secondary-color-white;
+padding-left: 18px;
+}
+
+
+
+
+}
