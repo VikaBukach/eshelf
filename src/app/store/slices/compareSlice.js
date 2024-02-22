@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const compareSlice = createSlice({
   name: "compare",
   initialState: {
-    data: [],
+    data: JSON.parse(localStorage.getItem("compare")) ?? [],
     isOutOfLimit: false,
   },
   reducers: {
@@ -16,9 +16,11 @@ const compareSlice = createSlice({
       } else {
         state.isOutOfLimit = false;
       }
+      localStorage.setItem("compare", JSON.stringify(state.data));
     },
     removeFromCompare: (state, action) => {
       state.data = [...state.data].filter((item) => item.id !== action.payload);
+      localStorage.setItem("compare", JSON.stringify(state.data));
     },
   },
 });

@@ -10,14 +10,88 @@
     padding: 2.4rem 4rem;
     background: #ECEFF1;
     border-radius: 1rem;
-
-
+    margin-bottom: 56px;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: flex-start;
-    width: min(100%, 96rem);
-    gap: 2rem;
+.compareTableMain {
+    width: auto;
+    border-spacing: 0;
 }
+
+.compareTableMain td {
+    padding: 8px 24px;
+    border-left: 1px solid red;
+}
+
+.compareTableMain td:first-child {
+    padding-left: 0;
+    border-left: none;
+}
+
+.compareItem {
+    padding: 0 24px;
+    border-left: 1px solid red;
+}
+
+.compareImgHold {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    min-height: 222px;
+}
+
+.compareImg {
+    max-height: 222px;
+    max-width: 222px;
+    width: auto;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.compareTitle {
+    padding: 16px 0;
+}
+
+.compareCaptionTd,
+.compareCaption {
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid rgb($secondary-color-blue-light, 20%);
+}
+
+.compareCaption {
+    font-size: 18px;
+    font-weight: 500;
+    color: $primary-color-black;
+}
+
+.compareLabel {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb($primary-color-black, 56%);
+}
+
+.compareCaption,
+.compareLabel {
+    width: 270px;
+    text-align: left;
+    text-transform: capitalize;
+}
+
+.compareItem:first-child .compareLabel {}
+
+.compareValue {
+    font-size: 16px;
+    color: $primary-color-black;
+    max-width: 335px;
+}
+
+.compareLiHold {}
+
+.compareLiItem {
+    padding: 8px 0;
+}
+
+.compareListHold {}
+
+.compareListItem {}
