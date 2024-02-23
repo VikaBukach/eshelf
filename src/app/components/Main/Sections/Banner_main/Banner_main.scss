@@ -21,14 +21,14 @@
       background: $secondary-color-purple-light;
 
       @media (min-width: $desktop) {
-        background: linear-gradient(135deg, #a2acff 0%, #caadf9 99.79%);
+        background: $secondary-color-blue;
       }
     }
 
     &-2 {
       background: $main-gradient;
       @media (min-width: $desktop) {
-        background: linear-gradient(135deg, #a2acff 0%, #caadf9 99.79%);
+        background: $primary-color-blue;
       }
     }
 
@@ -180,6 +180,10 @@
     transform: translateY(-350%) translateX(90%);
 
     @media (min-width: $desktop) {
+
+    }
+
+    @media (min-width: $desktop) {
       display: inline-block;
       text-align: left;
       margin-left: 30px;
@@ -189,9 +193,12 @@
 
   .arrow-svg-container-next {
     cursor: pointer;
-    display: flex;
+    display: inline-block;
     right: 0;
     transform: translateY(308%) translateX(-100%);
+    @media (min-width: $desktop) {
+
+    }
 
     @media (min-width: $desktop) {
       transform: translateY(1900%) translateX(-100%);
