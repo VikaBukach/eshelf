@@ -6,6 +6,13 @@
   .banner_main-slider-item {
     padding: 0 17px;
     @media (min-width: $desktop) {
+      width: 608px;
+      height: 325px;
+    }
+
+    @media (min-width: $desktop) {
+      width: 1680px;
+      height: 835px;
       border-radius: 20px;
       position: relative;
     }
@@ -37,10 +44,18 @@
     padding-top: 16px;
     padding-bottom: 8px;
     text-align: center;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 1.5;
+    font: 600 18px / 1.5 "Inter", sans-serif;
     color: $secondary-color-white;
+
+    @media (min-width: $tablet) {
+      font: 600 20px / 1.5 "Inter", sans-serif;
+    }
+
+    @media (min-width: $desktop) {
+      font: 600 36px / 1.5 "Inter", sans-serif;
+      padding-top: 50px;
+      padding-bottom: 20px;
+    }
   }
 
   .banner_main-descr {
@@ -62,18 +77,16 @@
     }
     @media (min-width: $tablet) {
       width: 665px;
-      margin: 0 auto;
-      margin-right: 52px;
-      margin-bottom: 24px;
+      margin-bottom: 44px;
       overflow: initial;
       text-align: center;
+
     }
     @media (min-width: $desktop) {
-      margin: 0 auto;
       overflow: initial;
       width: 938px;
       font-size: 20px;
-      margin-bottom: 50px;
+      padding-bottom: 50px;
     }
   }
 
@@ -87,12 +100,30 @@
   .banner_main-img {
     margin-left: 4rem;
     margin-right: 4rem;
+    @media (min-width: $desktop) {
+      display: none;
+    }
+  }
+
+  .banner_main-img-desktop {
+    @media (min-width: $mobile) {
+      display: none;
+    }
+    @media (min-width: $desktop) {
+      display: flex;
+    }
   }
 
   .banner_main-price {
     display: flex;
     justify-content: center;
     margin-bottom: 8px;
+
+    @media (min-width: $desktop) {
+      flex-direction: row;
+      align-items: center;
+      text-align: center;
+    }
   }
 
   .banner_main-old-price {
@@ -103,6 +134,12 @@
     color: $secondary-color-white;
     opacity: 0.56;
     margin-right: 8px;
+
+    @media (min-width: $desktop) {
+      font: 600 24px / 1.5 "Inter", sans-serif;
+      text-decoration: line-through;
+      opacity: 0.56;
+    }
   }
 
   .banner_main-new-price {
@@ -110,6 +147,16 @@
     font-size: 16px;
     line-height: 1.5;
     color: $secondary-color-purple;
+
+    @media (min-width: $tablet) {
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: $desktop) {
+      font: 600 36px / 1.5 "Inter", sans-serif;
+      color: $secondary-color-purple;
+      padding-left: 15px;
+    }
   }
 
   .banner_main-text {
@@ -122,6 +169,9 @@
     justify-content: center;
     flex-direction: row;
     margin-bottom: 8px;
+    @media (min-width: $tablet) {
+      display: none;
+    }
   }
 
   .arrow-svg-container-prev {
@@ -144,7 +194,7 @@
     transform: translateY(308%) translateX(-100%);
 
     @media (min-width: $desktop) {
-      transform: translateY(855%) translateX(-100%);
+      transform: translateY(1900%) translateX(-100%);
       display: inline-block;
       text-align: right;
       margin-left: 10px;

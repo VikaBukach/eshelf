@@ -13,7 +13,8 @@ function BannerMain(props) {
             oldPrice: "₴ 71 999",
             newPrice: "₴ 65 999",
             validOffer: "The offer is valid from 12.11 to 29.12",
-            imagePath: "/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png"
+            imagePath: "/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png",
+            imagePathDesktop: "/img/mavic-big.png"
         },
         {
             title: "Phantom 5 Pro V2.5",
@@ -21,7 +22,8 @@ function BannerMain(props) {
             oldPrice: "₴ 31 999",
             newPrice: "₴ 20 999",
             validOffer: "The offer is valid from 15.12 to 31.12",
-            imagePath: "/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png"
+            imagePath: "/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png",
+            imagePathDesktop: "/img/mavic-big.png"
         },
         {
             title: "Phantom 6 Pro V3.0",
@@ -29,7 +31,8 @@ function BannerMain(props) {
             oldPrice: "₴ 99 999",
             newPrice: "₴ 77 999",
             validOffer: "The offer is valid from 12.11 to 29.12",
-            imagePath: "/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png"
+            imagePath: "/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png",
+            imagePathDesktop: "/img/mavic-big.png"
         },
     ]; //add sliders
 
@@ -56,6 +59,7 @@ function BannerMain(props) {
 
                         <div className="banner_main-img-container">
                             <img className="banner_main-img" src={slide.imagePath} alt="Quadcopter"/>
+                            <img className="banner_main-img-desktop" src={slide.imagePathDesktop} alt="Quadcopter"/>
                         </div>
                         <div className="arrow-svg-container-prev">
                             <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()}/>
