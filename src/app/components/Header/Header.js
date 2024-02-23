@@ -10,7 +10,8 @@ import { ReactComponent as HeartIcon } from "../../../assets/images/Heart.svg";
 import { ReactComponent as CartIcon } from "../../../assets/images/Cart.svg";
 import { ReactComponent as UserIcon } from "../../../assets/images/Profile page.svg";
 
-import useWindowWidth from "../../../hooks/useWindowWidth";
+import useWindowWidth from "../../hooks/useWindowWidth";
+import { useModal } from "../../hooks/useModal";
 import Cart from "../Cart";
 
 const Header = () => {
@@ -29,6 +30,8 @@ const Header = () => {
   };
 
   const shouldShowMobileMenu = windowWidth <= 768;
+
+  const { open } = useModal();
 
   return (
     <>
@@ -98,7 +101,13 @@ const Header = () => {
             <HeartIcon />
           </NavLink>
           <NavLink to="/cart" className="header__link-cart">
-            <CartIcon />
+          <Cart
+            activator={
+              <div onClick={open}>
+                <CartIcon />
+              </div>
+            }
+          ></Cart>
           </NavLink>
           <NavLink to="/users" className="header__link-users">
             <UserIcon />
