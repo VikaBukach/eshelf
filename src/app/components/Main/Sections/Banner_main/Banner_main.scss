@@ -3,23 +3,33 @@
 .banner_main {
   margin: 24px 0;
 
-
   .banner_main-slider-item {
     padding: 0 17px;
     @media (min-width: $desktop) {
+      border-radius: 20px;
       position: relative;
     }
 
     &-1 {
       background: $secondary-color-purple-light;
+
+      @media (min-width: $desktop) {
+        background: linear-gradient(135deg, #a2acff 0%, #caadf9 99.79%);
+      }
     }
 
     &-2 {
       background: $main-gradient;
+      @media (min-width: $desktop) {
+        background: linear-gradient(135deg, #a2acff 0%, #caadf9 99.79%);
+      }
     }
 
     &-3 {
       background: $main-gradient;
+      @media (min-width: $desktop) {
+        background: linear-gradient(135deg, #a2acff 0%, #caadf9 99.79%);
+      }
     }
   }
 

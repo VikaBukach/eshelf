@@ -26,10 +26,17 @@ function BannerTopProduct(props) {
                 <h1 className="banner_top-product-desktop-title">
                     Apple Iphone 14
                 </h1>
-                <p className="banner_top-product-desktop-descr"> One of the main features of the iPhone 14 was supposed
+                <h4 className="banner_top-product-desktop-descr"> One of the main features of the iPhone 14 was supposed
                     to be the absence of bangs, or reduction of them. In version 13, Apple narrowed it down a bit, so it
                     was assumed that next year the company would get rid of the bangs, turning to a "hole" camera
-                    design.</p>
+                    design.
+                </h4>
+                <p className="banner_top-product-desktop-long-descr">One of the main features of the iPhone 14 was
+                    supposed to be the absence of bangs, or reduction of them. In version 13, Apple narrowed it down a
+                    bit, so it was assumed that next year the company would get rid of the bangs, turning to a "hole"
+                    camera design. This is the kind that Android manufacturers have been using for several years now.
+                    Information about future changes in the novelty was shared by analyst Min-Chi Kuo.
+                </p>
                 <Buttun_perple
                     btnClass="banner_top-product-desktop-pre-order-btn"
                     text={'Pre-order'}
