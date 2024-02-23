@@ -48,6 +48,10 @@
     padding: 12px 32px;
     width: 288px;
     height: 40px;
+    @media (min-width: $tablet) {
+      margin-top: 24px;
+    }
+
   }
 
   .section_especially-products-desktop {

@@ -1,31 +1,35 @@
 @import "../../../../../assets/styles/style";
 
-.banner_top-product {
+.banner_top-product-mobile {
+  display: flex;
   background-color: $secondary-color-purple-light;
   margin-top: 29px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
   flex-direction: column;
   padding: 16px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 
   &-title {
     font: 600 20px / 1.5 "Inter", sans-serif;
     text-align: center;
     color: $secondary-color-white;
-
+    margin-bottom: 8px;
   }
+
   &-img {
-    padding-bottom: 16px;
+    display: flex;
+    margin-bottom: 16px;
   }
 
   &-subtitle {
-    padding: 0 16px;
     font: 400 14px / 1.5 "Inter", sans-serif;
     color: $secondary-color-white;
     opacity: 0.9;
+    text-align: center;
   }
-  .banner_top-product-pre-order-btn {
+
+  &-pre-order-btn {
     margin-top: 16px;
     background-color: $secondary-color-purple;
     border-radius: 5px;
@@ -33,12 +37,91 @@
     width: 288px;
     height: 40px;
   }
-.btn-text {
-  color: $secondary-color-white;
-padding-left: 18px;
+
+  .btn-text {
+    color: $secondary-color-white;
+    padding-left: 18px;
+  }
+
+  @media (min-width: $tablet) {
+    display: none;
+  }
 }
 
 
 
 
-}
+
+//
+//.banner_top-product-desktop {
+//
+//  @media (min-width: $tablet) {
+//    flex-direction: row;
+//    justify-content: space-between;
+//
+//  }
+//
+//  &-info {
+//    //order: 1;
+//    @media (min-width: $tablet) {
+//      order: 2;
+//      //flex: 1;
+//      margin-right: 16px;
+//      flex-direction: row;
+//      justify-content: space-between;
+//
+//    }
+//  }
+//
+//
+//
+//    @media (min-width: $tablet) {
+//      font: 600 20px / 1.5 "Inter", sans-serif;
+//    }
+//
+//  }
+//
+//  &-subtitle {
+//    font: 400 14px / 1.5 "Inter", sans-serif;
+//    color: $secondary-color-white;
+//    opacity: 0.9;
+//    text-align: center;
+//
+//    @media (min-width: $tablet) {
+//
+//    }
+//  }
+//
+//  .banner_top-product-pre-order-btn {
+//    margin-top: 16px;
+//    background-color: $secondary-color-purple;
+//    border-radius: 5px;
+//    padding: 12px 32px;
+//    width: 288px;
+//    height: 40px;
+//
+//    @media (min-width: $tablet) {
+//
+//    }
+//  }
+//
+//.btn-text {
+//  color: $secondary-color-white;
+//  padding-left: 18px;
+//  @media (min-width: $tablet) {
+//    padding-left: 0;
+//  }
+//}
+//
+//  &-img {
+//    width: 100%;
+//    margin-top: 16px;
+//
+//    @media (min-width: $tablet) {
+//      width: auto;
+//      max-width: 50%;
+//      margin-top: 0;
+//
+//    }
+//  }
+
