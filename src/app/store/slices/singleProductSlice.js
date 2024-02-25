@@ -4,7 +4,6 @@ const singleProductSlice = createSlice({
   name: "product",
   initialState: {
     tabs: "About the product",
-    status: "idle",
   },
 
   reducers: {

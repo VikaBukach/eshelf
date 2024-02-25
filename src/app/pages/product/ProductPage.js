@@ -2,7 +2,11 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { changeTabs } from '../../store/slices/singleProductSlice'; 
-import { fetchDataOfProducts } from '../../store/slices/productsSlice'; 
+import { fetchDataOfProducts } from '../../store/slices/productsSlice';
+import { AboutProduct } from '../../components/SingleProduct/AboutProduct';
+import { CharacteristicProduct } from "../../components/SingleProduct/CharacteristicProduct";
+import { PhotoVideoProduct } from '../../components/SingleProduct/PhotoVideoProduct';
+import { ReviewsProduct } from '../../components/SingleProduct/ReviewsProduct'; 
 
 const ProductPage = () => {
 
@@ -43,10 +47,10 @@ const ProductPage = () => {
             ))}
           </ul>
           <div className="product-details__body">
-            {tabs === "About the product" && <p>{product.image}</p>}
-            {tabs === "Characteristic" && <p>{product.brand}</p>}
-            {tabs === "Reviews" && <p>{product._id}</p>}
-            {tabs === "Photo and video" && <p>{product.model}</p>}
+            {tabs === "About the product" && <AboutProduct product={product}/>}
+            {tabs === "Characteristic" && <CharacteristicProduct />}
+            {tabs === "Reviews" && <ReviewsProduct />}
+            {tabs === "Photo and video" && <PhotoVideoProduct />}
           </div>
         </div>
       </section>
