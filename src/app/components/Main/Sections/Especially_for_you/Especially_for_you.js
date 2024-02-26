@@ -98,14 +98,15 @@ function EspeciallyForYou() {
               {status === "failed" && <div>Error: {error} </div>}
               {status === "succeeded" && data.length > 0 ? (
                 data.slice(0, itemsToShow).map((item, index) => {
-                  return (
+                  console.log('--------------', item)
+                                    return (
                     <div className="section-especially-item-desktop " key={index}>
                       {item && (
                         <ProductCard
                           id={item._id}
                           imageURL={item.colors[0].images[0]}
                           category={"Smartphones"}
-                          title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity}
+                                                title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity + " " + item.colors[0].color}
                           price={item.colors[0].products[0].price}
                           discountPrice={item.colors[0].products[0]["discount_price"]}
                         />
