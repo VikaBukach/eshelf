@@ -23,6 +23,7 @@ const Smartphones = () => {
             { title: "Display_matrix_type", path: "specifications.display.display_matrix_type" },
             { title: "Capacity", path: "colors.products.capacity" },
           ]}
+          pricePath="colors.products.price"
       />
     </div>
   );
