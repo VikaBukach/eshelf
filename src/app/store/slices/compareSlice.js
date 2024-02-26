@@ -11,7 +11,7 @@ const compareSlice = createSlice({
       if (!state.isOutOfLimit) {
         state.data = [...state.data, action.payload];
       }
-      if (state.data.length === 2) {
+      if (state.data.length === 3) {
         state.isOutOfLimit = true;
       } else {
         state.isOutOfLimit = false;
@@ -19,7 +19,7 @@ const compareSlice = createSlice({
       localStorage.setItem("compare", JSON.stringify(state.data));
     },
     removeFromCompare: (state, action) => {
-      state.data = [...state.data].filter((item) => item.id !== action.payload);
+      state.data = [...state.data].filter((item) => item._id !== action.payload);
       localStorage.setItem("compare", JSON.stringify(state.data));
     },
   },

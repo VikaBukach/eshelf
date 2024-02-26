@@ -7,10 +7,13 @@
 }
 
 .comparingBody {
-    padding: 2.4rem 4rem;
+    padding: 1.4rem 4rem;
     background: #ECEFF1;
     border-radius: 1rem;
     margin-bottom: 56px;
+    display: flex;
+    flex-grow: 1;
+    align-items: self-start;
 }
 
 .compareTableMain {
@@ -89,9 +92,137 @@
 .compareLiHold {}
 
 .compareLiItem {
+    --cols: 1;
     padding: 8px 0;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    // grid-auto-flow: column;
+    // align-items: flex-start;
+
 }
 
 .compareListHold {}
 
 .compareListItem {}
+
+:root {
+    --line-color: red;
+    // --line-color: #dee2f4;
+}
+
+
+.grid {
+    --cols: 1;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(20rem, 30.1rem));
+    position: relative;
+    gap: 2.4rem;
+
+
+
+
+
+    &>*:not(:first-child) {
+
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: var(--line-color);
+            height: calc(100%);
+        }
+
+    }
+
+    &.table {
+        &>*:not(:first-child) {
+
+            &::after {
+                top: -5.1rem;
+                height: calc(100% + 5.1rem);
+            }
+
+        }
+
+    }
+
+
+}
+
+.firstColumnList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+
+    li> :first-child {
+        opacity: 0.56;
+    }
+}
+
+.firstColumnHeader {
+    font-weight: 700;
+    font-size: 1.8rem;
+    padding-top: 0.8rem;
+    position: relative;
+    margin-bottom: 0.8rem;
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: calc(3.1rem + 100%);
+        height: 1px;
+        background: var(--line-color);
+        top: 0;
+        left: -4rem;
+    }
+
+}
+
+.compareRow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.compareHeader {
+    position: relative;
+    padding-right: 7.2rem;
+    padding-top: 1rem;
+
+    img {
+        margin-bottom: 1.6rem;
+    }
+
+    button {
+        position: absolute;
+        right: 0.8rem;
+        top: -1rem;
+    }
+}
+
+.compareWrapper {
+    display: grid;
+    gap: 0.8rem;
+    overflow-y: auto;
+    padding-block: 1rem;
+
+
+}
+
+.scroll-shadows {
+    background-image: linear-gradient(to right, #ECEFF1, #ECEFF1), linear-gradient(to right, #ECEFF1, #ECEFF1), linear-gradient(to right, rgba(0, 0, 20, .15), rgba(255, 255, 255, 0)), linear-gradient(to left, rgba(0, 0, 20, .15), rgba(255, 255, 255, 0));
+    /* Shadows */
+    /* Shadow covers */
+    background-position: left center, right center, left center, right center;
+    background-repeat: no-repeat;
+    background-color: #ECEFF1;
+    background-size: 20px 100%, 20px 100%, 20px 100%, 20px 100%;
+    background-attachment: local, local, scroll, scroll;
+
+
+}
