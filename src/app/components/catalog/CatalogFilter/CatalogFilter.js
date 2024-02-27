@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
-import { setFilteredProducts } from "../../../store/slices/filteredProductsSlice";
+import { setBaseFilteredProducts, setProductsFilteredWithPrice } from "../../../store/slices/filteredProductsSlice";
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
 
 import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
@@ -10,10 +10,13 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products.data);
-  const filteredProducts = useSelector((state) => state.filteredProducts.data);
+  const filteredProducts = useSelector((state) => state.filteredProducts.baseFilter);
+  const filteredProductsWithPrice = useSelector((state) => state.filteredProducts.filteredWithPrice);
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
+  const priceBy = useSelector((state) => state.filterSettings.priceBy);
+  const priceTo = useSelector((state) => state.filterSettings.priceTo);
 
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
@@ -109,9 +112,9 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
   };
 
   // Визначення мінімальної та максимальної ціни з фільтрованих товарів
-  const findMinAndMaxPrice = () => {
+  const findMinAndMaxPrice = (productArray) => {
     let allPrices = [];
-    filteredProducts.forEach((product) => {
+    productArray.forEach((product) => {
       allPrices = [...allPrices, ...findValueByPath(product, pricePath).value];
     });
     return {
@@ -172,22 +175,36 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
         filteredProductsArray.push(product);
       }
     });
-    dispatch(setFilteredProducts(filteredProductsArray));
+    dispatch(setBaseFilteredProducts(filteredProductsArray));
   };
 
   const onFilterSubmit = () => {
     filterProducts();
+    filterByPrice();
   };
 
   const filterByPrice = () => {
-    console.log("Testttt");
-    console.log(minValue);
+    const filteredProductsArray = [];
+
+    filteredProducts.forEach((product) => {
+      const { minValue, maxValue } = findMinAndMaxPrice([product]);
+
+      if (
+        (minValue >= priceBy && minValue <= priceTo) ||  
+        (maxValue >= priceBy && maxValue <= priceTo) ||  
+        (minValue <= priceBy && maxValue >= priceBy) ||  
+        (minValue <= priceTo && maxValue >= priceTo)
+    ) {
+        filteredProductsArray.push(product);
+      }
+    });
+    dispatch(setProductsFilteredWithPrice(filteredProductsArray));
   };
 
   useEffect(() => {
     setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
-    dispatch(setMinPrice(findMinAndMaxPrice().minValue));
-    dispatch(setMaxPrice(findMinAndMaxPrice().maxValue));
+    dispatch(setMinPrice(findMinAndMaxPrice(filteredProducts).minValue));
+    dispatch(setMaxPrice(findMinAndMaxPrice(filteredProducts).maxValue));
   }, [filterCriterias, products]);
 
   return (

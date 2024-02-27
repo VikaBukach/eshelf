@@ -9,35 +9,33 @@ const CatalogPriceFilter = ({ onClickfunc }) => {
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
 
-  const [minPriceValue, setMinPriceValue] = useState(minValue);
-  const [maxPriceValue, setMaxPriceValue] = useState(maxValue);
-  const [isMinPriceError, setIsMinPriceError] = useState(false);
-  const [isMaxPriceError, setIsMaxPriceError] = useState(false);
+  const [isPriceByError, setIsPriceByError] = useState(false);
+  const [isPriceToError, setIsPriceToError] = useState(false);
 
   useEffect(() => {
-    setMinPriceValue(minValue);
-    setMaxPriceValue(maxValue);
+    dispatch(setPriceBy(minValue));
+    dispatch(setPriceTo(maxValue));
   }, [minValue, maxValue, ]);
 
   const filterByPrice = () => {
-    if (!isMinPriceError && !isMaxPriceError) {
-        onClickfunc();
+    if (!isPriceByError && !isPriceToError) {
+      onClickfunc();
     }
   };
 
   const ckeckValidation = () => {
-    setIsMinPriceError(minPriceValue < minValue || minPriceValue > maxValue || minPriceValue > maxPriceValue);
-    setIsMaxPriceError(maxPriceValue < minValue || maxPriceValue > maxValue || maxPriceValue < minPriceValue);
+    setIsPriceByError(priceBy < minValue || priceBy > maxValue || priceBy > priceTo);
+    setIsPriceToError(priceTo < minValue || priceTo > maxValue || priceTo < priceBy);
   };
 
   const handleMinPriceChange = (event) => {
     const { value } = event.target;
-    setMinPriceValue(Number(value));
+    dispatch(setPriceBy(Number(value)));
   };
   
   const handleMaxPriceChange = (event) => {
     const { value } = event.target;
-    setMaxPriceValue(Number(value));
+    dispatch(setPriceTo(Number(value)));
   };
 
 
@@ -49,10 +47,10 @@ const CatalogPriceFilter = ({ onClickfunc }) => {
         <div>
           <input
             type="number"
-            className={`price-filter__input ${isMinPriceError ? 'price-filter__input--error' : ''}`}
+            className={`price-filter__input ${isPriceByError ? 'price-filter__input--error' : ''}`}
             id="minPriceInput"
             name="minPriceInput"
-            value={minPriceValue}
+            value={priceBy}
             min={minValue}
             max={maxValue}
             onChange={handleMinPriceChange}
@@ -60,10 +58,10 @@ const CatalogPriceFilter = ({ onClickfunc }) => {
           />
           <input
             type="number"
-            className={`price-filter__input ${isMaxPriceError ? 'price-filter__input--error' : ''}`}
+            className={`price-filter__input ${isPriceToError ? 'price-filter__input--error' : ''}`}
             id="maxPriceInput"
             name="maxPriceInput"
-            value={maxPriceValue}
+            value={priceTo}
             min={minValue}
             max={maxValue}
             onChange={handleMaxPriceChange}
