@@ -15,7 +15,7 @@ const CatalogProductList = () => {
 
   let productItems = [];
 
-  (filteredProductsWithPrice).forEach((product) => {
+  (filteredProducts).forEach((product) => {
     product.colors.forEach((color) => {
       const productItem = {};
       productItem.fullName = product.brand + " " + product.model + " " + color.color;

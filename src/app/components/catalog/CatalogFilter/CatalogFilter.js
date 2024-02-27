@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
 import { setBaseFilteredProducts, setProductsFilteredWithPrice } from "../../../store/slices/filteredProductsSlice";
@@ -12,6 +12,7 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
   const products = useSelector((state) => state.products.data);
   const filteredProducts = useSelector((state) => state.filteredProducts.baseFilter);
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
+  const filteredProductsWithPrice = useSelector((state) => state.filteredProducts.filteredWithPrice);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
 
@@ -174,9 +175,6 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
     dispatch(setBaseFilteredProducts(filteredProductsArray));
   };
 
-  const onFilterSubmit = () => {
-    filterProducts();
-  };
 
   const filterByPrice = () => {
     const filteredProductsArray = [];
@@ -196,13 +194,22 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
     dispatch(setProductsFilteredWithPrice(filteredProductsArray));
   };
 
+  
+  const onFilterSubmit = useCallback(() => {
+    filterProducts();
+    filterByPrice();
+  }, [filterProducts, filterByPrice]);
+
+  useEffect(() => {
+    dispatch(setBaseFilteredProducts(products));
+    dispatch(setProductsFilteredWithPrice(products));
+  }, [products]);
+
   useEffect(() => {
     setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
     dispatch(setMinPrice(findMinAndMaxPrice(filteredProducts).minValue));
     dispatch(setMaxPrice(findMinAndMaxPrice(filteredProducts).maxValue));
   }, [filterCriterias, products]);
-
-
 
   return (
     <div className="filter">
