@@ -21,7 +21,8 @@ export const humanizeText = (text) => {
 };
 
 export const getFirstColumnKeys = (obj) => {
-  const res = Object.entries(obj).map(([key, val]) => {
+  const res = Object.entries(obj).map(([rawKey, val]) => {
+    const key = rawKey.split(" ").join("_");
     if (Array.isArray(val)) {
       return key;
     }

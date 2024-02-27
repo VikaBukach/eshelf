@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import Main from "../components/Main/Main";
 
 const Home = () => {
@@ -6,7 +6,7 @@ const Home = () => {
     <>
       <Main />
     </>
-  )
-}
+  );
+};
 
-export {Home};
+export { Home };

@@ -3,7 +3,7 @@ import style from "./Comparing.module.scss";
 import { CompareBody } from "./components/CompareBody";
 
 export const ComparingPage = () => {
-  const { data: compareData, isOutOfLimit } = useSelector((state) => state.compare);
+  const { data: compareData } = useSelector((state) => state.compare);
 
   if (compareData.length == 0) {
     return <h2>No data</h2>;

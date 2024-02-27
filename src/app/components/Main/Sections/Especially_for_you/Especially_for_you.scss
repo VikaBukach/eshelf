@@ -1,4 +1,4 @@
-@import '../../../../../assets/styles/variables';
+@import "../../../../../assets/styles/variables";
 
 .section_especially {
   display: flex;
@@ -15,7 +15,9 @@
 
   &-title {
     padding: 0 16px;
-    font: 500 18px / 1.5 "Inter", sans-serif;
+    font:
+      500 18px / 1.5 "Inter",
+      sans-serif;
     color: #333;
   }
 
@@ -51,7 +53,6 @@
     @media (min-width: $tablet) {
       margin-top: 24px;
     }
-
   }
 
   .section_especially-products-desktop {
@@ -63,24 +64,23 @@
       position: relative;
 
       &-arrows {
-      display: flex;
-      flex-direction: row;
-      width: 80px;
-      height: 32px;
-      position: absolute;
-      right: -20px;
-      top: -55px;
+        display: flex;
+        flex-direction: row;
+        width: 80px;
+        height: 32px;
+        position: absolute;
+        right: -20px;
+        top: -55px;
 
+        .especially_arrow-svg-container-next {
+          cursor: pointer;
+        }
 
-      .especially_arrow-svg-container-next {
-        cursor: pointer;
+        .especially_arrow-svg-container-prev {
+          margin-left: 30px;
+          cursor: pointer;
+        }
       }
-
-      .especially_arrow-svg-container-prev {
-        margin-left: 30px;
-        cursor: pointer;
-      }
-    }
     }
   }
 }

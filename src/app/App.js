@@ -1,6 +1,6 @@
 import "./App.scss";
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Comparing } from "./pages/Comparing";
@@ -12,12 +12,36 @@ import { Smartphones } from "./pages/catalog/Smartphones";
 import { Laptops } from "./pages/catalog/Laptops";
 import Cart from "./components/Cart";
 
+const config = {
+  laptops: "Laptops",
+  smartphones: "Smartphones",
+};
+
+const Test = () => {
+  const { category } = useParams();
+
+  if (!config[category]) return <Notfound />;
+
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchDataOfProducts(category));
+  // }, [dispatch]);
+
+  // return (
+  //   <div>
+  //     <CatalogLayout title={config[category]} />
+  //   </div>
+  // );
+};
+
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/catalog/:category" element={<Test />} />
           <Route path="/smartphones" element={<Smartphones />} />
           <Route path="/laptops" element={<Laptops />} />
           <Route path="/comparing" element={<Comparing />} />
