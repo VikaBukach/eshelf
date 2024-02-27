@@ -11,10 +11,7 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
 
   const products = useSelector((state) => state.products.data);
   const filteredProducts = useSelector((state) => state.filteredProducts.baseFilter);
-  const filteredProductsWithPrice = useSelector((state) => state.filteredProducts.filteredWithPrice);
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
-  const minValue = useSelector((state) => state.filterSettings.minPrice);
-  const maxValue = useSelector((state) => state.filterSettings.maxPrice);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
 
@@ -190,11 +187,11 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
       const { minValue, maxValue } = findMinAndMaxPrice([product]);
 
       if (
-        (minValue >= priceBy && minValue <= priceTo) ||  
-        (maxValue >= priceBy && maxValue <= priceTo) ||  
-        (minValue <= priceBy && maxValue >= priceBy) ||  
+        (minValue >= priceBy && minValue <= priceTo) ||
+        (maxValue >= priceBy && maxValue <= priceTo) ||
+        (minValue <= priceBy && maxValue >= priceBy) ||
         (minValue <= priceTo && maxValue >= priceTo)
-    ) {
+      ) {
         filteredProductsArray.push(product);
       }
     });
@@ -210,16 +207,11 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
   return (
     <div className="filter">
       <CatalogPriceFilter onClickfunc={filterByPrice} />
-      {filterCriteriasWithTypes.map((criteria) => (
-        <>
-          <CatalogFilterItem
-            key={criteria.title}
-            filterTitle={criteria.title}
-            checkBoxNames={criteria.types}
-            criteriaPath={criteria.path}
-          />
+      {filterCriteriasWithTypes.map((criteria, index) => (
+        <React.Fragment key={index}>
+          <CatalogFilterItem filterTitle={criteria.title} checkBoxNames={criteria.types} criteriaPath={criteria.path} />
           <p>-----------------</p>
-        </>
+        </React.Fragment>
       ))}
       <button onClick={onFilterSubmit} className="filter__submit">
         FILTER

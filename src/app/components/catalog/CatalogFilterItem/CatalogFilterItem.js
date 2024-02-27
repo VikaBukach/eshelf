@@ -19,12 +19,12 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
   };
 
   return (
-    <div className="filter__cover">
-      <h5 className="filter__name">{filterTitle}</h5>
+    <div className="filter-item">
+      <h5 className="filter-item__name">{filterTitle}</h5>
       {checkBoxNames.map((checkBoxName) => {
         return (
-          <label key={checkBoxName + 1}>
-            <input  type="checkbox" name={checkBoxName} onChange={handleCheckboxChange} />
+          <label className="filter-item__label" key={checkBoxName + 1}>
+            <input className="filter-item__chekbox" type="checkbox" name={checkBoxName} onChange={handleCheckboxChange} />
             {checkBoxName}
           </label>
         );
