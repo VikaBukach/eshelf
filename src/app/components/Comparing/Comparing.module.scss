@@ -16,26 +16,6 @@
   align-items: self-start;
 }
 
-.compareTableMain {
-  width: auto;
-  border-spacing: 0;
-}
-
-.compareTableMain td {
-  padding: 8px 24px;
-  border-left: 1px solid red;
-}
-
-.compareTableMain td:first-child {
-  padding-left: 0;
-  border-left: none;
-}
-
-.compareItem {
-  padding: 0 24px;
-  border-left: 1px solid red;
-}
-
 .compareImgHold {
   display: flex;
   justify-content: center;
@@ -215,7 +195,7 @@
   padding-block: 1rem;
 }
 
-.scroll-shadows {
+.scrollShadows {
   // background-image: linear-gradient(to right, #ECEFF1, #ECEFF1),
   //     linear-gradient(to right, #ECEFF1, #ECEFF1),
   //     linear-gradient(to right, rgba(0, 0, 20, .15), rgba(255, 255, 255, 0)),

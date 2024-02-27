@@ -7,7 +7,7 @@ import ProductCard from "../../ProductCard/ProductCard";
 export const CompareBody = ({ data }) => {
   const getCompareBody = (arr, products, headerData, columns) => {
     return (
-      <div className={classNames(style.compareWrapper, style["scroll-shadows"])}>
+      <div className={classNames(style.compareWrapper, style.scrollShadows)}>
         <div
           className={style.grid}
           style={{
