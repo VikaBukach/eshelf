@@ -11,6 +11,7 @@ import { Order } from "./pages/Order";
 import { Smartphones } from "./pages/catalog/Smartphones";
 import { Laptops } from "./pages/catalog/Laptops";
 import Cart from "./components/Cart";
+import { ProductPage } from "./pages/product/ProductPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/order" element={<Order />} />
           <Route path="*" element={<Notfound />} />
+          <Route path="/:collection/:id" element={<ProductPage />} />
         </Route>
       </Routes>
     </>

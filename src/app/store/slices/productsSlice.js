@@ -5,7 +5,7 @@ export const fetchDataOfProducts = createAsyncThunk(
   "products/fetchDataOfProducts",
   async (collection, { dispatch }) => {
     try {
-      const response = await axios.get(`http://localhost:5500/${collection}`);
+      const response = await axios.get(`http://localhost:5000/${collection}`);
       dispatch(setProducts(response.data));
       return response.data;
     } catch (err) {

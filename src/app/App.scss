@@ -1,7 +1,10 @@
 @import "../assets/styles/style.scss";
-@import "./components/Header/Header.scss";
-@import "./components/Footer/Footer.scss";
-@import "./components/ProductCard/ProductCard.scss";
-@import "./components/catalog/CatalogProductList/CatalogProductList.scss";
-@import "./components/catalog/CatalogLayout/CatalogLayout.scss";
-@import "./components/catalog/CatalogFilter/CatalogFilter.scss";
+@import './components/Header/Header.scss';
+@import './components/Footer/Footer.scss';
+@import './components/ProductCard/ProductCard.scss';
+@import './components/catalog/CatalogProductList/CatalogProductList.scss';
+@import './components/catalog/CatalogLayout/CatalogLayout.scss';
+@import './components/catalog/CatalogFilter/CatalogFilter.scss';
+@import './pages/product/ProductPage.scss';
+@import './components/SingleProduct/AboutProduct.scss';
+@import './components/SingleProduct/ButtonBuy.scss';
