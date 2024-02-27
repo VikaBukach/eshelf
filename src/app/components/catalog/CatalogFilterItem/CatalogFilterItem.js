@@ -1,20 +1,26 @@
 import React from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
 
-
 const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
-
   const dispatch = useDispatch();
-  const filterSettings = useSelector(state => state.filterSettings.checkboxes);
+  const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
 
   const filterSettingsToUpdate = { ...filterSettings };
-  filterSettingsToUpdate[criteriaPath] = {...filterSettingsToUpdate[criteriaPath]};
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
 
-    filterSettingsToUpdate[criteriaPath][name] = checked;
+    if (!filterSettingsToUpdate[criteriaPath]) {
+      filterSettingsToUpdate[criteriaPath] = [];
+    };
+    if (checked) {
+      filterSettingsToUpdate[criteriaPath] = [...filterSettingsToUpdate[criteriaPath], name]
+    };
+    if (!checked) {
+      filterSettingsToUpdate[criteriaPath] = filterSettingsToUpdate[criteriaPath].filter(item => item !== name);
+    };
+
     dispatch(setCheckboxesSettings(filterSettingsToUpdate));
   };
 
@@ -24,7 +30,12 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
       {checkBoxNames.map((checkBoxName) => {
         return (
           <label className="filter-item__label" key={checkBoxName + 1}>
-            <input className="filter-item__chekbox" type="checkbox" name={checkBoxName} onChange={handleCheckboxChange} />
+            <input
+              className="filter-item__chekbox"
+              type="checkbox"
+              name={checkBoxName}
+              onChange={handleCheckboxChange}
+            />
             {checkBoxName}
           </label>
         );

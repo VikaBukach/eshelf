@@ -134,7 +134,7 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
       let isMatch = true;
 
       for (const [path, parametersOfSetting] of entriesOfFilterSettings) {
-        const trueValues = Object.keys(parametersOfSetting).filter((key) => parametersOfSetting[key]);
+        const trueValues = parametersOfSetting;
 
         const { value, arrayOfObjects } = findValueByPath(product, path);
 
@@ -160,7 +160,6 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
           // Якщо є массив об'єктів: фільтрація по іншим критеріям
           else if (arrayOfObjects && !trueValues.some((trueValue) => value.includes(trueValue))) {
             isMatch = false;
-            console.log("1");
           }
           // Прибираємо всі продукти з пустими значаннями, якщо такі є
           else if (value.length < 1) {
@@ -177,7 +176,6 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
 
   const onFilterSubmit = () => {
     filterProducts();
-    filterByPrice();
   };
 
   const filterByPrice = () => {
@@ -203,6 +201,8 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
     dispatch(setMinPrice(findMinAndMaxPrice(filteredProducts).minValue));
     dispatch(setMaxPrice(findMinAndMaxPrice(filteredProducts).maxValue));
   }, [filterCriterias, products]);
+
+
 
   return (
     <div className="filter">
