@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const PhotoVideoProduct = () => {
-  return (
-    <div>PhotoVideoProduct</div>
-  )
-}
+  return <div>PhotoVideoProduct</div>;
+};
 
-export { PhotoVideoProduct }
+export { PhotoVideoProduct };

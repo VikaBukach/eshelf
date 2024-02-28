@@ -1,9 +1,8 @@
 @mixin logo {
-    width: 32px; 
-    height: 32px; 
-    color:$primary-color-blue;
-
-};
+  width: 32px;
+  height: 32px;
+  color: $primary-color-blue;
+}
 
 @function rem($px) {
   @return calc($px / 10) * 1rem;
