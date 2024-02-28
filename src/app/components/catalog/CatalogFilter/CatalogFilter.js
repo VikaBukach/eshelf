@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
-import { setBaseFilteredProducts } from "../../../store/slices/filteredProductsSlice";
+import { setBaseFilteredProducts, updateBaseFilterData, selectFilteredProductsStatus } from "../../../store/slices/filteredProductsSlice";
 import { setFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
 
@@ -16,6 +16,7 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
   const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
+  const baseFilterProductsStatus = useSelector(selectFilteredProductsStatus);
   
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
@@ -221,19 +222,21 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
       // --------------------------------------------------------
 
   const onFilterSubmit = () => {
-    let filteredProductsArrayBase = filterProducts();
-    console.log(filteredProductsArrayBase);
-    dispatch(setBaseFilteredProducts(filteredProductsArrayBase));
-  
-    console.log(filteredProducts);
+    dispatch(updateBaseFilterData(filterProducts()));
+  };
+
+  useEffect(() => {
+    if (baseFilterProductsStatus === 'idle') {
+      dispatch(setFilteredProductsWithPrice(filterByPrice()));
+    }
+  }, [baseFilterProductsStatus, dispatch]);
+
+
+
+  const onFilterSubmitPrice = () => {
     let filteredProductsArrayWithPrice = filterByPrice();
     dispatch(setFilteredProductsWithPrice(filteredProductsArrayWithPrice));
     console.log(filteredProductsArrayWithPrice);
-  };
-
-  const onFilterSubmitPrice = async () => {
-    let filteredProductsArray =  await filterByPrice();
-    // dispatch(setFilteredProductsWithPrice(filteredProductsArray));
   };
 
 
