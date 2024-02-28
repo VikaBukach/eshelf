@@ -47,8 +47,8 @@ const ProductPage = () => {
             ))}
           </ul>
           <div className="product-details__body">
-            {tabs === "About the product" && <AboutProduct product={product}/>}
-            {tabs === "Characteristic" && <CharacteristicProduct />}
+            {tabs === "About the product" && <AboutProduct product={product} />}
+            {tabs === "Characteristic" && <CharacteristicProduct product={product} />}
             {tabs === "Reviews" && <ReviewsProduct />}
             {tabs === "Photo and video" && <PhotoVideoProduct />}
           </div>

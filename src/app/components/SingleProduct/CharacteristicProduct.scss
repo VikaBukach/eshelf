@@ -1,0 +1,52 @@
+.characteristic-body {
+    padding: 24px 32px;
+    display: flex;
+    background-color: $secondary-color-grey-card;
+    border-radius: 10px;
+
+    &__info {
+        flex: 0 1 50%;
+    }
+    &__title {
+        margin-bottom: 40px;
+        font-weight: 500;
+        span {
+            font-weight: 400;
+        }
+    }
+
+    &__group {
+        &:not(:last-child) {
+            margin-bottom: 32px;
+        }
+    }
+    &__heading {
+        margin-bottom: 8px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    &__list {
+
+    }
+
+    &__item {
+        display: flex;
+        //justify-content: center;
+        align-items: center;
+    }
+    &__label {
+        width: 40%;
+    }
+    &__value {
+
+    }
+    &__sub-list {
+        li {
+
+        }
+    }
+
+    &__buy {
+        flex: 0 1 50%;
+    }
+}
