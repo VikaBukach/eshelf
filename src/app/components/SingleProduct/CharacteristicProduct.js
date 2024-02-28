@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const CharacteristicProduct = () => {
-  return (
-    <div>CharacteristicProduct</div>
-  )
-}
+  return <div>CharacteristicProduct</div>;
+};
 
-export { CharacteristicProduct }
+export { CharacteristicProduct };

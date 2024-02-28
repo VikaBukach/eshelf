@@ -61,16 +61,10 @@
   text-transform: capitalize;
 }
 
-.compareItem:first-child .compareLabel {
-}
-
 .compareValue {
   font-size: 16px;
   color: $primary-color-black;
   max-width: 335px;
-}
-
-.compareLiHold {
 }
 
 .compareLiItem {
@@ -78,14 +72,6 @@
   padding: 8px 0;
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
-  // grid-auto-flow: column;
-  // align-items: flex-start;
-}
-
-.compareListHold {
-}
-
-.compareListItem {
 }
 
 :root {
@@ -193,27 +179,4 @@
   gap: 0.8rem;
   overflow-y: auto;
   padding-block: 1rem;
-}
-
-.scrollShadows {
-  // background-image: linear-gradient(to right, #ECEFF1, #ECEFF1),
-  //     linear-gradient(to right, #ECEFF1, #ECEFF1),
-  //     linear-gradient(to right, rgba(0, 0, 20, .15), rgba(255, 255, 255, 0)),
-  //     linear-gradient(to left, rgba(0, 0, 20, .15), rgba(255, 255, 255, 0));
-  // /* Shadows */
-  // /* Shadow covers */
-  // background-position: left center,
-  //     right center,
-  //     left center,
-  //     right center;
-  // background-repeat: no-repeat;
-  // background-color: #ECEFF1;
-  // background-size: 20px 100%,
-  //     20px 100%,
-  //     20px 100%,
-  //     20px 100%;
-  // background-attachment: local,
-  //     local,
-  //     scroll,
-  //     scroll;
 }
