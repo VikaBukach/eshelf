@@ -8,11 +8,9 @@ const singleProductSlice = createSlice({
 
   reducers: {
     changeTabs: (state, action) => {
-      state.tabs = action.payload
-    }
+      state.tabs = action.payload;
+    },
   },
-
- 
 });
 
 export const { changeTabs } = singleProductSlice.actions;

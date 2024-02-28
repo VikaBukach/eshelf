@@ -1,10 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCompare } from "../../../store/slices/compareSlice";
+import { useLocation } from "react-router-dom";
 
 const CatalogProductList = () => {
   const products = useSelector((state) => state.products.data);
+  const selectedCategory = useSelector((state) => state.compare.selectedCategory);
   const dispatch = useDispatch();
+
+  const params = useLocation();
+  const category = params.pathname.replace("/", "");
+
+  console.log(selectedCategory);
 
   let productItems = [];
 
@@ -28,7 +35,13 @@ const CatalogProductList = () => {
           {productItem.fullName}
           <button
             onClick={() => {
-              dispatch(addToCompare(productItem));
+              if (selectedCategory ? category == selectedCategory : true) {
+                dispatch(addToCompare({ product: productItem, category }));
+              } else {
+                alert(
+                  "Error! You try to compare " + category + " with " + selectedCategory + ". Categories should match."
+                );
+              }
             }}
             className="primary-btn"
           >

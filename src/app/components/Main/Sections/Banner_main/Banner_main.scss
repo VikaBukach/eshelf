@@ -44,15 +44,21 @@
     padding-top: 16px;
     padding-bottom: 8px;
     text-align: center;
-    font: 600 18px / 1.5 "Inter", sans-serif;
+    font:
+      600 18px / 1.5 "Inter",
+      sans-serif;
     color: $secondary-color-white;
 
     @media (min-width: $tablet) {
-      font: 600 20px / 1.5 "Inter", sans-serif;
+      font:
+        600 20px / 1.5 "Inter",
+        sans-serif;
     }
 
     @media (min-width: $desktop) {
-      font: 600 36px / 1.5 "Inter", sans-serif;
+      font:
+        600 36px / 1.5 "Inter",
+        sans-serif;
       padding-top: 50px;
       padding-bottom: 20px;
     }
@@ -80,7 +86,6 @@
       margin-bottom: 44px;
       overflow: initial;
       text-align: center;
-
     }
     @media (min-width: $desktop) {
       overflow: initial;
@@ -136,7 +141,9 @@
     margin-right: 8px;
 
     @media (min-width: $desktop) {
-      font: 600 24px / 1.5 "Inter", sans-serif;
+      font:
+        600 24px / 1.5 "Inter",
+        sans-serif;
       text-decoration: line-through;
       opacity: 0.56;
     }
@@ -153,7 +160,9 @@
     }
 
     @media (min-width: $desktop) {
-      font: 600 36px / 1.5 "Inter", sans-serif;
+      font:
+        600 36px / 1.5 "Inter",
+        sans-serif;
       color: $secondary-color-purple;
       padding-left: 15px;
     }
@@ -180,7 +189,6 @@
     transform: translateY(-350%) translateX(90%);
 
     @media (min-width: $desktop) {
-
     }
 
     @media (min-width: $desktop) {
@@ -197,7 +205,6 @@
     right: 0;
     transform: translateY(308%) translateX(-100%);
     @media (min-width: $desktop) {
-
     }
 
     @media (min-width: $desktop) {

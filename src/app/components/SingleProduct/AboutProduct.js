@@ -1,24 +1,21 @@
-import React from 'react'
+import React from "react";
 
-import { ReactComponent as AboutBatteryIcon } from '../../../assets/images/product-icons/Diagonal.svg'
-import { ReactComponent as AboutMainCameraIcon } from '../../../assets/images/product-icons/Camera.svg'
-import { ReactComponent as AboutFrontCameraIcon } from '../../../assets/images/product-icons/front-camera.svg'
-import { ReactComponent as AboutBatteryElementIcon } from '../../../assets/images/product-icons/Battery.svg'
-import { ReactComponent as AboutFrequencyIcon } from "../../../assets/images/product-icons/Mobile.svg"
-import { ReactComponent as AboutProcessorIcon } from "../../../assets/images/product-icons/Hardware.svg"
-import { ReactComponent as AboutComparingIcon } from "../../../assets/images/Balance.svg"
-import { ReactComponent as AboutFavoritesIcon } from "../../../assets/images/Heart.svg"
-import { ReactComponent as AboutVisaIcon } from "../../../assets/images/product-icons/visa.svg"
-import { ReactComponent as AboutGooglePayIcon } from "../../../assets/images/product-icons/google-pay.svg"
-import { ReactComponent as AboutApplePayIcon } from "../../../assets/images/product-icons/apple-pay.svg"
-import { ReactComponent as AboutMastercardIcon } from "../../../assets/images/product-icons/mastercard.svg"
+import { ReactComponent as AboutBatteryIcon } from "../../../assets/images/product-icons/Diagonal.svg";
+import { ReactComponent as AboutMainCameraIcon } from "../../../assets/images/product-icons/Camera.svg";
+import { ReactComponent as AboutFrontCameraIcon } from "../../../assets/images/product-icons/front-camera.svg";
+import { ReactComponent as AboutBatteryElementIcon } from "../../../assets/images/product-icons/Battery.svg";
+import { ReactComponent as AboutFrequencyIcon } from "../../../assets/images/product-icons/Mobile.svg";
+import { ReactComponent as AboutProcessorIcon } from "../../../assets/images/product-icons/Hardware.svg";
+import { ReactComponent as AboutComparingIcon } from "../../../assets/images/Balance.svg";
+import { ReactComponent as AboutFavoritesIcon } from "../../../assets/images/Heart.svg";
+import { ReactComponent as AboutVisaIcon } from "../../../assets/images/product-icons/visa.svg";
+import { ReactComponent as AboutGooglePayIcon } from "../../../assets/images/product-icons/google-pay.svg";
+import { ReactComponent as AboutApplePayIcon } from "../../../assets/images/product-icons/apple-pay.svg";
+import { ReactComponent as AboutMastercardIcon } from "../../../assets/images/product-icons/mastercard.svg";
 
-import { ButtonBuy } from './ButtonBuy'
-
-
+import { ButtonBuy } from "./ButtonBuy";
 
 const AboutProduct = ({ product }) => {
-
   return (
     <div className="product-details-body">
       <div className="product-details-body__slider">
@@ -155,6 +152,6 @@ const AboutProduct = ({ product }) => {
       </div>
     </div>
   );
-}
+};
 
-export { AboutProduct }
+export { AboutProduct };

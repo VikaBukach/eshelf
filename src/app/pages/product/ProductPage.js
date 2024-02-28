@@ -1,22 +1,21 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { changeTabs } from '../../store/slices/singleProductSlice'; 
-import { fetchDataOfProducts } from '../../store/slices/productsSlice';
-import { AboutProduct } from '../../components/SingleProduct/AboutProduct';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { changeTabs } from "../../store/slices/singleProductSlice";
+import { fetchDataOfProducts } from "../../store/slices/productsSlice";
+import { AboutProduct } from "../../components/SingleProduct/AboutProduct";
 import { CharacteristicProduct } from "../../components/SingleProduct/CharacteristicProduct";
-import { PhotoVideoProduct } from '../../components/SingleProduct/PhotoVideoProduct';
-import { ReviewsProduct } from '../../components/SingleProduct/ReviewsProduct'; 
+import { PhotoVideoProduct } from "../../components/SingleProduct/PhotoVideoProduct";
+import { ReviewsProduct } from "../../components/SingleProduct/ReviewsProduct";
 
 const ProductPage = () => {
-
   const { collection, id } = useParams();
 
   //console.log(collection);
 
   const dispatch = useDispatch();
 
-  const product = useSelector((state) => state.products.data.find(item => item._id === id));
+  const product = useSelector((state) => state.products.data.find((item) => item._id === id));
 
   const { tabs } = useSelector((state) => state.product);
 
@@ -56,6 +55,6 @@ const ProductPage = () => {
       </section>
     </>
   );
-}
+};
 
-export { ProductPage }
+export { ProductPage };

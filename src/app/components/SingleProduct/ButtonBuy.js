@@ -1,5 +1,5 @@
-import React from 'react'
-import { ReactComponent as CartIcon } from '../../../assets/images/Cart.svg' 
+import React from "react";
+import { ReactComponent as CartIcon } from "../../../assets/images/Cart.svg";
 
 const ButtonBuy = () => {
   return (
@@ -8,6 +8,6 @@ const ButtonBuy = () => {
       <span>Buy now</span>
     </div>
   );
-}
+};
 
-export { ButtonBuy }
+export { ButtonBuy };

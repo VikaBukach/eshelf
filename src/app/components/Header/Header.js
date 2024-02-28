@@ -101,13 +101,13 @@ const Header = () => {
             <HeartIcon />
           </NavLink>
           <NavLink to="/cart" className="header__link-cart">
-          <Cart
-            activator={
-              <div onClick={open}>
-                <CartIcon />
-              </div>
-            }
-          ></Cart>
+            <Cart
+              activator={
+                <div onClick={open}>
+                  <CartIcon />
+                </div>
+              }
+            ></Cart>
           </NavLink>
           <NavLink to="/users" className="header__link-users">
             <UserIcon />

@@ -1,38 +1,40 @@
 .product-details {
-    &__title {
-        @include adaptiveValue("font-size", 16, 24);
-        @include adaptiveValue("margin-bottom", 16, 32);
-        font-weight: 500;
+  &__title {
+    @include adaptiveValue("font-size", 16, 24);
+    @include adaptiveValue("margin-bottom", 16, 32);
+    font-weight: 500;
+  }
+
+  &__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 24px;
+    margin-bottom: 15px;
+  }
+
+  &__tabs-item {
+    padding: 5px 0;
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      border 0.3s,
+      color 0.3s;
+
+    &:hover {
+      border-color: $primary-color-blue;
+      color: $primary-color-blue;
     }
 
-    &__tabs {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px 24px;
-        margin-bottom: 15px;
+    @media screen and (min-width: $desktop) {
+      font-size: 16px;
     }
+  }
 
-    &__tabs-item {
-        padding: 5px 0;
-        font-size: 14px;
-        font-weight: 500;
-        border-bottom: 1px solid transparent;
-        white-space: nowrap;
-        cursor: pointer;
-        transition: border 0.3s, color 0.3s;
-
-        &:hover {
-            border-color: $primary-color-blue;
-            color: $primary-color-blue;
-        }
-
-        @media screen and (min-width: $desktop) {
-            font-size: 16px;
-        }
-    }
-
-    &__tabs-active {
-        border-color: $primary-color-blue;
-        color: $primary-color-blue;
-    }
+  &__tabs-active {
+    border-color: $primary-color-blue;
+    color: $primary-color-blue;
+  }
 }

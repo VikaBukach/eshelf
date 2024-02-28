@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const CharacteristicProduct = ({product}) => {
 
@@ -40,4 +40,4 @@ const CharacteristicProduct = ({product}) => {
   );
 }
 
-export { CharacteristicProduct }
+export { CharacteristicProduct };

@@ -11,7 +11,9 @@
   justify-content: center;
 
   &-title {
-    font: 600 20px / 1.5 "Inter", sans-serif;
+    font:
+      600 20px / 1.5 "Inter",
+      sans-serif;
     text-align: center;
     color: $secondary-color-white;
     margin-bottom: 8px;
@@ -23,7 +25,9 @@
   }
 
   &-subtitle {
-    font: 400 14px / 1.5 "Inter", sans-serif;
+    font:
+      400 14px / 1.5 "Inter",
+      sans-serif;
     color: $secondary-color-white;
     opacity: 0.9;
     text-align: center;
@@ -49,7 +53,6 @@
 }
 
 .banner_top-product-desktop {
-
   @media (min-width: $mobile) {
     display: none;
   }
@@ -90,39 +93,46 @@
       width: 874px;
       margin-top: 84px;
       margin-right: 75px;
-
     }
   }
 
   &-title {
     @media (min-width: $tablet) {
-      font: 600 20px / 1.5 "Inter", sans-serif;
+      font:
+        600 20px / 1.5 "Inter",
+        sans-serif;
       color: $secondary-color-white;
     }
     @media (min-width: $desktop) {
-      font: 600 36px / 1.5 "Inter", sans-serif;
+      font:
+        600 36px / 1.5 "Inter",
+        sans-serif;
     }
   }
 
   &-descr {
     @media (min-width: $tablet) {
       color: $secondary-color-white;
-      font: 400 14px / 1.5 "Inter", sans-serif;
+      font:
+        400 14px / 1.5 "Inter",
+        sans-serif;
       opacity: 0.9;
       padding-top: 8px;
     }
     @media (min-width: $desktop) {
-     display: none;
+      display: none;
     }
   }
 
   &-long-descr {
     @media (min-width: $mobile) {
-    display: none;
-  }
+      display: none;
+    }
     @media (min-width: $desktop) {
       display: flex;
-      font: 400 16px / 1.5 "Inter", sans-serif;
+      font:
+        400 16px / 1.5 "Inter",
+        sans-serif;
       color: $secondary-color-white;
       opacity: 0.9;
       padding-top: 16px;
@@ -147,17 +157,11 @@
   }
   .btn-text {
     @media (min-width: $tablet) {
-      font: 400 16px / 1.5 "Inter", sans-serif;
+      font:
+        400 16px / 1.5 "Inter",
+        sans-serif;
       color: $secondary-color-white;
       flex-direction: row;
     }
   }
 }
-
-
-
-
-
-
-
-
