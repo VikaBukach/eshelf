@@ -48,6 +48,7 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues
                 type="checkbox"
                 name={checkBoxName}
                 onChange={handleCheckboxChange}
+                disabled={findNumberOfValue(checkBoxName) === 0 ? true : false}
               />
               {checkBoxName}
             </label>

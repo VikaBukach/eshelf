@@ -187,7 +187,6 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
         filteredProductsArray.push(product);
       }
     });
-    console.log(filteredProductsArray);
     return filteredProductsArray;
   };
 
