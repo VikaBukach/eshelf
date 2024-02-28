@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
 import { NumberOfEligibleProducts } from "../NumberOfEligibleProducts/NumberOfEligibleProducts";
 
-const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
+const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues }) => {
   const dispatch = useDispatch();
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
+  const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
 
   const filterSettingsToUpdate = { ...filterSettings };
 
@@ -21,8 +22,18 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
     if (!checked) {
       filterSettingsToUpdate[criteriaPath] = filterSettingsToUpdate[criteriaPath].filter((item) => item !== name);
     }
-
     dispatch(setCheckboxesSettings(filterSettingsToUpdate));
+  };
+
+  const findNumberOfValue = (name) => {
+    const numberOfValue = allValues.reduce((accumulator, currentValue) => {
+      if (currentValue === name) {
+        return accumulator + 1;
+      } else {
+        return accumulator;
+      }
+    }, 0);
+    return numberOfValue;
   };
 
   return (
@@ -40,7 +51,7 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
               />
               {checkBoxName}
             </label>
-            <NumberOfEligibleProducts number={5} />
+            <NumberOfEligibleProducts number={findNumberOfValue(checkBoxName)} />
           </div>
         );
       })}

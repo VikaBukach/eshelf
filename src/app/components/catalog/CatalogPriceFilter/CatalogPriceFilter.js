@@ -15,7 +15,7 @@ const CatalogPriceFilter = ({ onClickfunc }) => {
   useEffect(() => {
     dispatch(setPriceBy(minValue));
     dispatch(setPriceTo(maxValue));
-  }, [minValue, maxValue, ]);
+  }, [minValue, maxValue]);
 
   const filterByPrice = () => {
     if (!isPriceByError && !isPriceToError) {

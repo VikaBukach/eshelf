@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
-import { setBaseFilteredProducts, setProductsFilteredWithPrice } from "../../../store/slices/filteredProductsSlice";
+import { setBaseFilteredProducts } from "../../../store/slices/filteredProductsSlice";
+import { setFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
 
 import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
@@ -12,10 +13,10 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
   const products = useSelector((state) => state.products.data);
   const filteredProducts = useSelector((state) => state.filteredProducts.baseFilter);
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
-  const filteredProductsWithPrice = useSelector((state) => state.filteredProducts.filteredWithPrice);
+  const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
-
+  
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
   // ---------------------------------------------------------
@@ -82,6 +83,7 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
     return { value: result, arrayOfObjects: arrayOfObjects };
   };
 
+
   // ---------------------------------------------------------
   // ---------------------------------------------------------
   // ---------------------------------------------------------
@@ -120,6 +122,18 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
       maxValue: isFinite(Math.max(...allPrices)) ? Math.max(...allPrices) : 0,
     };
   };
+
+
+
+  // Складання масиву з усіх значень (з повтореннями) згідно з шляхом пошуку 
+  const findAllValues = (path) => {
+    const valuesOfCriteria = [];
+    filteredProductsWithPrice.forEach((product) => {
+      const { value: findVariations } = findValueByPath(product, path);
+      valuesOfCriteria.push(...findVariations)
+    });
+    return valuesOfCriteria;
+};
 
   // ---------------------------------------------------------
   // ---------------------------------------------------------
@@ -172,7 +186,8 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
         filteredProductsArray.push(product);
       }
     });
-    dispatch(setBaseFilteredProducts(filteredProductsArray));
+    console.log(filteredProductsArray);
+    return filteredProductsArray;
   };
 
 
@@ -191,18 +206,44 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
         filteredProductsArray.push(product);
       }
     });
-    dispatch(setProductsFilteredWithPrice(filteredProductsArray));
+    return filteredProductsArray;
   };
 
+
+
+  // --------------------------------------------------------
+    // --------------------------------------------------------
+      // --------------------------------------------------------
+
+
+  // --------------------------------------------------------
+    // --------------------------------------------------------
+      // --------------------------------------------------------
+
+  const onFilterSubmit = () => {
+    let filteredProductsArrayBase = filterProducts();
+    console.log(filteredProductsArrayBase);
+    dispatch(setBaseFilteredProducts(filteredProductsArrayBase));
   
-  const onFilterSubmit = useCallback(() => {
-    filterProducts();
-    filterByPrice();
-  }, [filterProducts, filterByPrice]);
+    console.log(filteredProducts);
+    let filteredProductsArrayWithPrice = filterByPrice();
+    dispatch(setFilteredProductsWithPrice(filteredProductsArrayWithPrice));
+    console.log(filteredProductsArrayWithPrice);
+  };
+
+  const onFilterSubmitPrice = async () => {
+    let filteredProductsArray =  await filterByPrice();
+    // dispatch(setFilteredProductsWithPrice(filteredProductsArray));
+  };
+
+
+  useEffect(() => {
+    onFilterSubmit();
+  }, [filterSettings]);
 
   useEffect(() => {
     dispatch(setBaseFilteredProducts(products));
-    dispatch(setProductsFilteredWithPrice(products));
+    dispatch(setFilteredProductsWithPrice(filteredProducts));
   }, [products]);
 
   useEffect(() => {
@@ -213,10 +254,10 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
 
   return (
     <div className="filter">
-      <CatalogPriceFilter onClickfunc={filterByPrice} />
+      <CatalogPriceFilter onClickfunc={onFilterSubmitPrice} />
       {filterCriteriasWithTypes.map((criteria, index) => (
         <React.Fragment key={index}>
-          <CatalogFilterItem filterTitle={criteria.title} checkBoxNames={criteria.types} criteriaPath={criteria.path} />
+          <CatalogFilterItem filterTitle={criteria.title} checkBoxNames={criteria.types} criteriaPath={criteria.path} allValues={findAllValues(criteria.path)}/>
           <p>-----------------</p>
         </React.Fragment>
       ))}
@@ -228,3 +269,4 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
 };
 
 export { CatalogFilter };
+

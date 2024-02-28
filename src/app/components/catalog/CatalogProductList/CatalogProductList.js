@@ -1,21 +1,14 @@
-import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setBaseFilteredProducts, setProductsFilteredWithPrice } from "../../../store/slices/filteredProductsSlice";
 
 const CatalogProductList = () => {
-  const products = useSelector((state) => state.products.data);
-  const filteredProducts = useSelector((state) => state.filteredProducts.baseFilter);
-  const filteredProductsWithPrice = useSelector((state) => state.filteredProducts.filteredWithPrice);
-  const dispatch = useDispatch();
+  const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
 
-  useEffect(() => {
-    dispatch(setBaseFilteredProducts(products));
-    dispatch(setProductsFilteredWithPrice(products));
-  }, [products]);
+
+
 
   let productItems = [];
 
-  (filteredProducts).forEach((product) => {
+  filteredProductsWithPrice.forEach((product) => {
     product.colors.forEach((color) => {
       const productItem = {};
       productItem.fullName = product.brand + " " + product.model + " " + color.color;
