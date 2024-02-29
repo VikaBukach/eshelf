@@ -78,6 +78,10 @@ $silver: #a0a0a08f;
 .price {
   font-size: 2.4rem;
   font-weight: bold;
+  min-width: 10rem;
+  text-align: right;
+  max-width: 100%;
+  margin-right: 0;
 }
 
 .productQuantity {
@@ -86,8 +90,8 @@ $silver: #a0a0a08f;
   justify-content: space-between;
   width: 100%;
 
-  .price {
-    margin-right: 1rem;
+  & > .price {
+    text-align: left;
   }
 }
 
@@ -96,10 +100,7 @@ $silver: #a0a0a08f;
   align-items: center;
   font-size: 2.4rem;
   font-weight: bold;
-
-  & > div {
-    margin-right: 4rem;
-  }
+  gap: 3.2rem;
 
   .quantityControllers {
     display: flex;

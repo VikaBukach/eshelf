@@ -82,9 +82,11 @@ const Header = () => {
             </ul>
           </nav>
 
-          <span className={`header__logo ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "mobile" : ""}`}>
-            eShelf
-          </span>
+          <NavLink to="/">
+            <span className={`header__logo ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "mobile" : ""}`}>
+              eShelf
+            </span>
+          </NavLink>
 
           <div
             className={`header__search-container ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "mobile" : ""}`}
@@ -100,7 +102,7 @@ const Header = () => {
           <NavLink to="/favorites" className="header__link-favorites">
             <HeartIcon />
           </NavLink>
-          <NavLink to="/cart" className="header__link-cart">
+          <div className="header__link-cart">
             <Cart
               activator={
                 <div onClick={open}>
@@ -108,7 +110,7 @@ const Header = () => {
                 </div>
               }
             ></Cart>
-          </NavLink>
+          </div>
           <NavLink to="/users" className="header__link-users">
             <UserIcon />
           </NavLink>
