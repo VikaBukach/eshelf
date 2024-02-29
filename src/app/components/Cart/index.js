@@ -2,31 +2,40 @@ import { useEffect, useRef, useState } from "react";
 import Modal from "../Modal";
 import style from "./Cart.module.scss";
 import { useModal } from "../../hooks/useModal";
-import { Link } from "react-router-dom";
-
-const products = [];
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { decrementProductQuantity, incrementProductQuantity } from "../../store/slices/cartSlice";
+import { formatPrice } from "../../utils/formatPrice";
 
 const CartItem = ({ item }) => {
+  const dispatch = useDispatch();
+
+  const increase = (id) => {
+    dispatch(incrementProductQuantity(id));
+  };
+
+  const decrease = (id) => {
+    dispatch(decrementProductQuantity(id));
+  };
+
   return (
     <div className={style.product}>
       <div className={style.productImage}>
-        <img src={item.image} alt={item.name} />
+        <img src={item.imageURL} alt={item.title} />
       </div>
       <div className={style.productContent}>
-        <h3 className={style.heading}>{item.name}</h3>
-        <p>Code: {item.code}</p>
+        <h3 className={style.heading}>{item.title}</h3>
+        {/* <p>Code: {item.code}</p> */}
         <div className={style.productQuantity}>
-          <div className={style.price}>
-            {item.price} {item.currency}
-          </div>
+          <div className={style.price}>{formatPrice(item.price)} ₴</div>
           <div className={style.quantity}>
             <div className={style.quantityControllers}>
-              <div>-</div>
+              <div onClick={() => decrease(item.id)}>-</div>
               <span>{item.quantity}</span>
-              <div>+</div>
+              <div onClick={() => increase(item.id)}>+</div>
             </div>
             <div className={style.price}>
-              {+item.price * +item.quantity} {item.currency}
+              {formatPrice(+item.price * +item.quantity)} {item.currency} ₴
             </div>
           </div>
         </div>
@@ -36,19 +45,32 @@ const CartItem = ({ item }) => {
 };
 
 const Cart = ({ activator }) => {
+  const cart = useSelector((state) => state.cart.data);
   const { active, open, close } = useModal();
+  const navigate = useNavigate();
 
   const footerRef = useRef();
   const headerRef = useRef();
+
+  const totalPrice = cart.reduce((prev, curr) => {
+    return prev + curr.quantity * curr.price;
+  }, 0);
 
   const footerElement = (
     <div ref={footerRef}>
       <span className={style.line}></span>
       <div className={style.footer}>
-        <p className={style.price}>499$</p>
-        <Link to="/order" onClick={close} className="primary-btn">
+        <p className={style.price}>{formatPrice(totalPrice)} ₴</p>
+        <button
+          disabled={!cart.length}
+          onClick={() => {
+            navigate("/order");
+            close();
+          }}
+          className="primary-btn"
+        >
           Continue
-        </Link>
+        </button>
       </div>
     </div>
   );
@@ -88,7 +110,7 @@ const Cart = ({ activator }) => {
       }}
       className={style.list}
     >
-      {products.length === 0 ? (
+      {cart.length === 0 ? (
         <h2
           style={{
             fontSize: "2rem",
@@ -99,7 +121,7 @@ const Cart = ({ activator }) => {
           Cart is empty!
         </h2>
       ) : null}
-      {products.map((product) => (
+      {cart.map((product) => (
         <CartItem key={product.id} item={product} />
       ))}
     </div>

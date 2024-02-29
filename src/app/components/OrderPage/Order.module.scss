@@ -22,7 +22,12 @@ $silver: #a0a0a08f;
     width: 100%;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1124px) {
+    .cartTotals {
+      padding-left: 8rem;
+      border-left: 1px solid rgba(163, 173, 255, 0.2);
+    }
+
     & {
       flex-direction: row;
 
@@ -143,9 +148,10 @@ $silver: #a0a0a08f;
   }
 }
 
-.heading {
+.pageOrder .heading {
   font-size: 2.4rem;
   font-weight: medium;
+  line-height: 120%;
 }
 
 .product {
@@ -164,8 +170,23 @@ $silver: #a0a0a08f;
   }
 }
 
+.cartTotals {
+  padding-left: 0;
+  border-left: none;
+}
+
+.cartTotalsList {
+  display: grid;
+  gap: 2.4rem;
+  margin-bottom: 3rem;
+}
+
 .productContent {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  justify-content: space-between;
 
   * {
     line-height: 1;
@@ -256,6 +277,12 @@ $silver: #a0a0a08f;
 }
 
 .totals {
+  width: 100%;
+  padding-top: 1.9rem;
+  border-top: 1px solid rgba(163, 173, 255, 0.2);
+  margin-top: 1.2rem;
+  margin-bottom: 1rem;
+
   span {
     font-weight: 700;
   }

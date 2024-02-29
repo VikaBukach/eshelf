@@ -20,9 +20,9 @@ export const CompareBody = ({ data }) => {
           ))}
         </div>
         <div className={style.compareRow}>
-          {arr.map((obj) =>
+          {arr.map((obj, idx) =>
             Object.entries(obj).map(([key, val]) => (
-              <div>
+              <div key={idx + key}>
                 <h2 className={style.firstColumnHeader}>{humanizeText(key)}</h2>
                 <ul className={style.firstColumnList}>
                   {val.map((i, idx) => (
@@ -34,10 +34,10 @@ export const CompareBody = ({ data }) => {
                       }}
                     >
                       <div>{humanizeText(i)}</div>
-                      {products[key].map((pi) => {
+                      {products[key].map((pi, idx) => {
                         const val = pi.find((y) => Object.keys(y) == i);
 
-                        return <div>{val[i] || "--"}</div>;
+                        return <div key={idx}>{val[i] || "--"}</div>;
                       })}
                     </li>
                   ))}
@@ -53,13 +53,14 @@ export const CompareBody = ({ data }) => {
           }}
         >
           <div></div>
-          {headerData.map((item) => (
+          {headerData.map((item, idx) => (
             <ProductCard
+              key={idx}
               id={item.id}
               imageURL={item.image}
               category={"Smartphones"}
               title={item.name}
-              price={item.price}
+              price={String(item.price)}
               discountPrice={item.discountPrice}
             />
           ))}
@@ -73,7 +74,6 @@ export const CompareBody = ({ data }) => {
   const firstColumnKeys = getFirstColumnKeys(data[0].specifications);
   const columnsCount = data.length + 1;
   const headerData = data.map((item) => {
-    console.log(item);
     return {
       id: item._id,
       name: item.fullName,
