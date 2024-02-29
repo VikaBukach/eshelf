@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, createSelector  } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const updateBaseFilterData = createAsyncThunk('baseFilter/updateBaseFilterData', async (updatedData) => {
   return updatedData;
