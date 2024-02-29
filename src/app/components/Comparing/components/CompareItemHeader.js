@@ -16,9 +16,9 @@ export const CompareItemHeader = ({ item }) => {
           <path
             d="M9.01099 22.9901L16.0012 16M22.9913 9.00977L16.0012 16M16.0012 16L9.01099 9.00977M16.0012 16L22.9913 22.9901"
             stroke="#333333"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </button>

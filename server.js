@@ -1,8 +1,11 @@
+const env = require("dotenv");
+env.config();
 const express = require("express");
 const cors = require("cors");
 const { connectToDb, getDb } = require("./db");
 
-const PORT = 5000;
+const PORT = process.env.REACT_APP_PORT || 5000;
+
 const app = express();
 
 app.use(cors());
