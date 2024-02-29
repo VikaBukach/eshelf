@@ -33,12 +33,16 @@
         display: flex;
         //justify-content: center;
         align-items: center;
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
     }
     &__label {
-        width: 40%;
+        //display: block;
+        flex: 0 1 50%;
     }
     &__value {
-
+        //display: block;
     }
     &__sub-list {
         li {
