@@ -1,21 +1,29 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCompare } from "../../../store/slices/compareSlice";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setBaseFilteredProducts } from "../../../store/slices/filteredProductsSlice";
+import { setFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
+import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
 
 const CatalogProductList = () => {
-  const products = useSelector((state) => state.products.data);
-  const selectedCategory = useSelector((state) => state.compare.selectedCategory);
   const dispatch = useDispatch();
+  const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
+  const products = useSelector((state) => state.products.data);
 
-  const params = useLocation();
-  const category = params.pathname.replace("/", "");
+  // ------- ПОЧАТОК РОБОТИ
+  // ------- Заповнення массивів BASE та PRICE при завантаженні сторінки, а також до до ресет-сховища
 
-  console.log(selectedCategory);
+  useEffect(() => {
+    dispatch(setBaseFilteredProducts(products));
+    dispatch(setFilteredProductsWithPrice(products));
+    dispatch(setProductsToResrtSorting(products));
+  }, [products]);
 
+  // ---------------------------------------------------------
+  // --------------------ВРЕМЕННОЕ----------------------------
+  // ---------------------------------------------------------
   let productItems = [];
 
-  products.forEach((product) => {
+  filteredProductsWithPrice.forEach((product) => {
     product.colors.forEach((color) => {
       const cloneProduct = JSON.parse(JSON.stringify(product));
       delete cloneProduct.colors;
@@ -23,30 +31,38 @@ const CatalogProductList = () => {
       const productItem = { ...cloneProduct, color };
       productItem.fullName = product.brand + " " + product.model + " " + color.color;
       productItem.index = product._id + color.color;
+      productItem.priceBy = color.products[0].price;
+      let l = color.products.length - 1;
+      productItem.priceTo = color.products[l].price;
+      productItem.bool = product.test_boolean ? "Yes" : "No";
+      productItem.battary_capacity = product.specifications.battery.capacity;
+      productItem.capacity = [];
+      let b = color.products.forEach((product) => {
+        productItem.capacity.push(product.capacity + " / ");
+      });
 
       productItems.push(productItem);
     });
   });
+  // ---------------------------------------------------------
+  // ---------------------------------------------------------
+  // ---------------------------------------------------------
 
   return (
     <ul className="product-list">
       {productItems.map((productItem) => (
         <li className="product-list__item" key={productItem.index}>
-          {productItem.fullName}
-          <button
-            onClick={() => {
-              if (selectedCategory ? category == selectedCategory : true) {
-                dispatch(addToCompare({ product: productItem, category }));
-              } else {
-                alert(
-                  "Error! You try to compare " + category + " with " + selectedCategory + ". Categories should match."
-                );
-              }
-            }}
-            className="primary-btn"
-          >
-            Add to compare
-          </button>
+          <p>{productItem.fullName}</p>
+          <p>-----------</p>
+          <p>
+            price by {productItem.priceBy} to {productItem.priceTo}
+          </p>
+          <p>-----------</p>
+          <p>{productItem.bool}</p>
+          <p>-----------</p>
+          <p>{productItem.battary_capacity}</p>
+          <p>-----------</p>
+          <p>{productItem.capacity}</p>
         </li>
       ))}
     </ul>
