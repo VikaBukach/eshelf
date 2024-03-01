@@ -25,7 +25,10 @@ const CatalogProductList = () => {
 
   filteredProductsWithPrice.forEach((product) => {
     product.colors.forEach((color) => {
-      const productItem = {};
+      const cloneProduct = JSON.parse(JSON.stringify(product));
+      delete cloneProduct.colors;
+
+      const productItem = { ...cloneProduct, color };
       productItem.fullName = product.brand + " " + product.model + " " + color.color;
       productItem.index = product._id + color.color;
       productItem.priceBy = color.products[0].price;

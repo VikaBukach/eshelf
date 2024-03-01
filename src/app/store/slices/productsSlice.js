@@ -4,8 +4,10 @@ import axios from "axios";
 export const fetchDataOfProducts = createAsyncThunk(
   "products/fetchDataOfProducts",
   async (collection, { dispatch }) => {
+    const PORT = process.env.REACT_APP_PORT || 5000;
+
     try {
-      const response = await axios.get(`http://localhost:5000/${collection}`);
+      const response = await axios.get(`http://localhost:${PORT}/${collection}`);
       dispatch(setProducts(response.data));
       return response.data;
     } catch (err) {
@@ -35,6 +37,7 @@ const productsSlice = createSlice({
       .addCase(fetchDataOfProducts.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.data = action.payload;
+        state.error = null;
       })
       .addCase(fetchDataOfProducts.rejected, (state, action) => {
         state.status = "failed";

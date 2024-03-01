@@ -1,60 +1,120 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { PiScales } from "react-icons/pi";
-import { FaRegHeart, FaOpencart } from "react-icons/fa6";
-import { FaBars, FaRegUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../../store/slices/NavMenuSlice";
+import { ReactComponent as BurgerMenuIcon } from "../../../assets/images/Burger.svg";
+import { ReactComponent as MicrophoneIcon } from "../../../assets/images/Microphone.svg";
+import { ReactComponent as SearchIcon } from "../../../assets/images/Search.svg";
+import { ReactComponent as BalanceIcon } from "../../../assets/images/Balance.svg";
+import { ReactComponent as HeartIcon } from "../../../assets/images/Heart.svg";
+import { ReactComponent as CartIcon } from "../../../assets/images/Cart.svg";
+import { ReactComponent as UserIcon } from "../../../assets/images/Profile page.svg";
+
+import useWindowWidth from "../../hooks/useWindowWidth";
+import { useModal } from "../../hooks/useModal";
 import Cart from "../Cart";
 
 const Header = () => {
   const dispatch = useDispatch();
   const menuOpen = useSelector((state) => state.menu.isOpen);
+  const windowWidth = useWindowWidth();
 
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
   };
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const shouldShowMobileMenu = windowWidth <= 768;
+
+  const { open } = useModal();
+
   return (
     <>
-      <header>
-        <FaBars className="burger-icon" onClick={handleToggleMenu} />
+      <header className="header">
+        <div className={`header__content-container ${shouldShowMobileMenu && mobileMenuOpen ? "mobile" : ""}`}>
+          {shouldShowMobileMenu ? (
+            <>
+              <BurgerMenuIcon
+                className={`burger-icon ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "mobile" : ""}`}
+                onClick={handleMobileMenuToggle}
+              />
+              {mobileMenuOpen && (
+                <>
+                  <button className="header__menu-mobile_close-button" onClick={handleMobileMenuToggle}>
+                    &times;
+                  </button>
 
-        <nav className={`menu ${menuOpen ? "open" : ""}`}>
-          <ul>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/comparison">Comparison</NavLink>
-            </li>
-            <li>
-              <NavLink to="/favorites">Favorites</NavLink>
-            </li>
-            <li>
-              <NavLink to="/cart">Cart</NavLink>
-            </li>
-            <li>
-              <NavLink to="/users">Users</NavLink>
-            </li>
-          </ul>
-        </nav>
+                  <nav className="header__menu-mobile" onClick={handleMobileMenuToggle}>
+                    <span>Catalog (mobile)</span>
+                    <ul>
+                      <li>
+                        <NavLink to="/smartphones">Smartphones</NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/laptops">Laptops</NavLink>
+                      </li>
+                    </ul>
+                  </nav>
+                </>
+              )}
+            </>
+          ) : (
+            <BurgerMenuIcon
+              className={`burger-icon ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "mobile" : ""}`}
+              onClick={handleToggleMenu}
+            />
+          )}
 
-        <span className="logo">eShelf</span>
+          <nav className={`header__menu ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "open" : ""}`}>
+            <span>Catalog</span>
+            <ul>
+              <li>
+                <NavLink to="/smartphones">Smartphones</NavLink>
+              </li>
+              <li>
+                <NavLink to="/laptops">Laptops</NavLink>
+              </li>
+            </ul>
+          </nav>
 
-        <input type="search" name="search" placeholder="Search..." />
+          <NavLink to="/">
+            <span className={`header__logo ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "mobile" : ""}`}>
+              eShelf
+            </span>
+          </NavLink>
 
-        <NavLink to="/"></NavLink>
-        <NavLink to="/comparing">
-          <PiScales />
-        </NavLink>
-        <NavLink to="/favorites">
-          <FaRegHeart />
-        </NavLink>
-        <Cart activator={<FaOpencart />} />
-        <NavLink to="/users">
-          <FaRegUserCircle />
-        </NavLink>
+          <div
+            className={`header__search-container ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "mobile" : ""}`}
+          >
+            <input type="text" className="header__search-input" placeholder="Search..." />
+            <MicrophoneIcon className="microphone-icon" />
+            <SearchIcon className="search-icon" />
+          </div>
+          <NavLink to="/" className="header__link-home"></NavLink>
+          <NavLink to="/comparing" className="header__link-comparing">
+            <BalanceIcon />
+          </NavLink>
+          <NavLink to="/favorites" className="header__link-favorites">
+            <HeartIcon />
+          </NavLink>
+          <div className="header__link-cart">
+            <Cart
+              activator={
+                <div onClick={open}>
+                  <CartIcon />
+                </div>
+              }
+            ></Cart>
+          </div>
+          <NavLink to="/users" className="header__link-users">
+            <UserIcon />
+          </NavLink>
+        </div>
       </header>
     </>
   );

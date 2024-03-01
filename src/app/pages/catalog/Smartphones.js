@@ -6,6 +6,7 @@ import { CatalogLayout } from "../../components/catalog/CatalogLayout/CatalogLay
 const Smartphones = () => {
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     dispatch(fetchDataOfProducts("smartphones"));
   }, [dispatch]);
