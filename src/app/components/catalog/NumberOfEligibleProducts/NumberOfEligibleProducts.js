@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const NumberOfEligibleProducts = ({number}) => {
-  return (
-    <div className='eligible-products'>
-      {number}
-    </div>
-  )
-}
+const NumberOfEligibleProducts = ({ number }) => {
+  return <div className="eligible-products">{number}</div>;
+};
 
-export {NumberOfEligibleProducts};
+export { NumberOfEligibleProducts };

@@ -6,7 +6,6 @@ import { NumberOfEligibleProducts } from "../NumberOfEligibleProducts/NumberOfEl
 const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues }) => {
   const dispatch = useDispatch();
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
-  const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
 
   const filterSettingsToUpdate = { ...filterSettings };
 
@@ -32,12 +31,6 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues
       return false;
     }
   };
-
-//   console.log(filterSettings);
-//   {specifications.battery.capacity: Array(1), brand: Array(1)}
-// brand : ['Samsung']
-// specifications.battery.capacity : ['5000 mAh']
-
 
   const findNumberOfValue = (name) => {
     const numberOfValue = allValues.reduce((accumulator, currentValue) => {

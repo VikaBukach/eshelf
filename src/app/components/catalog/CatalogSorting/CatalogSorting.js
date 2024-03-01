@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilterSorting, setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
-import { findValueByPath } from "../../../helpers/catalog"
-import { pageLoadedAction } from "../../../store/actions";
-import { setFilteredProductsWithPrice,updateFilteredProductsWithPrice, selectFilteredProductsWithPriceStatus } from '../../../store/slices/filteredProductsWithPriceSlice'
+import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
+import { findValueByPath } from "../../../helpers/catalog";
+import {
+  setFilteredProductsWithPrice,
+  selectFilteredProductsWithPriceStatus,
+} from "../../../store/slices/filteredProductsWithPriceSlice";
 
 const CatalogSorting = ({}) => {
-
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.data);
   const checkedValue = useSelector((state) => state.filterSorting.mode);
   const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
   const productsToResrtSorting = useSelector((state) => state.filterSorting.productsToResrtSorting);
   const filteredProductsWithPriceStatus = useSelector(selectFilteredProductsWithPriceStatus);
-
 
   const productsSorting = (mode) => {
     switch (mode) {
@@ -34,16 +33,15 @@ const CatalogSorting = ({}) => {
               Math.min(...findValueByPath(a, "colors.products.price").value)
           );
       default: // "bestsellers"
-      return productsToResrtSorting;
+        return productsToResrtSorting;
     }
   };
-
 
   // ------- ВЗАЄМОДІЯ З КОРИСТУВАЧЕМ
   // ------- СОРТУВАННЯ - зміна значення
 
   useEffect(() => {
-    if (filteredProductsWithPriceStatus === 'idle') {
+    if (filteredProductsWithPriceStatus === "idle") {
       const sortingProductsArray = productsSorting(checkedValue);
       dispatch(setFilteredProductsWithPrice(sortingProductsArray));
     }

@@ -4,7 +4,7 @@ import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
 import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
 import { findValueByPath } from "../../../helpers/catalog"
-import { setCheckboxesSettings, setMinPrice, setMaxPrice, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
+import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 
 const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
@@ -12,6 +12,8 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const products = useSelector((state) => state.products.data);
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
+  const minValue = useSelector((state) => state.filterSettings.minPrice);
+  const maxValue = useSelector((state) => state.filterSettings.maxPrice);
   
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
@@ -106,24 +108,6 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     return filteredProductsArray;
   };
 
-  // --------------------------------------------------------
-    // --------------------------------------------------------
-      // --------------------------------------------------------
-
-
-  const onFilterSubmit = () => {
-    dispatch(updateBaseFilterData(filterProducts()));
-  };
-
-  const onResetSubmit = () => {
-    dispatch(setCheckboxesSettings([]));
-    // dispatch(setPriceBy(0));
-    // dispatch(setPriceTo(0));
-    };
-
-
-
-
   // ------- На початку роботи заповнюємо параметри BASE та PRICE  згідно з товарами у PRODUCTS
   useEffect(() => {
     setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
@@ -131,6 +115,17 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
 // }, [filterCriterias, products]);
 
   // ------- ВЗАЄМОДІЯ З КОРИСТУВАЧЕМ
+
+  const onFilterSubmit = () => {
+    dispatch(updateBaseFilterData(filterProducts()));
+  };
+
+  const onResetSubmit = () => {
+    dispatch(setCheckboxesSettings([]));
+    dispatch(setPriceBy(minValue));
+    dispatch(setPriceTo(maxValue));
+    };
+
   // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
 useEffect(() => {
   onFilterSubmit();

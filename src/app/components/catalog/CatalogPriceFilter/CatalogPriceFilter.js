@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
-import { setFilteredProductsWithPrice, updateFilteredProductsWithPrice, selectFilteredProductsWithPriceStatus } from '../../../store/slices/filteredProductsWithPriceSlice'
-import { setBaseFilteredProducts, updateBaseFilterData, selectFilteredProductsStatus } from "../../../store/slices/filteredProductsSlice";
-import { findValueByPath } from "../../../helpers/catalog"
+import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
+import { selectFilteredProductsStatus } from "../../../store/slices/filteredProductsSlice";
+import { findValueByPath } from "../../../helpers/catalog";
 import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
-import { setFilterSorting, setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
+import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
 
-const CatalogPriceFilter = ({pricePath}) => {
+const CatalogPriceFilter = ({ pricePath }) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.data);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
@@ -86,7 +86,7 @@ const CatalogPriceFilter = ({pricePath}) => {
   };
 
   useEffect(() => {
-    if (baseFilterProductsStatus === 'idle') {
+    if (baseFilterProductsStatus === "idle") {
       submitFilterByPrice();
     }
   }, [baseFilterProductsStatus]);

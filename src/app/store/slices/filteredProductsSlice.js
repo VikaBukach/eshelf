@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const updateBaseFilterData = createAsyncThunk('baseFilter/updateBaseFilterData', async (updatedData) => {
+export const updateBaseFilterData = createAsyncThunk("baseFilter/updateBaseFilterData", async (updatedData) => {
   return updatedData;
 });
 
@@ -15,18 +15,18 @@ const filteredProductsSlice = createSlice({
       state.baseFilter = action.payload;
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(updateBaseFilterData.pending, (state, action) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(updateBaseFilterData.fulfilled, (state, action) => {
         state.baseFilter = action.payload;
-        state.status = 'idle';
+        state.status = "idle";
       });
-  }
+  },
 });
 
 export const { setBaseFilteredProducts } = filteredProductsSlice.actions;
 export default filteredProductsSlice.reducer;
-export const selectFilteredProductsStatus = state => state.filteredProducts.status;
+export const selectFilteredProductsStatus = (state) => state.filteredProducts.status;
