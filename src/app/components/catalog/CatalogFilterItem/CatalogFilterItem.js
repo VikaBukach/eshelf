@@ -25,6 +25,20 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues
     dispatch(setCheckboxesSettings(filterSettingsToUpdate));
   };
 
+  const isCheckboxChecked = (checkBoxName) => {
+    if (filterSettings[criteriaPath]) {
+      return filterSettings[criteriaPath].includes(checkBoxName);
+    } else {
+      return false;
+    }
+  };
+
+//   console.log(filterSettings);
+//   {specifications.battery.capacity: Array(1), brand: Array(1)}
+// brand : ['Samsung']
+// specifications.battery.capacity : ['5000 mAh']
+
+
   const findNumberOfValue = (name) => {
     const numberOfValue = allValues.reduce((accumulator, currentValue) => {
       if (currentValue === name) {
@@ -47,6 +61,7 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues
                 className="filter-item__chekbox"
                 type="checkbox"
                 name={checkBoxName}
+                checked={isCheckboxChecked(checkBoxName)}
                 onChange={handleCheckboxChange}
                 disabled={findNumberOfValue(checkBoxName) === 0 ? true : false}
               />

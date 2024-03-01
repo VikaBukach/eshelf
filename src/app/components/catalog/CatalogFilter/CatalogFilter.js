@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
-import { setBaseFilteredProducts, updateBaseFilterData, selectFilteredProductsStatus } from "../../../store/slices/filteredProductsSlice";
-import { setFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
+import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
 import { findValueByPath } from "../../../helpers/catalog"
+import { setCheckboxesSettings, setMinPrice, setMaxPrice, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 
-import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
-
-const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
+const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products.data);
-  const filteredProducts = useSelector((state) => state.filteredProducts.baseFilter);
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
-  const priceBy = useSelector((state) => state.filterSettings.priceBy);
-  const priceTo = useSelector((state) => state.filterSettings.priceTo);
-  const baseFilterProductsStatus = useSelector(selectFilteredProductsStatus);
   
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
@@ -47,20 +41,6 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
     });
     return updatedFilterCriterias;
   };
-
-  // Визначення мінімальної та максимальної ціни з фільтрованих товарів
-  const findMinAndMaxPrice = (productArray) => {
-    let allPrices = [];
-    productArray.forEach((product) => {
-      allPrices = [...allPrices, ...findValueByPath(product, pricePath).value];
-    });
-    return {
-      minValue: isFinite(Math.min(...allPrices)) ? Math.min(...allPrices) : 0,
-      maxValue: isFinite(Math.max(...allPrices)) ? Math.max(...allPrices) : 0,
-    };
-  };
-
-
 
   // Складання масиву з усіх значень (з повтореннями) згідно з шляхом пошуку 
   const findAllValues = (path) => {
@@ -126,81 +106,50 @@ const CatalogFilter = ({ title, filterCriterias, pricePath }) => {
     return filteredProductsArray;
   };
 
-
-  const filterByPrice = () => {
-    const filteredProductsArray = [];
-
-    filteredProducts.forEach((product) => {
-      const { minValue, maxValue } = findMinAndMaxPrice([product]);
-
-      if (
-        (minValue >= priceBy && minValue <= priceTo) ||
-        (maxValue >= priceBy && maxValue <= priceTo) ||
-        (minValue <= priceBy && maxValue >= priceBy) ||
-        (minValue <= priceTo && maxValue >= priceTo)
-      ) {
-        filteredProductsArray.push(product);
-      }
-    });
-    return filteredProductsArray;
-  };
-
-
-
   // --------------------------------------------------------
     // --------------------------------------------------------
       // --------------------------------------------------------
 
-
-  // --------------------------------------------------------
-    // --------------------------------------------------------
-      // --------------------------------------------------------
 
   const onFilterSubmit = () => {
     dispatch(updateBaseFilterData(filterProducts()));
   };
 
-  useEffect(() => {
-    if (baseFilterProductsStatus === 'idle') {
-      dispatch(setFilteredProductsWithPrice(filterByPrice()));
-    }
-  }, [baseFilterProductsStatus, dispatch]);
+  const onResetSubmit = () => {
+    dispatch(setCheckboxesSettings([]));
+    // dispatch(setPriceBy(0));
+    // dispatch(setPriceTo(0));
+    };
 
 
 
-  const onFilterSubmitPrice = () => {
-    let filteredProductsArrayWithPrice = filterByPrice();
-    dispatch(setFilteredProductsWithPrice(filteredProductsArrayWithPrice));
-    console.log(filteredProductsArrayWithPrice);
-  };
 
-
-  useEffect(() => {
-    onFilterSubmit();
-  }, [filterSettings]);
-
-  useEffect(() => {
-    dispatch(setBaseFilteredProducts(products));
-    dispatch(setFilteredProductsWithPrice(filteredProducts));
-  }, [products]);
-
+  // ------- На початку роботи заповнюємо параметри BASE та PRICE  згідно з товарами у PRODUCTS
   useEffect(() => {
     setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
-    dispatch(setMinPrice(findMinAndMaxPrice(filteredProducts).minValue));
-    dispatch(setMaxPrice(findMinAndMaxPrice(filteredProducts).maxValue));
-  }, [filterCriterias, products]);
+  }, [products]);
+// }, [filterCriterias, products]);
+
+  // ------- ВЗАЄМОДІЯ З КОРИСТУВАЧЕМ
+  // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
+useEffect(() => {
+  onFilterSubmit();
+}, [filterSettings]);
 
   return (
     <div className="filter">
-      <CatalogPriceFilter onClickfunc={onFilterSubmitPrice} />
+      <CatalogPriceFilter pricePath={pricePath}/>
       {filterCriteriasWithTypes.map((criteria, index) => (
         <React.Fragment key={index}>
           <CatalogFilterItem filterTitle={criteria.title} checkBoxNames={criteria.types} criteriaPath={criteria.path} allValues={findAllValues(criteria.path)}/>
           <p>-----------------</p>
         </React.Fragment>
       ))}
-      <button onClick={onFilterSubmit} className="filter__submit">
+      <button onClick={onFilterSubmit} type="button" className="filter__submit">
         FILTER
+      </button>
+      <button onClick={onResetSubmit} type="button" className="filter__submit">
+        RESET
       </button>
     </div>
   );
