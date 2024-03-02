@@ -1,8 +1,10 @@
 .characteristic-body {
     padding: 24px 32px;
     display: flex;
+    flex-direction: row;
     background-color: $secondary-color-grey-card;
     border-radius: 10px;
+    //overflow: auto;
 
     &__info {
         flex: 0 1 50%;
@@ -24,6 +26,7 @@
         margin-bottom: 8px;
         font-size: 18px;
         font-weight: 500;
+        color: #333;
     }
     &__list {
 
@@ -31,18 +34,18 @@
 
     &__item {
         display: flex;
-        //justify-content: center;
         align-items: center;
         &:not(:last-child) {
             margin-bottom: 10px;
         }
     }
     &__label {
-        //display: block;
-        flex: 0 1 50%;
+        width: 50%;
+        color: rgba(51, 51, 51, 0.56);
     }
     &__value {
-        //display: block;
+        width: 50%;
+        color: #333;
     }
     &__sub-list {
         li {
@@ -52,5 +55,52 @@
 
     &__buy {
         flex: 0 1 50%;
+    }
+
+    &__carriage {
+        position: sticky;
+        top: 40px;
+    }
+    &__wrapper {
+    }
+}
+
+.characteristic-aside {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+
+    &__img {
+        flex: 0 1 50%;
+    }
+
+    &__details {
+        flex: 0 1 50%;
+    }
+    &__title {
+        font-size: 20px;
+        margin-bottom: 8px;
+
+    }
+    &__article {
+        margin-bottom: 32px;
+        font-size: 16px;
+        color: rgba(51, 51, 51, 0.56);
+    }
+    &__price-old {
+        margin-bottom: 8px;
+        text-decoration: line-through;
+        color: $secondary-color-grey;
+    }
+    &__price {
+        @include adaptiveValue("font-size", 20, 36);
+        font-weight: 600;
+        margin-bottom: 26px;
+    }
+
+    &__button {
+        &:not(:last-child) {
+            margin-bottom: 32px;
+        }
     }
 }

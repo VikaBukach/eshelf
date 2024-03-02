@@ -1,4 +1,6 @@
 import React from "react";
+import { ButtonBuy } from "./ButtonBuy";
+import { WeAccept } from "./WeAccept";
 
 const CharacteristicProduct = ({product}) => {
 
@@ -226,7 +228,27 @@ const CharacteristicProduct = ({product}) => {
           </section>
         )}
       </div>
-      <div className="characteristic-body__buy">Buy</div>
+      <div className="characteristic-body__buy">
+        <div className="characteristic-body__carriage">
+          <div className="characteristic-body__wrapper characteristic-aside">
+            <div className="characteristic-aside__img">
+              <img src={`/${product.colors[0].images[0]}`} alt="" />
+            </div>
+            <div className="characteristic-aside__details">
+              {product.model && <div className="characteristic-aside__title">{product.model}</div>}
+              <div className="characteristic-aside__article">
+                Code: <span>1816681</span>
+              </div>
+              <div className="characteristic-aside__price-old">52 999 ₴</div>
+              <div className="characteristic-aside__price">46 999 ₴</div>
+              <div className="characteristic-aside__button">
+                <ButtonBuy />
+              </div>
+              <WeAccept />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

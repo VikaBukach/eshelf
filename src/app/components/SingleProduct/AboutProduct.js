@@ -14,6 +14,7 @@ import { ReactComponent as AboutApplePayIcon } from "../../../assets/images/prod
 import { ReactComponent as AboutMastercardIcon } from "../../../assets/images/product-icons/mastercard.svg";
 
 import { ButtonBuy } from "./ButtonBuy";
+import { WeAccept } from "./WeAccept";
 
 const AboutProduct = ({ product }) => {
   return (
@@ -132,23 +133,7 @@ const AboutProduct = ({ product }) => {
             </div>
           </div>
         </div>
-        <div className="info-details__wrap">
-          <div className="info-details__header">We accept</div>
-          <div className="info-details__accept-block">
-            <div className="info-details__accept-item">
-              <AboutVisaIcon />
-            </div>
-            <div className="info-details__accept-item">
-              <AboutGooglePayIcon />
-            </div>
-            <div className="info-details__accept-item">
-              <AboutApplePayIcon />
-            </div>
-            <div className="info-details__accept-item">
-              <AboutMastercardIcon />
-            </div>
-          </div>
-        </div>
+        <WeAccept />
       </div>
     </div>
   );
