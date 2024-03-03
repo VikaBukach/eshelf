@@ -1,46 +1,79 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/slices/cartSlice";
+import { toggleFavorites } from "../../store/slices/favoritesSlice";
+import { classNames } from "../../utils/classNames";
+import { toggleCompare } from "../../store/slices/compareSlice";
 
 export default function ProductCard({ id, imageURL, category, title, price, discountPrice }) {
-  const dispatch = useDispatch();
+  const product = { id, imageURL, category, title, price, discountPrice };
+
+  const urlProduct = `/${category}/${id}`;
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
   const onCartAddHandler = (e) => {
     e.stopPropagation();
-    dispatch(addToCart({ id, imageURL, category, title, price, discountPrice }));
+    dispatch(addToCart(product));
   };
 
+  const favorites = useSelector((state) => state.favorites.data);
+  const compare = useSelector((state) => state.compare.data);
+  const productsList = useSelector((state) => state.products.data);
+
+  const toggleFavoritesHandle = (e) => {
+    e.stopPropagation();
+
+    dispatch(toggleFavorites(product));
+  };
+  const toggleCompareHandler = (e) => {
+    e.stopPropagation();
+
+    const fullProduct = productsList.find((p) => p._id == id);
+
+    // dispatch(toggleCompare({ ...fullProduct, id: fullProduct._id, color: fullProduct.colors[0], ...product }));
+    dispatch(toggleCompare({ ...fullProduct, category }));
+  };
+
+  const isFavorites = favorites.findIndex((f) => f.id == id) >= 0;
+  const isCompare = compare.findIndex((f) => f.id == id) >= 0;
+
   return (
-    <div
-      onClick={() => {
-        navigate(id);
-      }}
-      className="card-product"
-    >
-      <div className="card-product__image-container">
+    <div className="card-product">
+      <div className="card-product__image-container" onClick={() => navigate(urlProduct)}>
         <img src={imageURL} alt="product photo" />
       </div>
 
       <div className="card-product__functions">
-        <Link to="/favorites">
-          <button className="card-product__functions__button">
-            <img src="../assets/icons/favourite-stroke.svg" alt="favourite" />
-          </button>
-        </Link>
+        <button
+          onClick={toggleFavoritesHandle}
+          className={classNames(
+            "card-product__functions__button",
+            isFavorites ? "card-product__functions__button--active" : ""
+          )}
+        >
+          <img src="../assets/icons/favourite-stroke.svg" alt="favourite" />
+        </button>
 
-        <Link to="/comparing">
-          <button className="card-product__functions__button">
-            <img src="../assets/icons/balance-stroke.svg" alt="favourite" />
-          </button>
-        </Link>
+        <button
+          onClick={toggleCompareHandler}
+          className={classNames(
+            "card-product__functions__button",
+            isCompare ? "card-product__functions__button--active" : ""
+          )}
+        >
+          <img src="../assets/icons/balance-stroke.svg" alt="favourite" />
+        </button>
       </div>
 
       <div className="card-product__info">
         <span className="card-product__info__category">{category}</span>
 
-        <p className="card-product__info__title">{title}</p>
+        <p className="card-product__info__title" onClick={() => navigate(urlProduct)}>
+          {title}
+        </p>
 
         <div className="card-product__info__rating">
           <img src="../assets/icons/star-stroke.svg" alt="rate" />
@@ -51,8 +84,14 @@ export default function ProductCard({ id, imageURL, category, title, price, disc
         </div>
 
         <div className="card-product__info__price-container">
-          <span className="card-product__info__price-container__price">₴ {discountPrice}</span>
-          <span className="card-product__info__price-container__discount">₴ {price}</span>
+          {discountPrice ? (
+            <>
+              <span className="card-product__info__price-container__price">₴ {discountPrice}</span>
+              <span className="card-product__info__price-container__discount">₴ {price}</span>
+            </>
+          ) : (
+            <span className="card-product__info__price-container__price">₴ {price}</span>
+          )}
         </div>
       </div>
 

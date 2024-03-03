@@ -1,1 +1,1 @@
-export * from './pageLoadedAction';
+export * from "./pageLoadedAction";

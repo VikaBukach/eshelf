@@ -1,0 +1,30 @@
+.favorites {
+  &__wrapper {
+    padding-inline: 1.6rem;
+    padding-block: 4rem;
+
+    h1 {
+      margin-bottom: 2.4rem;
+      font-size: 2.4rem;
+    }
+  }
+
+  &__group {
+    h2 {
+      margin-bottom: 1.6rem;
+      font-size: 2rem;
+      font-weight: 500;
+    }
+  }
+
+  &__group-list {
+    display: grid;
+    gap: 2.1rem;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  }
+
+  &__body {
+    display: grid;
+    gap: 4rem;
+  }
+}

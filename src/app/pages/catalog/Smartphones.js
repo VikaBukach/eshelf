@@ -6,7 +6,6 @@ import { CatalogLayout } from "../../components/catalog/CatalogLayout/CatalogLay
 const Smartphones = () => {
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(fetchDataOfProducts("smartphones"));
   }, [dispatch]);
@@ -16,15 +15,15 @@ const Smartphones = () => {
       <CatalogLayout
         title="Smartphones"
         filterCriterias={[
-            { title: "Brand", path: "brand" },
-            { title: "Battery Capacity", path: "specifications.battery.capacity" },
-            { title: "Color", path: "colors.color" },
-            { title: "Boolean Test", path: "test_boolean" },
-            // { title: "Functions", path: "specifications.camera.functions" },
-            { title: "Display_matrix_type", path: "specifications.display.display_matrix_type" },
-            { title: "Capacity", path: "colors.products.capacity" },
-          ]}
-          pricePath="colors.products.price"
+          { title: "Brand", path: "brand" },
+          { title: "Battery Capacity", path: "specifications.battery.capacity" },
+          { title: "Color", path: "colors.color" },
+          { title: "Boolean Test", path: "test_boolean" },
+          // { title: "Functions", path: "specifications.camera.functions" },
+          { title: "Display_matrix_type", path: "specifications.display.display_matrix_type" },
+          { title: "Capacity", path: "colors.products.capacity" },
+        ]}
+        pricePath="colors.products.price"
       />
     </div>
   );
