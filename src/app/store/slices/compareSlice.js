@@ -14,31 +14,31 @@ const compareSlice = createSlice({
       const { _id, category } = action.payload;
       const id = _id;
 
-      const productAlreadyAdded = data.findIndex((i) => i.id === id) >= 0; // Перевірка, чи товар вже додано
+      const productAlreadyAdded = data.findIndex((i) => i.id === id) >= 0;
 
       if (!productAlreadyAdded) {
         if (state.canAddMore) {
           if (selectedCategory === null) {
-            state.selectedCategory = category; // Якщо ще не вибрано категорію, обираємо категорію першого товару
+            state.selectedCategory = category;
           } else if (selectedCategory !== category) {
-            alert("Товари мають належати до однієї категорії для порівняння!"); // Попередження, якщо товари належать до різних категорій
+            alert("Products shoud be from the same category!");
             return;
           }
 
-          state.data = [...data, setCompareProduct(action.payload)]; // Додаємо новий товар для порівняння
-          state.canAddMore = state.data.length < 2; // Оновлюємо можливість додати ще товар для порівняння
+          state.data = [...data, setCompareProduct(action.payload)];
+          state.canAddMore = state.data.length < 2;
         } else {
-          alert("Вже додано два товари для порівняння!"); // Попередження, якщо вже додано два товари
+          alert("Two products already added to compare!");
         }
       } else {
-        state.data = data.filter((item) => item.id !== id); // Видаляємо товар, якщо він вже додано
-        state.canAddMore = true; // Повертаємо можливість додати ще товар для порівняння
+        state.data = data.filter((item) => item.id !== id);
+        state.canAddMore = true;
         if (state.data.length === 0) {
-          state.selectedCategory = null; // Скидаємо вибрану категорію, якщо більше немає товарів для порівняння
+          state.selectedCategory = null;
         }
       }
 
-      localStorage.setItem("compare", JSON.stringify(state)); // Оновлюємо дані в локальному сховищі
+      localStorage.setItem("compare", JSON.stringify(state));
     },
   },
 });

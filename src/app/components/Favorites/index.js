@@ -21,11 +21,6 @@ const FavoritesPage = () => {
       } else {
         obj[category] = [item];
       }
-      //   if (obj["category"]) {
-      //     obj["category"] = [...obj["category"], item];
-      //   } else {
-      //     obj["category"] = [item];
-      //   }
     });
 
     return obj;
