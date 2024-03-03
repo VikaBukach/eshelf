@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import setCompareProduct from "../../helpers/setCompareProduct";
 
 const compareSlice = createSlice({
   name: "compare",
@@ -8,41 +9,40 @@ const compareSlice = createSlice({
     canAddMore: (JSON.parse(localStorage.getItem("compare"))?.data ?? []).length != 2,
   },
   reducers: {
-    addToCompare: (state, action) => {
-      if (state.canAddMore) {
-        if (state.selectedCategory == action.payload.category) {
-          if (state.data.findIndex((i) => i._id == action.payload.product._id) < 0) {
-            state.data = [...state.data, action.payload.product];
-          } else {
-            alert("Product already added to compare!");
+    toggleCompare: (state, action) => {
+      const { data, selectedCategory } = state;
+      const { _id, category } = action.payload;
+      const id = _id;
+
+      const productAlreadyAdded = data.findIndex((i) => i.id === id) >= 0; // Перевірка, чи товар вже додано
+
+      if (!productAlreadyAdded) {
+        if (state.canAddMore) {
+          if (selectedCategory === null) {
+            state.selectedCategory = category; // Якщо ще не вибрано категорію, обираємо категорію першого товару
+          } else if (selectedCategory !== category) {
+            alert("Товари мають належати до однієї категорії для порівняння!"); // Попередження, якщо товари належать до різних категорій
+            return;
           }
-        }
 
-        if (!state.selectedCategory) {
-          state.selectedCategory = action.payload.category;
-          state.data = [...state.data, action.payload.product];
+          state.data = [...data, setCompareProduct(action.payload)]; // Додаємо новий товар для порівняння
+          state.canAddMore = state.data.length < 2; // Оновлюємо можливість додати ще товар для порівняння
+        } else {
+          alert("Вже додано два товари для порівняння!"); // Попередження, якщо вже додано два товари
         }
-        localStorage.setItem("compare", JSON.stringify(state));
       } else {
-        alert("Two products already added to compare!");
-      }
-    },
-    removeFromCompare: (state, action) => {
-      state.data = [...state.data].filter((item) => item._id !== action.payload);
-
-      if (state.data.length < 2) {
-        state.canAddMore = true;
+        state.data = data.filter((item) => item.id !== id); // Видаляємо товар, якщо він вже додано
+        state.canAddMore = true; // Повертаємо можливість додати ще товар для порівняння
+        if (state.data.length === 0) {
+          state.selectedCategory = null; // Скидаємо вибрану категорію, якщо більше немає товарів для порівняння
+        }
       }
 
-      if (state.data.length == 0) {
-        state.selectedCategory = null;
-      }
-
-      localStorage.setItem("compare", JSON.stringify(state.data));
+      localStorage.setItem("compare", JSON.stringify(state)); // Оновлюємо дані в локальному сховищі
     },
   },
 });
 
-export const { addToCompare, removeFromCompare } = compareSlice.actions;
+export const { toggleCompare } = compareSlice.actions;
 
 export default compareSlice.reducer;
