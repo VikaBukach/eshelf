@@ -1,3 +1,3 @@
 export const pageLoadedAction = () => {
-  return { type: 'PAGE_LOADED', payload: true };
+  return { type: "PAGE_LOADED", payload: true };
 };
