@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ButtonBuy } from "./ButtonBuy";
 import { WeAccept } from "./WeAccept";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveColorIndex, setActiveMemoryIndex } from "../../store/slices/singleProductSlice";
 
 const CharacteristicProduct = ({product}) => {
+
+  const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
+  const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const savedColorIndex = localStorage.getItem("activeColorIndex");
+    const savedMemoryIndex = localStorage.getItem("activeMemoryIndex");
+    if (savedColorIndex !== null) {
+      dispatch(setActiveColorIndex(Number(savedColorIndex)));
+    }
+    if (savedMemoryIndex !== null) {
+      dispatch(setActiveMemoryIndex(Number(savedMemoryIndex)));
+    }
+  }, [dispatch])
 
   return (
     <div className="characteristic-body">
@@ -114,6 +131,16 @@ const CharacteristicProduct = ({product}) => {
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
                       <li>{product.specifications.memory.RAM}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
+              {product.colors[activeColorIndex].products[activeMemoryIndex].capacity && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">The amount of built-in memory is</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.colors[activeColorIndex].products[activeMemoryIndex].capacity}</li>
                     </ul>
                   </dd>
                 </div>
@@ -232,15 +259,28 @@ const CharacteristicProduct = ({product}) => {
         <div className="characteristic-body__carriage">
           <div className="characteristic-body__wrapper characteristic-aside">
             <div className="characteristic-aside__img">
-              <img src={`/${product.colors[0].images[0]}`} alt="" />
+              <img src={`/${product.colors[activeColorIndex].images[0]}`} alt={`${product.model}`} />
             </div>
             <div className="characteristic-aside__details">
               {product.model && <div className="characteristic-aside__title">{product.model}</div>}
-              <div className="characteristic-aside__article">
-                Code: <span>1816681</span>
-              </div>
-              <div className="characteristic-aside__price-old">52 999 ₴</div>
-              <div className="characteristic-aside__price">46 999 ₴</div>
+              {product.colors[activeColorIndex].products[activeMemoryIndex].article && (
+                <div className="characteristic-aside__article">
+                  Code: <span>{product.colors[activeColorIndex].products[activeMemoryIndex].article}</span>
+                </div>
+              )}
+
+              {product.colors[activeColorIndex].products[activeMemoryIndex].price && (
+                <div className="characteristic-aside__price-old">
+                  {product.colors[activeColorIndex].products[activeMemoryIndex].price}
+                </div>
+              )}
+
+              {product.colors[activeColorIndex].products[activeMemoryIndex].discount_price && (
+                <div className="characteristic-aside__price">
+                  {product.colors[activeColorIndex].products[activeMemoryIndex].discount_price}
+                </div>
+              )}
+
               <div className="characteristic-aside__button">
                 <ButtonBuy />
               </div>

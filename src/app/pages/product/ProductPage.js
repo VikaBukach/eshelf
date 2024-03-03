@@ -71,7 +71,6 @@ const ProductPage = () => {
               <li
                 className={`product-details__tabs-item ${tabs === item ? "product-details__tabs-active" : ""}`}
                 key={id}
-                //onClick={() => dispatch(changeTabs(item))}
                 onClick={() => handleTabClick(item)}
               >
                 {item}
