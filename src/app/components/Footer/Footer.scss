@@ -1,11 +1,13 @@
-footer {
-  display: flex;
+.footer {
+  display: none;
   // width: 50%;
   justify-content: space-between;
 
   @include header-h4;
+
+  @media (min-width: $tablet) {
+    display: flex;
+  }
 }
 
-footer.mobile {
-  display: none;
-}
+
