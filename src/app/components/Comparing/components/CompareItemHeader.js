@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { removeFromCompare } from "../../../store/slices/compareSlice";
+import { toggleCompare } from "../../../store/slices/compareSlice";
 import style from "../Comparing.module.scss";
 
 export const CompareItemHeader = ({ item }) => {
@@ -9,7 +9,7 @@ export const CompareItemHeader = ({ item }) => {
     <div className={style.compareHeader}>
       <button
         onClick={() => {
-          dispatch(removeFromCompare(item.id));
+          dispatch(toggleCompare(item));
         }}
       >
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,8 +22,8 @@ export const CompareItemHeader = ({ item }) => {
           />
         </svg>
       </button>
-      <img src={item.image} alt={item.name} />
-      <p>{item.name}</p>
+      <img src={item.image} alt={item.title} />
+      <p>{item.title}</p>
     </div>
   );
 };

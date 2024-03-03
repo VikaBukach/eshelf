@@ -9,6 +9,7 @@ import pageReducer from "./reducers/pageReducer";
 import cartReducer from "./slices/cartSlice";
 import compareReducer from "./slices/compareSlice";
 import singleProductSlice from "./slices/singleProductSlice";
+import favoritesReducer from "./slices/favoritesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
     cart: cartReducer,
     compare: compareReducer,
     product: singleProductSlice,
+    favorites: favoritesReducer,
   },
 });

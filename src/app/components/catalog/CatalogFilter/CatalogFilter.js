@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
 import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
-import { findValueByPath } from "../../../helpers/catalog"
+import { findValueByPath } from "../../../helpers/catalog";
 import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 
 const CatalogFilter = ({ filterCriterias, pricePath }) => {
@@ -14,7 +14,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
-  
+
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
   // ---------------------------------------------------------
@@ -44,15 +44,15 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     return updatedFilterCriterias;
   };
 
-  // Складання масиву з усіх значень (з повтореннями) згідно з шляхом пошуку 
+  // Складання масиву з усіх значень (з повтореннями) згідно з шляхом пошуку
   const findAllValues = (path) => {
     const valuesOfCriteria = [];
     filteredProductsWithPrice.forEach((product) => {
       const { value: findVariations } = findValueByPath(product, path);
-      valuesOfCriteria.push(...findVariations)
+      valuesOfCriteria.push(...findVariations);
     });
     return valuesOfCriteria;
-};
+  };
 
   // ---------------------------------------------------------
   // ---------------------------------------------------------
@@ -112,7 +112,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   useEffect(() => {
     setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
   }, [products]);
-// }, [filterCriterias, products]);
+  // }, [filterCriterias, products]);
 
   // ------- ВЗАЄМОДІЯ З КОРИСТУВАЧЕМ
 
@@ -124,19 +124,24 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     dispatch(setCheckboxesSettings([]));
     dispatch(setPriceBy(minValue));
     dispatch(setPriceTo(maxValue));
-    };
+  };
 
   // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
-useEffect(() => {
-  onFilterSubmit();
-}, [filterSettings]);
+  useEffect(() => {
+    onFilterSubmit();
+  }, [filterSettings]);
 
   return (
     <div className="filter">
-      <CatalogPriceFilter pricePath={pricePath}/>
+      <CatalogPriceFilter pricePath={pricePath} />
       {filterCriteriasWithTypes.map((criteria, index) => (
         <React.Fragment key={index}>
-          <CatalogFilterItem filterTitle={criteria.title} checkBoxNames={criteria.types} criteriaPath={criteria.path} allValues={findAllValues(criteria.path)}/>
+          <CatalogFilterItem
+            filterTitle={criteria.title}
+            checkBoxNames={criteria.types}
+            criteriaPath={criteria.path}
+            allValues={findAllValues(criteria.path)}
+          />
           <p>-----------------</p>
         </React.Fragment>
       ))}
@@ -151,4 +156,3 @@ useEffect(() => {
 };
 
 export { CatalogFilter };
-

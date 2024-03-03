@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import setCompareProduct from "../../helpers/setCompareProduct";
 
 const compareSlice = createSlice({
   name: "compare",
@@ -8,41 +9,40 @@ const compareSlice = createSlice({
     canAddMore: (JSON.parse(localStorage.getItem("compare"))?.data ?? []).length != 2,
   },
   reducers: {
-    addToCompare: (state, action) => {
-      if (state.canAddMore) {
-        if (state.selectedCategory == action.payload.category) {
-          if (state.data.findIndex((i) => i._id == action.payload.product._id) < 0) {
-            state.data = [...state.data, action.payload.product];
-          } else {
-            alert("Product already added to compare!");
+    toggleCompare: (state, action) => {
+      const { data, selectedCategory } = state;
+      const { _id, category } = action.payload;
+      const id = _id;
+
+      const productAlreadyAdded = data.findIndex((i) => i.id === id) >= 0;
+
+      if (!productAlreadyAdded) {
+        if (state.canAddMore) {
+          if (selectedCategory === null) {
+            state.selectedCategory = category;
+          } else if (selectedCategory !== category) {
+            alert("Products shoud be from the same category!");
+            return;
           }
-        }
 
-        if (!state.selectedCategory) {
-          state.selectedCategory = action.payload.category;
-          state.data = [...state.data, action.payload.product];
+          state.data = [...data, setCompareProduct(action.payload)];
+          state.canAddMore = state.data.length < 2;
+        } else {
+          alert("Two products already added to compare!");
         }
-        localStorage.setItem("compare", JSON.stringify(state));
       } else {
-        alert("Two products already added to compare!");
-      }
-    },
-    removeFromCompare: (state, action) => {
-      state.data = [...state.data].filter((item) => item._id !== action.payload);
-
-      if (state.data.length < 2) {
+        state.data = data.filter((item) => item.id !== id);
         state.canAddMore = true;
+        if (state.data.length === 0) {
+          state.selectedCategory = null;
+        }
       }
 
-      if (state.data.length == 0) {
-        state.selectedCategory = null;
-      }
-
-      localStorage.setItem("compare", JSON.stringify(state.data));
+      localStorage.setItem("compare", JSON.stringify(state));
     },
   },
 });
 
-export const { addToCompare, removeFromCompare } = compareSlice.actions;
+export const { toggleCompare } = compareSlice.actions;
 
 export default compareSlice.reducer;

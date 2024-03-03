@@ -58,10 +58,10 @@ export const CompareBody = ({ data }) => {
               key={idx}
               id={item.id}
               imageURL={item.image}
-              category={"Smartphones"}
-              title={item.name}
+              category={item.category}
+              title={item.title}
               price={String(item.price)}
-              discountPrice={item.discountPrice}
+              discountPrice={String(item.discountPrice)}
             />
           ))}
         </div>
@@ -73,13 +73,15 @@ export const CompareBody = ({ data }) => {
 
   const firstColumnKeys = getFirstColumnKeys(data[0].specifications);
   const columnsCount = data.length + 1;
+
   const headerData = data.map((item) => {
     return {
-      id: item._id,
-      name: item.fullName,
+      id: item.id,
+      title: item.title,
       image: item.image,
-      price: item.color.products[0].price,
-      discountPrice: item?.discountPrice || "0",
+      price: item.price,
+      discountPrice: item.discountPrice,
+      category: item.category,
     };
   });
 
