@@ -217,7 +217,8 @@
 
   &__accept-block {
     display: flex;
-    gap: 16px;
+    flex-wrap: wrap;
+    gap: 8px 16px;
   }
   &__accept-item {
     display: flex;

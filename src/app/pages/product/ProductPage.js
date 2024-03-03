@@ -62,7 +62,6 @@ const ProductPage = () => {
 
   return (
     <>
-      <div>Breadcrumbs</div>
       <section className="product-details">
         <div className="container">
           <h1 className="product-details__title">{product.model}</h1>
