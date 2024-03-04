@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveColorIndex, setActiveImageIndex, setActiveMemoryIndex } from "../../store/slices/singleProductSlice";
 
@@ -21,20 +21,8 @@ const AboutProduct = ({ product }) => {
   const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const savedColorIndex = localStorage.getItem("activeColorIndex");
-    const savedMemoryIndex = localStorage.getItem("activeMemoryIndex");
-    if (savedColorIndex !== null) {
-      dispatch(setActiveColorIndex(Number(savedColorIndex)));
-    }
-    if (savedMemoryIndex !== null) {
-      dispatch(setActiveMemoryIndex(Number(savedMemoryIndex)));
-    }
-  }, [dispatch])
-
   const handleColorItemClick = (index) => {
     dispatch(setActiveColorIndex(index));
-    localStorage.setItem('activeColorIndex', index);
   }
 
   const handleSmallImageClick = (index) => {
@@ -43,7 +31,6 @@ const AboutProduct = ({ product }) => {
 
   const handleMemoryClick = (index) => {
     dispatch(setActiveMemoryIndex(index));
-    localStorage.setItem("activeMemoryIndex", index);
   }
 
   return (
@@ -66,9 +53,11 @@ const AboutProduct = ({ product }) => {
           <div className="info-details__wrap">
             <div className="info-details__header">
               Select memory
-              <span className="info-details__article">
-                Code: {product.colors[activeColorIndex].products[activeMemoryIndex].article}
-              </span>
+              {product.colors[activeColorIndex].products[activeMemoryIndex].article && (
+                <span className="info-details__article">
+                  Code: {product.colors[activeColorIndex].products[activeMemoryIndex].article}
+                </span>
+              )}
             </div>
             <div className="info-details__memory-block">
               {product.colors[activeColorIndex].products.map((item, i) => (

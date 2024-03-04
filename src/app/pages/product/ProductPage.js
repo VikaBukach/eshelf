@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { changeTabs } from "../../store/slices/singleProductSlice";
+import {
+  changeTabs,
+  setActiveColorIndex,
+  setActiveMemoryIndex,
+  setActiveImageIndex,
+} from "../../store/slices/singleProductSlice";
 import { fetchDataOfProducts } from "../../store/slices/productsSlice";
 import { AboutProduct } from "../../components/SingleProduct/AboutProduct";
 import { CharacteristicProduct } from "../../components/SingleProduct/CharacteristicProduct";
@@ -11,8 +16,6 @@ import { ReviewsProduct } from "../../components/SingleProduct/ReviewsProduct";
 const ProductPage = () => {
   const { collection, id } = useParams();
 
-  //console.log(collection);
-
   const dispatch = useDispatch();
 
   const product = useSelector((state) => state.products.data.find((item) => item._id === id));
@@ -21,38 +24,15 @@ const ProductPage = () => {
 
   useEffect(() => {
     dispatch(fetchDataOfProducts(`${collection}`));
+    return () => {
+      dispatch(changeTabs("About the product"));
+      dispatch(setActiveColorIndex(0));
+      dispatch(setActiveMemoryIndex(0));
+      dispatch(setActiveImageIndex(0));
+    };
   }, [dispatch, collection]);
 
-  useEffect(() => {
-    // Восстановление выбранного таба из URL при загрузке страницы
-    const params = new URLSearchParams(window.location.search);
-    const tab = params.get("tab");
-    if (tab) {
-      dispatch(changeTabs(tab));
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    // Восстановление выбранного таба из localStorage при загрузке страницы
-    const storedTab = localStorage.getItem("selectedTab");
-    if (storedTab) {
-      dispatch(changeTabs(storedTab));
-    }
-  }, [dispatch]);
-
   const handleTabClick = (tabName) => {
-    // Обновление хранилища и состояния таба при клике на табе
-    localStorage.setItem("selectedTab", tabName);
-
-    // Обновление URL при клике на табе
-    const url = new URL(window.location.href);
-    if (tabName === "About the product") {
-      url.searchParams.delete("tab");
-    } else {
-      url.searchParams.set("tab", tabName.toLowerCase().replace(/ /g, "-"));
-    }
-    window.history.pushState({ path: url.href }, "", url.href);
-
     dispatch(changeTabs(tabName));
   };
 

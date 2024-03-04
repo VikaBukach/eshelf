@@ -1,25 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ButtonBuy } from "./ButtonBuy";
 import { WeAccept } from "./WeAccept";
-import { useDispatch, useSelector } from "react-redux";
-import { setActiveColorIndex, setActiveMemoryIndex } from "../../store/slices/singleProductSlice";
+import { useSelector } from "react-redux";
 
 const CharacteristicProduct = ({product}) => {
 
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
   const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const savedColorIndex = localStorage.getItem("activeColorIndex");
-    const savedMemoryIndex = localStorage.getItem("activeMemoryIndex");
-    if (savedColorIndex !== null) {
-      dispatch(setActiveColorIndex(Number(savedColorIndex)));
-    }
-    if (savedMemoryIndex !== null) {
-      dispatch(setActiveMemoryIndex(Number(savedMemoryIndex)));
-    }
-  }, [dispatch])
 
   return (
     <div className="characteristic-body">
