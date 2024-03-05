@@ -19,7 +19,7 @@ function EspeciallyForYou() {
     dispatch(fetchDataOfProducts("smartphones"));
   }, [dispatch]);
 
-  const [itemsToShow, setItemsToShow] = useState(window.innerWidth >= 768 ? 3 : 2);
+  const [itemsToShow, setItemsToShow] = useState(window.innerWidth >= 768 ? 5 : 2);
 
   const handleResize = () => {
     setItemsToShow(window.innerWidth >= 768 ? 3 : 2);

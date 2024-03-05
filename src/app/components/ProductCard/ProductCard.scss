@@ -78,10 +78,6 @@
         color: $secondary-color-purple;
         @include header-h1;
       }
-
-      //&__discount {
-      //  display: none;
-      //}
     }
   }
 
@@ -133,9 +129,15 @@
 
 @media screen and (min-width: $desktop) {
   .card-product {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 405px; //V
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
     padding: 16px 16px 20px;
-    margin-right: 16px; // додала Віка
+    margin-right: 16px; // V
+
 
     &:hover {
       box-shadow: 0px 0px 10px 0px rgba(129, 25, 177, 0.1);
@@ -157,8 +159,9 @@
     }
 
     &__image-container {
-      height: 15vw;
+      height: 13vw; // V
     }
+
 
     &__functions {
       position: absolute;
