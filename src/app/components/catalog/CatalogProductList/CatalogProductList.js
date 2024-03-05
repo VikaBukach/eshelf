@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setBaseFilteredProducts } from "../../../store/slices/filteredProductsSlice";
 import { setFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
 import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
+import ProductCard from "../../ProductCard/ProductCard";
 
 const CatalogProductList = () => {
   const dispatch = useDispatch();
@@ -31,15 +32,19 @@ const CatalogProductList = () => {
       const productItem = { ...cloneProduct, color };
       productItem.fullName = product.brand + " " + product.model + " " + color.color;
       productItem.index = product._id + color.color;
+      productItem.image = color.images[0];
+      productItem.category = product.product;
       productItem.priceBy = color.products[0].price;
       let l = color.products.length - 1;
       productItem.priceTo = color.products[l].price;
-      productItem.bool = product.test_boolean ? "Yes" : "No";
-      productItem.battary_capacity = product.specifications.battery.capacity;
-      productItem.capacity = [];
-      let b = color.products.forEach((product) => {
-        productItem.capacity.push(product.capacity + " / ");
-      });
+      productItem.discountPriceBy = color.products[0].discount_price;
+
+      // productItem.bool = product.test_boolean ? "Yes" : "No";
+      // productItem.battary_capacity = product.specifications.battery.capacity;
+      // productItem.capacity = [];
+      // let b = color.products.forEach((product) => {
+      //   productItem.capacity.push(product.capacity + " / ");
+      // });
 
       productItems.push(productItem);
     });
@@ -52,17 +57,14 @@ const CatalogProductList = () => {
     <ul className="product-list">
       {productItems.map((productItem) => (
         <li className="product-list__item" key={productItem.index}>
-          <p>{productItem.fullName}</p>
-          <p>-----------</p>
-          <p>
-            price by {productItem.priceBy} to {productItem.priceTo}
-          </p>
-          <p>-----------</p>
-          <p>{productItem.bool}</p>
-          <p>-----------</p>
-          <p>{productItem.battary_capacity}</p>
-          <p>-----------</p>
-          <p>{productItem.capacity}</p>
+          <ProductCard
+            id={productItem.index}
+            imageURL={productItem.image}
+            category={productItem.category}
+            title={productItem.fullName}
+            price={productItem.priceBy}
+            discountPrice={productItem.discountPriceBy}
+          />
         </li>
       ))}
     </ul>
