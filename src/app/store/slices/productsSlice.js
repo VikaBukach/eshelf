@@ -4,7 +4,7 @@ import axios from "axios";
 export const fetchDataOfProducts = createAsyncThunk(
   "products/fetchDataOfProducts",
   async (collection, { dispatch }) => {
-    const PORT = process.env.REACT_APP_PORT || 5000;
+    const PORT = process.env.REACT_APP_PORT || 3001;
 
     try {
       const response = await axios.get(`http://localhost:${PORT}/${collection}`);
