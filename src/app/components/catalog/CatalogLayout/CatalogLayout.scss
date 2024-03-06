@@ -1,11 +1,10 @@
 .catalog {
+  position: relative;
   width: 100%;
   padding: 8px 16px;
-  
-  background-color: rgb(144, 131, 175);
   &__head-line {
     @include flex-container(column, space-between, flex-start, nowrap);
-    background-color: rgb(64, 161, 132);
+    margin-bottom: 16px;
 
     &__breadcrumb {
       font-size: 12px;
@@ -14,6 +13,7 @@
     &__title {
       font-size: 24px;
       font-weight: 500;
+      margin-bottom: 11px;
     }
     &__container{
       width: 100%;
@@ -21,17 +21,26 @@
       gap: 8px;
     }
     &__filter-btn {
+      @include flex-container(row, space-around, center, nowrap);
       width: 50%;
       height: 38px;
       padding: 8px 16px;
       border-radius: 10px;
       background-color: $secondary-color-blue-light;
       font-size: 14px;
+      color: $secondary-color-white;
+      user-select: none;
+      cursor: pointer;
+
+      &__count {
+        text-align: center;
+        padding-top: 1px;
+        height: 20px;
+        min-width: 20px;
+        border-radius: 10px;
+        background-color: $secondary-color-white;
+        color: #000000;
+      }
     }
-  }
-  &__body {
-    display: flex;
-    justify-content: space-between;
-    background-color: rgb(211, 123, 177);
   }
 }

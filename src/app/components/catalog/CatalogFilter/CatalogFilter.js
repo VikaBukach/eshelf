@@ -5,6 +5,7 @@ import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlic
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
 import { findValueByPath } from "../../../helpers/catalog"
 import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
+import { Accordion } from "../../ui/Accordion/Accordion";
 
 const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
@@ -126,6 +127,11 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     dispatch(setPriceTo(maxValue));
     };
 
+    const closeFilter = () => {
+      document.querySelector(".filter").classList.toggle("filter--open");
+      document.querySelector("body").classList.toggle("body-to-filter");
+    };
+
   // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
 useEffect(() => {
   onFilterSubmit();
@@ -133,7 +139,14 @@ useEffect(() => {
 
   return (
     <div className="filter">
-      <CatalogPriceFilter pricePath={pricePath}/>
+      <div className="filter__header">
+        <h1 className="filter__title">Filter</h1>
+        <img className="filter__close-btn" src="../assets/icons/close.svg" alt="Close" onClick={closeFilter} />
+
+      </div>
+      <Accordion title="Price" content={
+        <CatalogPriceFilter pricePath={pricePath}/>
+      } />
       {filterCriteriasWithTypes.map((criteria, index) => (
         <React.Fragment key={index}>
           <CatalogFilterItem filterTitle={criteria.title} checkBoxNames={criteria.types} criteriaPath={criteria.path} allValues={findAllValues(criteria.path)}/>

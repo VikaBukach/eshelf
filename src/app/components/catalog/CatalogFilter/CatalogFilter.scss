@@ -1,12 +1,37 @@
 .filter {
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 0%;
+    max-height: 100vh;
+    padding: 0px;
     background-color: rgb(233, 218, 230);
-    min-height: 20px;
-    width: 20%;
+    transition: 1s;
+    &--open {
+        width: 100%;
+        padding: 16px;
+    }
 
-    display: none;
+    &__header {
+        @include flex-container(row, space-between, center, nowrap);
+        margin-bottom: 36px;
+    }
+    &__title {
+        @include header-h1;
+    }
+    &__header {}
+    &__header {}
 
     &__submit {
         background-color: rgb(149, 187, 223);
         padding: 5px;
     }
+}
+
+.body-to-filter {
+    overflow: hidden;
+    height: 100%;
 }

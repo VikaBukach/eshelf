@@ -1,21 +1,8 @@
 .product-list {
-  display: none;
-  min-height: 240px;
-  background-color: rgb(15, 109, 109);
-  min-height: 20px;
-  width: 80%;
-  margin: 0;
-  // display: grid;
-  // grid-template-columns: repeat(4, 1fr);
-  // gap: 10px;
+  @include grid-container(2, 8px);
+  width: 100%;
 
   &__item {
-    display: none;
-    border: 1px solid rgb(138, 45, 45);
     list-style: none;
-    // display: block;
-    padding: 5px;
-    min-height: 50px;
-    font-family: Arial, Helvetica, sans-serif;
   }
 }

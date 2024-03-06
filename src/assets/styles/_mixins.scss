@@ -106,4 +106,5 @@ $maxScreen: 171.2rem;
 @mixin grid-item($column-span: 1, $row-span: 1) {
   grid-column: span $column-span;
   grid-row: span $row-span;
+  align-items: stretch;
 }

@@ -95,7 +95,7 @@ const CatalogPriceFilter = ({ pricePath }) => {
     <div>
       <div className="price-filter">
         <h5 className="price-filter__title">ФІЛЬТРАЦІЯ ЗА ЦІНОЮ</h5>
-        <div>
+        <div className="price-filter__inputs-cover">
           <input
             type="number"
             className={`price-filter__input ${isPriceByError ? "price-filter__input--error" : ""}`}
@@ -118,10 +118,10 @@ const CatalogPriceFilter = ({ pricePath }) => {
             onChange={handleMaxPriceChange}
             onBlur={ckeckValidation}
           />
-          <button type="button" id="price-filter__button" onClick={submitFilterByPrice}>
-            OK
-          </button>
         </div>
+        <button type="button" className="price-filter__button" id="price-filter__button" onClick={submitFilterByPrice}>
+          OK
+        </button>
         <p>--------------</p>
       </div>
     </div>
