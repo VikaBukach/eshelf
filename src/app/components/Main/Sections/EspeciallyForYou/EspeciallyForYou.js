@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, {useState, useEffect, useRef, useCallback} from "react";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import Button from "../../Button/Button";
 import ProductCard from "../../../ProductCard/ProductCard";
 import "./EspeciallyForYou.scss";
@@ -9,21 +9,22 @@ import { fetchDataOfProducts } from "../../../../store/slices/productsSlice";
 import Slider from "react-slick";
 import Arrow from "../../Arrow/Arrow";
 
+
+const MemoizedProductCard = React.memo(ProductCard);
+
 function EspeciallyForYou() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.products.data);
-  const status = useSelector((state) => state.products.status);
-  const error = useSelector((state) => state.products.error);
+ const { data, status, error } = useSelector((state) => state.products, shallowEqual);
 
   useEffect(() => {
     dispatch(fetchDataOfProducts("smartphones"));
   }, [dispatch]);
 
-  const [itemsToShow, setItemsToShow] = useState(window.innerWidth >= 768 ? 5 : 2);
+  const [itemsToShow, setItemsToShow] = useState( window.innerWidth >= 768 ? 5 : 2);
 
-  const handleResize = () => {
+  const handleResize = useCallback(() => {
     setItemsToShow(window.innerWidth >= 768 ? 3 : 2);
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -61,7 +62,7 @@ function EspeciallyForYou() {
                 return (
                   <div className="section-especially-item" key={index}>
                     {item && (
-                      <ProductCard
+                      <MemoizedProductCard
                         id={item._id}
                         imageURL={item.colors[0].images[0]}
                         category={"Smartphones"}
@@ -101,8 +102,8 @@ function EspeciallyForYou() {
                   console.log("--------------", data);
                   return (
                     <div className="section-especially-item-desktop " key={index}>
-                      {item && (
-                        <ProductCard
+
+                        <MemoizedProductCard
                           id={item._id}
                           imageURL={item.colors[0].images[0]}
                           category={"Smartphones"}
@@ -120,7 +121,7 @@ function EspeciallyForYou() {
                           price={item.colors[0].products[0].price}
                           discountPrice={item.colors[0].products[0]["discount_price"]}
                         />
-                      )}
+
                     </div>
                   );
                 })

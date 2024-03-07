@@ -4,8 +4,8 @@ import TopBrands from "./Sections/TopBrands/TopBrands";
 import "./Main.scss";
 import EspeciallyForYou from "./Sections/EspeciallyForYou/EspeciallyForYou";
 import BannerTopProduct from "./Sections/BannerTopProduct/BannerTopProduct";
-// import TopProduct from "./Sections/TopProduct/TopProduct";
-// import TopBrands from "./Sections/TopBrands/TopBrands";
+import TopProduct from "./Sections/TopProduct/TopProduct";
+
 
 const Main = () => {
   return (
