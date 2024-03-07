@@ -11,8 +11,8 @@ const compareSlice = createSlice({
   reducers: {
     toggleCompare: (state, action) => {
       const { data, selectedCategory } = state;
-      const { _id, category } = action.payload;
-      const id = _id;
+      const { _id, category, id: __id } = action.payload;
+      const id = _id || __id;
 
       const productAlreadyAdded = data.findIndex((i) => i.id === id) >= 0;
 

@@ -48,7 +48,7 @@ const ProductPage = () => {
           <div className="product-details__body">
             {tabs === "About the product" && <AboutProduct product={product} />}
             {tabs === "Characteristic" && <CharacteristicProduct />}
-            {tabs === "Reviews" && <ReviewsProduct />}
+            {tabs === "Reviews" && <ReviewsProduct productId={product._id} />}
             {tabs === "Photo and video" && <PhotoVideoProduct />}
           </div>
         </div>

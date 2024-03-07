@@ -1,0 +1,22 @@
+@import "../../../../assets/styles/variables";
+
+.pagination-wrapper {
+  display: flex;
+  margin-inline: auto;
+  max-width: max-content;
+  gap: 1.6rem;
+}
+
+.pagination-button {
+  border: 2px solid rgba($primary-color-black, 0.2);
+  padding: 1em;
+  border-radius: 0.6rem;
+  min-width: 5rem;
+
+  color: $primary-color-black;
+
+  &.active {
+    color: $main-background;
+    border-color: $main-background;
+  }
+}
