@@ -1,44 +1,38 @@
 .price-filter {
+  &__inputs-cover {
+    position: relative;
+    @include flex-container(row, space-around, center, nowrap);
+    width: 224px;
+    height: 40px;
+    margin: 0 auto 6px;
+    border: 1px solid $primary-color-black;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 
-    &__inputs-cover {
-        position: relative;
-        @include flex-container(row, space-around, center, nowrap);
-        width: 224px;
-        height: 40px;
-        margin: 0 auto;
-        border: 1px solid $primary-color-black;
-        border-radius: 10px;
-        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-
-        &::after {
-            content: "";
-            position: absolute;
-            display: block;
-            left: 50%;
-            width: 1px;
-            height: 32px;
-            background: $primary-color-black;
-        }
-
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      left: 50%;
+      width: 1px;
+      height: 32px;
+      background: $primary-color-black;
     }
+  }
 
-    &__input{
-        width: 80px;
-        color: $primary-color-black;
-        text-align: center;
-    }
+  &__input {
+    width: 80px;
+    color: $primary-color-black;
+    text-align: center;
+  }
 
-    &__button {
-        display: none;
-    }
-
-
-
+  &__button {
+    display: none;
+  }
 }
 
-
 .price-filter__input {
-    &--error {
-        color: $secondary-color-red;
-    }
+  &--error {
+    color: $secondary-color-red;
+  }
 }

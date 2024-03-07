@@ -1,8 +1,7 @@
 .eligible-products {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(94, 156, 156);
+    width: 24px;
+    height: 24px;
+    @include flex-container(row, center, center, nowrap);
+    background-color: $secondary-color-blue;
+    border-radius: 5px;
 }

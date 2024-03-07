@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
 import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
-import { findValueByPath } from "../../../helpers/catalog"
+import { findValueByPath } from "../../../helpers/catalog";
 import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { Accordion } from "../../ui/Accordion/Accordion";
 
@@ -15,7 +15,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
-  
+
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
   // ---------------------------------------------------------
@@ -45,15 +45,15 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     return updatedFilterCriterias;
   };
 
-  // Складання масиву з усіх значень (з повтореннями) згідно з шляхом пошуку 
+  // Складання масиву з усіх значень (з повтореннями) згідно з шляхом пошуку
   const findAllValues = (path) => {
     const valuesOfCriteria = [];
     filteredProductsWithPrice.forEach((product) => {
       const { value: findVariations } = findValueByPath(product, path);
-      valuesOfCriteria.push(...findVariations)
+      valuesOfCriteria.push(...findVariations);
     });
     return valuesOfCriteria;
-};
+  };
 
   // ---------------------------------------------------------
   // ---------------------------------------------------------
@@ -113,7 +113,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   useEffect(() => {
     setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
   }, [products]);
-// }, [filterCriterias, products]);
+  // }, [filterCriterias, products]);
 
   // ------- ВЗАЄМОДІЯ З КОРИСТУВАЧЕМ
 
@@ -125,43 +125,45 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     dispatch(setCheckboxesSettings([]));
     dispatch(setPriceBy(minValue));
     dispatch(setPriceTo(maxValue));
-    };
+  };
 
-    const closeFilter = () => {
-      document.querySelector(".filter").classList.toggle("filter--open");
-      document.querySelector("body").classList.toggle("body-to-filter");
-    };
+  const closeFilter = () => {
+    document.querySelector(".filter").classList.toggle("filter--open");
+    document.querySelector("body").classList.toggle("body-to-filter");
+  };
 
   // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
-useEffect(() => {
-  onFilterSubmit();
-}, [filterSettings]);
+  useEffect(() => {
+    onFilterSubmit();
+  }, [filterSettings]);
 
   return (
     <div className="filter">
       <div className="filter__header">
         <h1 className="filter__title">Filter</h1>
         <img className="filter__close-btn" src="../assets/icons/close.svg" alt="Close" onClick={closeFilter} />
-
       </div>
-      <Accordion title="Price" content={
-        <CatalogPriceFilter pricePath={pricePath}/>
-      } />
+      <Accordion title="Price" content={<CatalogPriceFilter pricePath={pricePath} />} />
       {filterCriteriasWithTypes.map((criteria, index) => (
         <React.Fragment key={index}>
-          <CatalogFilterItem filterTitle={criteria.title} checkBoxNames={criteria.types} criteriaPath={criteria.path} allValues={findAllValues(criteria.path)}/>
-          <p>-----------------</p>
+          <CatalogFilterItem
+            filterTitle={criteria.title}
+            checkBoxNames={criteria.types}
+            criteriaPath={criteria.path}
+            allValues={findAllValues(criteria.path)}
+          />
         </React.Fragment>
       ))}
-      <button onClick={onFilterSubmit} type="button" className="filter__submit">
-        FILTER
-      </button>
-      <button onClick={onResetSubmit} type="button" className="filter__submit">
-        RESET
-      </button>
+      <div className="filter__buttons">
+        <button onClick={onResetSubmit} type="button" className="filter__reset filter__btn">
+          Reset
+        </button>
+        <button onClick={onFilterSubmit} type="button" className="filter__submit filter__btn">
+          Submit
+        </button>
+      </div>
     </div>
   );
 };
 
 export { CatalogFilter };
-
