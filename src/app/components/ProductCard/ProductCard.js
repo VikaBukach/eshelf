@@ -86,11 +86,11 @@ export default function ProductCard({ id, imageURL, category, title, price, disc
         <div className="card-product__info__price-container">
           {discountPrice ? (
             <>
-              <span className="card-product__info__price-container__price">₴ {discountPrice}</span>
-              <span className="card-product__info__price-container__discount">₴ {price}</span>
+              <span className="card-product__info__price-container__price">$ {discountPrice}</span>
+              <span className="card-product__info__price-container__discount">$ {price}</span>
             </>
           ) : (
-            <span className="card-product__info__price-container__price">₴ {price}</span>
+            <span className="card-product__info__price-container__price">$ {price}</span>
           )}
         </div>
       </div>

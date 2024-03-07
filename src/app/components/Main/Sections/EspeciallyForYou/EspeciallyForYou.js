@@ -9,8 +9,6 @@ import {fetchDataOfProducts} from "../../../../store/slices/productsSlice";
 import Slider from "react-slick";
 import Arrow from "../../Arrow/Arrow";
 
-// const MemoizedProductCard = React.memo(ProductCard);
-
 function EspeciallyForYou() {
     const dispatch = useDispatch();
     const {data, status, error} = useSelector((state) => state.products, shallowEqual);
