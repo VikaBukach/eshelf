@@ -108,8 +108,8 @@ ProductCard.propTypes = {
   imageURL: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  discountPrice: PropTypes.string.isRequired,
+  price: PropTypes.number,
+  discountPrice: PropTypes.number,
 };
 
 ProductCard.defaultProps = {
