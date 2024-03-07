@@ -1,5 +1,5 @@
 import React from "react";
-import "./Top_Brands.scss";
+import "./TopBrands.scss";
 
 function TopBrands(props) {
   return (
