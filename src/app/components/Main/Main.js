@@ -4,7 +4,7 @@ import TopBrands from "./Sections/TopBrands/TopBrands";
 import "./Main.scss";
 import EspeciallyForYou from "./Sections/EspeciallyForYou/EspeciallyForYou";
 import BannerTopProduct from "./Sections/BannerTopProduct/BannerTopProduct";
-import TopProduct from "./Sections/TopProduct/TopProduct";
+// import TopProduct from "./Sections/TopProduct/TopProduct";
 
 
 const Main = () => {

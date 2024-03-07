@@ -106,7 +106,7 @@ export default function ProductCard({ id, imageURL, category, title, price, disc
 ProductCard.propTypes = {
   id: PropTypes.string.isRequired,
   imageURL: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  category: PropTypes.string,
   title: PropTypes.string.isRequired,
   price: PropTypes.number,
   discountPrice: PropTypes.number,

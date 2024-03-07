@@ -9,7 +9,7 @@ import {fetchDataOfProducts} from "../../../../store/slices/productsSlice";
 import Slider from "react-slick";
 import Arrow from "../../Arrow/Arrow";
 
-const MemoizedProductCard = React.memo(ProductCard);
+// const MemoizedProductCard = React.memo(ProductCard);
 
 function EspeciallyForYou() {
     const dispatch = useDispatch();
@@ -61,10 +61,10 @@ function EspeciallyForYou() {
                                 return (
                                     <div className="section-especially-item" key={index}>
                                         {item && (
-                                            <MemoizedProductCard
+                                            <ProductCard
                                                 id={item._id}
                                                 imageURL={item.colors[0].images[0]}
-                                                category={"Smartphones"}
+                                                category={item.category}
                                                 title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity}
                                                 price={item.colors[0].products[0].price}
                                                 discountPrice={item.discountPrice}
@@ -102,14 +102,16 @@ function EspeciallyForYou() {
                                     // console.log("--------------", data);
                                     return (
                                         <div className="section-especially-item-desktop " key={index}>
-                                            <MemoizedProductCard
+                                            {item && (
+                                            <ProductCard
                                                 id={item._id}
                                                 imageURL={item.colors[0].images[0]}
-                                                category={"Smartphones"}
+                                                category={item.category}
                                                 title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity + " " + item.colors[0].color + " " + item.colors[0].products[0].article
                                                 }price={item.colors[0].products[0].price}
                                                 discountPrice={item.colors[0].products[0]["discount_price"]}
                                             />
+                                                )}
                                         </div>
                                     );
                                 })
