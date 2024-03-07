@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "../../Button/Button";
 import ProductCard from "../../../ProductCard/ProductCard";
-import "./Especially_for_you.scss";
+import "./EspeciallyForYou.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { fetchDataOfProducts } from "../../../../store/slices/productsSlice";
@@ -43,7 +43,7 @@ function EspeciallyForYou() {
     infinite: true,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToScroll: 1,
   };
 
   return (
