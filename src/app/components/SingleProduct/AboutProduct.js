@@ -15,7 +15,6 @@ import { ButtonBuy } from "./ButtonBuy";
 import { WeAccept } from "./WeAccept";
 
 const AboutProduct = ({ product }) => {
-
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
   const activeImageIndex = useSelector((state) => state.product.activeImageIndex);
   const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
@@ -23,15 +22,15 @@ const AboutProduct = ({ product }) => {
 
   const handleColorItemClick = (index) => {
     dispatch(setActiveColorIndex(index));
-  }
+  };
 
   const handleSmallImageClick = (index) => {
     dispatch(setActiveImageIndex(index));
-  }
+  };
 
   const handleMemoryClick = (index) => {
     dispatch(setActiveMemoryIndex(index));
-  }
+  };
 
   return (
     <div className="product-details-body">

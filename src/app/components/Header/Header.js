@@ -10,9 +10,8 @@ import { ReactComponent as BalanceIcon } from "../../../assets/images/Balance.sv
 import { ReactComponent as HeartIcon } from "../../../assets/images/Heart.svg";
 import { ReactComponent as CartIcon } from "../../../assets/images/Cart.svg";
 import { ReactComponent as UserIcon } from "../../../assets/images/Profile page.svg";
-import BurgerMenu from "./BurgerMenu/BurgerMenu"
-import BurgerMenuDesktop from "./BurgerMenu/BurgerMenuDesktop"
-
+import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import BurgerMenuDesktop from "./BurgerMenu/BurgerMenuDesktop";
 
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useModal } from "../../hooks/useModal";
@@ -34,32 +33,45 @@ const Header = () => {
 
   return (
     <>
-    <header className="header">
-      <div className="header__content-container">
-        <BurgerMenuIcon className="burger-icon" onClick={handleToggleMenu} />
-        <NavLink to="/" className="header__logo"><LogoIcon /></NavLink>
-        <div className="header__search-container">
+      <header className="header">
+        <div className="header__content-container">
+          <BurgerMenuIcon className="burger-icon" onClick={handleToggleMenu} />
+          <NavLink to="/" className="header__logo">
+            <LogoIcon />
+          </NavLink>
+          <div className="header__search-container">
             <input type="text" className="header__search-input" placeholder="Search..." />
-            <MicrophoneIcon className="microphone-icon" onClick={handleVoiceSearch}/>
+            <MicrophoneIcon className="microphone-icon" onClick={handleVoiceSearch} />
             <SearchIcon className="search-icon" />
-        </div>
-        <NavLink to="/" className="header__link-home"></NavLink>
-        <NavLink to="/comparing" className="header__link-comparing"><BalanceIcon /></NavLink>
-        <NavLink to="/favorites" className="header__link-favorites"><HeartIcon /></NavLink>
-        <div className="header__link-cart">
-          <Cart activator={<div onClick={open}><CartIcon /></div>} />
-        </div>
-        <NavLink to="/users" className="header__link-users"><UserIcon /></NavLink>
-      
+          </div>
+          <NavLink to="/" className="header__link-home"></NavLink>
+          <NavLink to="/comparing" className="header__link-comparing">
+            <BalanceIcon />
+          </NavLink>
+          <NavLink to="/favorites" className="header__link-favorites">
+            <HeartIcon />
+          </NavLink>
+          <div className="header__link-cart">
+            <Cart
+              activator={
+                <div onClick={open}>
+                  <CartIcon />
+                </div>
+              }
+            />
+          </div>
+          <NavLink to="/users" className="header__link-users">
+            <UserIcon />
+          </NavLink>
 
-      {menuOpen && (
-        <>
-          {windowWidth < 1024 && <BurgerMenu isOpen={menuOpen} onClose= {handleToggleMenu}/>}
-          {windowWidth > 1024 && <BurgerMenuDesktop isOpen={menuOpen} onClose= {handleToggleMenu}/>}
-        </>
-      )}
-      </div>
-    </header>
+          {menuOpen && (
+            <>
+              {windowWidth < 1024 && <BurgerMenu isOpen={menuOpen} onClose={handleToggleMenu} />}
+              {windowWidth > 1024 && <BurgerMenuDesktop isOpen={menuOpen} onClose={handleToggleMenu} />}
+            </>
+          )}
+        </div>
+      </header>
     </>
   );
 };

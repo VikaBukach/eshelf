@@ -3,8 +3,7 @@ import { ButtonBuy } from "./ButtonBuy";
 import { WeAccept } from "./WeAccept";
 import { useSelector } from "react-redux";
 
-const CharacteristicProduct = ({product}) => {
-
+const CharacteristicProduct = ({ product }) => {
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
   const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
 
@@ -278,6 +277,6 @@ const CharacteristicProduct = ({product}) => {
       </div>
     </div>
   );
-}
+};
 
 export { CharacteristicProduct };

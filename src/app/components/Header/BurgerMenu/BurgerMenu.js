@@ -80,7 +80,9 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
             <ul>
               <li className="category-link">
                 <div className="category-link-wrapper">
-                  <MobileIcon className={`category-image ${activeCategory === "smartphones" && smartphonesActive ? "active" : "not-active"}`} />
+                  <MobileIcon
+                    className={`category-image ${activeCategory === "smartphones" && smartphonesActive ? "active" : "not-active"}`}
+                  />
                   <NavLink to="/smartphones" onClick={handleNavLinkClick}>
                     Smartphones
                   </NavLink>
@@ -94,7 +96,9 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
               </li>
               <li className="category-link">
                 <div className="category-link-wrapper">
-                  <LaptopIcon className={`category-image ${activeCategory === "laptops" && laptopsActive ? "active" : "not-active"}`} />
+                  <LaptopIcon
+                    className={`category-image ${activeCategory === "laptops" && laptopsActive ? "active" : "not-active"}`}
+                  />
                   <NavLink to="/laptops" onClick={handleNavLinkClick}>
                     Laptops
                   </NavLink>

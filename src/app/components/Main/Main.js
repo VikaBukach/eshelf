@@ -14,7 +14,7 @@ const Main = () => {
       <TopBrands />
       <EspeciallyForYou />
       <BannerTopProduct />
-        {/*<TopProduct/>*/}
+      {/*<TopProduct/>*/}
     </div>
   );
 };

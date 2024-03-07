@@ -1,70 +1,63 @@
 @import "../../../../assets/styles/style.scss";
 
-
-.burger-menu_container{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.350);
-    z-index: 999;
-
+.burger-menu_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 999;
 }
 
-.burger-menu{
+.burger-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: -1;
 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    z-index: -1;
-
-    &_header{
-        display: flex;
-        justify-content: space-between;
-    }
-
-    &_button{
-        width: 24px;
-        height: 24px;
-    }
-
-    &_links{
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-        border-bottom: 1px solid black
-    }
-
-    &__categories h2{
-        @include header-h2;
-        margin-top: 20px;
-    }
-
-    &__categories li{
-
-        @include header-h3;
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-        border-bottom: 1px solid black;
-    }
-
-    @media (min-width: $tablet) {
-
-        top: 25%;
-        left: 25%;
-        width: 50%;
-        height: 50%;
-        background-color: gray;
-    }
-}
-
-.category-link-wrapper{
+  &_header {
     display: flex;
+    justify-content: space-between;
+  }
+
+  &_button {
+    width: 24px;
+    height: 24px;
+  }
+
+  &_links {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    border-bottom: 1px solid black;
+  }
+
+  &__categories h2 {
+    @include header-h2;
+    margin-top: 20px;
+  }
+
+  &__categories li {
+    @include header-h3;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    border-bottom: 1px solid black;
+  }
+
+  @media (min-width: $tablet) {
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    background-color: gray;
+  }
 }
 
-
+.category-link-wrapper {
+  display: flex;
+}

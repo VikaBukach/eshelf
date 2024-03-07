@@ -6,7 +6,7 @@ const singleProductSlice = createSlice({
     tabs: "About the product",
     activeColorIndex: 0,
     activeImageIndex: 0,
-    activeMemoryIndex: 0
+    activeMemoryIndex: 0,
   },
 
   reducers: {
@@ -22,10 +22,11 @@ const singleProductSlice = createSlice({
     },
     setActiveMemoryIndex: (state, action) => {
       state.activeMemoryIndex = action.payload;
-    }
+    },
   },
 });
 
-export const { changeTabs, setActiveColorIndex, setActiveImageIndex, setActiveMemoryIndex } = singleProductSlice.actions;
+export const { changeTabs, setActiveColorIndex, setActiveImageIndex, setActiveMemoryIndex } =
+  singleProductSlice.actions;
 
 export default singleProductSlice.reducer;
