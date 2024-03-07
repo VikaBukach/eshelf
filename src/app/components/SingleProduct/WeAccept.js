@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { ReactComponent as AboutVisaIcon } from "../../../assets/images/product-icons/visa.svg";
 import { ReactComponent as AboutGooglePayIcon } from "../../../assets/images/product-icons/google-pay.svg";
 import { ReactComponent as AboutApplePayIcon } from "../../../assets/images/product-icons/apple-pay.svg";
@@ -24,6 +24,6 @@ const WeAccept = () => {
       </div>
     </div>
   );
-}
+};
 
-export { WeAccept }
+export { WeAccept };

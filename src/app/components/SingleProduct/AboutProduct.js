@@ -43,11 +43,11 @@ const AboutProduct = ({ product }) => {
 
   const handleColorItemClick = (index) => {
     dispatch(setActiveColorIndex(index));
-  }
+  };
 
   const handleSmallImageClick = (index) => {
     dispatch(setActiveImageIndex(index));
-  }
+  };
 
   const handleMemoryClick = (index) => {
     dispatch(setActiveMemoryIndex(index));

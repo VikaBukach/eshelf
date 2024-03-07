@@ -2,13 +2,16 @@ const env = require("dotenv");
 env.config();
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const { connectToDb, getDb } = require("./db");
+const { reviewRouter } = require("./backend/router");
 
 const PORT = process.env.REACT_APP_PORT || 3001;
 
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
 
 let db;
 
@@ -23,7 +26,9 @@ connectToDb((err) => {
   }
 });
 
-  const handleCollectionRequest = ("/products", (collection, req, res) => {
+const handleCollectionRequest =
+  ("/products",
+  (collection, req, res) => {
     const products = [];
 
     db.collection(collection)
@@ -45,6 +50,9 @@ app.get("/smartphones", (req, res) => {
 app.get("/laptops", (req, res) => {
   handleCollectionRequest("laptops", req, res);
 });
+
 app.get("/monitors", (req, res) => {
   handleCollectionRequest("monitors", req, res);
 });
+
+app.use(reviewRouter);

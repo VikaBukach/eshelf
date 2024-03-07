@@ -1,0 +1,17 @@
+# Скачати розширення до VS Code, по посиланню нижче
+# Name: REST Client
+# VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+GET http://localhost:5500/getProductReview?productId=65cb593bf88b23255ef42f6a&take=1
+
+###
+
+GET http://localhost:5500/getProductReviewTotals?productId=65cb593bf88b23255ef42f6a
+
+### Приклад POST запиту
+# POST https://example.com/comments
+# content-type: application/json
+# {
+#     "name": "sample",
+#     "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+# }
