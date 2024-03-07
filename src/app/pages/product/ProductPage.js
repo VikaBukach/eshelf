@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { changeTabs } from "../../store/slices/singleProductSlice";
+import {
+  changeTabs,
+  setActiveColorIndex,
+  setActiveMemoryIndex,
+  setActiveImageIndex,
+} from "../../store/slices/singleProductSlice";
 import { fetchDataOfProducts } from "../../store/slices/productsSlice";
 import { AboutProduct } from "../../components/SingleProduct/AboutProduct";
 import { CharacteristicProduct } from "../../components/SingleProduct/CharacteristicProduct";
@@ -11,8 +16,6 @@ import { ReviewsProduct } from "../../components/SingleProduct/ReviewsProduct";
 const ProductPage = () => {
   const { collection, id } = useParams();
 
-  //console.log(collection);
-
   const dispatch = useDispatch();
 
   const product = useSelector((state) => state.products.data.find((item) => item._id === id));
@@ -21,7 +24,17 @@ const ProductPage = () => {
 
   useEffect(() => {
     dispatch(fetchDataOfProducts(`${collection}`));
+    return () => {
+      dispatch(changeTabs("About the product"));
+      dispatch(setActiveColorIndex(0));
+      dispatch(setActiveMemoryIndex(0));
+      dispatch(setActiveImageIndex(0));
+    };
   }, [dispatch, collection]);
+
+  const handleTabClick = (tabName) => {
+    dispatch(changeTabs(tabName));
+  };
 
   if (!product) {
     return <div>Loading...</div>;
@@ -29,7 +42,6 @@ const ProductPage = () => {
 
   return (
     <>
-      <div>Breadcrumbs</div>
       <section className="product-details">
         <div className="container">
           <h1 className="product-details__title">{product.model}</h1>
@@ -39,7 +51,7 @@ const ProductPage = () => {
               <li
                 className={`product-details__tabs-item ${tabs === item ? "product-details__tabs-active" : ""}`}
                 key={id}
-                onClick={() => dispatch(changeTabs(item))}
+                onClick={() => handleTabClick(item)}
               >
                 {item}
               </li>
@@ -47,8 +59,8 @@ const ProductPage = () => {
           </ul>
           <div className="product-details__body">
             {tabs === "About the product" && <AboutProduct product={product} />}
-            {tabs === "Characteristic" && <CharacteristicProduct />}
             {tabs === "Reviews" && <ReviewsProduct productId={product._id} />}
+            {tabs === "Characteristic" && <CharacteristicProduct product={product} />}
             {tabs === "Photo and video" && <PhotoVideoProduct />}
           </div>
         </div>

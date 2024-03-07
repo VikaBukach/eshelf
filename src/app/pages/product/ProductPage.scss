@@ -1,7 +1,10 @@
 .product-details {
+  @include adaptiveValue("margin-bottom", 30, 50);
+  margin-bottom: 50px;
   &__title {
     @include adaptiveValue("font-size", 16, 24);
-    @include adaptiveValue("margin-bottom", 16, 32);
+    @include adaptiveValue("padding-top", 30, 50);
+    @include adaptiveValue("padding-bottom", 16, 32);
     font-weight: 500;
   }
 
@@ -9,7 +12,15 @@
     display: flex;
     flex-wrap: wrap;
     gap: 5px 24px;
+    padding: 10px 15px;
     margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: $secondary-color-grey-card;
+    @media screen and (min-width: $tablet) {
+      background-color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
   }
 
   &__tabs-item {

@@ -3,12 +3,15 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../../store/slices/NavMenuSlice";
 import { ReactComponent as BurgerMenuIcon } from "../../../assets/images/Burger.svg";
+import { ReactComponent as LogoIcon } from "../../../assets/images/Logo.svg";
 import { ReactComponent as MicrophoneIcon } from "../../../assets/images/Microphone.svg";
 import { ReactComponent as SearchIcon } from "../../../assets/images/Search.svg";
 import { ReactComponent as BalanceIcon } from "../../../assets/images/Balance.svg";
 import { ReactComponent as HeartIcon } from "../../../assets/images/Heart.svg";
 import { ReactComponent as CartIcon } from "../../../assets/images/Cart.svg";
 import { ReactComponent as UserIcon } from "../../../assets/images/Profile page.svg";
+import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import BurgerMenuDesktop from "./BurgerMenu/BurgerMenuDesktop";
 
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useModal } from "../../hooks/useModal";
@@ -23,76 +26,22 @@ const Header = () => {
     dispatch(toggleMenu());
   };
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const handleMobileMenuToggle = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
-  const shouldShowMobileMenu = windowWidth <= 768;
-
   const { open } = useModal();
+  const handleVoiceSearch = () => {
+    // Функція обробки голосового повідомлення
+  };
 
   return (
     <>
       <header className="header">
-        <div className={`header__content-container ${shouldShowMobileMenu && mobileMenuOpen ? "mobile" : ""}`}>
-          {shouldShowMobileMenu ? (
-            <>
-              <BurgerMenuIcon
-                className={`burger-icon ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "mobile" : ""}`}
-                onClick={handleMobileMenuToggle}
-              />
-              {mobileMenuOpen && (
-                <>
-                  <button className="header__menu-mobile_close-button" onClick={handleMobileMenuToggle}>
-                    &times;
-                  </button>
-
-                  <nav className="header__menu-mobile" onClick={handleMobileMenuToggle}>
-                    <span>Catalog (mobile)</span>
-                    <ul>
-                      <li>
-                        <NavLink to="/smartphones">Smartphones</NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/laptops">Laptops</NavLink>
-                      </li>
-                    </ul>
-                  </nav>
-                </>
-              )}
-            </>
-          ) : (
-            <BurgerMenuIcon
-              className={`burger-icon ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "mobile" : ""}`}
-              onClick={handleToggleMenu}
-            />
-          )}
-
-          <nav className={`header__menu ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "open" : ""}`}>
-            <span>Catalog</span>
-            <ul>
-              <li>
-                <NavLink to="/smartphones">Smartphones</NavLink>
-              </li>
-              <li>
-                <NavLink to="/laptops">Laptops</NavLink>
-              </li>
-            </ul>
-          </nav>
-
-          <NavLink to="/">
-            <span className={`header__logo ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "mobile" : ""}`}>
-              eShelf
-            </span>
+        <div className="header__content-container">
+          <BurgerMenuIcon className="burger-icon" onClick={handleToggleMenu} />
+          <NavLink to="/" className="header__logo">
+            <LogoIcon />
           </NavLink>
-
-          <div
-            className={`header__search-container ${menuOpen || (shouldShowMobileMenu && mobileMenuOpen) ? "mobile" : ""}`}
-          >
+          <div className="header__search-container">
             <input type="text" className="header__search-input" placeholder="Search..." />
-            <MicrophoneIcon className="microphone-icon" />
+            <MicrophoneIcon className="microphone-icon" onClick={handleVoiceSearch} />
             <SearchIcon className="search-icon" />
           </div>
           <NavLink to="/" className="header__link-home"></NavLink>
@@ -109,11 +58,18 @@ const Header = () => {
                   <CartIcon />
                 </div>
               }
-            ></Cart>
+            />
           </div>
           <NavLink to="/users" className="header__link-users">
             <UserIcon />
           </NavLink>
+
+          {menuOpen && (
+            <>
+              {windowWidth < 1024 && <BurgerMenu isOpen={menuOpen} onClose={handleToggleMenu} />}
+              {windowWidth > 1024 && <BurgerMenuDesktop isOpen={menuOpen} onClose={handleToggleMenu} />}
+            </>
+          )}
         </div>
       </header>
     </>
