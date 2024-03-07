@@ -45,3 +45,6 @@ app.get("/smartphones", (req, res) => {
 app.get("/laptops", (req, res) => {
   handleCollectionRequest("laptops", req, res);
 });
+app.get("/monitors", (req, res) => {
+  handleCollectionRequest("monitors", req, res);
+});
