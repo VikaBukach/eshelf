@@ -13,6 +13,16 @@
   &--open {
     width: 100%;
     padding: 16px;
+
+
+    .filter__buttons {
+
+      width: calc(100% - 32px);
+
+
+    }
+
+
   }
 
   &__header {
@@ -28,23 +38,24 @@
     position: fixed;
     @include grid-container(2, 8px);
     bottom: 11px;
-    width: calc(100% - 32px);
+    width: 0px;
+    overflow: hidden;
+    transition: 1s;
   }
 
   &__btn {
     height: 48px;
     border-radius: 27px;
+    min-width: 140px;
     border: 1px solid $secondary-color-blue-light;
   }
 
   &__reset {
-    left: 0px;
     background-color: $secondary-color-white;
     color: $secondary-color-blue-light;
   }
 
   &__submit {
-    right: 0px;
     background-color: $secondary-color-blue-light;
     color: $secondary-color-white;
   }

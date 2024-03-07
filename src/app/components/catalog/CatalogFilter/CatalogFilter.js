@@ -18,12 +18,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
 
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
-  // ---------------------------------------------------------
-  // ---------------------------------------------------------
-  // ---------------------------------------------------------
   // ЗАПОВНЕННЯ БЛОКУ ФІЛЬТРУ
-  // ---------------------------------------------------------
-
   // Пошук усіх можливих варіантів у товарах та додання результату до критеріїв пошуку
   const addVariationsToFilterCriterias = () => {
     const updatedFilterCriterias = [];
@@ -55,11 +50,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     return valuesOfCriteria;
   };
 
-  // ---------------------------------------------------------
-  // ---------------------------------------------------------
-  // ---------------------------------------------------------
   // ОБРОБКА ФІЛЬТРАЦІЇ (ПІСЛЯ НАТИСКАННЯ КНОПКИ)
-  // ---------------------------------------------------------
 
   const filterProducts = () => {
     const filteredProductsArray = [];
@@ -113,18 +104,19 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   useEffect(() => {
     setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
   }, [products]);
-  // }, [filterCriterias, products]);
 
   // ------- ВЗАЄМОДІЯ З КОРИСТУВАЧЕМ
 
   const onFilterSubmit = () => {
     dispatch(updateBaseFilterData(filterProducts()));
+    closeFilter();
   };
 
   const onResetSubmit = () => {
     dispatch(setCheckboxesSettings([]));
     dispatch(setPriceBy(minValue));
     dispatch(setPriceTo(maxValue));
+    closeFilter();
   };
 
   const closeFilter = () => {
@@ -134,7 +126,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
 
   // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
   useEffect(() => {
-    onFilterSubmit();
+    dispatch(updateBaseFilterData(filterProducts()));
   }, [filterSettings]);
 
   return (
