@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveColorIndex, setActiveImageIndex, setActiveMemoryIndex } from "../../store/slices/singleProductSlice";
+import { toggleFavorites } from "../../store/slices/favoritesSlice";
+import { toggleCompare } from "../../store/slices/compareSlice";
+import { addToCart } from "../../store/slices/cartSlice";
 
 import { ReactComponent as AboutBatteryIcon } from "../../../assets/images/product-icons/Diagonal.svg";
 import { ReactComponent as AboutMainCameraIcon } from "../../../assets/images/product-icons/Camera.svg";
@@ -14,12 +17,29 @@ import { ReactComponent as AboutFavoritesIcon } from "../../../assets/images/Hea
 import { ButtonBuy } from "./ButtonBuy";
 import { WeAccept } from "./WeAccept";
 
-const AboutProduct = ({ product }) => {
 
+const AboutProduct = ({ product }) => {
+  
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
   const activeImageIndex = useSelector((state) => state.product.activeImageIndex);
   const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
+  const favorites = useSelector((state) => state.favorites.data);
   const dispatch = useDispatch();
+
+  const { _id: id, colors, category, model: title } = product;
+  const { images, products } = colors[activeColorIndex];
+  const { price, discount_price: discountPrice } = products[activeMemoryIndex];
+  const imageURL = images[activeImageIndex];
+
+
+  const productDetails = {
+    id,
+    imageURL,
+    category,
+    title,
+    price,
+    discountPrice,
+  };
 
   const handleColorItemClick = (index) => {
     dispatch(setActiveColorIndex(index));
@@ -31,6 +51,18 @@ const AboutProduct = ({ product }) => {
 
   const handleMemoryClick = (index) => {
     dispatch(setActiveMemoryIndex(index));
+  }
+
+  const handleAddToFavorites = () => {
+    dispatch(toggleFavorites(productDetails));
+  }
+
+  const handleAddToCompare = () => {
+    dispatch(toggleCompare(product, category, activeColorIndex, activeMemoryIndex));
+  }
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(productDetails));
   }
 
   return (
@@ -157,17 +189,20 @@ const AboutProduct = ({ product }) => {
               </div>
               <div className="info-details__price-wrap">
                 <div className="info-details__price-body">
-                  <div className="info-details__price">
+                  <div className="info-details__price" onClick={handleAddToCart}>
                     {product.colors[activeColorIndex].products[activeMemoryIndex].discount_price}$
                   </div>
                   <ButtonBuy />
                 </div>
 
                 <div className="info-details__price-icon-wrap">
-                  <div className="info-details__price-icon">
+                  <div className="info-details__price-icon" onClick={handleAddToCompare}>
                     <AboutComparingIcon />
                   </div>
-                  <div className="info-details__price-icon">
+                  <div
+                    className={`info-details__price-icon ${favorites.findIndex((item) => item.id === product._id) > -1 ? "info-details__icon-favorites" : ""}`}
+                    onClick={handleAddToFavorites}
+                  >
                     <AboutFavoritesIcon />
                   </div>
                 </div>
