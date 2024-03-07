@@ -56,3 +56,7 @@ app.get("/monitors", (req, res) => {
 });
 
 app.use(reviewRouter);
+
+app.get("/smartwatches", (req, res) => {
+  handleCollectionRequest("smartwatches", req, res);
+});
