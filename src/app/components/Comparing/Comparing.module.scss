@@ -87,14 +87,14 @@
 
   align-items: stretch;
 
-  & > a,
-  & > a > div {
+  &>a,
+  &>a>div {
     height: 100%;
     margin-right: 0;
     padding-right: 2rem;
   }
 
-  & > *:not(:first-child) {
+  &>*:not(:first-child) {
     position: relative;
 
     &::after {
@@ -115,7 +115,7 @@
 
   &.productCart,
   &.table {
-    & > *:not(:first-child) {
+    &>*:not(:first-child) {
       &::after {
         top: -5.1rem;
         height: calc(100% + 5.1rem);
@@ -129,9 +129,15 @@
   flex-direction: column;
   gap: 0.8rem;
 
-  li > :first-child {
+  li> :first-child {
     opacity: 0.56;
   }
+}
+
+.comparingOneMore {
+  font-size: 30px;
+  text-align: center;
+  margin: 40px 0;
 }
 
 .firstColumnHeader {
