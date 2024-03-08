@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
@@ -12,6 +12,8 @@ import { AboutProduct } from "../../components/SingleProduct/AboutProduct";
 import { CharacteristicProduct } from "../../components/SingleProduct/CharacteristicProduct";
 import { PhotoVideoProduct } from "../../components/SingleProduct/PhotoVideoProduct";
 import { ReviewsProduct } from "../../components/SingleProduct/ReviewsProduct";
+import Rating from "../../components/SingleProduct/components/Rating";
+import axios from "axios";
 
 const ProductPage = () => {
   const { collection, id } = useParams();
@@ -19,8 +21,35 @@ const ProductPage = () => {
   const dispatch = useDispatch();
 
   const product = useSelector((state) => state.products.data.find((item) => item._id === id));
-
+  
   const { tabs } = useSelector((state) => state.product);
+
+  const [rating, setRating] = useState(0);
+  const [totalReviews, setTotalReviews] = useState(0);
+
+  const PORT = process.env.REACT_APP_PORT || 3001;
+
+  useEffect(() => {
+    const getOverallRating = async () => {
+      try {
+        if (product) {
+          const response = await axios.get(`http://localhost:${PORT}/getProductReviewTotals`, {
+            params: {
+              productId: product._id,
+            },
+          });
+          setRating(response.data?.avgRating);
+          setTotalReviews(response.data?.reviewsCount);
+        }
+      } catch (error) {
+        console.error("Error fetching overall rating:", error);
+      }
+    };
+    
+    if (product) {
+      getOverallRating();
+    }
+  }, [product, PORT]);
 
   useEffect(() => {
     dispatch(fetchDataOfProducts(`${collection}`));
@@ -45,7 +74,12 @@ const ProductPage = () => {
       <section className="product-details">
         <div className="container">
           <h1 className="product-details__title">{product.model}</h1>
-
+          <div className="product-details__rating">
+            <div className="product-details__rating-stars">
+              <Rating size={18} value={rating} setValue={setRating} />
+            </div>
+            <div className="product-details__rating-count">{totalReviews}</div>
+          </div>
           <ul className="product-details__tabs">
             {["About the product", "Characteristic", "Reviews", "Photo and video"].map((item, id) => (
               <li
