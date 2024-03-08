@@ -14,7 +14,7 @@ function EspeciallyForYou() {
     const {data, status, error} = useSelector((state) => state.products, shallowEqual);
 
     useEffect(() => {
-        dispatch(fetchDataOfProducts("smartphones"));
+        dispatch(fetchDataOfProducts("quadcopters"));
     }, [dispatch]);
 
     const [itemsToShow, setItemsToShow] = useState(window.innerWidth >= 768 ? 5 : 2);
