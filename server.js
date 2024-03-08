@@ -60,3 +60,12 @@ app.use(reviewRouter);
 app.get("/smartwatches", (req, res) => {
   handleCollectionRequest("smartwatches", req, res);
 });
+
+app.get("/mouses", (req, res) => {
+  handleCollectionRequest("mouses", req, res);
+});
+
+app.get("/quadcopters", (req, res) => {
+  handleCollectionRequest("quadcopters", req, res);
+});
+
