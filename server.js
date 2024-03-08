@@ -55,8 +55,6 @@ app.get("/monitors", (req, res) => {
   handleCollectionRequest("monitors", req, res);
 });
 
-app.use(reviewRouter);
-
 app.get("/smartwatches", (req, res) => {
   handleCollectionRequest("smartwatches", req, res);
 });
@@ -68,4 +66,6 @@ app.get("/mouses", (req, res) => {
 app.get("/quadcopters", (req, res) => {
   handleCollectionRequest("quadcopters", req, res);
 });
+
+app.use(reviewRouter);
 
