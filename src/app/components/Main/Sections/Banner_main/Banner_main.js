@@ -1,14 +1,19 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Banner_main.scss";
 import Arrow from "../../Arrow/Arrow";
 
-function BannerMain(props) {
+function BannerMain( { product } ) {
+  const data = useSelector((state) => state.products.data);
+
+  const dispatch = useDispatch();
+
   const slides = [
     {
-      title: "Phantom 4 Pro V2.0",
+      title: " DJI Mavic 3 Pro",
       description:
         "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom.  A wide array of intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial imaging solution, designed for the professional creator.",
       oldPrice: "₴ 71 999",

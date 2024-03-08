@@ -13,8 +13,17 @@ function EspeciallyForYou() {
     const dispatch = useDispatch();
     const {data, status, error} = useSelector((state) => state.products, shallowEqual);
 
+
     useEffect(() => {
-        dispatch(fetchDataOfProducts("smartphones"));
+        const categoryOfProducts = [
+             "smartphones", "monitors", "smartwatches", "mouses", "quadcopters"
+        ];
+
+         let randomIndex = Math.floor(Math.random() * categoryOfProducts.length);
+
+        let randomElement = categoryOfProducts[randomIndex]
+
+        dispatch(fetchDataOfProducts(randomElement));
     }, [dispatch]);
 
     const [itemsToShow, setItemsToShow] = useState(window.innerWidth >= 768 ? 5 : 2);
