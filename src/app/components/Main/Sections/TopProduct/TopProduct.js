@@ -7,7 +7,7 @@ function TopProduct() {
         title="Top product"
         category="tablets"
         initialItemsToShow={5}
-        fetchDataOfProducts={fetchDataOfProducts}
+        fetchDataOfProducts={() => fetchDataOfProducts("tablets")}
     />
 }
 

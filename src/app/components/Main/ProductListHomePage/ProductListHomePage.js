@@ -10,14 +10,15 @@ import "./ProductListHomePage.scss";
 import {fetchDataOfProducts} from "../../../store/slices/productsSlice";
 
 function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfProducts}) {
+    console.log(category)
     const dispatch = useDispatch();
     const { data, status, error } = useSelector((state) => state.products, shallowEqual);
 
 
     useEffect(() => {
-        dispatch(fetchDataOfProducts("especiallyforyou"))
+        dispatch(fetchDataOfProducts(category))
 
-    }, [dispatch]);
+    }, [dispatch, fetchDataOfProducts, category]);
 
 
 

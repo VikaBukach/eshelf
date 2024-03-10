@@ -11,7 +11,8 @@ function EspeciallyForYou() {
             title = "Espessially for you"
             category="especiallyforyou"
             initialItemsToShow={5}
-            fetchDataOfProducts={fetchDataOfProducts}/>
+            fetchDataOfProducts={() => fetchDataOfProducts("especiallyforyou")}
+        />
 }
 
 export default EspeciallyForYou;
