@@ -27,7 +27,7 @@ const ProductPage = () => {
   const [rating, setRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
 
-  const PORT = process.env.REACT_APP_PORT || 3001;
+  const PORT = process.env.REACT_APP_PORT || 5000;
 
   useEffect(() => {
     const getOverallRating = async () => {

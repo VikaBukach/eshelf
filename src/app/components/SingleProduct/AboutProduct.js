@@ -124,7 +124,7 @@ const AboutProduct = ({ product }) => {
         <div className="info-details__wrap">
           <div className="info-details__header">Characteristics</div>
           <div className="info-details__characteristics-block">
-            {product.specifications.display.screen_diagonal && (
+            {product.specifications.display?.screen_diagonal && (
               <div className="info-details__characteristics-item">
                 <AboutBatteryIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
@@ -133,7 +133,7 @@ const AboutProduct = ({ product }) => {
                 </div>
               </div>
             )}
-            {product.specifications.camera.main_camera && (
+            {product.specifications.camera?.main_camera && (
               <div className="info-details__characteristics-item">
                 <AboutMainCameraIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
@@ -142,7 +142,7 @@ const AboutProduct = ({ product }) => {
                 </div>
               </div>
             )}
-            {product.specifications.camera.front_camera && (
+            {product.specifications.camera?.front_camera && (
               <div className="info-details__characteristics-item">
                 <AboutFrontCameraIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
@@ -151,7 +151,7 @@ const AboutProduct = ({ product }) => {
                 </div>
               </div>
             )}
-            {product.specifications.battery.capacity && (
+            {product.specifications.battery?.capacity && (
               <div className="info-details__characteristics-item">
                 <AboutBatteryElementIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
@@ -160,7 +160,7 @@ const AboutProduct = ({ product }) => {
                 </div>
               </div>
             )}
-            {product.specifications.display.frequency && (
+            {product.specifications.display?.frequency && (
               <div className="info-details__characteristics-item">
                 <AboutFrequencyIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
@@ -169,7 +169,7 @@ const AboutProduct = ({ product }) => {
                 </div>
               </div>
             )}
-            {product.specifications.processor.type && (
+            {product.specifications.processor?.type && (
               <div className="info-details__characteristics-item">
                 <AboutProcessorIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
@@ -180,7 +180,7 @@ const AboutProduct = ({ product }) => {
             )}
           </div>
         </div>
-        {product.colors[activeColorIndex].products[activeMemoryIndex].discount_price && (
+        {product.colors[activeColorIndex].products[activeMemoryIndex]?.discount_price && (
           <div className="info-details__wrap">
             <div className="info-details__header">Price</div>
             <div className="info-details__price-block">
