@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { connectToDb, getDb } = require("./db");
-const { reviewRouter } = require("./backend/router");
+const { reviewRouter, authRouter } = require("./backend/router");
 
 const PORT = process.env.REACT_APP_PORT || 3001;
 
@@ -56,3 +56,4 @@ app.get("/monitors", (req, res) => {
 });
 
 app.use(reviewRouter);
+app.use(authRouter);
