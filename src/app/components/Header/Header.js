@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMenu } from "../../store/slices/NavMenuSlice";
+import { toggleMenu, setCartTotal } from "../../store/slices/NavMenuSlice";
 import { ReactComponent as BurgerMenuIcon } from "../../../assets/images/Burger.svg";
 import { ReactComponent as LogoIcon } from "../../../assets/images/Logo.svg";
 import { ReactComponent as MicrophoneIcon } from "../../../assets/images/Microphone.svg";
@@ -20,12 +20,20 @@ import Cart from "../Cart";
 const Header = () => {
   const dispatch = useDispatch();
   const menuOpen = useSelector((state) => state.menu.isOpen);
+  const selectCartTotal = (state) => state.menu.cartTotal;
+  const cartTotal = useSelector(selectCartTotal);
+  const compareCount = useSelector((state) => state.menu.compareCount);
+  const favoritesCount = useSelector((state) => state.menu.favoritesCount);
+  const cartCount = useSelector((state) => state.menu.cartCount);
+  const userCount = useSelector((state) => state.menu.userCount);
   const windowWidth = useWindowWidth();
-  const [compareCount, setCompareCount] = useState(1);
-  const [favoritesCount, setFavoritesCount] = useState(1);
-  const [cartCount, setCartCount] = useState(1);
-  const [userCount, setUserCount] = useState(1);
-
+  useEffect(() => {
+    const calculateCartTotal = () => {
+      const total = 0;
+      dispatch(setCartTotal(total));
+    };
+    calculateCartTotal();
+  }, [dispatch]);
 
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
@@ -61,29 +69,19 @@ const Header = () => {
           <div className="header__link-cart">
             <Cart
               activator={
-                <div className = "cart-activator" onClick={open}>
+                <div className="cart-activator" onClick={open}>
                   <CartIcon />
-                  {windowWidth > 1024 && cartCount > 0 && (
-               <span className="counter">${cartCount}</span>
-            )}
-            {windowWidth <= 1024 && userCount > 0 && (
-              <span className="counter-circle">{cartCount}</span>
-            )}
+                  {windowWidth > 1024 && cartCount > 0 && <span className="counter">${cartTotal}</span>}
+                  {windowWidth <= 1024 && userCount > 0 && <span className="counter-circle">{cartCount}</span>}
                 </div>
               }
-
             />
-
           </div>
 
           <NavLink to="/users" className="header__link-users">
             <UserIcon />
-            {windowWidth > 1024 && (
-              <span>Hello, user</span>
-            )}
-            {windowWidth <= 1024 && userCount > 0 && (
-              <span className="counter-circle"></span>
-            )}
+            {windowWidth > 1024 && <span>Hello, user</span>}
+            {windowWidth <= 1024 && userCount > 0 && <span className="counter-circle"></span>}
           </NavLink>
 
           {menuOpen && (
