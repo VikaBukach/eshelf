@@ -9,10 +9,13 @@ import {fetchDataOfProducts} from "../../../../store/slices/productsSlice";
 import Slider from "react-slick";
 import Arrow from "../../Arrow/Arrow";
 
+
+
 function EspeciallyForYou() {
+    const [category, setCategory] = useState("");
+
     const dispatch = useDispatch();
     const {data, status, error} = useSelector((state) => state.products, shallowEqual);
-
 
     useEffect(() => {
         const categoryOfProducts = [
@@ -21,10 +24,13 @@ function EspeciallyForYou() {
 
          let randomIndex = Math.floor(Math.random() * categoryOfProducts.length);
 
-        let randomElement = categoryOfProducts[randomIndex]
+        let randomElement = categoryOfProducts[randomIndex];
+
+        setCategory(randomElement)
 
         dispatch(fetchDataOfProducts(randomElement));
     }, [dispatch]);
+
 
     const [itemsToShow, setItemsToShow] = useState(window.innerWidth >= 768 ? 5 : 2);
 
@@ -38,6 +44,7 @@ function EspeciallyForYou() {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
 
     const showMoreCards = () => {
         setItemsToShow((prevItems) => prevItems + (window.innerWidth >= 768 ? 3 : 2));

@@ -10,6 +10,7 @@ import Slider from "react-slick";
 import Arrow from "../../Arrow/Arrow";
 
 function TopProduct() {
+    const[category, setCategory] = useState("");
     const dispatch = useDispatch();
     const {data, status, error} = useSelector((state) => state.products, shallowEqual);
 
@@ -20,7 +21,9 @@ function TopProduct() {
 
         let randomIndex = Math.floor(Math.random() * categoryOfProducts.length);
 
-        let randomElement = categoryOfProducts[randomIndex]
+        let randomElement = categoryOfProducts[randomIndex];
+
+        setCategory(randomElement)
 
         dispatch(fetchDataOfProducts(randomElement));
     }, [dispatch]);
