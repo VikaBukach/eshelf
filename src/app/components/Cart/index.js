@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { decrementProductQuantity, incrementProductQuantity } from "../../store/slices/cartSlice";
 import { formatPrice } from "../../utils/formatPrice";
+import { setCartTotal } from "../../store/slices/NavMenuSlice"; // додав обчислення загальної суми
+
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
@@ -48,6 +50,7 @@ const Cart = ({ activator }) => {
   const cart = useSelector((state) => state.cart.data);
   const { active, open, close } = useModal();
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // додав обчислення загальної суми
 
   const footerRef = useRef();
   const headerRef = useRef();
@@ -56,7 +59,12 @@ const Cart = ({ activator }) => {
     return prev + curr.quantity * curr.price;
   }, 0);
 
-  const footerElement = (
+// додав обчислення загальної суми
+  useEffect(() => {
+    dispatch(setCartTotal(totalPrice));
+  }, [dispatch, totalPrice]);
+
+  const footerElement =  (
     <div ref={footerRef}>
       <span className={style.line}></span>
       <div className={style.footer}>
