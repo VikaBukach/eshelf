@@ -67,16 +67,16 @@ app.get("/quadcopters", (req, res) => {
   handleCollectionRequest("quadcopters", req, res);
 });
 
-app.get("/tv", (req, res) => {
-  handleCollectionRequest("tv", req, res);
+app.get("/headphones", (req, res) => {
+  handleCollectionRequest("headphones", req, res);
 });
 
 app.get("/tablets", (req, res) => {
   handleCollectionRequest("tablets", req, res);
 });
 
-app.get("/headphones", (req, res) => {
-  handleCollectionRequest("headphones", req, res);
+app.get("/tv", (req, res) => {
+  handleCollectionRequest("tv", req, res);
 });
 
 app.use(reviewRouter);

@@ -16,7 +16,7 @@ function EspeciallyForYou() {
 
     useEffect(() => {
         const categoryOfProducts = [
-             "smartphones", "monitors", "smartwatches", "mouses", "quadcopters"
+             "smartphones", "monitors", "smartwatches", "mouses", "quadcopters", "tv", "headphones", "tablets"
         ];
 
          let randomIndex = Math.floor(Math.random() * categoryOfProducts.length);
