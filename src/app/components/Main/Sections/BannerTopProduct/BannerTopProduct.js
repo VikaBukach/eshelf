@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../../Button/Button";
-import "./Banner_top-product.scss";
+import "./BannerTopProduct.scss";
 import Buttun_perple from "../../Button/Buttun_perple";
 
 function BannerTopProduct(props) {

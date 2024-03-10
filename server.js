@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const { connectToDb, getDb } = require("./db");
 const { reviewRouter } = require("./backend/router");
 
-const PORT = process.env.REACT_APP_PORT || 3001;
+const PORT = process.env.REACT_APP_PORT || 5000;
 
 const app = express();
 
@@ -55,4 +55,17 @@ app.get("/monitors", (req, res) => {
   handleCollectionRequest("monitors", req, res);
 });
 
+app.get("/smartwatches", (req, res) => {
+  handleCollectionRequest("smartwatches", req, res);
+});
+
+app.get("/mouses", (req, res) => {
+  handleCollectionRequest("mouses", req, res);
+});
+
+app.get("/quadcopters", (req, res) => {
+  handleCollectionRequest("quadcopters", req, res);
+});
+
 app.use(reviewRouter);
+

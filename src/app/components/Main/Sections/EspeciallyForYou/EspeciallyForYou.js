@@ -2,23 +2,24 @@ import React, {useState, useEffect, useRef, useCallback} from "react";
 import {useSelector, useDispatch, shallowEqual} from "react-redux";
 import Button from "../../Button/Button";
 import ProductCard from "../../../ProductCard/ProductCard";
-import "./TopProduct.scss"
+import "./EspeciallyForYou.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {fetchDataOfProducts} from "../../../../store/slices/productsSlice";
 import Slider from "react-slick";
 import Arrow from "../../Arrow/Arrow";
 
-function TopProduct() {
+function EspeciallyForYou() {
     const dispatch = useDispatch();
     const {data, status, error} = useSelector((state) => state.products, shallowEqual);
 
+
     useEffect(() => {
         const categoryOfProducts = [
-            "smartphones", "monitors", "smartwatches", "mouses", "quadcopters"
+             "smartphones", "monitors", "smartwatches", "mouses", "quadcopters"
         ];
 
-        let randomIndex = Math.floor(Math.random() * categoryOfProducts.length);
+         let randomIndex = Math.floor(Math.random() * categoryOfProducts.length);
 
         let randomElement = categoryOfProducts[randomIndex]
 
@@ -56,16 +57,14 @@ function TopProduct() {
         <>
             <div className="section_especially">
                 <div className="section_especially-wrap">
-                    <h6 className="section_especially-title">Top product</h6>
+                    <h6 className="section_especially-title">Especially for you</h6>
                 </div>
                 <div className="section_especially-products-mobile">
                     <div className="section_especially-products">
                         {status === "loading" && <div>Loading...</div>}
                         {status === "failed" && <div>Error: {error} </div>}
                         {status === "succeeded" && data.length > 0 ? (
-
                             data.slice(0, itemsToShow).map((item, index) => {
-                                console.log("---------", data);
                                 return (
                                     <div className="section-especially-item" key={index}>
                                         {item && (
@@ -107,17 +106,19 @@ function TopProduct() {
                             {status === "failed" && <div>Error: {error} </div>}
                             {status === "succeeded" && data.length > 0 ? (
                                 data.slice(0, itemsToShow).map((item, index) => {
-                                    // console.log('--------------', data)
+                                    // console.log("--------------", data);
                                     return (
                                         <div className="section-especially-item-desktop " key={index}>
+                                            {item && (
                                             <ProductCard
                                                 id={item._id}
                                                 imageURL={item.colors[0].images[0]}
                                                 category={item.category}
-                                                title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity + " " + item.colors[0].color + " " + item.colors[0].products[0].article}
-                                                price={item.colors[0].products[0].price}
+                                                title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity + " " + item.colors[0].color + " " + item.colors[0].products[0].article
+                                                }price={item.colors[0].products[0].price}
                                                 discountPrice={item.colors[0].products[0]["discount_price"]}
                                             />
+                                                )}
                                         </div>
                                     );
                                 })
@@ -133,4 +134,4 @@ function TopProduct() {
     );
 }
 
-export default TopProduct;
+export default EspeciallyForYou;
