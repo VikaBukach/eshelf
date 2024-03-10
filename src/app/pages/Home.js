@@ -2,7 +2,7 @@ import React from "react";
 import Main from "../components/Main/Main";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setFavoritesTotal } from "../store/slices/NavMenuSlice";
+import { setFavoritesTotal } from "../store/slices/navMenuSlice";
 
 const Home = () => {
   const dispatch = useDispatch();

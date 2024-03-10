@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMenu, setCartTotal, setFavoritesTotal } from "../../store/slices/NavMenuSlice";
+import { toggleMenu, setCartTotal} from "../../store/slices/navMenuSlice";
 import { ReactComponent as BurgerMenuIcon } from "../../../assets/images/Burger.svg";
 import { ReactComponent as LogoIcon } from "../../../assets/images/Logo.svg";
 import { ReactComponent as MicrophoneIcon } from "../../../assets/images/Microphone.svg";
@@ -24,8 +24,6 @@ const Header = () => {
   const cartTotal = useSelector(selectCartTotal);
   const favoritesTotal = useSelector((state) => state.menu.favoritesTotal);
   const compareCount = useSelector((state) => state.menu.compareCount);
-  const favoritesCount = useSelector((state) => state.menu.favoritesCount);
-  const cartCount = useSelector((state) => state.menu.cartCount);
   const userCount = useSelector((state) => state.menu.userCount);
   const windowWidth = useWindowWidth();
   useEffect(() => {
@@ -74,8 +72,8 @@ const Header = () => {
               activator={
                 <div className="cart-activator" onClick={open}>
                   <CartIcon />
-                  {windowWidth > 1024 && cartCount > 0 && <span className="counter">${cartTotal}</span>}
-                  {windowWidth <= 1024 && userCount > 0 && <span className="counter-circle">{cartCount}</span>}
+                  {windowWidth > 1024 && cartTotal > 0 && <span className="counter">${cartTotal}</span>}
+                  {windowWidth <= 1024 && cartTotal > 0 && <span className="counter-circle"></span>}
                 </div>
               }
             />

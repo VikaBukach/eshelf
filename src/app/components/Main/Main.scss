@@ -1,5 +1,7 @@
 @import "../../../assets/styles/style";
 
 main{
-    margin-top: 70px;
+    @media (min-width: $desktop) {
+        margin-top: 70px;
+      }
 }
