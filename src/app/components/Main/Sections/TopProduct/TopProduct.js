@@ -15,17 +15,9 @@ function TopProduct() {
     const {data, status, error} = useSelector((state) => state.products, shallowEqual);
 
     useEffect(() => {
-        const categoryOfProducts = [
-            "smartphones", "monitors", "smartwatches", "mouses", "quadcopters", "tv", "headphones", "tablets"
-        ];
+        dispatch(fetchDataOfProducts("topproduct"))
 
-        let randomIndex = Math.floor(Math.random() * categoryOfProducts.length);
 
-        let randomElement = categoryOfProducts[randomIndex];
-
-        setCategory(randomElement)
-
-        dispatch(fetchDataOfProducts(randomElement));
     }, [dispatch]);
 
     const [itemsToShow, setItemsToShow] = useState(window.innerWidth >= 768 ? 5 : 2);

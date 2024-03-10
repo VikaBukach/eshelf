@@ -9,26 +9,14 @@ import {fetchDataOfProducts} from "../../../../store/slices/productsSlice";
 import Slider from "react-slick";
 import Arrow from "../../Arrow/Arrow";
 
-
-
 function EspeciallyForYou() {
-    const [category, setCategory] = useState("");
-
     const dispatch = useDispatch();
     const {data, status, error} = useSelector((state) => state.products, shallowEqual);
 
     useEffect(() => {
-        const categoryOfProducts = [
-             "smartphones", "monitors", "smartwatches", "mouses", "quadcopters", "tv", "headphones", "tablets"
-        ];
+dispatch(fetchDataOfProducts("especiallyforyou"))
 
-         let randomIndex = Math.floor(Math.random() * categoryOfProducts.length);
 
-        let randomElement = categoryOfProducts[randomIndex];
-
-        setCategory(randomElement)
-
-        dispatch(fetchDataOfProducts(randomElement));
     }, [dispatch]);
 
 
