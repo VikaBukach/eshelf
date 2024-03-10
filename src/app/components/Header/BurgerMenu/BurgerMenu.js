@@ -9,23 +9,27 @@ import { ReactComponent as CloseIcon } from "../../../../assets/images/times-sol
 import { ReactComponent as MobileIcon } from "../../../../assets/images/burger-menu/mobile-phone.svg";
 import { ReactComponent as LaptopIcon } from "../../../../assets/images/burger-menu/LapTop.svg";
 import { ReactComponent as ArrowIcon } from "../../../../assets/images/burger-menu/Arrow.svg";
+import { ReactComponent as ArrowIconBack } from "../../../../assets/images/burger-menu/ArrowBack.svg";
 
 import { useModal } from "../../../hooks/useModal";
 import Cart from "../../Cart";
 
 const BurgerMenu = ({ isOpen, onClose, history }) => {
   const [menuOpen, setMenuOpen] = useState(isOpen);
+  const [burgerMenuOpen, setBurgerMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
   const [smartphonesActive, setSmartphonesActive] = useState(false);
   const [laptopsActive, setLaptopsActive] = useState(false);
-
+  const [currentCategory, setCurrentCategory] = useState("Catalog");
   const { open } = useModal();
 
   const handleCloseMenu = () => {
-    setMenuOpen(false);
+    setBurgerMenuOpen(false);
     onClose();
   };
-
+  const handleOpenMenu = () => {
+    setBurgerMenuOpen(true);
+  };
   const handleNavLinkClick = () => {
     handleCloseMenu();
     history.push("/");
@@ -36,13 +40,20 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
       setActiveCategory(category);
       setSmartphonesActive(category === "smartphones");
       setLaptopsActive(category === "laptops");
+      setCurrentCategory(category);
     } else {
       setActiveCategory(null);
       setSmartphonesActive(false);
       setLaptopsActive(false);
+      setCurrentCategory("Catalog");
     }
   };
 
+  const handleBackButtonClick = () => {
+    setCurrentCategory("Catalog");
+    setSmartphonesActive(false);
+    setLaptopsActive(false);
+  };
   return (
     <div className="burger-menu_container">
       <div className="burger-menu">
@@ -76,7 +87,7 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
         </div>
         <div className="burger-menu__categories">
           <nav>
-            <h2>Catalog (mobile)</h2>
+            <h2>{currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1)}</h2>
             <ul>
               <li className="category-link">
                 <div className="category-link-wrapper">
@@ -89,7 +100,14 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
                 </div>
                 {smartphonesActive && (
                   <ul className="subcategory-menu">
-                    <div>Smartphones subcategory</div>
+                    <NavLink onClick={handleBackButtonClick}>
+                      <ArrowIconBack />
+                      All categories
+                    </NavLink>
+                   
+                    <div>Smartphones subcategory1</div>
+                    <div>Smartphones subcategory2</div>
+                    <div>Smartphones subcategory3</div>
                   </ul>
                 )}
                 <ArrowIcon onClick={() => toggleMobileCategories("smartphones")} />
@@ -105,8 +123,15 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
                 </div>
                 {laptopsActive && (
                   <ul className="subcategory-menu">
-                    <div>Laptops subcategory</div>
-                  </ul>
+                                      <NavLink onClick={handleBackButtonClick}>
+                      <ArrowIconBack />
+                      All categories
+                    </NavLink>
+                 
+                  <div>Laptops subcategory1</div>
+                  <div>Laptops subcategory2</div>
+                  <div>Laptops subcategory3</div>
+                </ul>
                 )}
                 <ArrowIcon onClick={() => toggleMobileCategories("laptops")} />
               </li>

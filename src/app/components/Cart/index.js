@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { decrementProductQuantity, incrementProductQuantity } from "../../store/slices/cartSlice";
 import { formatPrice } from "../../utils/formatPrice";
-import { setCartTotal } from "../../store/slices/NavMenuSlice"; // додав обчислення загальної суми
+import { setCartTotal } from "../../store/slices/navMenuSlice"; // додав обчислення загальної суми
 
 
 const CartItem = ({ item }) => {
