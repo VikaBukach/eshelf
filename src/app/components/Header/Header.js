@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMenu, setCartTotal } from "../../store/slices/NavMenuSlice";
+import { toggleMenu, setCartTotal, setFavoritesTotal } from "../../store/slices/NavMenuSlice";
 import { ReactComponent as BurgerMenuIcon } from "../../../assets/images/Burger.svg";
 import { ReactComponent as LogoIcon } from "../../../assets/images/Logo.svg";
 import { ReactComponent as MicrophoneIcon } from "../../../assets/images/Microphone.svg";
@@ -22,6 +22,7 @@ const Header = () => {
   const menuOpen = useSelector((state) => state.menu.isOpen);
   const selectCartTotal = (state) => state.menu.cartTotal;
   const cartTotal = useSelector(selectCartTotal);
+  const favoritesTotal = useSelector((state) => state.menu.favoritesTotal);
   const compareCount = useSelector((state) => state.menu.compareCount);
   const favoritesCount = useSelector((state) => state.menu.favoritesCount);
   const cartCount = useSelector((state) => state.menu.cartCount);
@@ -32,6 +33,8 @@ const Header = () => {
       const total = 0;
       dispatch(setCartTotal(total));
     };
+
+
     calculateCartTotal();
   }, [dispatch]);
 
@@ -64,7 +67,7 @@ const Header = () => {
           </NavLink>
           <NavLink to="/favorites" className="header__link-favorites">
             <HeartIcon />
-            {favoritesCount > 0 && <span className="counter-circle">{favoritesCount}</span>}
+            {favoritesTotal > 0 && <span className="counter-circle">{favoritesTotal}</span>}
           </NavLink>
           <div className="header__link-cart">
             <Cart
