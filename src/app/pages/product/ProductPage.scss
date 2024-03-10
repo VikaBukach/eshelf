@@ -4,8 +4,20 @@
   &__title {
     @include adaptiveValue("font-size", 16, 24);
     @include adaptiveValue("padding-top", 30, 50);
-    @include adaptiveValue("padding-bottom", 16, 32);
+    padding-bottom: 8px;
     font-weight: 500;
+  }
+
+  &__rating {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 8px;
+    @include adaptiveValue("margin-bottom", 6, 32);
+  }
+
+  &__rating-count {
+    font-size: 14px;
+    line-height: 130%;
   }
 
   &__tabs {
