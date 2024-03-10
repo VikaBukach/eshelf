@@ -23,14 +23,14 @@ function BannerMain( { product } ) {
       imagePathDesktop: "/img/mavic-big.png",
     },
     {
-      title: "Phantom 6 Pro V3.0",
+      title: "iPhone 15 Pro Max",
       description:
-        "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom.  A wide array of intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial imaging solution, designed for the professional creator.",
-      oldPrice: "₴ 99 999",
-      newPrice: "₴ 77 999",
-      validOffer: "The offer is valid from 12.11 to 29.12",
-      imagePath: "/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png",
-      imagePathDesktop: "/img/mavic-big.png",
+        "As part of our efforts to reach carbon neutrality by 2030, iPhone 15 Pro and iPhone 15 Pro Max do not include a power adapter or EarPods. Included in the box is a USB‑C Charge Cable that supports fast charging and is compatible with USB‑C power adapters and computer ports.We encourage you to use any compatible USB‑C power adapter. If you need a new Apple power adapter or headphones, they are available for purchase",
+      oldPrice: "999 $",
+      newPrice: "988 $",
+      validOffer: "The offer is valid from 25.03 to 29.04",
+      imagePath: "assets/images/Products/Smartphones/Apple/iPhone15ProMax/ipnall.png",
+      imagePathDesktop: "assets/images/Products/Smartphones/Apple/iPhone15ProMax/ipnallbig.png",
     },
     {
       title: "Apple Watch Series 9 GPS 41mm",
