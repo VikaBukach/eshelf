@@ -21,6 +21,11 @@ const Header = () => {
   const dispatch = useDispatch();
   const menuOpen = useSelector((state) => state.menu.isOpen);
   const windowWidth = useWindowWidth();
+  const [compareCount, setCompareCount] = useState(1);
+  const [favoritesCount, setFavoritesCount] = useState(1);
+  const [cartCount, setCartCount] = useState(1);
+  const [userCount, setUserCount] = useState(1);
+
 
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
@@ -47,21 +52,38 @@ const Header = () => {
           <NavLink to="/" className="header__link-home"></NavLink>
           <NavLink to="/comparing" className="header__link-comparing">
             <BalanceIcon />
+            {compareCount > 0 && <span className="counter-circle">{compareCount}</span>}
           </NavLink>
           <NavLink to="/favorites" className="header__link-favorites">
             <HeartIcon />
+            {favoritesCount > 0 && <span className="counter-circle">{favoritesCount}</span>}
           </NavLink>
           <div className="header__link-cart">
             <Cart
               activator={
-                <div onClick={open}>
+                <div className = "cart-activator" onClick={open}>
                   <CartIcon />
+                  {windowWidth > 1024 && cartCount > 0 && (
+               <span className="counter">${cartCount}</span>
+            )}
+            {windowWidth <= 1024 && userCount > 0 && (
+              <span className="counter-circle">{cartCount}</span>
+            )}
                 </div>
               }
+
             />
+
           </div>
+
           <NavLink to="/users" className="header__link-users">
             <UserIcon />
+            {windowWidth > 1024 && (
+              <span>Hello, user</span>
+            )}
+            {windowWidth <= 1024 && userCount > 0 && (
+              <span className="counter-circle"></span>
+            )}
           </NavLink>
 
           {menuOpen && (

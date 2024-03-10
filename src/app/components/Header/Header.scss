@@ -30,7 +30,9 @@
   }
 
   @media (min-width: $desktop) {
+    position: fixed;
     height: 88px;
+    z-index: 1000;
   }
 }
 
@@ -74,6 +76,25 @@
   @media (min-width: $tablet) {
     display: inline-block;
   }
+}
+
+.cart-activator{
+  display: flex;
+}
+
+.counter-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__link-users span {
+  margin-left: 5px;
 }
 
 // .header__menu-mobile {
