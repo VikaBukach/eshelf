@@ -13,22 +13,12 @@ function BannerMain( { product } ) {
 
   const slides = [
     {
-      title: " DJI Mavic 3 Pro",
+      title: " DJI Mavic 3 Pro V2",
       description:
-        "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom.  A wide array of intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial imaging solution, designed for the professional creator.",
-      oldPrice: "₴ 71 999",
-      newPrice: "₴ 65 999",
-      validOffer: "The offer is valid from 12.11 to 29.12",
-      imagePath: "/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png",
-      imagePathDesktop: "/img/mavic-big.png",
-    },
-    {
-      title: "Phantom 5 Pro V2.5",
-      description:
-        "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom.  A wide array of intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial imaging solution, designed for the professional creator.",
-      oldPrice: "₴ 31 999",
-      newPrice: "₴ 20 999",
-      validOffer: "The offer is valid from 15.12 to 31.12",
+        "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos the Phantom 3 Pro V2.0 grants filmmakers absolute creative freedom.  A wide array of intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial imaging solution, designed for the professional creator.",
+      oldPrice: "3400 $",
+      newPrice: "3299 $",
+      validOffer: "The offer is valid from 25.03 to 29.04",
       imagePath: "/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png",
       imagePathDesktop: "/img/mavic-big.png",
     },
@@ -41,6 +31,16 @@ function BannerMain( { product } ) {
       validOffer: "The offer is valid from 12.11 to 29.12",
       imagePath: "/img/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3%201.png",
       imagePathDesktop: "/img/mavic-big.png",
+    },
+    {
+      title: "Apple Watch Series 9 GPS 41mm",
+      description:
+          "Apple Watch can do what your other devices can’t because it’s on your wrist. When you wear it, you get a fitness partner that measures all the ways you move, meaningful health insights, innovative safety features, and a connection to the people you care about most.",
+      oldPrice: "399 $",
+      newPrice: "378 $",
+      validOffer: "The offer is valid from 05.03 to 31.03",
+      imagePath: "assets/images/Products/Smartwatches/Apple/WatchSeries9/appwatchall.png",
+      imagePathDesktop: "assets/images/Products/Smartwatches/Apple/WatchSeries9/img.png",
     },
   ]; //add sliders
 
@@ -66,8 +66,8 @@ function BannerMain( { product } ) {
             </div>
 
             <div className="banner_main-img-container">
-              <img className="banner_main-img" src={slide.imagePath} alt="Quadcopter" />
-              <img className="banner_main-img-desktop" src={slide.imagePathDesktop} alt="Quadcopter" />
+              <img className="banner_main-img" src={slide.imagePath} alt={slide.title}/>
+              <img className="banner_main-img-desktop" src={slide.imagePathDesktop} alt={slide.title} />
             </div>
             <div className="arrow-svg-container-prev">
               <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()} />
