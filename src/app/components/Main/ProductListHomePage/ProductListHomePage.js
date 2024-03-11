@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import React, {useState, useEffect, useRef, useCallback} from "react";
+import {useSelector, useDispatch, shallowEqual} from "react-redux";
 import Button from "../../Main/Button/Button";
 import ProductCard from "../../ProductCard/ProductCard";
 import Slider from "react-slick";
@@ -7,19 +7,26 @@ import Arrow from "../../Main/Arrow/Arrow";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./ProductListHomePage.scss";
-import {fetchDataOfProducts} from "../../../store/slices/productsSlice";
 
-function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfProducts}) {
-    console.log(category)
+function ProductListHomePage({title, category, initialItemsToShow, fetchDataOfProducts}) {
+    console.log(category);
+
     const dispatch = useDispatch();
-    const { data, status, error } = useSelector((state) => state.products, shallowEqual);
+    const {data, status, error} = useSelector((state) => state.products, shallowEqual);
 
 
     useEffect(() => {
-        dispatch(fetchDataOfProducts(category))
+        const fetchData = async () => {
+            try {
+                await dispatch(fetchDataOfProducts(category));
+            } catch (error) {
+                console.log("Error fetching products:", error);
+            }
+        };
 
-    }, [dispatch, fetchDataOfProducts, category]);
+        fetchData();
 
+    }, [dispatch, category]);
 
 
     const [itemsToShow, setItemsToShow] = useState(window.innerWidth >= 768 ? 5 : 2);
@@ -79,7 +86,8 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                         )}
 
                         {itemsToShow < data.length && (
-                            <Button btnClass="section_especially-products-btn" text={"See more"} onClick={showMoreCards} />
+                            <Button btnClass="section_especially-products-btn" text={"See more"}
+                                    onClick={showMoreCards}/>
                         )}
                     </div>
                 </div>
@@ -87,10 +95,10 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                 <div className="section_especially-products-desktop">
                     <div className="section_especially-products-desktop-arrows">
                         <div className="especially_arrow-svg-container-next">
-                            <Arrow direction="next" onClick={() => sliderRef.current.slickNext()} />
+                            <Arrow direction="next" onClick={() => sliderRef.current.slickNext()}/>
                         </div>
                         <div className="especially_arrow-svg-container-prev">
-                            <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()} />
+                            <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()}/>
                         </div>
                     </div>
                     <div className="section_especially-products-desktop-container slider-container">
