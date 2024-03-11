@@ -1,18 +1,20 @@
 .product-list {
-  background-color: rgb(218, 233, 233);
-  min-height: 20px;
-  width: 80%;
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  @include grid-container(2, 8px);
+  width: 100%;
 
   &__item {
-    border: 1px solid gray;
     list-style: none;
-    display: block;
-    padding: 5px;
-    min-height: 50px;
-    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  .product-list {
+    @include grid-container(3, 16px);
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .product-list {
+    @include grid-container(4, 16px);
   }
 }

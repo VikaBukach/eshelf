@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
 import { NumberOfEligibleProducts } from "../NumberOfEligibleProducts/NumberOfEligibleProducts";
+import { Accordion } from "../../ui/Accordion/Accordion";
 
 const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues }) => {
   const dispatch = useDispatch();
@@ -44,27 +45,34 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues
   };
 
   return (
-    <div className="filter-item">
-      <h5 className="filter-item__name">{filterTitle}</h5>
-      {checkBoxNames.map((checkBoxName, index) => {
-        return (
-          <div className="filter-item__checkbox-line" key={checkBoxName + index}>
-            <label className="filter-item__label">
-              <input
-                className="filter-item__chekbox"
-                type="checkbox"
-                name={checkBoxName}
-                checked={isCheckboxChecked(checkBoxName)}
-                onChange={handleCheckboxChange}
-                disabled={findNumberOfValue(checkBoxName) === 0 ? true : false}
-              />
-              {checkBoxName}
-            </label>
-            <NumberOfEligibleProducts number={findNumberOfValue(checkBoxName)} />
-          </div>
-        );
-      })}
-    </div>
+    <Accordion
+      title={filterTitle}
+      content={
+        <div className="filter-item">
+          {checkBoxNames.map((checkBoxName, index) => {
+            return (
+              <div className="filter-item__checkbox-line" key={checkBoxName + index}>
+                <label className="filter-item__label">
+                  <input
+                    className="filter-item__chekbox"
+                    type="checkbox"
+                    name={checkBoxName}
+                    checked={isCheckboxChecked(checkBoxName)}
+                    onChange={handleCheckboxChange}
+                    disabled={findNumberOfValue(checkBoxName) === 0 ? true : false}
+                  />
+                  <span
+                    className={`filter-item__custom-checkbox ${isCheckboxChecked(checkBoxName) ? "filter-item__custom-checkbox--checked" : ""} ${findNumberOfValue(checkBoxName) === 0 ? "filter-item__custom-checkbox--disabled" : ""}`}
+                  ></span>
+                  {checkBoxName}
+                </label>
+                <NumberOfEligibleProducts number={findNumberOfValue(checkBoxName)} />
+              </div>
+            );
+          })}
+        </div>
+      }
+    />
   );
 };
 
