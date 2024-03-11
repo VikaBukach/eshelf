@@ -16,9 +16,12 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
   const [allSettings, setAllSettings] = useState([]);
 
   const openFilter = () => {
-    document.querySelector(".filter").classList.toggle("filter--open");
-    document.querySelector("body").classList.toggle("body-to-filter");
-    document.querySelector(".catalog__shadow").classList.toggle("catalog__shadow--open");
+    if (window.innerWidth < 1024) {
+      document.querySelector(".filter").classList.toggle("filter--open");
+      document.querySelector("body").classList.toggle("body-to-filter");
+      document.querySelector(".catalog__shadow").classList.toggle("catalog__shadow--open");
+      
+    }
   };
 
   const checkCount = () => {

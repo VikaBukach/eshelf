@@ -120,9 +120,11 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   };
 
   const closeFilter = () => {
-    document.querySelector(".filter").classList.toggle("filter--open");
-    document.querySelector("body").classList.toggle("body-to-filter");
-    document.querySelector(".catalog__shadow").classList.toggle("catalog__shadow--open");
+    if (window.innerWidth < 1024) {
+      document.querySelector(".filter").classList.toggle("filter--open");
+      document.querySelector("body").classList.toggle("body-to-filter");
+      document.querySelector(".catalog__shadow").classList.toggle("catalog__shadow--open");
+    }
   };
 
   const accordions = document.querySelectorAll(".filter .accordion");

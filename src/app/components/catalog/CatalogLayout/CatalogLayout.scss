@@ -56,13 +56,14 @@
       z-index: 1;
       left: 0px;
       top: -64px;
-      width: 100vw;
+      width: 0vw;
       height: calc(100vh + 64px);
       background-color: rgba(0, 0, 0, 0.2);
-      transition: 0.3s;
+      transition: opacity 0.3s;
       pointer-events: none;
 
       &--open {
+        width: 100vw;
         opacity: 1;
       }
     }
@@ -125,7 +126,7 @@
     }
     &__body {
       display: grid;
-      grid-template-columns: auto auto;
+      @include flex-container(row, space-between, flex-end, nowrap);
       align-items: start;
       gap: 24px;
     }
