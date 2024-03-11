@@ -5,6 +5,7 @@ import "./Main.scss";
 import EspeciallyForYou from "./Sections/EspeciallyForYou/EspeciallyForYou";
 import BannerTopProduct from "./Sections/BannerTopProduct/BannerTopProduct";
 import TopProduct from "./Sections/TopProduct/TopProduct";
+import SalesWeek from "./Sections/SalesWeek/SalesWeek";
 
 
 const Main = () => {
@@ -15,6 +16,7 @@ const Main = () => {
       <EspeciallyForYou />
       <BannerTopProduct />
       <TopProduct/>
+        <SalesWeek />
     </div>
   );
 };
