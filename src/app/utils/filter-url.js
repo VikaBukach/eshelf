@@ -34,13 +34,10 @@ export const createFilterSettingsObjectFromUrl = (minValue, maxValue) => {
   let sortingSettings = "";
   const url = window.location.search;
 
-  console.log(url);
-
   if (url) {
     const parametrs = url.substring(1).split(";");
 
     parametrs.forEach((parametr) => {
-      console.log(parametr);
       const parametrParts = parametr.split("=");
       if (parametrParts[0] === "price") {
         filterPriceSettings.priceBy = parametrParts[1].split("-")[0];
@@ -53,6 +50,5 @@ export const createFilterSettingsObjectFromUrl = (minValue, maxValue) => {
     });
   }
 
-  console.log(sortingSettings);
   return { filterCheckboxSettings, filterPriceSettings, sortingSettings };
 };
