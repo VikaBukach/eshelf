@@ -15,6 +15,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
+  const isLoaded = useSelector((state) => state.page.isLoaded);
 
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
@@ -122,7 +123,14 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const closeFilter = () => {
     document.querySelector(".filter").classList.toggle("filter--open");
     document.querySelector("body").classList.toggle("body-to-filter");
+    document.querySelector(".catalog__shadow").classList.toggle("catalog__shadow--open");
   };
+
+  const accordions = document.querySelectorAll(".filter .accordion");
+  if (accordions.length > 1) {
+    accordions[accordions.length - 1].style.borderBottom = "0px";
+    accordions[accordions.length - 1].style.marginBottom = "0px";
+  }
 
   // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
   useEffect(() => {
@@ -132,6 +140,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   return (
     <div className="filter">
       <div className="filter__header">
+        <img className="filter__header__img" src="../assets/icons/filter-dark.svg" alt="Icon" />
         <h1 className="filter__title">Filter</h1>
         <img className="filter__close-btn" src="../assets/icons/close.svg" alt="Close" onClick={closeFilter} />
       </div>

@@ -96,3 +96,13 @@
     }
   }
 }
+
+@media screen and (min-width: $tablet) {
+  .catalog-sorting {
+    width: 192px;
+
+    &__options {
+      min-width: 256px;
+    }
+  }
+}

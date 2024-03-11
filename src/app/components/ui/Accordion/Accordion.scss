@@ -54,3 +54,11 @@
     transition: 1s;
   }
 }
+
+@media screen and (min-width: $desktop) {
+  .accordion {
+    &__title {
+      font-size: 18px;
+    }
+  }
+}

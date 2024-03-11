@@ -54,3 +54,14 @@
     opacity: 0;
   }
 }
+
+@media screen and (min-width: $tablet) {
+  .filter-item {
+    &__checkbox-line {
+      min-width: 288px;
+    }
+  }
+}
+
+@media screen and (min-width: $desktop) {
+}

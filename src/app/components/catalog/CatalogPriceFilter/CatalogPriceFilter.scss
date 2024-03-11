@@ -36,3 +36,27 @@
     color: $secondary-color-red;
   }
 }
+
+@media screen and (min-width: $desktop) {
+  .price-filter {
+    @include flex-container(row, space-between, center, nowrap);
+
+    &__button {
+      display: block;
+      position: relative;
+      top: -3px;
+      height: 48px;
+      width: 59px;
+      background-color: $secondary-color-blue-light;
+      font-size: 14px;
+      color: $secondary-color-white;
+      border-radius: 10px;
+    }
+
+    &__inputs-cover {
+      height: 48px;
+      margin: 0px;
+      margin-bottom: 6px;
+    }
+  }
+}

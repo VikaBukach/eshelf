@@ -6,3 +6,15 @@
     list-style: none;
   }
 }
+
+@media screen and (min-width: $tablet) {
+  .product-list {
+    @include grid-container(3, 16px);
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .product-list {
+    @include grid-container(4, 16px);
+  }
+}

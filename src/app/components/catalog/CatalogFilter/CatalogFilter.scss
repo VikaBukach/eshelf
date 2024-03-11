@@ -14,20 +14,18 @@
     width: 100%;
     padding: 16px;
 
-
     .filter__buttons {
-
       width: calc(100% - 32px);
-
-
     }
-
-
   }
 
   &__header {
     @include flex-container(row, space-between, center, nowrap);
     margin-bottom: 36px;
+
+    &__img {
+      display: none;
+    }
   }
 
   &__title {
@@ -64,4 +62,59 @@
 .body-to-filter {
   overflow: hidden;
   height: 100%;
+}
+
+@media screen and (min-width: $tablet) {
+  .filter {
+    &--open {
+      width: 320px;
+
+      .filter__buttons {
+        width: 288px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .filter {
+    position: static;
+    width: 100%;
+    min-width: 320px;
+    height: auto;
+    padding: 16px;
+    background-color: $secondary-color-grey-card;
+    border-radius: 10px;
+    transition: 1s;
+
+    &__header {
+      margin-bottom: 24px;
+      @include flex-container(row, flex-start, center, nowrap);
+
+      &__img {
+        display: block;
+        margin-right: 18px;
+      }
+    }
+
+    &__close-btn {
+      display: none;
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    &__buttons {
+      position: static;
+      width: 100%;
+      margin-top: 16px;
+      @include flex-container(row, center, center, nowrap);
+    }
+
+    &__submit {
+      display: none;
+    }
+  }
 }
