@@ -19,6 +19,7 @@ const CatalogPriceFilter = ({ pricePath }) => {
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
+  const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
   const baseFilterProductsStatus = useSelector(selectFilteredProductsStatus);
   const filteredProducts = useSelector((state) => state.filteredProducts.baseFilter);
 
@@ -71,13 +72,15 @@ const CatalogPriceFilter = ({ pricePath }) => {
   };
 
   const navigateToUrlWithSettings = () => {
-      const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue)}`;
-      navigate(url);
-  };
+    const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
+    navigate(url);
+};
 
   useEffect(() => {
-    dispatch(setPriceBy(minValue));
-    dispatch(setPriceTo(maxValue));
+    if (priceBy === 0 || priceTo === 0) {
+      dispatch(setPriceBy(minValue));
+      dispatch(setPriceTo(maxValue));
+    }
   }, [minValue, maxValue]);
 
   // ------- На початку роботи заповнюємо параметри BASE та PRICE  згідно з товарами у PRODUCTS
@@ -92,7 +95,9 @@ const CatalogPriceFilter = ({ pricePath }) => {
     if (!isPriceByError && !isPriceToError) {
       dispatch(updateFilteredProductsWithPrice(filterByPrice()));
       dispatch(setProductsToResrtSorting(filterByPrice()));
-      navigateToUrlWithSettings();
+      if (filterSettings.length !== 0 || priceBy !== minValue || priceTo !== maxValue) {
+        navigateToUrlWithSettings();
+      }
     }
   };
 

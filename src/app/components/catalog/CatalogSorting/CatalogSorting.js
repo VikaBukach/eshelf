@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
 import { findValueByPath } from "../../../helpers/catalog";
@@ -6,10 +7,18 @@ import {
   setFilteredProductsWithPrice,
   selectFilteredProductsWithPriceStatus,
 } from "../../../store/slices/filteredProductsWithPriceSlice";
+import { createUrlFromFilterSettings } from "../../../utils/filter-url";
 
 const CatalogSorting = ({}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const checkedValue = useSelector((state) => state.filterSorting.mode);
+  const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
+  const priceBy = useSelector((state) => state.filterSettings.priceBy);
+  const priceTo = useSelector((state) => state.filterSettings.priceTo);
+  const minValue = useSelector((state) => state.filterSettings.minPrice);
+  const maxValue = useSelector((state) => state.filterSettings.maxPrice);
   const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
   const productsToResrtSorting = useSelector((state) => state.filterSorting.productsToResrtSorting);
   const filteredProductsWithPriceStatus = useSelector(selectFilteredProductsWithPriceStatus);
@@ -40,6 +49,11 @@ const CatalogSorting = ({}) => {
   document.querySelectorAll(".catalog-sorting__option").forEach((option) => {
     option.addEventListener("click", () => {
       dispatch(setFilterSorting(option.getAttribute("data-value")));
+
+      const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, option.getAttribute("data-value"))}`;
+      navigate(url);
+
+
     });
   });
 
@@ -59,6 +73,7 @@ const CatalogSorting = ({}) => {
       dispatch(setFilteredProductsWithPrice(sortingProductsArray));
     }
   }, [filteredProductsWithPriceStatus, checkedValue]);
+
 
   return (
     <>

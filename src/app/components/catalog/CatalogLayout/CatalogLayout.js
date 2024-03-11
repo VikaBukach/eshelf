@@ -5,7 +5,9 @@ import { CatalogProductList } from "../CatalogProductList/CatalogProductList";
 import { CatalogFilter } from "../CatalogFilter/CatalogFilter";
 import { CatalogSorting } from "../CatalogSorting/CatalogSorting";
 import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
-import { createUrlFromFilterSettings } from "../../../utils/filter-url";
+import { setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
+import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
+import { createFilterSettingsObjectFromUrl, createUrlFromFilterSettings } from "../../../utils/filter-url";
 
 const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
@@ -16,6 +18,7 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
+  const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
   const isLoaded = useSelector((state) => state.page.isLoaded);
 
   const [allSettings, setAllSettings] = useState([]);
@@ -47,17 +50,30 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
   };
 
   const navigateToUrlWithSettings = () => {
-      const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue)}`;
+      const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
       navigate(url);
   };
 
   useEffect(() => {
     setAllSettings(Object.values(filterSettings).flat());
-    navigateToUrlWithSettings();
+    if (filterSettings.length !== 0 || priceBy !== minValue || priceTo !== maxValue) {
+      navigateToUrlWithSettings();
+    }
   }, [filterSettings]);
 
   useEffect(() => {
-    console.log(isLoaded);
+    const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(minValue, maxValue);
+    if (Object.keys(filterCheckboxSettings).length !== 0) {
+      dispatch(setCheckboxesSettings(filterCheckboxSettings));
+    };
+    if (sortingSettings) {
+      dispatch(setFilterSorting(sortingSettings));
+    };
+    if (filterPriceSettings.priceBy !== 0 && filterPriceSettings.priceTo !== 0) {
+      console.log(filterPriceSettings.priceBy);
+      dispatch(setPriceBy(filterPriceSettings.priceBy));
+      dispatch(setPriceTo(filterPriceSettings.priceTo));
+    }
   }, [isLoaded]);
 
   return (
