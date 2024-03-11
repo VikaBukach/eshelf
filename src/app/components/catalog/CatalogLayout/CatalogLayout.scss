@@ -1,12 +1,136 @@
 .catalog {
-  width: 1200px;
-  background-color: rgb(163, 163, 163);
+  position: relative;
+  width: 100%;
+  padding: 8px 16px;
   &__head-line {
-    display: flex;
-    justify-content: space-between;
+    @include flex-container(column, space-between, flex-start, nowrap);
+    margin-bottom: 16px;
+
+    &__breadcrumb {
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    &__title {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 11px;
+    }
+    &__container {
+      width: 100%;
+      @include flex-container(row, space-between, center, nowrap);
+      gap: 8px;
+    }
+    &__filter-btn {
+      @include flex-container(row, space-around, center, nowrap);
+      width: 50%;
+      height: 38px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      background-color: $secondary-color-blue-light;
+      font-size: 14px;
+      color: $secondary-color-white;
+      user-select: none;
+      cursor: pointer;
+
+      &__count {
+        text-align: center;
+        padding-top: 1px;
+        height: 20px;
+        min-width: 20px;
+        border-radius: 10px;
+        background-color: $secondary-color-white;
+        color: #000000;
+      }
+    }
   }
-  &__body {
-    display: flex;
-    justify-content: space-between;
+  &__filter-settings {
+    display: none;
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  .catalog {
+    &__shadow {
+      opacity: 0;
+      position: absolute;
+      z-index: 1;
+      left: 0px;
+      top: -64px;
+      width: 100vw;
+      height: calc(100vh + 64px);
+      background-color: rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+      pointer-events: none;
+
+      &--open {
+        opacity: 1;
+      }
+    }
+
+    &__head-line {
+      &__filter-btn {
+        width: 125px;
+        justify-content: center;
+
+        &__img {
+          margin-right: 8px;
+        }
+
+        &__count {
+          display: none;
+        }
+      }
+    }
+    &__filter-settings {
+      @include flex-container(row, flex-start, center, nowrap);
+      gap: 8px;
+      width: 100%;
+      margin-top: 16px;
+
+      &__item {
+        @include flex-container(row, center, center, nowrap);
+        padding: 0 16px;
+        height: 44px;
+        border: 1px solid $secondary-color-blue-light;
+        border-radius: 10px;
+        text-transform: capitalize;
+        color: $secondary-color-blue-light;
+      }
+
+      &__close {
+        margin-left: 24px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .catalog {
+    &__head-line {
+      @include flex-container(row, space-between, flex-end, nowrap);
+      margin-bottom: 16px;
+
+      &__filter-btn {
+        display: none;
+      }
+
+      &__title {
+        margin-bottom: 0px;
+      }
+
+      &__container {
+        width: 190px;
+        display: block;
+      }
+    }
+    &__body {
+      display: grid;
+      grid-template-columns: auto auto;
+      align-items: start;
+      gap: 24px;
+    }
+    &__filter-settings {
+      display: none;
+    }
   }
 }

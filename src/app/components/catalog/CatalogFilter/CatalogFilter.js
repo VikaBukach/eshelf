@@ -5,6 +5,7 @@ import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlic
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
 import { findValueByPath } from "../../../helpers/catalog";
 import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
+import { Accordion } from "../../ui/Accordion/Accordion";
 
 const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
@@ -17,12 +18,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
 
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
-  // ---------------------------------------------------------
-  // ---------------------------------------------------------
-  // ---------------------------------------------------------
   // ЗАПОВНЕННЯ БЛОКУ ФІЛЬТРУ
-  // ---------------------------------------------------------
-
   // Пошук усіх можливих варіантів у товарах та додання результату до критеріїв пошуку
   const addVariationsToFilterCriterias = () => {
     const updatedFilterCriterias = [];
@@ -54,11 +50,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     return valuesOfCriteria;
   };
 
-  // ---------------------------------------------------------
-  // ---------------------------------------------------------
-  // ---------------------------------------------------------
   // ОБРОБКА ФІЛЬТРАЦІЇ (ПІСЛЯ НАТИСКАННЯ КНОПКИ)
-  // ---------------------------------------------------------
 
   const filterProducts = () => {
     const filteredProductsArray = [];
@@ -112,28 +104,46 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   useEffect(() => {
     setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
   }, [products]);
-  // }, [filterCriterias, products]);
 
   // ------- ВЗАЄМОДІЯ З КОРИСТУВАЧЕМ
 
   const onFilterSubmit = () => {
     dispatch(updateBaseFilterData(filterProducts()));
+    closeFilter();
   };
 
   const onResetSubmit = () => {
     dispatch(setCheckboxesSettings([]));
     dispatch(setPriceBy(minValue));
     dispatch(setPriceTo(maxValue));
+    closeFilter();
   };
+
+  const closeFilter = () => {
+    document.querySelector(".filter").classList.toggle("filter--open");
+    document.querySelector("body").classList.toggle("body-to-filter");
+    document.querySelector(".catalog__shadow").classList.toggle("catalog__shadow--open");
+  };
+
+  const accordions = document.querySelectorAll(".filter .accordion");
+  if (accordions.length > 1) {
+    accordions[accordions.length - 1].style.borderBottom = "0px";
+    accordions[accordions.length - 1].style.marginBottom = "0px";
+  }
 
   // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
   useEffect(() => {
-    onFilterSubmit();
+    dispatch(updateBaseFilterData(filterProducts()));
   }, [filterSettings]);
 
   return (
     <div className="filter">
-      <CatalogPriceFilter pricePath={pricePath} />
+      <div className="filter__header">
+        <img className="filter__header__img" src="../assets/icons/filter-dark.svg" alt="Icon" />
+        <h1 className="filter__title">Filter</h1>
+        <img className="filter__close-btn" src="../assets/icons/close.svg" alt="Close" onClick={closeFilter} />
+      </div>
+      <Accordion title="Price" content={<CatalogPriceFilter pricePath={pricePath} />} />
       {filterCriteriasWithTypes.map((criteria, index) => (
         <React.Fragment key={index}>
           <CatalogFilterItem
@@ -142,15 +152,16 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
             criteriaPath={criteria.path}
             allValues={findAllValues(criteria.path)}
           />
-          <p>-----------------</p>
         </React.Fragment>
       ))}
-      <button onClick={onFilterSubmit} type="button" className="filter__submit">
-        FILTER
-      </button>
-      <button onClick={onResetSubmit} type="button" className="filter__submit">
-        RESET
-      </button>
+      <div className="filter__buttons">
+        <button onClick={onResetSubmit} type="button" className="filter__reset filter__btn">
+          Reset
+        </button>
+        <button onClick={onFilterSubmit} type="button" className="filter__submit filter__btn">
+          Submit
+        </button>
+      </div>
     </div>
   );
 };

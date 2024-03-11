@@ -1,5 +1,62 @@
+.price-filter {
+  &__inputs-cover {
+    position: relative;
+    @include flex-container(row, space-around, center, nowrap);
+    width: 224px;
+    height: 40px;
+    margin: 0 auto 6px;
+    border: 1px solid $primary-color-black;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      left: 50%;
+      width: 1px;
+      height: 32px;
+      background: $primary-color-black;
+    }
+  }
+
+  &__input {
+    width: 80px;
+    color: $primary-color-black;
+    text-align: center;
+  }
+
+  &__button {
+    display: none;
+  }
+}
+
 .price-filter__input {
   &--error {
-    border: 2px solid red;
+    color: $secondary-color-red;
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .price-filter {
+    @include flex-container(row, space-between, center, nowrap);
+
+    &__button {
+      display: block;
+      position: relative;
+      top: -3px;
+      height: 48px;
+      width: 59px;
+      background-color: $secondary-color-blue-light;
+      font-size: 14px;
+      color: $secondary-color-white;
+      border-radius: 10px;
+    }
+
+    &__inputs-cover {
+      height: 48px;
+      margin: 0px;
+      margin-bottom: 6px;
+    }
   }
 }

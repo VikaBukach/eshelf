@@ -1,7 +1,108 @@
 .catalog-sorting {
-  &__selecter {
-    width: 300px;
-    height: 30px;
-    background-color: bisque;
+  width: 50%;
+  position: relative;
+  &__btn {
+    @include flex-container(row, space-between, center, nowrap);
+    height: 38px;
+    padding: 8px 10%;
+    border-radius: 10px;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: $secondary-color-blue-light;
+    border: 1px solid $secondary-color-blue-light;
+    background-color: $secondary-color-white;
+    user-select: none;
+    cursor: pointer;
+  }
+  &__checked-option {
+    width: 100%;
+    text-align: center;
+  }
+  &__options {
+    z-index: 2;
+    display: block;
+    position: absolute;
+    top: 52px;
+    right: 0px;
+    min-width: 217px;
+    padding: 18px 10px 10px 16px;
+    background-color: $secondary-color-white;
+    border-radius: 10px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transition: max-height 0.05s;
+
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: -8px;
+      right: 46px;
+      width: 10px;
+      height: 20px;
+      background-color: $secondary-color-white;
+      transform: rotateZ(65deg);
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: -8px;
+      right: 32px;
+      width: 10px;
+      height: 20px;
+      background-color: $secondary-color-white;
+      transform: rotateZ(-65deg);
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    &__container {
+      @include flex-container(column, flex-start, flex-start, nowrap);
+      max-height: 0px;
+      overflow: clip;
+      transition: 0.5s;
+    }
+
+    &--open {
+      opacity: 1;
+      .catalog-sorting__options__container {
+        max-height: 200px;
+      }
+    }
+
+    &__triangle {
+      position: absolute;
+      z-index: 2;
+      top: -8px;
+      right: 0px;
+      width: 0;
+      height: 0;
+      border-left: 44px solid transparent;
+      border-right: 44px solid transparent;
+      border-bottom: 22px solid $secondary-color-white;
+    }
+  }
+
+  &__option {
+    color: $secondary-color-grey;
+    margin-bottom: 8px;
+    width: 100%;
+    user-select: none;
+    cursor: pointer;
+    &--checked {
+      color: $secondary-color-blue-light;
+    }
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  .catalog-sorting {
+    width: 192px;
+
+    &__options {
+      min-width: 256px;
+    }
   }
 }
