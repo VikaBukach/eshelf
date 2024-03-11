@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
@@ -6,9 +7,13 @@ import { selectFilteredProductsStatus } from "../../../store/slices/filteredProd
 import { findValueByPath } from "../../../helpers/catalog";
 import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
 import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
+import { createUrlFromFilterSettings } from "../../../utils/filter-url";
 
 const CatalogPriceFilter = ({ pricePath }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const products = useSelector((state) => state.products.data);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
@@ -65,6 +70,11 @@ const CatalogPriceFilter = ({ pricePath }) => {
     return filteredProductsArray;
   };
 
+  const navigateToUrlWithSettings = () => {
+      const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue)}`;
+      navigate(url);
+  };
+
   useEffect(() => {
     dispatch(setPriceBy(minValue));
     dispatch(setPriceTo(maxValue));
@@ -82,6 +92,7 @@ const CatalogPriceFilter = ({ pricePath }) => {
     if (!isPriceByError && !isPriceToError) {
       dispatch(updateFilteredProductsWithPrice(filterByPrice()));
       dispatch(setProductsToResrtSorting(filterByPrice()));
+      navigateToUrlWithSettings();
     }
   };
 

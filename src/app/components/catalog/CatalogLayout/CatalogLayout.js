@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { CatalogProductList } from "../CatalogProductList/CatalogProductList";
 import { CatalogFilter } from "../CatalogFilter/CatalogFilter";
 import { CatalogSorting } from "../CatalogSorting/CatalogSorting";
 import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
+import { createUrlFromFilterSettings } from "../../../utils/filter-url";
 
 const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
+  const isLoaded = useSelector((state) => state.page.isLoaded);
 
   const [allSettings, setAllSettings] = useState([]);
+
 
   const openFilter = () => {
     if (window.innerWidth < 1024) {
@@ -40,9 +46,19 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
     dispatch(setCheckboxesSettings(newFilterSettings));
   };
 
+  const navigateToUrlWithSettings = () => {
+      const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue)}`;
+      navigate(url);
+  };
+
   useEffect(() => {
     setAllSettings(Object.values(filterSettings).flat());
+    navigateToUrlWithSettings();
   }, [filterSettings]);
+
+  useEffect(() => {
+    console.log(isLoaded);
+  }, [isLoaded]);
 
   return (
     <div className="catalog">
