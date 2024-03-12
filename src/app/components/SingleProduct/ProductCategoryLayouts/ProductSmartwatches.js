@@ -10,13 +10,14 @@ import { toggleCompare } from "../../../store/slices/compareSlice";
 import { addToCart } from "../../../store/slices/cartSlice";
 
 import { ReactComponent as AboutBatteryIcon } from "../../../../assets/images/product-icons/Diagonal.svg";
-import { ReactComponent as AboutMainCameraIcon } from "../../../../assets/images/product-icons/Camera.svg";
 import { ReactComponent as AboutFrontCameraIcon } from "../../../../assets/images/product-icons/front-camera.svg";
 import { ReactComponent as AboutBatteryElementIcon } from "../../../../assets/images/product-icons/Battery.svg";
 import { ReactComponent as AboutFrequencyIcon } from "../../../../assets/images/product-icons/Mobile.svg";
 import { ReactComponent as AboutProcessorIcon } from "../../../../assets/images/product-icons/Hardware.svg";
 import { ReactComponent as AboutComparingIcon } from "../../../../assets/images/Balance.svg";
 import { ReactComponent as AboutFavoritesIcon } from "../../../../assets/images/Heart.svg";
+import { ReactComponent as AboutMemoryIcon } from "../../../../assets/images/product-icons/Memory.svg";
+
 
 import { ButtonBuy } from "../ButtonBuy";
 import { WeAccept } from "../WeAccept";
@@ -67,10 +68,14 @@ const ProductSmartwatches = ({ product }) => {
   };
 
   const colorMap = {
-    black: "#000",
+    black: "#333333",
     silver: "#c0c0c0",
     midnight: "#2e2e2e",
     starlight: "#d7cdc4",
+    titanium: "#221f1f4d",
+    red: "#ff583b",
+    "black titanium": "#2e2e2e",
+    gold: "#ffbf00",
   };
 
   return (
@@ -132,57 +137,57 @@ const ProductSmartwatches = ({ product }) => {
         <div className="info-details__wrap">
           <div className="info-details__header">Characteristics</div>
           <div className="info-details__characteristics-block">
-            {product.specifications.display?.screen_diagonal && (
+            {product.specifications.display?.resolution && (
               <div className="info-details__characteristics-item">
                 <AboutBatteryIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
-                  <div className="info-details__characteristics-title">Screen diagonal</div>
-                  <span>{product.specifications.display.screen_diagonal}</span>
+                  <div className="info-details__characteristics-title">Display resolution</div>
+                  <span>{product.specifications.display.resolution}</span>
                 </div>
               </div>
             )}
-            {product.specifications.camera?.main_camera && (
+            {product.specifications.memory?.memory && (
               <div className="info-details__characteristics-item">
-                <AboutMainCameraIcon className="info-details__characteristics-icon" />
+                <AboutMemoryIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
-                  <div className="info-details__characteristics-title">Main camera</div>
-                  <span>{product.specifications.camera.main_camera}</span>
+                  <div className="info-details__characteristics-title">Memory</div>
+                  <span>{product.specifications.memory.memory}</span>
                 </div>
               </div>
             )}
-            {product.specifications.camera?.front_camera && (
+            {product.specifications.water_resistant?.swimproof && (
               <div className="info-details__characteristics-item">
                 <AboutFrontCameraIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
-                  <div className="info-details__characteristics-title">Front camera</div>
-                  <span>{product.specifications.camera.front_camera}</span>
+                  <div className="info-details__characteristics-title">Water resistant</div>
+                  <span>{product.specifications.water_resistant?.swimproof}</span>
                 </div>
               </div>
             )}
-            {product.specifications.battery?.capacity && (
+            {product.specifications.battery_capacity?.capacity && (
               <div className="info-details__characteristics-item">
                 <AboutBatteryElementIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
                   <div className="info-details__characteristics-title">Battery capacity</div>
-                  <span>{product.specifications.battery.capacity}</span>
+                  <span>{product.specifications.battery_capacity.capacity}</span>
                 </div>
               </div>
             )}
-            {product.specifications.display?.frequency && (
-              <div className="info-details__characteristics-item">
-                <AboutFrequencyIcon className="info-details__characteristics-icon" />
-                <div className="info-details__characteristics-wrap">
-                  <div className="info-details__characteristics-title">Display frequency</div>
-                  <span>{product.specifications.display.frequency}</span>
-                </div>
-              </div>
-            )}
-            {product.specifications.processor?.type && (
+            {product.specifications.processor?.matrix_type && (
               <div className="info-details__characteristics-item">
                 <AboutProcessorIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
                   <div className="info-details__characteristics-title">Processor</div>
-                  <span>{product.specifications.processor.type}</span>
+                  <span>{product.specifications.processor?.matrix_type}</span>
+                </div>
+              </div>
+            )}
+            {product.specifications.display?.display_matrix_type && (
+              <div className="info-details__characteristics-item">
+                <AboutFrequencyIcon className="info-details__characteristics-icon" />
+                <div className="info-details__characteristics-wrap">
+                  <div className="info-details__characteristics-title">Matrix</div>
+                  <span>{product.specifications.display.display_matrix_type}</span>
                 </div>
               </div>
             )}
@@ -193,12 +198,12 @@ const ProductSmartwatches = ({ product }) => {
             <div className="info-details__header">Price</div>
             <div className="info-details__price-block">
               <div className="info-details__price-old">
-                {product.colors[activeColorIndex].products[activeMemoryIndex].price}$
+                {product.colors[activeColorIndex].products[activeMemoryIndex]?.price}$
               </div>
               <div className="info-details__price-wrap">
                 <div className="info-details__price-body">
                   <div className="info-details__price" onClick={handleAddToCart}>
-                    {product.colors[activeColorIndex].products[activeMemoryIndex].discount_price}$
+                    {product.colors[activeColorIndex].products[activeMemoryIndex]?.discount_price}$
                   </div>
                   <ButtonBuy />
                 </div>

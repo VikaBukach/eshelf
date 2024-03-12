@@ -73,7 +73,7 @@ const ProductPage = () => {
     <>
       <section className="product-details">
         <div className="container">
-          <h1 className="product-details__title">{product.model}</h1>
+          <h1 className="product-details__title">{product.brand} {product.model}</h1>
           <div className="product-details__rating">
             <div className="product-details__rating-stars">
               <Rating size={18} value={rating} setValue={setRating} />

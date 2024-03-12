@@ -62,6 +62,26 @@ const ProductSmartphones = ({ product }) => {
     dispatch(addToCart(productDetails));
   };
 
+  const colorMap = {
+    black: "#333333",
+    silver: "#c0c0c0",
+    midnight: "#2e2e2e",
+    starlight: "#d7cdc4",
+    titanium: "#221f1f4d",
+    red: "#ff583b",
+    gold: "#ffbf00",
+    "black titanium": "#2e2e2e",
+    "white titanium": "#FCFFF0",
+    "blue titanium": "#5f778a",
+    "natural titanium": "#878681",
+    pink: "#B700C7",
+    blue: "#7FC6F9",
+    yellow: "#F1F522",
+    green: "#54C02E",
+    violet: "#9018DA",
+    gray: "#ABABAB",
+  };
+
   return (
     <div className="product-details-body">
       <div className="product-details-body__slider">
@@ -110,7 +130,7 @@ const ProductSmartphones = ({ product }) => {
                 <div
                   key={i}
                   onClick={() => handleColorItemClick(i)}
-                  style={{ backgroundColor: `${item.color}` }}
+                  style={{ backgroundColor: `${colorMap[item.color] || item.color}` }}
                   className={`info-details__color-item ${i === activeColorIndex ? "info-details__color-active" : ""}`}
                 ></div>
               ))}
