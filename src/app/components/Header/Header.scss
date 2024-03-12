@@ -4,7 +4,7 @@
   width: 100%;
   height: 56px;
   padding: 8px 16px;
-  background-color: $primary-color-gray;
+  //background-color: $primary-color-gray;
   .header__logo,
   .header__link-comparing,
   .header__link-favorites,
@@ -39,7 +39,9 @@
 .header__content-container {
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
+  margin-top: 20px;
+  text-align: center;
+  align-items: center;
 }
 
 .header__menu {
@@ -52,22 +54,34 @@
 
 .header__search-container {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: flex-end;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 8px;
+  text-align: center;
   border: 1px solid;
   border-radius: 10px;
-  padding: 0px 12px 0px 8px;
   height: 40px;
+  font: 400 16px / 1.5 "Inter", sans-serif;
+  color: rgba(160, 160, 160, 0.56);
 
   @media (min-width: $tablet) {
     width: 323px;
+    justify-content: right;
   }
 
   @media (min-width: $desktop) {
     width: 712px;
-    height: 48px;
+    height: 40px;
+    display: flex;
   }
+
+}
+.header__search-input  {
+  font: 400 16px / 1.5 "Inter", sans-serif;
+  color: $secondary-color-grey;
+  width: 100%;
+  margin-left: 16px;
 }
 
 .search-icon {
@@ -75,6 +89,10 @@
 
   @media (min-width: $tablet) {
     display: inline-block;
+    border-radius: 0 10px 10px 0;
+    width: 40px;
+    height: 40px;
+    background: #a3adff;
   }
 }
 
