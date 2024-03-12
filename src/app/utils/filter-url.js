@@ -45,7 +45,10 @@ export const createFilterSettingsObjectFromUrl = (minValue, maxValue) => {
       } else if (parametrParts[0] === "sorting") {
         sortingSettings = parametrParts[1].replace(/%20/g, " ");
       } else {
-        filterCheckboxSettings[parametrParts[0]] = parametrParts[1].split(",");
+        let values = parametrParts[1].split(",");
+        values = values.map((value) => value.replace(/%20/g, " "));
+
+        filterCheckboxSettings[parametrParts[0]] = values;
       }
     });
   }
