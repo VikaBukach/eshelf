@@ -3,10 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
 import { NumberOfEligibleProducts } from "../NumberOfEligibleProducts/NumberOfEligibleProducts";
 import { Accordion } from "../../ui/Accordion/Accordion";
+import { findValueByPath } from "../../../helpers/catalog";
 
-const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues }) => {
+const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
   const dispatch = useDispatch();
+
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
+  const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
 
   const filterSettingsToUpdate = { ...filterSettings };
 
@@ -22,7 +25,19 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues
     if (!checked) {
       filterSettingsToUpdate[criteriaPath] = filterSettingsToUpdate[criteriaPath].filter((item) => item !== name);
     }
+
+    console.log(filterSettingsToUpdate);
     dispatch(setCheckboxesSettings(filterSettingsToUpdate));
+  };
+
+  // Складання масиву з усіх значень (з повтореннями) згідно з шляхом пошуку
+  const findAllValues = (array, path) => {
+    const valuesOfCriteria = [];
+    array.forEach((product) => {
+      const { value: findVariations } = findValueByPath(product, path);
+      valuesOfCriteria.push(...findVariations);
+    });
+    return valuesOfCriteria;
   };
 
   const isCheckboxChecked = (checkBoxName) => {
@@ -34,7 +49,7 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues
   };
 
   const findNumberOfValue = (name) => {
-    const numberOfValue = allValues.reduce((accumulator, currentValue) => {
+    const numberOfValue = findAllValues(filteredProductsWithPrice, criteriaPath).reduce((accumulator, currentValue) => {
       if (currentValue === name) {
         return accumulator + 1;
       } else {

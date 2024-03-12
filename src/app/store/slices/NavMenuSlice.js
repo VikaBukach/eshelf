@@ -4,12 +4,13 @@ export const menuSlice = createSlice({
   name: "menu",
   initialState: {
     isOpen: false,
-    compareCount: 1,
+    compareCount: 0,
     favoritesCount: 0,
     cartCount: 1,
     userCount: 1,
     cartTotal: 0,
     favoritesTotal: 0,
+    compareTotal: 0,
   },
   reducers: {
     toggleMenu: (state) => {
@@ -33,11 +34,17 @@ export const menuSlice = createSlice({
     setFavoritesTotal: (state, action) => { 
       state.favoritesTotal = action.payload;
     },
+    setCompareTotal: (state, action) => { 
+      state.favoritesTotal = action.payload;
+    },
   },
 });
 
-export const { toggleMenu, setCompareCount, setFavoritesCount, setCartCount, setUserCount, setCartTotal, setFavoritesTotal } = menuSlice.actions;
+export const { toggleMenu, setCompareCount, setFavoritesCount, setCartCount, setUserCount, setCartTotal, setFavoritesTotal, setCompareTotal } = menuSlice.actions;
 
 export const selectCartTotal = (state) => state.menu.cartTotal;
 export const selectFavoritesTotal = (state) => state.menu.favoritesTotal;
+export const selectCompareTotal = (state) => state.menu.compareTotal;
+
+
 export default menuSlice.reducer;

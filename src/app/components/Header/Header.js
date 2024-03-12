@@ -23,7 +23,13 @@ const Header = () => {
   const selectCartTotal = (state) => state.menu.cartTotal;
   const cartTotal = useSelector(selectCartTotal);
   const favoritesTotal = useSelector((state) => state.menu.favoritesTotal);
-  const compareCount = useSelector((state) => state.menu.compareCount);
+
+
+  const compareTotal = useSelector((state) => state.menu.compareTotal);
+
+  console.log(compareTotal) // перевірка вхідних даних по товарам у порівнянні
+
+
   const userCount = useSelector((state) => state.menu.userCount);
   const windowWidth = useWindowWidth();
   useEffect(() => {
@@ -61,7 +67,7 @@ const Header = () => {
           <NavLink to="/" className="header__link-home"></NavLink>
           <NavLink to="/comparing" className="header__link-comparing">
             <BalanceIcon />
-            {compareCount > 0 && <span className="counter-circle">{compareCount}</span>}
+            {compareTotal > 0 && <span className="counter-circle">{compareTotal}</span>}
           </NavLink>
           <NavLink to="/favorites" className="header__link-favorites">
             <HeartIcon />

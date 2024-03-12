@@ -65,7 +65,6 @@ function TopProduct() {
                         {status === "succeeded" && data.length > 0 ? (
 
                             data.slice(0, itemsToShow).map((item, index) => {
-                                console.log("---------", data);
                                 return (
                                     <div className="section-especially-item" key={index}>
                                         {item && (
