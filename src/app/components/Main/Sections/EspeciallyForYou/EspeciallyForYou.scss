@@ -17,7 +17,7 @@
     padding: 0 16px;
     font: 500 18px / 1.5 "Inter",
     sans-serif;
-    color: #333;
+    color: $primary-color-black;
   }
 
   &-products-mobile {
@@ -91,6 +91,6 @@
     }
   }
   .slick-slide {
-    padding: 0 10px; /* Встановлюємо відступ між елементами */
+    padding: 0 10px;
   }
 }

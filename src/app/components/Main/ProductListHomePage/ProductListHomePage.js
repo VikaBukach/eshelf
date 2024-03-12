@@ -93,7 +93,8 @@ function ProductListHomePage({title, category, initialItemsToShow, fetchDataOfPr
                                         <path d="M5.25 10.2914L12 17.0414L18.75 10.2914" stroke="#8119B1"
                                               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>}
-                                    onClick={showMoreCards}/>
+                                    onClick={showMoreCards}
+                            />
                         )}
                     </div>
                 </div>

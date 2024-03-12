@@ -1,0 +1,39 @@
+@import "../../../../../assets/styles/variables";
+
+.popular_category{
+  @media (min-width: $mobile) {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    &-title{
+      padding: 0 16px;
+      font: 500 18px / 1.5 "Inter", sans-serif;
+      color: $primary-color-black;
+    }
+    &-btn {
+      display: flex;
+      flex-direction: column;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      gap: 16px;
+      align-items: center;
+
+    &-smartpnones {
+      border: 1px solid $secondary-color-purple;
+      border-radius: 5px;
+      padding: 12px 32px;
+      width: 288px;
+      height: 40px;
+    }
+      & > .btn-text {
+
+      }
+
+      & > .btn-svg {
+padding-right: 10px;
+      }
+
+    }
+
+  }
+
+}
