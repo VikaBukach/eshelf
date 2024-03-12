@@ -15,9 +15,8 @@
 
   &-title {
     padding: 0 16px;
-    font:
-      500 18px / 1.5 "Inter",
-      sans-serif;
+    font: 500 18px / 1.5 "Inter",
+    sans-serif;
     color: #333;
   }
 
@@ -36,11 +35,14 @@
   &-products {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 15px;
     justify-content: center;
 
     .section-especially-item {
-      display: flex;
+      width: 140px;
+      @media (min-width: $tablet) {
+        width: 234px;
+      }
     }
   }
 
@@ -59,9 +61,10 @@
     display: none;
 
     @media (min-width: $desktop) {
-      display: inline-block;
-      width: 100%;
       position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
 
       &-arrows {
         display: flex;
@@ -81,6 +84,13 @@
           cursor: pointer;
         }
       }
+      .section-especially-item-desktop {
+        width: 319px;
+        height: 405px;
+      }
     }
+  }
+  .slick-slide {
+    padding: 0 10px; /* Встановлюємо відступ між елементами */
   }
 }

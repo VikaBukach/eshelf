@@ -52,7 +52,7 @@ function ProductListHomePage({title, category, initialItemsToShow, fetchDataOfPr
         infinite: true,
         speed: 500,
         slidesToShow: 5,
-        slidesToScroll: 1,
+        slidesToScroll: 2,
     };
 
 
@@ -107,7 +107,7 @@ function ProductListHomePage({title, category, initialItemsToShow, fetchDataOfPr
                             {status === "failed" && <div>Error: {error} </div>}
                             {status === "succeeded" && data.length > 0 ? (
                                 data.slice(0, itemsToShow).map((item, index) => (
-                                    <div className="section-especially-item-desktop " key={index}>
+                                    <div className="section-especially-item-desktop" key={index}>
                                         <ProductCard
                                             id={item._id}
                                             imageURL={item.colors[0].images[0]}
