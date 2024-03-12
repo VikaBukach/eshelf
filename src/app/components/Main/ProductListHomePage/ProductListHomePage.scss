@@ -45,6 +45,10 @@
   }
 
   .section_especially-products-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     border: 1px solid #8119b1;
     border-radius: 5px;
     padding: 12px 32px;
@@ -52,6 +56,12 @@
     height: 40px;
     @media (min-width: $tablet) {
       margin-top: 24px;
+    }
+     .btn-text {
+       color: $secondary-color-purple;
+    }
+    .btn-svg {
+      padding-left: 8px;
     }
   }
 
@@ -83,4 +93,5 @@
       }
     }
   }
+
 }
