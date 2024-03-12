@@ -1,14 +1,16 @@
 @import "../../../../../assets/styles/variables";
 
-.popular_category{
+.popular_category {
   @media (min-width: $mobile) {
     margin-top: 30px;
     margin-bottom: 40px;
-    &-title{
+
+    &-title {
       padding: 0 16px;
       font: 500 18px / 1.5 "Inter", sans-serif;
       color: $primary-color-black;
     }
+
     &-btn {
       display: flex;
       flex-direction: column;
@@ -17,23 +19,29 @@
       gap: 16px;
       align-items: center;
 
-    &-smartpnones {
-      border: 1px solid $secondary-color-purple;
-      border-radius: 5px;
-      padding: 12px 32px;
-      width: 288px;
-      height: 40px;
-    }
-      & > .btn-text {
+      &-smartpnones,
+      &-components,
+      &-tablets,
+      &-others {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 1px solid $secondary-color-purple;
+        border-radius: 5px;
+        padding: 12px 32px;
+        width: 288px;
+        height: 40px;
 
+        .btn-text {
+          color: $secondary-color-purple;
+        }
+
+        .btn-svg {
+          padding-left: 10px;
+        }
       }
-
-      & > .btn-svg {
-padding-right: 10px;
-      }
-
     }
-
   }
 
 }

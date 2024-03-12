@@ -16,7 +16,7 @@ function PopularCategory({onClick}) {
                     </svg>}
                     text={"Smartphones"}
             />
-            <Button btnClass="popular_category-btn-smartpnones"
+            <Button btnClass="popular_category-btn-components"
                     onClick={onClick}
                     svg={<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -29,7 +29,7 @@ function PopularCategory({onClick}) {
                     text={"PC and components"}
             />
 
-            <Button btnClass="popular_category-btn-smartpnones"
+            <Button btnClass="popular_category-btn-tablets"
                     onClick={onClick}
                     svg={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -39,7 +39,7 @@ function PopularCategory({onClick}) {
                     </svg>}
                     text={"Tablets, photos, videos"}
             />
-            <Button btnClass="popular_category-btn-smartpnones"
+            <Button btnClass="popular_category-btn-others"
                     onClick={onClick}
                     svg={<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.25 10.2914L12 17.0414L18.75 10.2914" stroke="#8119B1" stroke-width="1.5"
