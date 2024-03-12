@@ -21,14 +21,14 @@
       background: $secondary-color-purple-light;
 
       @media (min-width: $desktop) {
-        background: $secondary-color-blue;
+        background: $main-gradient;
       }
     }
 
     &-2 {
       background: $main-gradient;
       @media (min-width: $desktop) {
-        background: $primary-color-blue;
+        background: $main-gradient;
       }
     }
 
