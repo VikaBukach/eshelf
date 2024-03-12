@@ -47,10 +47,10 @@ const CartItem = ({ item }) => {
 };
 
 const Cart = ({ activator }) => {
+  const dispatch = useDispatch(); // додав обчислення загальної суми
   const cart = useSelector((state) => state.cart.data);
   const { active, open, close } = useModal();
   const navigate = useNavigate();
-  const dispatch = useDispatch(); // додав обчислення загальної суми
 
   const footerRef = useRef();
   const headerRef = useRef();
