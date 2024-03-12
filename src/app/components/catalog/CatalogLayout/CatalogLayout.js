@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { CatalogProductList } from "../CatalogProductList/CatalogProductList";
 import { CatalogFilter } from "../CatalogFilter/CatalogFilter";
@@ -8,37 +8,37 @@ import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice
 import { setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
 import { createFilterSettingsObjectFromUrl, createUrlFromFilterSettings } from "../../../utils/filter-url";
+import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
+import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
+import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
 
 const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
+  const products = useSelector((state) => state.products.data);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
   const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
-  const isLoaded = useSelector((state) => state.page.isLoaded);
+  const fetchStatus = useSelector((state) => state.products.status);
 
   const [allSettings, setAllSettings] = useState([]);
 
+  // ДІЇ ПО КНОПКАХ
 
+  // Відкрити фільтр
   const openFilter = () => {
     if (window.innerWidth < 1024) {
       document.querySelector(".filter").classList.toggle("filter--open");
       document.querySelector("body").classList.toggle("body-to-filter");
       document.querySelector(".catalog__shadow").classList.toggle("catalog__shadow--open");
-      
     }
   };
 
-  const checkCount = () => {
-    let pricePlus;
-    priceBy > minValue || priceTo < maxValue ? (pricePlus = 1) : (pricePlus = 0);
-    return allSettings.length + pricePlus;
-  };
-
+  // Видалити критерій фільтру (таблет версія)
   const deleteSetting = (event) => {
     const newFilterSettings = {};
     for (const setting in filterSettings) {
@@ -46,13 +46,53 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
         (item) => item !== event.target.getAttribute("data-value")
       );
     }
-    dispatch(setCheckboxesSettings(newFilterSettings));
+    // dispatch(setCheckboxesSettings(newFilterSettings));
   };
 
-  const navigateToUrlWithSettings = () => {
-      const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
-      navigate(url);
+  // ДОПОМІЖНІ ЕЛЕМЕНТИ
+
+  // Кружечок з кількістю фільтрів (мобільна версія)
+  const checkCount = () => {
+    let pricePlus;
+    priceBy > minValue || priceTo < maxValue ? (pricePlus = 1) : (pricePlus = 0);
+    return allSettings.length + pricePlus;
   };
+
+  // Фільтр-посилання
+  const navigateToUrlWithSettings = () => {
+    const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
+    navigate(url);
+  };
+
+  // ЗМІНА СТАНІВ
+
+  // При завантаженні товарів
+  useEffect(() => {
+    if (fetchStatus === "succeeded") {
+      dispatch(updateBaseFilterData(products));
+      dispatch(updateFilteredProductsWithPrice(products));
+      dispatch(setProductsToResrtSorting(products));
+
+      if (window.location.search !== "") {
+        const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
+          minValue,
+          maxValue
+        );
+
+        if (sortingSettings) {
+          dispatch(setFilterSorting(sortingSettings));
+        }
+        if (filterPriceSettings.priceBy !== 0 && filterPriceSettings.priceTo !== 0) {
+          dispatch(setPriceBy(filterPriceSettings.priceBy));
+          dispatch(setPriceTo(filterPriceSettings.priceTo));
+        }
+        if (Object.keys(filterCheckboxSettings).length !== 0) {
+          dispatch(setCheckboxesSettings(filterCheckboxSettings));
+        }
+      } else {
+      }
+    }
+  }, [fetchStatus]);
 
   useEffect(() => {
     setAllSettings(Object.values(filterSettings).flat());
@@ -60,21 +100,6 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
       navigateToUrlWithSettings();
     }
   }, [filterSettings]);
-
-  useEffect(() => {
-    const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(minValue, maxValue);
-    if (Object.keys(filterCheckboxSettings).length !== 0) {
-      dispatch(setCheckboxesSettings(filterCheckboxSettings));
-    };
-    if (sortingSettings) {
-      dispatch(setFilterSorting(sortingSettings));
-    };
-    if (filterPriceSettings.priceBy !== 0 && filterPriceSettings.priceTo !== 0) {
-      console.log(filterPriceSettings.priceBy);
-      dispatch(setPriceBy(filterPriceSettings.priceBy));
-      dispatch(setPriceTo(filterPriceSettings.priceTo));
-    }
-  }, [isLoaded]);
 
   return (
     <div className="catalog">

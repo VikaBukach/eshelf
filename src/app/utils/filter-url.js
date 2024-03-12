@@ -14,7 +14,7 @@ export const createUrlFromFilterSettings = (
     }
   }
 
-  if (priceBy !== minValue || priceTo !== maxValue) {
+  if ((priceBy !== minValue || priceTo !== maxValue) && priceBy !== 0 && priceTo !== 0) {
     filterUrl = filterUrl + "price" + "=" + priceBy.toString() + "-" + priceTo.toString() + ";";
   }
 

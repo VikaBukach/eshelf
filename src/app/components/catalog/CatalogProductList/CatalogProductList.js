@@ -1,27 +1,10 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setBaseFilteredProducts } from "../../../store/slices/filteredProductsSlice";
-import { setFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
-import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
+import React from "react";
+import { useSelector } from "react-redux";
 import ProductCard from "../../ProductCard/ProductCard";
 
 const CatalogProductList = () => {
-  const dispatch = useDispatch();
   const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
-  const products = useSelector((state) => state.products.data);
 
-  // ------- ПОЧАТОК РОБОТИ
-  // ------- Заповнення массивів BASE та PRICE при завантаженні сторінки, а також до до ресет-сховища
-
-  useEffect(() => {
-    dispatch(setBaseFilteredProducts(products));
-    dispatch(setFilteredProductsWithPrice(products));
-    dispatch(setProductsToResrtSorting(products));
-  }, [products]);
-
-  // ---------------------------------------------------------
-  // --------------------ВРЕМЕННОЕ----------------------------
-  // ---------------------------------------------------------
   let productItems = [];
 
   filteredProductsWithPrice.forEach((product) => {
@@ -39,19 +22,9 @@ const CatalogProductList = () => {
       productItem.priceTo = color.products[l].price;
       productItem.discountPriceBy = color.products[0].discount_price;
 
-      // productItem.bool = product.test_boolean ? "Yes" : "No";
-      // productItem.battary_capacity = product.specifications.battery.capacity;
-      // productItem.capacity = [];
-      // let b = color.products.forEach((product) => {
-      //   productItem.capacity.push(product.capacity + " / ");
-      // });
-
       productItems.push(productItem);
     });
   });
-  // ---------------------------------------------------------
-  // ---------------------------------------------------------
-  // ---------------------------------------------------------
 
   return (
     <ul className="product-list">

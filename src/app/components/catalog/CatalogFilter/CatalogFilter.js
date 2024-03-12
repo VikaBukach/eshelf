@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
 import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
 import { findValueByPath } from "../../../helpers/catalog";
 import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { Accordion } from "../../ui/Accordion/Accordion";
+import { createUrlFromFilterSettings } from "../../../utils/filter-url";
+import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
+import { fetchDataOfProducts } from "../../../store/slices/productsSlice";
 
 const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const products = useSelector((state) => state.products.data);
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
-  const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
+  const priceBy = useSelector((state) => state.filterSettings.priceBy);
+  const priceTo = useSelector((state) => state.filterSettings.priceTo);
+  const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
+  const fetchStatus = useSelector(state => state.products.status);
 
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
@@ -38,16 +46,6 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
       updatedFilterCriterias.push({ title: criteria.title, types: criteria.types, path: criteria.path });
     });
     return updatedFilterCriterias;
-  };
-
-  // Складання масиву з усіх значень (з повтореннями) згідно з шляхом пошуку
-  const findAllValues = (path) => {
-    const valuesOfCriteria = [];
-    filteredProductsWithPrice.forEach((product) => {
-      const { value: findVariations } = findValueByPath(product, path);
-      valuesOfCriteria.push(...findVariations);
-    });
-    return valuesOfCriteria;
   };
 
   // ОБРОБКА ФІЛЬТРАЦІЇ (ПІСЛЯ НАТИСКАННЯ КНОПКИ)
@@ -100,25 +98,43 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     return filteredProductsArray;
   };
 
-  // ------- На початку роботи заповнюємо параметри BASE та PRICE  згідно з товарами у PRODUCTS
-  useEffect(() => {
-    setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
-  }, [products]);
+  // Прибираємо розділювальну риску на останнтому елементі
+  const accordions = document.querySelectorAll(".filter .accordion");
+  if (accordions.length > 1) {
+    accordions[accordions.length - 1].style.borderBottom = "0px";
+    accordions[accordions.length - 1].style.marginBottom = "0px";
+  }
 
-  // ------- ВЗАЄМОДІЯ З КОРИСТУВАЧЕМ
+  // Фільтр-посилання при ресеті
+  const navigateToUrlWithSettings = () => {
+    const url = `?${createUrlFromFilterSettings([], 0, 0, 0, 0, checkedSortingValue)}`;
+    navigate(url);
+  };
 
+
+  // ДІЇ ПО КНОПКАХ
+
+  // Запуск базового фільтру
   const onFilterSubmit = () => {
-    dispatch(updateBaseFilterData(filterProducts()));
+    // dispatch(updateBaseFilterData(filterProducts()));   ПРИ ЗМІНІ ЧЕКБРКСУ ВЖЕ СПРАЦЮВАЛО
     closeFilter();
   };
 
+ // Натиск RESET
   const onResetSubmit = () => {
+        
+    dispatch(setPriceBy(0));
+    dispatch(setPriceTo(0));
     dispatch(setCheckboxesSettings([]));
-    dispatch(setPriceBy(minValue));
-    dispatch(setPriceTo(maxValue));
+    // dispatch(setMinPrice(0));
+    // dispatch(setMaxPrice(0));
+    // dispatch(setCheckboxesSettings([]));
+    
     closeFilter();
+    navigateToUrlWithSettings();
   };
 
+  // Закрити фільтр (мобільна і таблет-версії)
   const closeFilter = () => {
     if (window.innerWidth < 1024) {
       document.querySelector(".filter").classList.toggle("filter--open");
@@ -127,16 +143,39 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     }
   };
 
-  const accordions = document.querySelectorAll(".filter .accordion");
-  if (accordions.length > 1) {
-    accordions[accordions.length - 1].style.borderBottom = "0px";
-    accordions[accordions.length - 1].style.marginBottom = "0px";
-  }
+
+
+
+
+  // ЗМІНА СТАНІВ
+
+      // ------- На початку роботи заповнюємо параметри BASE та PRICE  згідно з товарами у PRODUCTS
+    useEffect(() => {
+      if (fetchStatus === 'succeeded') {
+      setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
+      }
+    }, [fetchStatus]);
+
+
 
   // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
+  // useEffect(() => {
+  //   dispatch(updateBaseFilterData(filterProducts()));
+  // }, [baseFilterProductsStatus]);
+
+
+
+
+
   useEffect(() => {
     dispatch(updateBaseFilterData(filterProducts()));
   }, [filterSettings]);
+
+
+
+
+
+
 
   return (
     <div className="filter">
@@ -148,12 +187,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
       <Accordion title="Price" content={<CatalogPriceFilter pricePath={pricePath} />} />
       {filterCriteriasWithTypes.map((criteria, index) => (
         <React.Fragment key={index}>
-          <CatalogFilterItem
-            filterTitle={criteria.title}
-            checkBoxNames={criteria.types}
-            criteriaPath={criteria.path}
-            allValues={findAllValues(criteria.path)}
-          />
+          <CatalogFilterItem filterTitle={criteria.title} checkBoxNames={criteria.types} criteriaPath={criteria.path} />
         </React.Fragment>
       ))}
       <div className="filter__buttons">
