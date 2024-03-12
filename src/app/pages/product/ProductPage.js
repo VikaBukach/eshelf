@@ -21,7 +21,9 @@ const ProductPage = () => {
   const dispatch = useDispatch();
 
   const product = useSelector((state) => state.products.data.find((item) => item._id === id));
-  
+
+
+
   const { tabs } = useSelector((state) => state.product);
 
   const [rating, setRating] = useState(0);

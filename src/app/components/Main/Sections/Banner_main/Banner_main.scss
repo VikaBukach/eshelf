@@ -113,9 +113,12 @@
   .banner_main-img-desktop {
     @media (min-width: $mobile) {
       display: none;
+
     }
     @media (min-width: $desktop) {
       display: flex;
+      width: 600px;
+      height: 383px;
     }
   }
 
