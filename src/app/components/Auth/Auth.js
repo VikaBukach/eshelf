@@ -54,7 +54,7 @@ const RegisterForm = ({ onSuccess }) => {
   const PORT = process.env.REACT_APP_PORT || 5000;
   const [loginNotify, setLoginNotify] = useState({ type: "empty" });
   const dispatch = useDispatch();
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const formRef = useRef();
 
   const loginHandler = async (e) => {

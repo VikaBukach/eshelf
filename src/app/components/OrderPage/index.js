@@ -50,7 +50,7 @@ const OrderPage = () => {
           <p>&times; {item.quantity}</p>
           <div className={style.productQuantity}>
             <div className={style.quantity}>
-              <div className={style.price}>{formatPrice(+item.price * +item.quantity)} ₴</div>
+              <div className={style.price}>{formatPrice(+item.price * +item.quantity)} $</div>
             </div>
           </div>
         </div>
@@ -85,16 +85,16 @@ const OrderPage = () => {
             <p>
               {totalProductsQuantity} {plural("product", totalProductsQuantity)} for the amount of
             </p>
-            <span>{formatPrice(totalProductsPrice)} ₴</span>
+            <span>{formatPrice(totalProductsPrice)} $</span>
           </div>
           <div>
             <p>The cost of delivery</p>
-            <span>{formatPrice(DELIVERY_COST)} ₴</span>
+            <span>{formatPrice(DELIVERY_COST)} $</span>
           </div>
 
           <div className={style.totals}>
             <p>Total</p>
-            <span>{formatPrice(totalProductsPrice + DELIVERY_COST)} ₴</span>
+            <span>{formatPrice(totalProductsPrice + DELIVERY_COST)} $</span>
           </div>
           <button onClick={open} className="primary-btn" disabled={buttonDisabled}>
             <img src="" alt="" />
