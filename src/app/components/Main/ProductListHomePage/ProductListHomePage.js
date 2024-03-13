@@ -54,7 +54,6 @@ function ProductListHomePage({title, category, initialItemsToShow, fetchDataOfPr
         slidesToScroll: 2,
     };
 
-
     return (
         <>
             <div className="section_especially">
