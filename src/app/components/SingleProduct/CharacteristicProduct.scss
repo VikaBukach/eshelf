@@ -6,7 +6,7 @@
 
   @media screen and (min-width: $tablet) {
     padding: 10px 20px 30px 20px;
-    background-color: $secondary-color-grey-card;
+    //background-color: $secondary-color-grey-card;
   }
 
   @media screen and (min-width: $desktop) {
@@ -80,7 +80,7 @@
   &__carriage {
     @media screen and (min-width: $desktop) {
       position: sticky;
-      top: 40px;
+      top: 100px;
     }
   }
 }
@@ -97,7 +97,7 @@
   }
 
   &__img {
-    flex: 0 1 50%;
+    flex: 0 1 45%;
     flex-shrink: 0;
     max-width: 200px;
     @media screen and (min-width: $tablet) {
@@ -109,7 +109,7 @@
   }
 
   &__details {
-    flex: 0 1 50%;
+    flex: 0 1 55%;
   }
   &__title {
     font-size: 20px;

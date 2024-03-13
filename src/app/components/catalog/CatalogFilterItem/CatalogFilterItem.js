@@ -2,10 +2,14 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
 import { NumberOfEligibleProducts } from "../NumberOfEligibleProducts/NumberOfEligibleProducts";
+import { Accordion } from "../../ui/Accordion/Accordion";
+import { findValueByPath } from "../../../helpers/catalog";
 
-const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues }) => {
+const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
   const dispatch = useDispatch();
+
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
+  const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
 
   const filterSettingsToUpdate = { ...filterSettings };
 
@@ -21,7 +25,19 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues
     if (!checked) {
       filterSettingsToUpdate[criteriaPath] = filterSettingsToUpdate[criteriaPath].filter((item) => item !== name);
     }
+
+    console.log(filterSettingsToUpdate);
     dispatch(setCheckboxesSettings(filterSettingsToUpdate));
+  };
+
+  // Складання масиву з усіх значень (з повтореннями) згідно з шляхом пошуку
+  const findAllValues = (array, path) => {
+    const valuesOfCriteria = [];
+    array.forEach((product) => {
+      const { value: findVariations } = findValueByPath(product, path);
+      valuesOfCriteria.push(...findVariations);
+    });
+    return valuesOfCriteria;
   };
 
   const isCheckboxChecked = (checkBoxName) => {
@@ -33,7 +49,7 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues
   };
 
   const findNumberOfValue = (name) => {
-    const numberOfValue = allValues.reduce((accumulator, currentValue) => {
+    const numberOfValue = findAllValues(filteredProductsWithPrice, criteriaPath).reduce((accumulator, currentValue) => {
       if (currentValue === name) {
         return accumulator + 1;
       } else {
@@ -44,27 +60,34 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath, allValues
   };
 
   return (
-    <div className="filter-item">
-      <h5 className="filter-item__name">{filterTitle}</h5>
-      {checkBoxNames.map((checkBoxName, index) => {
-        return (
-          <div className="filter-item__checkbox-line" key={checkBoxName + index}>
-            <label className="filter-item__label">
-              <input
-                className="filter-item__chekbox"
-                type="checkbox"
-                name={checkBoxName}
-                checked={isCheckboxChecked(checkBoxName)}
-                onChange={handleCheckboxChange}
-                disabled={findNumberOfValue(checkBoxName) === 0 ? true : false}
-              />
-              {checkBoxName}
-            </label>
-            <NumberOfEligibleProducts number={findNumberOfValue(checkBoxName)} />
-          </div>
-        );
-      })}
-    </div>
+    <Accordion
+      title={filterTitle}
+      content={
+        <div className="filter-item">
+          {checkBoxNames.map((checkBoxName, index) => {
+            return (
+              <div className="filter-item__checkbox-line" key={checkBoxName + index}>
+                <label className="filter-item__label">
+                  <input
+                    className="filter-item__chekbox"
+                    type="checkbox"
+                    name={checkBoxName}
+                    checked={isCheckboxChecked(checkBoxName)}
+                    onChange={handleCheckboxChange}
+                    disabled={findNumberOfValue(checkBoxName) === 0 ? true : false}
+                  />
+                  <span
+                    className={`filter-item__custom-checkbox ${isCheckboxChecked(checkBoxName) ? "filter-item__custom-checkbox--checked" : ""} ${findNumberOfValue(checkBoxName) === 0 ? "filter-item__custom-checkbox--disabled" : ""}`}
+                  ></span>
+                  {checkBoxName}
+                </label>
+                <NumberOfEligibleProducts number={findNumberOfValue(checkBoxName)} />
+              </div>
+            );
+          })}
+        </div>
+      }
+    />
   );
 };
 

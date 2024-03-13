@@ -1,9 +1,16 @@
 import { humanizeText } from "../Comparing/helpers";
 import ProductCard from "../ProductCard/ProductCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setFavoritesTotal } from "../../store/slices/navMenuSlice"; // додав обчислення загальної суми
 
 const FavoritesPage = () => {
+  const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites.data);
+
+  useEffect(() => {
+    dispatch(setFavoritesTotal(favorites.length));
+  }, [dispatch, favorites]);
 
   const groupCategories = (arr) => {
     let obj = {};

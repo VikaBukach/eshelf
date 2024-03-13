@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import menuReducer from "./slices/NavMenuSlice";
+import menuReducer from "./slices/navMenuSlice";
 import productsReducer from "./slices/productsSlice";
 import filteredProductsReducer from "./slices/filteredProductsSlice";
 import filterSettingsReducer from "./slices/filterSettingsSlice";

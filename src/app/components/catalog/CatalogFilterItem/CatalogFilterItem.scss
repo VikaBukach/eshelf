@@ -1,8 +1,64 @@
 .filter-item {
-  display: flex;
-  flex-direction: column;
+  @include flex-container(column, center, flex-start, nowrap);
   &__checkbox-line {
-    display: flex;
-    justify-content: space-between;
+    @include flex-container(row, space-between, center, nowrap);
+    min-width: 250px;
+    width: 100%;
+    margin-bottom: 16px;
+
+    &:last-child {
+      margin-bottom: 8px;
+    }
+  }
+
+  &__label {
+    position: relative;
+    @include flex-container(row, flex-start, center, nowrap);
+  }
+
+  &__custom-checkbox {
+    display: block;
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    background-color: $secondary-color-white;
+    border-radius: 5px;
+    border: 1px solid $primary-color-black;
+    &--checked {
+      background-color: $secondary-color-blue-light;
+      border: 1px solid $secondary-color-blue-light;
+
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 10px;
+        height: 9px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: url("../../../../../public/assets/icons/check.svg") no-repeat;
+      }
+    }
+    &--disabled {
+      background-color: $primary-color-gray;
+      border: 1px solid $secondary-color-grey-light;
+    }
+  }
+
+  &__chekbox {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    margin-right: 12px;
+    opacity: 0;
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  .filter-item {
+    &__checkbox-line {
+      min-width: 288px;
+    }
   }
 }
