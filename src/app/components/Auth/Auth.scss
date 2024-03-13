@@ -1,0 +1,55 @@
+@import '../../../assets//styles/variables';
+
+.auth-form-wrapper {
+    padding: 3.2rem;
+    max-width: 54rem;
+    min-width: unset;
+    width: 100%;
+}
+
+.auth-form {
+    display: grid;
+    gap: 2.4rem;
+
+    input {
+        width: 100%;
+        border-radius: 1rem;
+        border: 1px solid $primary-color-black;
+        padding: 1.2rem 1.6rem;
+        font-size: 1.6rem;
+    }
+
+    button {
+        margin-top: 0.8rem;
+    }
+
+
+    &__header {
+        text-align: center;
+        margin-bottom: 2.4rem;
+
+        h3 {
+            font-size: 2.4rem;
+        }
+    }
+
+    &__footer {
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 1.8rem;
+
+        a {
+            color: $secondary-color-purple;
+        }
+    }
+
+
+}
+
+.form-group {
+    label {
+        display: block;
+        margin-bottom: 1.2rem;
+        line-height: 1;
+    }
+}

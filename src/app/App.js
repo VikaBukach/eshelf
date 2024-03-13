@@ -1,5 +1,5 @@
 import "./App.scss";
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
@@ -12,8 +12,24 @@ import { Smartphones } from "./pages/catalog/Smartphones";
 import { Laptops } from "./pages/catalog/Laptops";
 import Cart from "./components/Cart";
 import { ProductPage } from "./pages/product/ProductPage";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "./store/slices/authSlice";
 
 function App() {
+  const dispath = useDispatch();
+
+  useEffect(() => {
+    dispath(getUser());
+  }, []);
+
+  const { loading } = useSelector((state) => state.user);
+  if (loading)
+    return (
+      <div className="page-loader">
+        <div className="loader"></div>
+      </div>
+    );
+
   return (
     <>
       <Routes>

@@ -16,10 +16,12 @@ import BurgerMenuDesktop from "./BurgerMenu/BurgerMenuDesktop";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useModal } from "../../hooks/useModal";
 import Cart from "../Cart";
+import Auth from "../Auth/Auth";
 
 const Header = () => {
   const dispatch = useDispatch();
   const menuOpen = useSelector((state) => state.menu.isOpen);
+  const user = useSelector((state) => state.user.data);
   const windowWidth = useWindowWidth();
 
   const handleToggleMenu = () => {
@@ -60,9 +62,23 @@ const Header = () => {
               }
             />
           </div>
-          <NavLink to="/users" className="header__link-users">
-            <UserIcon />
-          </NavLink>
+
+          {user ? (
+            <NavLink to="/users" className="header__link-users">
+              <span>Hello, {user.name}</span>
+              <UserIcon />
+            </NavLink>
+          ) : (
+            <div className="header__link-users">
+              <Auth
+                activator={
+                  <div>
+                    <UserIcon />
+                  </div>
+                }
+              />
+            </div>
+          )}
 
           {menuOpen && (
             <>

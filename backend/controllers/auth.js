@@ -11,8 +11,6 @@ const authorize = async (req, res) => {
 
   const token = req.headers.authorization;
 
-  console.log("CALL", token);
-
   try {
     if (!token) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -37,7 +35,7 @@ const authorize = async (req, res) => {
     });
   } catch (error) {
     console.error("Error saving review:", error);
-    res.status(500, {
+    res.status(200, {
       message: "Something went wrong!",
     });
   }
@@ -50,30 +48,33 @@ const login = async (req, res) => {
   const users = database.collection("users");
   try {
     const user = await users.findOne({
-      email,
+      email: email.toLowerCase(),
     });
 
     if (!user) {
-      return res.status(404).send({ message: "User not found" });
+      return res.status(200).send({ type: "error", message: "User not found" });
     }
 
     const comparePasswords = await bcrypt.compare(password, user.password);
 
     if (!comparePasswords) {
-      return res.status(404).send("Wrong username or password!");
+      return res.status(200).send({ type: "error", message: "Wrong username or password!" });
     }
 
     const token = jwt.sign({ id: user.userId }, SECRET_KEY);
 
     res.send({
+      type: "success",
+      message: "You are succefull logged in!",
+      token,
       name: user.name,
       surname: user.surname,
       email: user.email,
-      token,
     });
   } catch (error) {
     console.error("Error saving review:", error);
-    res.status(500, {
+    res.status(200, {
+      type: "error",
       message: "Something went wrong!",
     });
   }
@@ -84,20 +85,16 @@ const register = async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  console.log(email);
-  if (!email || !password) {
-    res.send("TEST");
-  }
-
   const database = client.getDb();
   const users = database.collection("users");
+
   try {
     const user = await users.findOne({
-      email,
+      email: email.toLowerCase(),
     });
 
     if (user) {
-      return res.status(404).send({ message: "User already exist" });
+      return res.status(200).send({ type: "error", message: "User already exist" });
     }
 
     const userId = uuidv4();
@@ -111,10 +108,11 @@ const register = async (req, res) => {
 
     const token = jwt.sign({ id: userId }, SECRET_KEY);
 
-    res.status(200).send({ token });
+    res.status(200).send({ type: "success", name, surname, email, token });
   } catch (error) {
     console.error("Error saving review:", error);
     res.status(500, {
+      type: "error",
       message: "Something went wrong!",
     });
   }
