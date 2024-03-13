@@ -1,0 +1,30 @@
+@import "../../../assets/styles/style";
+
+.userprofile_container {
+  @media screen and (min-width: $desktop) {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+
+
+    .userprofile {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      margin-top: 10vh;
+
+      &-sidebar-left {
+        //width: 20%;
+        width: 540px;
+        height: 79px;
+        background: #eceff1;
+        //background: rgba(163, 173, 255, 0.2);//hovers color
+        border-radius: 20px 20px 0 0;
+      }
+
+      &-sidebar-right {
+
+      }
+    }
+  }
+}
