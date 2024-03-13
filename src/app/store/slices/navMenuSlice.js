@@ -28,23 +28,31 @@ export const menuSlice = createSlice({
     setUserCount: (state, action) => {
       state.userCount = action.payload;
     },
-    setCartTotal: (state, action) => { 
+    setCartTotal: (state, action) => {
       state.cartTotal = action.payload;
     },
-    setFavoritesTotal: (state, action) => { 
+    setFavoritesTotal: (state, action) => {
       state.favoritesTotal = action.payload;
     },
-    setCompareTotal: (state, action) => { 
+    setCompareTotal: (state, action) => {
       state.favoritesTotal = action.payload;
     },
   },
 });
 
-export const { toggleMenu, setCompareCount, setFavoritesCount, setCartCount, setUserCount, setCartTotal, setFavoritesTotal, setCompareTotal } = menuSlice.actions;
+export const {
+  toggleMenu,
+  setCompareCount,
+  setFavoritesCount,
+  setCartCount,
+  setUserCount,
+  setCartTotal,
+  setFavoritesTotal,
+  setCompareTotal,
+} = menuSlice.actions;
 
 export const selectCartTotal = (state) => state.menu.cartTotal;
 export const selectFavoritesTotal = (state) => state.menu.favoritesTotal;
 export const selectCompareTotal = (state) => state.menu.compareTotal;
-
 
 export default menuSlice.reducer;

@@ -9,7 +9,6 @@ import { ProductDetailsTablets } from "./ProductDetailsLayouts/ProductDetailsTab
 import { ProductDetailsHeadphones } from "./ProductDetailsLayouts/ProductDetailsHeadphones";
 
 const CharacteristicProduct = ({ product }) => {
-
   let DetailsComponent;
 
   switch (product.category) {

@@ -8,7 +8,6 @@ import { ProductTv } from "./ProductCategoryLayouts/ProductTv";
 import { ProductTablets } from "./ProductCategoryLayouts/ProductTablets";
 import { ProductHeadphones } from "./ProductCategoryLayouts/ProductHeadphones";
 
-
 const AboutProduct = ({ product }) => {
   let ProductComponent;
 
@@ -41,11 +40,11 @@ const AboutProduct = ({ product }) => {
       ProductComponent = () => <div className="product-details-body">Unsupported product category</div>;
   }
 
-   return (
+  return (
     <>
       <ProductComponent product={product} />
     </>
-   );
+  );
 };
 
 export { AboutProduct };

@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ProductKeyboards = () => {
-  return (
-    <div>ProductKeyboards</div>
-  )
-}
+  return <div>ProductKeyboards</div>;
+};
 
 export { ProductKeyboards };

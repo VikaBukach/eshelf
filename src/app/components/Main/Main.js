@@ -8,7 +8,6 @@ import PopularCategory from "./Sections/PopularCategory/PopularCategory";
 // import TopProduct from "./Sections/TopProduct/TopProduct";
 // import SalesWeek from "./Sections/SalesWeek/SalesWeek";
 
-
 const Main = () => {
   return (
     <div className="container">
@@ -17,8 +16,8 @@ const Main = () => {
       <EspeciallyForYou />
       <BannerTopProduct />
       {/*<TopProduct/>*/}
-        {/*<SalesWeek />*/}
-       <PopularCategory />
+      {/*<SalesWeek />*/}
+      <PopularCategory />
     </div>
   );
 };

@@ -1,11 +1,7 @@
 import React from "react";
 
 const Headphones = () => {
-
-  return (
-    
-    <div>Headphones</div>
-  );
+  return <div>Headphones</div>;
 };
 
 export { Headphones };

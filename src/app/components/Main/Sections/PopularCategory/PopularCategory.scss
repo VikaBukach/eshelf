@@ -7,7 +7,9 @@
 
     &-title {
       padding: 0 16px;
-      font: 500 18px / 1.5 "Inter", sans-serif;
+      font:
+        500 18px / 1.5 "Inter",
+        sans-serif;
       color: $primary-color-black;
     }
 
@@ -43,7 +45,7 @@
       }
     }
     .popular_category-items,
-    .popular_category-items-carousel{
+    .popular_category-items-carousel {
       display: none;
     }
   }
@@ -56,9 +58,6 @@
     }
 
     .popular_category-items {
-
-
-
       padding: 16px;
       width: 768px;
       height: 568px;
@@ -107,7 +106,9 @@
     }
 
     .popular_category-title {
-      font: 400 20px / 1.5 "Inter", sans-serif;
+      font:
+        400 20px / 1.5 "Inter",
+        sans-serif;
       color: $primary-color-black;
     }
 
@@ -142,10 +143,11 @@
       height: auto;
     }
 
-
     .popular_category-title-des {
       text-align: center;
-      font: 500 16px / 1.5 "Inter", sans-serif;
+      font:
+        500 16px / 1.5 "Inter",
+        sans-serif;
       color: $primary-color-black;
     }
     .popular_category-product-cont .slick-slide {
@@ -153,8 +155,3 @@
     }
   }
 }
-
-
-
-
-

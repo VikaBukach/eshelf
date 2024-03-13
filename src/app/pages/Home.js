@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(setFavoritesTotal(favorites.length));
   }, [dispatch, favorites]);
-  
+
   return (
     <>
       <Main />

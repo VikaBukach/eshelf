@@ -8,7 +8,6 @@ import { decrementProductQuantity, incrementProductQuantity } from "../../store/
 import { formatPrice } from "../../utils/formatPrice";
 import { setCartTotal } from "../../store/slices/navMenuSlice"; // додав обчислення загальної суми
 
-
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
 
@@ -59,12 +58,12 @@ const Cart = ({ activator }) => {
     return prev + curr.quantity * curr.price;
   }, 0);
 
-// додав обчислення загальної суми
+  // додав обчислення загальної суми
   useEffect(() => {
     dispatch(setCartTotal(totalPrice));
   }, [dispatch, totalPrice]);
 
-  const footerElement =  (
+  const footerElement = (
     <div ref={footerRef}>
       <span className={style.line}></span>
       <div className={style.footer}>

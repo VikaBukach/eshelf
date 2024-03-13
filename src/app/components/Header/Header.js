@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMenu, setCartTotal} from "../../store/slices/navMenuSlice";
+import { toggleMenu, setCartTotal } from "../../store/slices/navMenuSlice";
 import { ReactComponent as BurgerMenuIcon } from "../../../assets/images/Burger.svg";
 import { ReactComponent as LogoIcon } from "../../../assets/images/Logo.svg";
 import { ReactComponent as MicrophoneIcon } from "../../../assets/images/Microphone.svg";
@@ -16,19 +16,19 @@ import BurgerMenuDesktop from "./BurgerMenu/BurgerMenuDesktop";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useModal } from "../../hooks/useModal";
 import Cart from "../Cart";
+import Auth from "../Auth/Auth";
 
 const Header = () => {
   const dispatch = useDispatch();
   const menuOpen = useSelector((state) => state.menu.isOpen);
+  const user = useSelector((state) => state.user.data);
   const selectCartTotal = (state) => state.menu.cartTotal;
   const cartTotal = useSelector(selectCartTotal);
   const favoritesTotal = useSelector((state) => state.menu.favoritesTotal);
 
-
   const compareTotal = useSelector((state) => state.menu.compareTotal);
 
-  console.log(compareTotal) // перевірка вхідних даних по товарам у порівнянні
-
+  console.log(compareTotal); // перевірка вхідних даних по товарам у порівнянні
 
   const userCount = useSelector((state) => state.menu.userCount);
   const windowWidth = useWindowWidth();
@@ -37,7 +37,6 @@ const Header = () => {
       const total = 0;
       dispatch(setCartTotal(total));
     };
-
 
     calculateCartTotal();
   }, [dispatch]);
@@ -85,11 +84,29 @@ const Header = () => {
             />
           </div>
 
-          <NavLink to="/users" className="header__link-users">
+          {user ? (
+            <NavLink to="/users" className="header__link-users">
+              <UserIcon />
+              <p>
+                Hello, <span>{user.name}</span>
+              </p>
+            </NavLink>
+          ) : (
+            <div className="header__link-users">
+              <Auth
+                activator={
+                  <div>
+                    <UserIcon />
+                  </div>
+                }
+              />
+            </div>
+          )}
+          {/* <NavLink to="/users" className="header__link-users">
             <UserIcon />
             {windowWidth > 1024 && <span>Hello, user</span>}
             {windowWidth <= 1024 && userCount > 0 && <span className="counter-circle"></span>}
-          </NavLink>
+          </NavLink> */}
 
           {menuOpen && (
             <>

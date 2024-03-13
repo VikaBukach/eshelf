@@ -22,7 +22,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
   const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
-  const fetchStatus = useSelector(state => state.products.status);
+  const fetchStatus = useSelector((state) => state.products.status);
 
   const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
@@ -111,7 +111,6 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     navigate(url);
   };
 
-
   // ДІЇ ПО КНОПКАХ
 
   // Запуск базового фільтру
@@ -120,16 +119,15 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     closeFilter();
   };
 
- // Натиск RESET
+  // Натиск RESET
   const onResetSubmit = () => {
-        
     dispatch(setPriceBy(0));
     dispatch(setPriceTo(0));
     dispatch(setCheckboxesSettings([]));
     // dispatch(setMinPrice(0));
     // dispatch(setMaxPrice(0));
     // dispatch(setCheckboxesSettings([]));
-    
+
     closeFilter();
     navigateToUrlWithSettings();
   };
@@ -143,39 +141,23 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     }
   };
 
-
-
-
-
   // ЗМІНА СТАНІВ
 
-      // ------- На початку роботи заповнюємо параметри BASE та PRICE  згідно з товарами у PRODUCTS
-    useEffect(() => {
-      if (fetchStatus === 'succeeded') {
+  // ------- На початку роботи заповнюємо параметри BASE та PRICE  згідно з товарами у PRODUCTS
+  useEffect(() => {
+    if (fetchStatus === "succeeded") {
       setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
-      }
-    }, [fetchStatus]);
-
-
+    }
+  }, [fetchStatus]);
 
   // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
   // useEffect(() => {
   //   dispatch(updateBaseFilterData(filterProducts()));
   // }, [baseFilterProductsStatus]);
 
-
-
-
-
   useEffect(() => {
     dispatch(updateBaseFilterData(filterProducts()));
   }, [filterSettings]);
-
-
-
-
-
-
 
   return (
     <div className="filter">

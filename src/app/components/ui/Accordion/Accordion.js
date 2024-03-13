@@ -7,7 +7,6 @@ const Accordion = ({ title, content }) => {
   const openAndClose = (event) => {
     setIsOpen(!isOpen);
     event.target.classList.toggle("accordion__open-close--open");
-    
   };
 
   React.useEffect(() => {
@@ -35,10 +34,6 @@ const Accordion = ({ title, content }) => {
       </div>
     </div>
   );
-};  
-
-
-
-
+};
 
 export { Accordion };

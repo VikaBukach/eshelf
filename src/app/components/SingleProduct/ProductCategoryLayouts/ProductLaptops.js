@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ProductLaptops = () => {
-  return (
-    <div>ProductLaptops</div>
-  )
-}
+  return <div>ProductLaptops</div>;
+};
 
 export { ProductLaptops };

@@ -32,8 +32,8 @@
 
   @media (min-width: $desktop) {
     //position: fixed;
-   position: sticky;
-    top:0;
+    position: sticky;
+    top: 0;
     height: 88px;
     z-index: 1000;
   }
@@ -65,7 +65,9 @@
   border: 1px solid;
   border-radius: 10px;
   height: 40px;
-  font: 400 16px / 1.5 "Inter", sans-serif;
+  font:
+    400 16px / 1.5 "Inter",
+    sans-serif;
   color: rgba(160, 160, 160, 0.56);
 
   @media (min-width: $tablet) {
@@ -78,10 +80,11 @@
     height: 40px;
     display: flex;
   }
-
 }
-.header__search-input  {
-  font: 400 16px / 1.5 "Inter", sans-serif;
+.header__search-input {
+  font:
+    400 16px / 1.5 "Inter",
+    sans-serif;
   color: $secondary-color-grey;
   width: 100%;
   margin-left: 16px;
@@ -99,7 +102,7 @@
   }
 }
 
-.cart-activator{
+.cart-activator {
   display: flex;
 }
 

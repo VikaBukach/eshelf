@@ -1,6 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveColorIndex, setActiveImageIndex, setActiveMemoryIndex } from "../../../store/slices/singleProductSlice";
+import {
+  setActiveColorIndex,
+  setActiveImageIndex,
+  setActiveMemoryIndex,
+} from "../../../store/slices/singleProductSlice";
 import { toggleFavorites } from "../../../store/slices/favoritesSlice";
 import { toggleCompare } from "../../../store/slices/compareSlice";
 import { addToCart } from "../../../store/slices/cartSlice";

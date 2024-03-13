@@ -17,7 +17,11 @@ function BannerTopProduct(props) {
       </div>
 
       <div className="banner_top-product-desktop">
-        <img className="banner_top-product-desktop-img" src="/img/secttopprod/Iphone_14_01-removebg-preview 1.png" alt="" />
+        <img
+          className="banner_top-product-desktop-img"
+          src="/img/secttopprod/Iphone_14_01-removebg-preview 1.png"
+          alt=""
+        />
         <div className="banner_top-product-desktop-info">
           <h1 className="banner_top-product-desktop-title">Apple Iphone 14</h1>
           <h4 className="banner_top-product-desktop-descr">

@@ -18,7 +18,6 @@ import { ReactComponent as AboutComparingIcon } from "../../../../assets/images/
 import { ReactComponent as AboutFavoritesIcon } from "../../../../assets/images/Heart.svg";
 import { ReactComponent as AboutMemoryIcon } from "../../../../assets/images/product-icons/Memory.svg";
 
-
 import { ButtonBuy } from "../ButtonBuy";
 import { WeAccept } from "../WeAccept";
 

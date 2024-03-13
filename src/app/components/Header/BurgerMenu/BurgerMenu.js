@@ -104,7 +104,7 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
                       <ArrowIconBack />
                       All categories
                     </NavLink>
-                   
+
                     <div>Smartphones subcategory1</div>
                     <div>Smartphones subcategory2</div>
                     <div>Smartphones subcategory3</div>
@@ -123,15 +123,15 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
                 </div>
                 {laptopsActive && (
                   <ul className="subcategory-menu">
-                                      <NavLink onClick={handleBackButtonClick}>
+                    <NavLink onClick={handleBackButtonClick}>
                       <ArrowIconBack />
                       All categories
                     </NavLink>
-                 
-                  <div>Laptops subcategory1</div>
-                  <div>Laptops subcategory2</div>
-                  <div>Laptops subcategory3</div>
-                </ul>
+
+                    <div>Laptops subcategory1</div>
+                    <div>Laptops subcategory2</div>
+                    <div>Laptops subcategory3</div>
+                  </ul>
                 )}
                 <ArrowIcon onClick={() => toggleMobileCategories("laptops")} />
               </li>

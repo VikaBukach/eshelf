@@ -1,6 +1,5 @@
 import "./App.scss";
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
 import { pageLoadedAction } from "./store/actions/pageLoadedAction";
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "./pages/Layout";
@@ -21,9 +20,23 @@ import { Tv } from "./pages/catalog/Tv";
 import { Laptops } from "./pages/catalog/Laptops";
 import Cart from "./components/Cart";
 import { ProductPage } from "./pages/product/ProductPage";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "./store/slices/authSlice";
 
 function App() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
+  const { loading } = useSelector((state) => state.user);
+  if (loading)
+    return (
+      <div className="page-loader">
+        <div className="loader"></div>
+      </div>
+    );
 
   dispatch(pageLoadedAction());
 

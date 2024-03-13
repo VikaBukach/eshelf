@@ -22,8 +22,6 @@ const ProductPage = () => {
 
   const product = useSelector((state) => state.products.data.find((item) => item._id === id));
 
-
-
   const { tabs } = useSelector((state) => state.product);
 
   const [rating, setRating] = useState(0);
@@ -47,7 +45,7 @@ const ProductPage = () => {
         console.error("Error fetching overall rating:", error);
       }
     };
-    
+
     if (product) {
       getOverallRating();
     }
@@ -75,7 +73,9 @@ const ProductPage = () => {
     <>
       <section className="product-details">
         <div className="container">
-          <h1 className="product-details__title">{product.brand} {product.model}</h1>
+          <h1 className="product-details__title">
+            {product.brand} {product.model}
+          </h1>
           <div className="product-details__rating">
             <div className="product-details__rating-stars">
               <Rating size={18} value={rating} setValue={setRating} />

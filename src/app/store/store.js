@@ -10,6 +10,7 @@ import cartReducer from "./slices/cartSlice";
 import compareReducer from "./slices/compareSlice";
 import singleProductSlice from "./slices/singleProductSlice";
 import favoritesReducer from "./slices/favoritesSlice";
+import userReducer from "./slices/authSlice";
 
 export const store = configureStore({
   reducer: {
@@ -24,5 +25,6 @@ export const store = configureStore({
     compare: compareReducer,
     product: singleProductSlice,
     favorites: favoritesReducer,
+    user: userReducer,
   },
 });

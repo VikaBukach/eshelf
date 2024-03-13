@@ -6,7 +6,7 @@ function Button({ btnClass, onClick, text, svg }) {
     <button className={btnClass} onClick={onClick}>
       <div className="btn-text">
         {text}
-          {svg && <span className="btn-svg">{svg}</span>}
+        {svg && <span className="btn-svg">{svg}</span>}
       </div>
     </button>
   );
