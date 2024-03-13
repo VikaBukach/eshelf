@@ -1,0 +1,28 @@
+@import "../../../../assets/styles/style";
+
+.mydetails {
+  @media screen and (min-width: $desktop) {
+    margin-top: 60px;
+  }
+  .Order_contactDetails__SILei {
+    gap: 6.5rem clamp(2rem, 4vw, 7.2rem);
+
+  }
+.mydetails-btn-edit {
+  margin-top: 80px;
+  cursor: pointer;
+  background-color: $secondary-color-purple;
+  border-radius: 5px;
+  padding: 12px 32px;
+  width: 212px;
+  height: 48px;
+}
+  .btn-text {
+    color: $secondary-color-white;
+    text-align: right;
+  }
+
+
+}
+
+

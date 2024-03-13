@@ -4,13 +4,14 @@ import UserSidebar from "../../components/UserProfile/UserSidebar/UserSidebar";
 import AccountSettings from "../../components/UserProfile/AccountSettings/AccountSettings";
 import "./UserProfile.scss";
 
-const UserProfile = () => {
+const UserProfile = ({ state, setState }) => {
     const {activepage} = useParams();
 
     // alert(activepage)
 
     return (
         <div className="userprofile_container container">
+            <h1 className="userprofile-title">Account settings</h1>
             {/*<h1>Userprofile, showing {activepage}</h1>*/}
             <div className="userprofile">
                 <div className="userprofile-sidebar-left">
