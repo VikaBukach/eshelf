@@ -56,28 +56,28 @@ function PopularCategory({onClick}) {
               </div>
               <ul className="popular_category-items">
                   <li className="popular_category-item">
-                      <img className="popular_category-item-img" src="" alt=""/>
-                      <h4 className="popular_category-title"></h4>
+                      <img className="popular_category-item-img" src="/img/popularcategory/smartf.png" alt="Smartphones"/>
+                      <h4 className="popular_category-title">Smartphones</h4>
                   </li>
                   <li className="popular_category-item">
-                      <img className="popular_category-item-img" src="" alt=""/>
-                      <h4 className="popular_category-title"></h4>
+                      <img className="popular_category-item-img" src="/img/popularcategory/headphone.png" alt="Headphones"/>
+                      <h4 className="popular_category-title">Headphones</h4>
                   </li>
                   <li className="popular_category-item">
-                      <img className="popular_category-item-img" src="" alt=""/>
-                      <h4 className="popular_category-title"></h4>
+                      <img className="popular_category-item-img" src="/img/popularcategory/tablets.png" alt="Tablets"/>
+                      <h4 className="popular_category-title">Tablets</h4>
                   </li>
                   <li className="popular_category-item">
-                      <img className="popular_category-item-img" src="" alt=""/>
-                      <h4 className="popular_category-title"></h4>
+                      <img className="popular_category-item-img" src="/img/popularcategory/smartw.png" alt="Smartwatches"/>
+                      <h4 className="popular_category-title">Smartwatches</h4>
                   </li>
                   <li className="popular_category-item">
-                      <img className="popular_category-item-img" src="" alt=""/>
-                      <h4 className="popular_category-title"></h4>
+                      <img className="popular_category-item-img" src="/img/popularcategory/tvs.png" alt="TVs"/>
+                      <h4 className="popular_category-title">TVs</h4>
                   </li>
                   <li className="popular_category-item">
-                      <img className="popular_category-item-img" src="" alt=""/>
-                      <h4 className="popular_category-title"></h4>
+                      <img className="popular_category-item-img" src="/img/popularcategory/quadro.png" alt="Quadrocopters"/>
+                      <h4 className="popular_category-title">Quadrocopters</h4>
                   </li>
 
               </ul>
