@@ -9,7 +9,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "./ProductListHomePage.scss";
 
 function ProductListHomePage({title, category, initialItemsToShow, fetchDataOfProducts}) {
-    console.log(category);
 
     const dispatch = useDispatch();
     const {data, status, error} = useSelector((state) => state.products, shallowEqual);

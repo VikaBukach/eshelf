@@ -59,7 +59,6 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
 
-
       .popular_category-item {
 
         border-radius: 10px;
@@ -73,6 +72,7 @@
           padding-top: 16px;
           margin: 0 auto;
         }
+
         .popular_category-title {
           padding-top: 24px;
           justify-content: center;
@@ -82,4 +82,46 @@
       }
     }
   }
+  @media (min-width: $desktop) {
+    .popular_category-items {
+      display: none;
+    }
+
+    .popular_category-items-carousel {
+      display: inline-block;
+      width: 100%;
+      position: relative;
+    }
+
+    .popular_category-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 35px;
+    }
+
+    .popular_category-title {
+
+    }
+
+    .especially_arrow-svg-container-prev {
+      display: flex;
+      flex-direction: row;
+      width: 80px;
+      height: 32px;
+      position: absolute;
+      right: -60px;
+      top: 0px;
+      cursor: pointer;
+
+    }
+
+    .popular_category-slider-item- {
+
+    }
+  }
 }
+
+
+
+
+

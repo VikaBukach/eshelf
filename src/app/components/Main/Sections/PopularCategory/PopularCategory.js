@@ -1,15 +1,61 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import Button from "../../Button/Button";
 import "./PopularCategory.scss";
-import {findAllByDisplayValue} from "@testing-library/react";
-function PopularCategory({onClick}) {
-  return (
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import Arrow from "../../Arrow/Arrow";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+function PopularCategory({  title, category, initialItemsToShow, fetchDataOfProducts}) {
+
+    const slides = [
+        {
+            title: "Smartphones",
+            imagePathDesk: "/img/popularcategory/smartf.png",
+        },
+        {
+            title: "Headphones",
+            imagePathDesk: "/img/popularcategory/headphone.png",
+        },
+        {
+            title: "Tablets",
+            imagePathDesk: "/img/popularcategory/tablets.png",
+        },
+        {
+            title: "Smartwatches",
+            imagePathDesk: "/img/popularcategory/smartw.png",
+        },
+        {
+            title: "TVs",
+            imagePathDesk: "/img/popularcategory/tvs.png",
+        },
+        {
+            title: "Quadrocopters",
+            imagePathDesk: "/img/popularcategory/quadro.png",
+        },
+        {
+            title: "Mouses",
+            imagePathDesk: "/assets/images/Products/Mouses/img.png",
+        },
+    ];
+    const sliderRef = useRef(null);
+
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 7,
+        slidesToScroll: 2,
+    };
+
+    return (
       <>
           <div className="popular_category">
               <h1 className="popular_category-title">Popular category </h1>
               <div className="popular_category-btn">
                   <Button btnClass="popular_category-btn-smartpnones"
-                          onClick={onClick}
+                      // onClick={onClick}
                           svg={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                               <path
@@ -20,7 +66,7 @@ function PopularCategory({onClick}) {
                           text={"Smartphones"}
                   />
                   <Button btnClass="popular_category-btn-components"
-                          onClick={onClick}
+                      // onClick={onClick}
                           svg={<svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                               <path
@@ -34,7 +80,7 @@ function PopularCategory({onClick}) {
                   />
 
                   <Button btnClass="popular_category-btn-tablets"
-                          onClick={onClick}
+                      // onClick={onClick}
                           svg={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                               <path
@@ -45,7 +91,7 @@ function PopularCategory({onClick}) {
                           text={"Tablets, photos, videos"}
                   />
                   <Button btnClass="popular_category-btn-others"
-                          onClick={onClick}
+                      // onClick={onClick}
                           svg={<svg width="24" height="25" viewBox="0 0 24 25" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                               <path d="M5.25 10.2914L12 17.0414L18.75 10.2914" stroke="#8119B1" stroke-width="1.5"
@@ -56,11 +102,13 @@ function PopularCategory({onClick}) {
               </div>
               <ul className="popular_category-items">
                   <li className="popular_category-item">
-                      <img className="popular_category-item-img" src="/img/popularcategory/smartf.png" alt="Smartphones"/>
+                      <img className="popular_category-item-img" src="/img/popularcategory/smartf.png"
+                           alt="Smartphones"/>
                       <h4 className="popular_category-title">Smartphones</h4>
                   </li>
                   <li className="popular_category-item">
-                      <img className="popular_category-item-img" src="/img/popularcategory/headphone.png" alt="Headphones"/>
+                      <img className="popular_category-item-img" src="/img/popularcategory/headphone.png"
+                           alt="Headphones"/>
                       <h4 className="popular_category-title">Headphones</h4>
                   </li>
                   <li className="popular_category-item">
@@ -68,7 +116,8 @@ function PopularCategory({onClick}) {
                       <h4 className="popular_category-title">Tablets</h4>
                   </li>
                   <li className="popular_category-item">
-                      <img className="popular_category-item-img" src="/img/popularcategory/smartw.png" alt="Smartwatches"/>
+                      <img className="popular_category-item-img" src="/img/popularcategory/smartw.png"
+                           alt="Smartwatches"/>
                       <h4 className="popular_category-title">Smartwatches</h4>
                   </li>
                   <li className="popular_category-item">
@@ -76,15 +125,37 @@ function PopularCategory({onClick}) {
                       <h4 className="popular_category-title">TVs</h4>
                   </li>
                   <li className="popular_category-item">
-                      <img className="popular_category-item-img" src="/img/popularcategory/quadro.png" alt="Quadrocopters"/>
+                      <img className="popular_category-item-img" src="/img/popularcategory/quadro.png"
+                           alt="Quadrocopters"/>
                       <h4 className="popular_category-title">Quadrocopters</h4>
                   </li>
-
               </ul>
+
+              <div className="popular_category-items-carousel slider-container">
+                  <div className="popular_category-container">
+                         <h3 className="popular_category-title">See all</h3>
+                         <div className="especially_arrow-svg-container-prev">
+                         <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()}/>
+                         </div>
+                  </div>
+
+                  <Slider {...settings} ref={sliderRef}>
+                      {slides.map((slide, index) => (
+                          <div key={index} className={`popular_category-slider-item-${index + 1}`}>
+                              <div className="banner_main-img-container">
+                                  <img className="banner_main-img" src={slide.imagePath} alt={slide.title}/>
+                                  <img className="banner_main-img-desktop" src={slide.imagePathDesktop}
+                                       alt={slide.title}/>
+                              </div>
+                              <h1 className="popular_category-title">{slide.title}</h1>
+                          </div>
+                      ))}
+                  </Slider>
+              </div>
           </div>
 
       </>
-  );
+    );
 }
 
 
