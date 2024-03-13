@@ -6,7 +6,13 @@ export const ComparingPage = () => {
   const { data: compareData } = useSelector((state) => state.compare);
 
   if (compareData.length === 0) {
-    return <h2>No data</h2>;
+    return (
+      <div className="container">
+        <div className={style.comparing}>
+          <h2 className={style.comparingOneMore}>No products have been selected for comparison. </h2>
+        </div>
+      </div>
+    );
   }
   if (compareData.length === 1) {
     return (

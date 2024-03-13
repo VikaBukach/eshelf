@@ -60,8 +60,8 @@ export const CompareBody = ({ data }) => {
               imageURL={item.image}
               category={item.category}
               title={item.title}
-              price={String(item.price)}
-              discountPrice={String(item.discountPrice)}
+              price={Number(item.price)}
+              discountPrice={Number(item.discountPrice)}
             />
           ))}
         </div>

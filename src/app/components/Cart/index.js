@@ -28,7 +28,7 @@ const CartItem = ({ item }) => {
         <h3 className={style.heading}>{item.title}</h3>
         {/* <p>Code: {item.code}</p> */}
         <div className={style.productQuantity}>
-          <div className={style.price}>{formatPrice(item.price)} ₴</div>
+          <div className={style.price}>{formatPrice(item.price)} $</div>
           <div className={style.quantity}>
             <div className={style.quantityControllers}>
               <div onClick={() => decrease(item.id)}>-</div>
@@ -36,7 +36,7 @@ const CartItem = ({ item }) => {
               <div onClick={() => increase(item.id)}>+</div>
             </div>
             <div className={style.price}>
-              {formatPrice(+item.price * +item.quantity)} {item.currency} ₴
+              {formatPrice(+item.price * +item.quantity)} {item.currency} $
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@ const Cart = ({ activator }) => {
     <div ref={footerRef}>
       <span className={style.line}></span>
       <div className={style.footer}>
-        <p className={style.price}>{formatPrice(totalPrice)} ₴</p>
+        <p className={style.price}>{formatPrice(totalPrice)} $</p>
         <button
           disabled={!cart.length}
           onClick={() => {

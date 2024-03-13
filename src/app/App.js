@@ -28,6 +28,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUser());
+    dispatch(pageLoadedAction());
   }, []);
 
   const { loading } = useSelector((state) => state.user);
@@ -37,8 +38,6 @@ function App() {
         <div className="loader"></div>
       </div>
     );
-
-  dispatch(pageLoadedAction());
 
   return (
     <>
