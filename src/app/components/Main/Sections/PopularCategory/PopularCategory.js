@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-function PopularCategory({  title, category, initialItemsToShow, fetchDataOfProducts}) {
+function PopularCategory() {
 
     const slides = [
         {
@@ -45,7 +45,7 @@ function PopularCategory({  title, category, initialItemsToShow, fetchDataOfProd
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 7,
+        slidesToShow: 6,
         slidesToScroll: 2,
     };
 
@@ -138,19 +138,20 @@ function PopularCategory({  title, category, initialItemsToShow, fetchDataOfProd
                          <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()}/>
                          </div>
                   </div>
+                  <div className="popular_category-product-cont">
 
                   <Slider {...settings} ref={sliderRef}>
                       {slides.map((slide, index) => (
-                          <div key={index} className={`popular_category-slider-item-${index + 1}`}>
-                              <div className="banner_main-img-container">
-                                  <img className="banner_main-img" src={slide.imagePath} alt={slide.title}/>
-                                  <img className="banner_main-img-desktop" src={slide.imagePathDesktop}
+                          <div key={index} className={`popular_category-slider-item-${index + 1} .unique-item-${index}`}>
+                              <div className="card-product__image-container">
+                              <img src={slide.imagePathDesk}
                                        alt={slide.title}/>
                               </div>
-                              <h1 className="popular_category-title">{slide.title}</h1>
+                              <h1 className="popular_category-title-des">{slide.title}</h1>
                           </div>
                       ))}
                   </Slider>
+                  </div>
               </div>
           </div>
 
