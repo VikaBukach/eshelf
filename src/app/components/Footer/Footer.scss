@@ -1,11 +1,18 @@
 .footer {
-  display: none;
-  // width: 50%;
-  justify-content: space-between;
+  width: 100%;
+  background: #aeacfd;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 8px;
+  //width: 284px;
+  height: 311px;
 
-  @include header-h4;
 
-  @media (min-width: $tablet) {
-    display: flex;
-  }
+  //@media (min-width: $tablet) {
+  //  display: flex;
+  //}
+
+
 }
