@@ -5,6 +5,8 @@
     margin-top: 60px;
   }
   .Order_contactDetails__SILei {
+    padding-left: 10px;
+    padding-right: 10px;
     gap: 6.5rem clamp(2rem, 4vw, 7.2rem);
 
   }
@@ -21,7 +23,15 @@
     color: $secondary-color-white;
     text-align: right;
   }
+  .input-settings-container {
+    display: flex;
+    flex-direction: column;
+  }
 
+  .label-settings > label{
+    display: flex;
+    flex-direction: column;
+  }
 
 }
 
