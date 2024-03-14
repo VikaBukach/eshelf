@@ -1,7 +1,6 @@
 import React from "react";
-import { ButtonBuy } from "../ButtonBuy";
-import { WeAccept } from "../WeAccept";
 import { useSelector } from "react-redux";
+import { CharacteristicBuy } from "../CharacteristicBuy";
 
 const ProductDetailsSmartphones = ({ product }) => {
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
@@ -243,40 +242,9 @@ const ProductDetailsSmartphones = ({ product }) => {
           </section>
         )}
       </div>
-      <div className="characteristic-body__buy">
-        <div className="characteristic-body__carriage">
-          <div className="characteristic-body__wrapper characteristic-aside">
-            <div className="characteristic-aside__img">
-              <img src={`/${product.colors[activeColorIndex].images[0]}`} alt={`${product.model}`} />
-            </div>
-            <div className="characteristic-aside__details">
-              {product.model && <div className="characteristic-aside__title">{product.model}</div>}
-              {product.colors[activeColorIndex].products[activeMemoryIndex].article && (
-                <div className="characteristic-aside__article">
-                  Code: <span>{product.colors[activeColorIndex].products[activeMemoryIndex].article}</span>
-                </div>
-              )}
 
-              {product.colors[activeColorIndex].products[activeMemoryIndex].price && (
-                <div className="characteristic-aside__price-old">
-                  {product.colors[activeColorIndex].products[activeMemoryIndex].price}
-                </div>
-              )}
+      <CharacteristicBuy product={product} />
 
-              {product.colors[activeColorIndex].products[activeMemoryIndex].discount_price && (
-                <div className="characteristic-aside__price">
-                  {product.colors[activeColorIndex].products[activeMemoryIndex].discount_price}
-                </div>
-              )}
-
-              <div className="characteristic-aside__button">
-                <ButtonBuy />
-              </div>
-              <WeAccept />
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

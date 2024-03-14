@@ -8,6 +8,7 @@
   background-color: $secondary-color-purple;
   color: #fff;
   cursor: pointer;
+  transition: background-color 0.3s;
 
   &__icon {
     width: 20px;
@@ -19,5 +20,9 @@
 
   span {
     white-space: nowrap;
+  }
+
+  &:hover {
+    background-color: #65128c;
   }
 }
