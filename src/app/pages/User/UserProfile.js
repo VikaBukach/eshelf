@@ -4,6 +4,7 @@ import UserSidebar from "../../components/UserProfile/UserSidebar/UserSidebar";
 import UserDetails from "../../components/UserProfile/UserDetails/UserDetails";
 import "./UserProfile.scss";
 import UserOrders from "../../components/UserProfile/UserOrders/UserOrders";
+import UserView from "../../components/UserProfile/UserView/UserView";
 
 const UserProfile = ({ state, setState }) => {
     const {activepage} = useParams();
@@ -18,9 +19,11 @@ const UserProfile = ({ state, setState }) => {
                 <div className="userprofile-sidebar-left">
                     <UserSidebar activepage={activepage}/>
                 </div>
+
                 <div className="userprofile-sidebar-right">
                     {activepage === 'accountsettings' && <UserDetails/>}
                     {activepage === 'myorders' && <UserOrders />}
+                    {activepage === 'myview' && <UserView />}
                 </div>
 
             </div>
