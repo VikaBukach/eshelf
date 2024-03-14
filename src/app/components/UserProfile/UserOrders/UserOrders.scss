@@ -7,6 +7,7 @@
     &-title {
       font: 400 20px / 1.5 "Inter", sans-serif;
       color: #333;
+      margin-top: 20px;
     }
     .user-orders-dayoforder {
       display: block;
@@ -24,10 +25,9 @@
       }
     }
     .user-orders-status-items {
-      margin-top: 30px;
+      margin-top: 50px;
       display: flex;
       justify-content: space-between;
-
 
       .user-orders-status-item {
         display: flex;
@@ -46,8 +46,19 @@
           color: #333;
         }
       }
-
-
     }
+    .user-orders-total-items {
+      margin-top: 70px;
+      margin-left: auto;
+      width: max-content;
+
+      .user-orders-total-item {
+        display: grid;
+        grid-template-columns: 200px 200px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    }
+
   }
 }

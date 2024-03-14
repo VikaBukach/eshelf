@@ -102,7 +102,20 @@ const UserOrders = () => {
                 </li>
             </ul>
 
-
+            <ul className="user-orders-total-items">
+                <li className="user-orders-total-item">
+                    <h5>Total payable:</h5>
+                    <p>1 799</p>
+                </li>
+                <li className="user-orders-total-item">
+                    <h5>Your delivery:</h5>
+                    <p>99</p>
+                </li>
+                <li className="user-orders-total-item">
+                    <h5>Total:</h5>
+                    <p>₴ 1700</p>
+                </li>
+            </ul>
         </div>
     );
 };
