@@ -37,8 +37,8 @@ const AccountSettings = () => {
     return (
         <div className="mydetails">
             <ContactDetails
-                state={state}
-                setState={setState}
+                state={userData}
+                setState={setUserData()}
                 accountSettingsClass="account-settings"
                 inputContainerClass="input-settings-container"
                 labelClass="label-settings"
