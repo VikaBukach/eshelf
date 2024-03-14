@@ -1,8 +1,9 @@
 import React from 'react';
 import {useParams} from "react-router-dom";
 import UserSidebar from "../../components/UserProfile/UserSidebar/UserSidebar";
-import AccountSettings from "../../components/UserProfile/AccountSettings/AccountSettings";
+import UserDetails from "../../components/UserProfile/UserDetails/UserDetails";
 import "./UserProfile.scss";
+import UserOrders from "../../components/UserProfile/UserOrders/UserOrders";
 
 const UserProfile = ({ state, setState }) => {
     const {activepage} = useParams();
@@ -18,7 +19,8 @@ const UserProfile = ({ state, setState }) => {
                     <UserSidebar activepage={activepage}/>
                 </div>
                 <div className="userprofile-sidebar-right">
-                    {activepage === 'accountsettings' && <AccountSettings/>}
+                    {activepage === 'accountsettings' && <UserDetails/>}
+                    {activepage === 'myorders' && <UserOrders />}
                 </div>
 
             </div>

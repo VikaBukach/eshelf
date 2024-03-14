@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import "./AccountSettings.scss";
+import "./UserDetails.scss";
 import {ContactDetails} from "../../OrderPage/components/ContactDetails";
 import Button from "../../Main/Button/Button";
 
 
-const AccountSettings = () => {
+const UserDetails = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [userData, setUserData] = useState({
         name: "",
@@ -92,4 +92,4 @@ const AccountSettings = () => {
     );
 };
 
-export default AccountSettings;
+export default UserDetails;

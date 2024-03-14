@@ -31,7 +31,7 @@ export const ContactDetails = ({ state, setState, accountSettingsClass, inputCon
     },
   ];
 
-  return (//added class ${accountSettingsClass} for overriting styles in AccountSettings
+  return (//added class ${accountSettingsClass} for overriting styles in UserDetails
       <div className={`${"orderPage__contactDetails"} ${accountSettingsClass}`}>
         {inputs.map((input) => (
             <div className={`${inputContainerClass}`} key={input.key}>

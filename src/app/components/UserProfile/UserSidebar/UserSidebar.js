@@ -6,7 +6,7 @@ const UserSidebar = ({activepage}) => {
     return (
         <div className="usersidebar">
             {
-                activepage === 'yourorders' ?
+                activepage === 'myorders' ?
                     <div className="s2">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -19,7 +19,7 @@ const UserSidebar = ({activepage}) => {
                         <span>My orders</span>
                     </div>
                     :
-                    <Link to="/user/yourorders"
+                    <Link to="/user/myorders"
                           className="stylenone"
                     >
                     <div className="s1">
