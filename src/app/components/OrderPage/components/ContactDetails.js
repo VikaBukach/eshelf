@@ -2,7 +2,7 @@ import "../Order.scss";
 import InputMask from "../../ui/Input/InputMask";
 import { validateEmail } from "..";
 
-export const ContactDetails = ({ state, setState, accountSettingsClass }) => {
+export const ContactDetails = ({ state, setState, accountSettingsClass, inputContainerClass, labelClass }) => {
   const inputs = [
     {
       key: "surname",
@@ -34,8 +34,12 @@ export const ContactDetails = ({ state, setState, accountSettingsClass }) => {
   return (//added class ${accountSettingsClass} for overriting styles in AccountSettings
       <div className={`${"orderPage__contactDetails"} ${accountSettingsClass}`}>
         {inputs.map((input) => (
-            <div className="inputContainer" key={input.key}>
-              <label htmlFor={input.key}>{input.label}</label>
+            <div className={`${inputContainerClass}`} key={input.key}>
+              <label htmlFor={input.key}
+                     className={`${labelClass}`}
+              >
+                {input.label}
+              </label>
               <InputMask
                   id={input.key}
                   validateFunction={input?.validateFunction}

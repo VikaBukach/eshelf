@@ -16,7 +16,13 @@ const AccountSettings = () => {
 
     return (
         <div className="mydetails">
-            <ContactDetails state={state} setState={setState} accountSettingsClass="account-settings"/>
+            <ContactDetails
+                state={state}
+                setState={setState}
+                accountSettingsClass="account-settings"
+                inputContainerClass="input-settings-container"
+                labelClass="label-settings"
+            />
             <div className="mydetails-btn">
                 <Buttun_perple
                     btnClass={"mydetails-btn-edit"}
