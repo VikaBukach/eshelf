@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./AccountSettings.scss";
 import {ContactDetails} from "../../OrderPage/components/ContactDetails";
 import Button from "../../Main/Button/Button";
@@ -34,11 +34,15 @@ const AccountSettings = () => {
         }));
     }
 
+    useEffect(() => {
+
+    }, []);
+
     return (
         <div className="mydetails">
             <ContactDetails
                 state={userData}
-                setState={setUserData()}
+                setState={setUserData}
                 accountSettingsClass="account-settings"
                 inputContainerClass="input-settings-container"
                 labelClass="label-settings"

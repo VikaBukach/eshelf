@@ -14,7 +14,7 @@
 
   .mydetails-btn-edit {
     display: flex;
-    margin-top: 80px;
+    margin-top: 70px;
     margin-left: auto;
     margin-right: 20px;
     background-color: $secondary-color-purple;
@@ -43,6 +43,7 @@
   }
 
   .mydetails-btn-change {
+    margin-top: 70px;  /////////
     margin-left: auto;
     margin-right: 20px;
     width: 300px;
@@ -58,7 +59,7 @@
     height: 48px;
   }
 
-  .mydetails-btn-cancel text {
+  .mydetails-btn-cancel .btn-text {
     color: $secondary-color-purple;
   }
 
