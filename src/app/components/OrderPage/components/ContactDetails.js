@@ -27,7 +27,7 @@ export const ContactDetails = ({ state, setState, accountSettingsClass, inputCon
       label: "E-mail",
       placeholder: "Enter your email",
       mask: /^\S*@?\S*$/,
-      validateFunction: (val) => validateEmail(val),
+      // validateFunction: (val) => validateEmail(val),
     },
   ];
 
