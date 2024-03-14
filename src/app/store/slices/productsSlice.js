@@ -3,11 +3,11 @@ import axios from "axios";
 
 export const fetchDataOfProducts = createAsyncThunk(
   "products/fetchDataOfProducts",
-  async (collection, { dispatch }) => {
+  async ({ collection, page, limit }, { dispatch }) => {
     const PORT = process.env.REACT_APP_PORT || 5000;
 
     try {
-      const response = await axios.get(`http://localhost:${PORT}/${collection}`);
+      const response = await axios.get(`http://localhost:${PORT}/${collection}?page=${page}&limit=${limit}`);
       dispatch(setProducts(response.data));
       return response.data;
     } catch (err) {

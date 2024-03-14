@@ -124,9 +124,6 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     dispatch(setPriceBy(0));
     dispatch(setPriceTo(0));
     dispatch(setCheckboxesSettings([]));
-    // dispatch(setMinPrice(0));
-    // dispatch(setMaxPrice(0));
-    // dispatch(setCheckboxesSettings([]));
 
     closeFilter();
     navigateToUrlWithSettings();
@@ -149,11 +146,6 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
       setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
     }
   }, [fetchStatus]);
-
-  // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
-  // useEffect(() => {
-  //   dispatch(updateBaseFilterData(filterProducts()));
-  // }, [baseFilterProductsStatus]);
 
   useEffect(() => {
     dispatch(updateBaseFilterData(filterProducts()));

@@ -7,7 +7,7 @@ const Smartphones = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchDataOfProducts("smartphones"));
+    dispatch(fetchDataOfProducts({ collection: "smartphones", page: 1, limit: 2 }));
   }, [dispatch]);
 
   return (

@@ -26,22 +26,24 @@ connectToDb((err) => {
   }
 });
 
-const handleCollectionRequest =
-  ("/products",
-  (collection, req, res) => {
-    const products = [];
+const handleCollectionRequest = (collection, req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 4;
+  const skip = (page - 1) * limit;
 
-    db.collection(collection)
-      .find()
-      .sort({ model: 1 })
-      .forEach((product) => products.push(product))
-      .then(() => {
-        res.status(200).json(products);
-      })
-      .catch(() => {
-        res.status(500).json({ error: "Something goes wrong..." });
-      });
-  });
+  db.collection(collection)
+    .find()
+    .sort({ model: 1 })
+    .skip(skip)
+    .limit(limit)
+    .toArray()
+    .then((products) => {
+      res.status(200).json(products);
+    })
+    .catch(() => {
+      res.status(500).json({ error: "Something goes wrong..." });
+    });
+};
 
 app.get("/smartphones", (req, res) => {
   handleCollectionRequest("smartphones", req, res);

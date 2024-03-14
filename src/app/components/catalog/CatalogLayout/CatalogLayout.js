@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { CatalogProductList } from "../CatalogProductList/CatalogProductList";
 import { CatalogFilter } from "../CatalogFilter/CatalogFilter";
 import { CatalogSorting } from "../CatalogSorting/CatalogSorting";
+import { CatalogPagination } from "../CatalogPagination/CatalogPagination";
 import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
 import { setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
@@ -134,7 +135,10 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
       </div>
       <div className="catalog__body">
         <CatalogFilter filterCriterias={filterCriterias} pricePath={pricePath} />
-        <CatalogProductList />
+        <div className="catalog__body__list">
+          <CatalogProductList />
+          <CatalogPagination />
+        </div>
       </div>
     </div>
   );

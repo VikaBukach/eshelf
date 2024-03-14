@@ -129,6 +129,10 @@
       @include flex-container(row, space-between, flex-end, nowrap);
       align-items: start;
       gap: 24px;
+
+      &__list {
+        width: 100%;
+      }
     }
     &__filter-settings {
       display: none;
