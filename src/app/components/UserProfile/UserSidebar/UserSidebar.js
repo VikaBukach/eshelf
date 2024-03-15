@@ -138,6 +138,39 @@ const UserSidebar = ({activepage}) => {
                     </Link>
             }
 
+            {
+                activepage === 'socialnetworks' ?
+                    <div className="s2">
+                        <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M2.66675 8.01993C2.66675 6.54353 3.86065 5.34668 5.33341 5.34668H26.6667C28.1395 5.34668 29.3334 6.54353 29.3334 8.01993V24.0594C29.3334 25.5359 28.1395 26.7327 26.6667 26.7327H5.33341C3.86065 26.7327 2.66675 25.5359 2.66675 24.0594V8.01993Z"
+                                stroke="#A3ADFF" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path
+                                d="M4 6.68311L12.4567 14.2187C14.4775 16.0194 17.5225 16.0194 19.5433 14.2187L28 6.68311"
+                                stroke="#A3ADFF" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Social networks</span>
+                    </div>
+                    :
+                    <Link to="/user/socialnetworks"
+                          className="stylenone"
+                    >
+                        <div className="s1">
+                            <svg width="32" height="33" viewBox="0 0 32 33" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M2.66675 8.01993C2.66675 6.54353 3.86065 5.34668 5.33341 5.34668H26.6667C28.1395 5.34668 29.3334 6.54353 29.3334 8.01993V24.0594C29.3334 25.5359 28.1395 26.7327 26.6667 26.7327H5.33341C3.86065 26.7327 2.66675 25.5359 2.66675 24.0594V8.01993Z"
+                                    stroke="#A3ADFF" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path
+                                    d="M4 6.68311L12.4567 14.2187C14.4775 16.0194 17.5225 16.0194 19.5433 14.2187L28 6.68311"
+                                    stroke="#A3ADFF" strokeLinejoin="round"/>
+                            </svg>
+                            <span>Social networks</span>
+                        </div>
+                    </Link>
+            }
+
+
         </div>
     );
 };

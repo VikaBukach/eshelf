@@ -6,11 +6,9 @@ import "./UserProfile.scss";
 import UserOrders from "../../components/UserProfile/UserOrders/UserOrders";
 import UserView from "../../components/UserProfile/UserView/UserView";
 import WarrantyDelivery from "../../components/UserProfile/Delivery/WarrantyDelivery";
-
+import SocialNetworks from "../../components/UserProfile/SocialNetworks/SocialNetworks";
 const UserProfile = ({ state, setState }) => {
     const {activepage} = useParams();
-
-    // alert(activepage)
 
     return (
         <div className="userprofile_container container">
@@ -26,10 +24,9 @@ const UserProfile = ({ state, setState }) => {
                     {activepage === 'myorders' && <UserOrders />}
                     {activepage === 'myview' && <UserView />}
                     {activepage === 'mydelivery' && <WarrantyDelivery />}
+                    {activepage === 'socialnetworks' && <SocialNetworks />}
                 </div>
-
             </div>
-
         </div>
     );
 };
