@@ -25,7 +25,6 @@ export default function InputMask({ input, setState, state, validateFunction = (
             onBlur={(e) => handleChange(e.target.value)}
             onAccept={handleChange}
             value={state[input.key]}
-            // className={classNames(style.input, !isValid && style.error)}
             placeholder={input.placeholder}
             key={input.key}
         />

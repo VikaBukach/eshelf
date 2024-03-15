@@ -1,5 +1,6 @@
-import InputMask from "../../../ui/Input/InputMask";
+import InputMask from "./IMaskInput";
 // import { validateEmail } from "./ValidateEmail";
+import "./FormContactYou.scss"
 
 import React from 'react';
 
