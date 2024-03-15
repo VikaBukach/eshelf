@@ -35,7 +35,7 @@
       .delivery-to-user-btn-toggle {
         position: absolute;
         top: 0;
-       left: 100%;
+        left: 100%;
         width: auto;
         height: 700px;
         font-size: 18px;
@@ -50,13 +50,42 @@
         transition: width 0.3s ease-in-out, opacity 0.3s 0.3s ease-in-out;
       }
 
-      .delivery-to-user-btn-toggle p {
+      .delivery-to-user-text {
         margin: 0;
-        padding: 22px 15px;
+        padding: 10px 10px;
         pointer-events: none;
-        line-height: 1.3;
+        font: 400 14px / 1.5 "Inter", sans-serif;
+        color: $primary-color-black;
       }
 
+      .delivery-to-user-posts {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+      }
+
+      .delivery-to-user-posts h6 {
+        padding-left: 20px;
+        font: 500 17px / 1.5 "Inter", sans-serif;
+        color: #333;
+      }
+
+      .delivery-to-user-list {
+        list-style: disc inside;
+        padding-left: 20px;
+      }
+
+      .delivery-to-user-list li {
+        margin-bottom: 10px;
+        font: 400 14px / 1.5 "Inter", sans-serif;
+        color: $primary-color-black;
+      }
+
+      .delivery-to-user-list li span {
+        font: 400 14px / 1.5 "Inter", sans-serif;
+        color: #8119b1;
+      }
 
     }
   }

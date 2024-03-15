@@ -8,7 +8,7 @@ const WarrantyDelivery = () => {
     const refHeight = useRef(null);
 
     useEffect(() => {
-        if(refHeight.current){
+        if (refHeight.current) {
             setHeightEl(`${refHeight.current.scrollHeight}px`)
         }
     }, [])
@@ -37,38 +37,41 @@ const WarrantyDelivery = () => {
                     ref={refHeight}
                 >
                     <div aria-hidden={toggle ? "true" : "false"}>
-                        <p>You can place an order on the site allo.ua around the clock. We will not disturb you and make phone calls if you do not wish to contact us. In the near future you will receive a notification with information on the order, or our
-                            partner will
-                            contact you shortly to clarify the data on the order.
+                        <p className="delivery-to-user-text">You can place an order on the site allo.ua around the clock.
+                            <p>We will not disturb you and make phone calls if you do not wish to contact us.</p>
+                            <p>In the near future you will receive a notification with information on the order, or our
+                                partner will contact you shortly to clarify the data on the order.</p>
                         </p>
-                        <div>
-                            <img src="/img/icons_profile/Nova_Poshta_202ч2_logo 1.svg" alt="img"/>
+                        <p className="delivery-to-user-text">For any questions, you can always contact us by phone 0 (800) 300-100 (free of charge) or
+                            write to us in the chat, we will answer you very soon.</p>
+                        <div className="delivery-to-user-posts">
+                            <img src="/img/icons_profile/Nova_Poshta_202ч2_logo 1.svg" alt="img" />
                             <h6>Nova Poshta</h6>
                         </div>
-                        <p>In the period from 11/17/22 to 01/31/23, when delivering goods to the Nova Poshta post
+                        <p className="delivery-to-user-text">In the period from 11/17/22 to 01/31/23, when delivering goods to the Nova Poshta post
                             office, the
                             following tariffs apply:
                         </p>
-                        <ul>
-                            <li>order value up to 500 UAH - the tariff is valid
+                        <ul className="delivery-to-user-list">
+                            <li>order value up to <span>500 UAH</span> - the tariff is valid
                             </li>
-                            <li>order value from 500 UAH – tariff 0 UAH.
+                            <li>order value from <span>500 UAH</span> – tariff 0 UAH.
                             </li>
                         </ul>
-                        <p>For one product from the categories of medium or small household appliances, costing up to
+                        <p className="delivery-to-user-text">For one product from the categories of medium or small household appliances, costing up to
                             10,000
                             UAH. and weighing up to 20 kg</p>
-                        <div>
+                        <div className="delivery-to-user-posts">
                             <img src="/img/icons_profile/1200px-Ukrposhta-ua 1.svg" alt="img"/>
                             <h6>Ukr Poshta</h6>
                         </div>
-                        <ul>
-                            <li>order value up to 500 UAH - the tariff is valid
+                        <ul className="delivery-to-user-list">
+                            <li>order value up to <span>500 UAH</span> - the tariff is valid
                             </li>
-                            <li>order value from 500 UAH – tariff 35 UAH.
+                            <li>order value from <span>500 UAH</span> – tariff 35 UAH.
                             </li>
                         </ul>
-                        <p>For one product from the categories of medium or small household appliances, costing up to
+                        <p className="delivery-to-user-text">For one product from the categories of medium or small household appliances, costing up to
                             10,000
                             UAH. and weighing up to 20 kg</p>
                     </div>
