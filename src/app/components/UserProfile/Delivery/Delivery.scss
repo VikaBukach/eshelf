@@ -1,0 +1,65 @@
+@import "../../../../assets/styles/style";
+.delivery-to-user {
+  @media screen and (min-width: $desktop) {
+    max-width: 400px;
+    margin: 100px auto 0;
+    border-radius: 3px;
+    background: #f1f1f1;
+
+    &-btn-visible {
+      background: #7177ca;
+      width: 100%;
+      color: #fff;
+      cursor: pointer;
+      border: 1px solid #474d9b;;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 15px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+
+      span {
+        padding: 15px 0;
+        font-size: 20px;
+      }
+      svg {
+        width: 20px;
+        transition: transform 0.2s ease-in-out;
+
+        svg.active {
+          transform: rotate(0deg)
+        }
+      }
+    }
+    .delivery-to-user-btn-toggle {
+      height: 0px;
+      font-size: 18px;
+      opacity: 0;
+      transition:
+              opacity 0.3s ease-in-out,
+              height 0.3s 0.3s ease-in-out;
+      color: #333;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+    .animated {
+      opacity: 1;
+      transition:
+              height 0.3s ease-in-out,
+              opacity 0.3s 0.3s ease-in-out;
+    }
+    .delivery-to-user-btn-toggle p{
+      margin: 0;
+      padding: 22px 15px;
+      pointer-events: none;
+      line-height: 1.3;
+    }
+
+
+
+
+
+
+  }
+}

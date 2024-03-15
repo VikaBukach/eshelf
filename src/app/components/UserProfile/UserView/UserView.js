@@ -6,11 +6,9 @@ const UserView = () => {
     return (
         <div className="user-viewed">
             <div>
-                <h4>Today:</h4>
+                <h4>My views:</h4>
             </div>
-            <div>
-                <h4>Other time:</h4>
-            </div>
+
 
         </div>
     );

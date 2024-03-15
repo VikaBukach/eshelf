@@ -112,6 +112,32 @@ const UserSidebar = ({activepage}) => {
                     </Link>
             }
 
+            {
+                activepage === 'mydelivery' ?
+                    <div className="s2">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M27.9999 10L15.9999 4L10.6666 6.66667M27.9999 10V22L16.6666 28M27.9999 10L22.3333 12.6667M5.33325 9.33333L16.6666 15.3333M5.33325 9.33333V22L16.6666 28M5.33325 9.33333L10.6666 6.66667M16.6666 15.3333V28M16.6666 15.3333L22.3333 12.6667M10.6666 6.66667L22.3333 12.6667M22.3333 12.6667V17.3333"
+                                stroke="#A3ADFF" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Warranty and delivery</span>
+                    </div>
+                    :
+                    <Link to="/user/mydelivery"
+                          className="stylenone"
+                    >
+                        <div className="s1">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M27.9999 10L15.9999 4L10.6666 6.66667M27.9999 10V22L16.6666 28M27.9999 10L22.3333 12.6667M5.33325 9.33333L16.6666 15.3333M5.33325 9.33333V22L16.6666 28M5.33325 9.33333L10.6666 6.66667M16.6666 15.3333V28M16.6666 15.3333L22.3333 12.6667M10.6666 6.66667L22.3333 12.6667M22.3333 12.6667V17.3333"
+                                    stroke="#A3ADFF" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            <span>Warranty and delivery</span>
+                        </div>
+                    </Link>
+            }
+
         </div>
     );
 };

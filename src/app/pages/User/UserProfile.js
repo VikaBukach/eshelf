@@ -5,6 +5,7 @@ import UserDetails from "../../components/UserProfile/UserDetails/UserDetails";
 import "./UserProfile.scss";
 import UserOrders from "../../components/UserProfile/UserOrders/UserOrders";
 import UserView from "../../components/UserProfile/UserView/UserView";
+import WarrantyDelivery from "../../components/UserProfile/Delivery/WarrantyDelivery";
 
 const UserProfile = ({ state, setState }) => {
     const {activepage} = useParams();
@@ -24,6 +25,7 @@ const UserProfile = ({ state, setState }) => {
                     {activepage === 'accountsettings' && <UserDetails/>}
                     {activepage === 'myorders' && <UserOrders />}
                     {activepage === 'myview' && <UserView />}
+                    {activepage === 'mydelivery' && <WarrantyDelivery />}
                 </div>
 
             </div>
