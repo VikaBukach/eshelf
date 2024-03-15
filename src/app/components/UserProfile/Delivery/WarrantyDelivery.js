@@ -94,7 +94,7 @@ const WarrantyDelivery = () => {
                     style={{height: activeQuestion === 1 ? `${refHeight.current[1]}` : "0px"}}
                     ref={(el) => {refHeight.current[1] = el ? el.scrollHeight : 0 }}
                 >
-                    <div aria-hidden={activeQuestion === 1 ? "true" : "false"}>
+                    <div className="content" aria-hidden={activeQuestion === 1 ? "true" : "false"}>
                         <p className="delivery-to-user-text"> <span>Browse Products:</span> Start by browsing the products available
                             in the store. You can navigate through different categories or use the search feature to
                             find specific items.</p>
