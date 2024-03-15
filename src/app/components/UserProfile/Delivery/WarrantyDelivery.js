@@ -1,7 +1,5 @@
 import "./Delivery.scss";
 import React, {useState, useEffect, useRef} from 'react';
-
-
 const WarrantyDelivery = () => {
     const [activeQuestion, setActiveQuestion] = useState(null);
     const refHeight = useRef([]);
@@ -39,16 +37,13 @@ const WarrantyDelivery = () => {
                                 partner will contact you shortly to clarify the data on the order.</p>
                         </p>
                         <p className="delivery-to-user-text">For any questions, you can always contact us by phone 0
-                            (800) 300-100 (free of charge) or
-                            write to us in the chat, we will answer you very soon.</p>
+                            (800) 300-100 (free of charge) or write to us in the chat, we will answer you very soon.</p>
                         <div className="delivery-to-user-posts">
                             <img src="/img/icons_profile/Nova_Poshta_202ч2_logo 1.svg" alt="img"/>
                             <h6>Nova Poshta</h6>
                         </div>
                         <p className="delivery-to-user-text">In the period from 11/17/22 to 01/31/23, when delivering
-                            goods to the Nova Poshta post
-                            office, the
-                            following tariffs apply:
+                            goods to the Nova Poshta post office, the following tariffs apply:
                         </p>
                         <ul className="delivery-to-user-list">
                             <li>order value up to <span>500 UAH</span> - the tariff is valid
@@ -57,9 +52,7 @@ const WarrantyDelivery = () => {
                             </li>
                         </ul>
                         <p className="delivery-to-user-text">For one product from the categories of medium or small
-                            household appliances, costing up to
-                            10,000
-                            UAH. and weighing up to 20 kg</p>
+                            household appliances, costing up to 10,000 UAH. and weighing up to 20 kg</p>
                         <div className="delivery-to-user-posts">
                             <img src="/img/icons_profile/1200px-Ukrposhta-ua 1.svg" alt="img"/>
                             <h6>Ukr Poshta</h6>
@@ -71,14 +64,10 @@ const WarrantyDelivery = () => {
                             </li>
                         </ul>
                         <p className="delivery-to-user-text">For one product from the categories of medium or small
-                            household appliances, costing up to
-                            10,000
-                            UAH. and weighing up to 20 kg</p>
+                            household appliances, costing up to 10,000 UAH. and weighing up to 20 kg</p>
                     </div>
                 </div>
             </div>
-
-
             <div className="delivery-to-user">
                 <button
                     className="delivery-to-user-btn-visible"
@@ -129,8 +118,6 @@ const WarrantyDelivery = () => {
                     </div>
                 </div>
             </div>
-
-
             <div className="delivery-to-user">
                 <button
                     className="delivery-to-user-btn-visible"
@@ -165,12 +152,9 @@ const WarrantyDelivery = () => {
                             Additionally, some e-commerce platforms may provide shipping cost estimations
                             during the
                             checkout process based on the items in your cart and your shipping address.</p>
-
                     </div>
                 </div>
             </div>
-
-
             <div className="delivery-to-user">
                 <button
                     className="delivery-to-user-btn-visible"
@@ -207,12 +191,9 @@ const WarrantyDelivery = () => {
                             available payment methods on the website or check with the seller to ensure that your
                             preferred payment method is accepted. Additionally, consider the security measures in place
                             to protect your payment information during the transaction.</p>
-
                     </div>
                 </div>
             </div>
-
-
         </div>
     );
 };
