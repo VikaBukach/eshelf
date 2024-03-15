@@ -34,6 +34,13 @@ const SocialNetworks = () => {
                 <p>0 800 100 000</p>
                 <p>Free from fixed and mobile phones in Ukraine</p>
             </div>
+
+            <div className="social-networks-right">
+                <h1 className="social-networks-title">Write and we will contact you</h1>
+
+            </div>
+
+
         </div>
     );
 };

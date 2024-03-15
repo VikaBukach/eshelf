@@ -3,12 +3,22 @@
 .social-networks {
   @media screen and (min-width: $desktop) {
     padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
     &-title {
       font: 500 18px / 1.5 "Inter", sans-serif;
       color: $primary-color-black;
+      padding-left: 20px;
       padding-bottom: 20px;
     }
+
+    .social-networks-left p {
+      font: 400 13px / 1.5 "Inter", sans-serif;
+      color: $primary-color-black;
+      padding-bottom: 20px;
+    }
+
     .social-networks-icons {
       display: grid;
       grid-template-columns: 250px 250px;
@@ -19,7 +29,9 @@
       flex-direction: row;
       align-items: center;
     }
-
+    .social-networks-icons img{
+      padding-right: 10px;
+    }
 
 
 
