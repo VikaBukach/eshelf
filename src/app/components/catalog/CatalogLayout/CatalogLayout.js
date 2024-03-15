@@ -12,13 +12,15 @@ import { createFilterSettingsObjectFromUrl, createUrlFromFilterSettings } from "
 import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
 import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
 import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
+import { fetchDataOfProducts, fetchModelNames } from "../../../store/slices/productsSlice";
 
-const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
+const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const products = useSelector((state) => state.products.data);
+  const activeCategoryName = useSelector((state) => state.products.activeCategoryName);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
@@ -61,11 +63,16 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
 
   // Фільтр-посилання
   const navigateToUrlWithSettings = () => {
+    console.log(filterSettings);
     const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
     navigate(url);
   };
 
   // ЗМІНА СТАНІВ
+  useEffect(() => {
+    dispatch(fetchDataOfProducts({ collection: categoryName, page: 1, limit: 2 }));
+    // dispatch(fetchModelNames({ collection: categoryName }));
+  }, [dispatch]);
 
   // При завантаженні товарів
   useEffect(() => {
@@ -134,7 +141,7 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
         </ul>
       </div>
       <div className="catalog__body">
-        <CatalogFilter filterCriterias={filterCriterias} pricePath={pricePath} />
+        <CatalogFilter categoryName={categoryName} filterCriterias={filterCriterias} pricePath={pricePath} />
         <div className="catalog__body__list">
           <CatalogProductList />
           <CatalogPagination />

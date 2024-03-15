@@ -4,6 +4,7 @@ const filterSettingsSlice = createSlice({
   name: "filterSettings",
   initialState: {
     checkboxes: [],
+    filterCriteriasWithTypes:[],
     minPrice: 0,
     maxPrice: 0,
     priceBy: 0,
@@ -12,6 +13,9 @@ const filterSettingsSlice = createSlice({
   reducers: {
     setCheckboxesSettings: (state, action) => {
       state.checkboxes = action.payload;
+    },
+    setFilterCriteriasWithTypes: (state, action) => {
+      state.filterCriteriasWithTypes = action.payload;
     },
     setMinPrice: (state, action) => {
       state.minPrice = action.payload;
@@ -28,5 +32,5 @@ const filterSettingsSlice = createSlice({
   },
 });
 
-export const { setCheckboxesSettings, setMinPrice, setMaxPrice, setPriceBy, setPriceTo } = filterSettingsSlice.actions;
+export const { setCheckboxesSettings, setMinPrice, setMaxPrice, setPriceBy, setPriceTo, setFilterCriteriasWithTypes } = filterSettingsSlice.actions;
 export default filterSettingsSlice.reducer;

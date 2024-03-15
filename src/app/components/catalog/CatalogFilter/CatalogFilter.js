@@ -9,13 +9,15 @@ import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/sl
 import { Accordion } from "../../ui/Accordion/Accordion";
 import { createUrlFromFilterSettings } from "../../../utils/filter-url";
 import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
-import { fetchDataOfProducts } from "../../../store/slices/productsSlice";
+import { addVariationsToFilterCriterias } from "../../../store/slices/productsSlice";
 
-const CatalogFilter = ({ filterCriterias, pricePath }) => {
+const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const products = useSelector((state) => state.products.data);
+  const activeCategoryName = useSelector((state) => state.products.activeCategoryName);
+  const filterCriteriasWithTypes = useSelector((state) => state.filterSettings.filterCriteriasWithTypes);
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
@@ -24,29 +26,29 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
   const fetchStatus = useSelector((state) => state.products.status);
 
-  const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
+  // const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
 
   // ЗАПОВНЕННЯ БЛОКУ ФІЛЬТРУ
   // Пошук усіх можливих варіантів у товарах та додання результату до критеріїв пошуку
-  const addVariationsToFilterCriterias = () => {
-    const updatedFilterCriterias = [];
+  // const addVariationsToFilterCriterias = () => {
+  //   const updatedFilterCriterias = [];
 
-    filterCriterias.forEach((criteria) => {
-      criteria.types = [];
+  //   filterCriterias.forEach((criteria) => {
+  //     criteria.types = [];
 
-      products.forEach((product) => {
-        const { value: findVariations } = findValueByPath(product, criteria.path);
+  //     products.forEach((product) => {
+  //       const { value: findVariations } = findValueByPath(product, criteria.path);
 
-        findVariations.forEach((findVariation) => {
-          if (!criteria.types.includes(findVariation)) {
-            criteria.types.push(findVariation);
-          }
-        });
-      });
-      updatedFilterCriterias.push({ title: criteria.title, types: criteria.types, path: criteria.path });
-    });
-    return updatedFilterCriterias;
-  };
+  //       findVariations.forEach((findVariation) => {
+  //         if (!criteria.types.includes(findVariation)) {
+  //           criteria.types.push(findVariation);
+  //         }
+  //       });
+  //     });
+  //     updatedFilterCriterias.push({ title: criteria.title, types: criteria.types, path: criteria.path });
+  //   });
+  //   return updatedFilterCriterias;
+  // };
 
   // ОБРОБКА ФІЛЬТРАЦІЇ (ПІСЛЯ НАТИСКАННЯ КНОПКИ)
 
@@ -141,15 +143,20 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
   // ЗМІНА СТАНІВ
 
   // ------- На початку роботи заповнюємо параметри BASE та PRICE  згідно з товарами у PRODUCTS
-  useEffect(() => {
-    if (fetchStatus === "succeeded") {
-      setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
-    }
-  }, [fetchStatus]);
+  // useEffect(() => {
+  //   if (fetchStatus === "succeeded") {
+  //     setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
+  //   }
+  // }, [fetchStatus]);
 
   useEffect(() => {
     dispatch(updateBaseFilterData(filterProducts()));
   }, [filterSettings]);
+
+  useEffect(() => {
+    // dispatch(fetchDataOfProducts({ collection: activeCategoryName, page: 1, limit: 10 }));
+    dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
+  }, [dispatch]);
 
   return (
     <div className="filter">

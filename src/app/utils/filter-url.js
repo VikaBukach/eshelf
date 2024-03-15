@@ -7,9 +7,11 @@ export const createUrlFromFilterSettings = (
   checkedSortingValue
 ) => {
   let filterUrl = "";
+  console.log(filterSettings);
 
   for (const setting in filterSettings) {
     if (filterSettings[setting].length !== 0) {
+      console.log(filterSettings[setting]);
       filterUrl = filterUrl + setting.toString() + "=" + filterSettings[setting].join(",") + ";";
     }
   }

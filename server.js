@@ -26,16 +26,49 @@ connectToDb((err) => {
   }
 });
 
-const handleCollectionRequest = (collection, req, res) => {
+// const handleCollectionRequest = (collection, req, res) => {
+//   const page = parseInt(req.query.page) || 1;
+//   const limit = parseInt(req.query.limit) || 4;
+//   const skip = (page - 1) * limit;
+
+//   db.collection(collection)
+//     .find()
+//     .sort({ model: 1 })
+//     .skip(skip)
+//     .limit(limit)
+//     .toArray()
+//     .then((products) => {
+//       res.status(200).json(products);
+//     })
+//     .catch(() => {
+//       res.status(500).json({ error: "Something goes wrong..." });
+//     });
+// };
+
+// const handleCollectionRequest = (collection, req, res) => {
+//   db.collection(collection)
+//     .find()
+//     .sort({ model: 1 })
+//     .toArray()
+//     .then((products) => {
+//       res.status(200).json(products);
+//     })
+//     .catch(() => {
+//       res.status(500).json({ error: "Something goes wrong..." });
+//     });
+// };
+
+
+const handleCollectionRequest = (collection, req, res, limit) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 4;
-  const skip = (page - 1) * limit;
+  const actualLimit = limit ? parseInt(limit) : 4; // Используем переданный лимит или по умолчанию 4
+  const skip = (page - 1) * actualLimit;
 
   db.collection(collection)
     .find()
     .sort({ model: 1 })
     .skip(skip)
-    .limit(limit)
+    .limit(actualLimit)
     .toArray()
     .then((products) => {
       res.status(200).json(products);
@@ -45,9 +78,15 @@ const handleCollectionRequest = (collection, req, res) => {
     });
 };
 
+
 app.get("/smartphones", (req, res) => {
-  handleCollectionRequest("smartphones", req, res);
+  const { limit } = req.query;
+  handleCollectionRequest("smartphones", req, res, limit);
 });
+
+// app.get("/smartphones", (req, res) => {
+//   handleCollectionRequest("smartphones", req, res);
+// });
 
 app.get("/laptops", (req, res) => {
   handleCollectionRequest("laptops", req, res);
