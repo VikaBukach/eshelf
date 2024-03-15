@@ -2,11 +2,12 @@
 
 .delivery-to-user-content {
   @media screen and (min-width: $desktop) {
+    gap: 20px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    max-width: 354px;
+    max-width: 370px;
 
     .delivery-to-user {
       position: relative;
@@ -17,14 +18,15 @@
         justify-content: center;
         text-align: center;
         align-items: center;
-        font: 500 15px / 1.5 "Inter", sans-serif;
+        font: 400 15px / 1.5 "Inter", sans-serif;
         color: $primary-color-black;
         width: 100%;
         cursor: pointer;
 
         span {
+          margin-right: auto;
           padding-right: 40px;
-          font-size: 20px;
+          font-size: 15px;
         }
 
         svg {
@@ -61,6 +63,7 @@
       }
 
       .delivery-to-user-posts {
+        margin-left: 10px;
         display: flex;
         flex-direction: row;
         text-align: center;
