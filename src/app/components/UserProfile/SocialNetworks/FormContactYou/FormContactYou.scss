@@ -1,6 +1,7 @@
 @import "../../../../../assets/styles/style";
 
 .form-contact {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -26,7 +27,6 @@
   font: 400 14px / 1.5 "Inter", sans-serif;
   color: rgba(51, 51, 51, 0.2);
 }
-
 
 .form-contact-label {
   font: 400 13px / 1.5 "Inter", sans-serif;

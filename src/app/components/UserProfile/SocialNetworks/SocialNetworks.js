@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import "./SocialNetworks.scss";
 import {ContactDetails} from "../../OrderPage/components/ContactDetails";
 import FormContactYou from "./FormContactYou/FormContactYou";
+import Buttun_perple from "../../Main/Button/Buttun_perple";
 
 const SocialNetworks = () => {
     const [data, setData] = useState({
@@ -49,6 +50,10 @@ const SocialNetworks = () => {
                 <div className="social-networks-form">
                     <FormContactYou state={data} setState={setData}/>
                 </div>
+                <Buttun_perple
+                    btnClass="contact-form-btn"
+                    text={"Send"}
+                />
             </div>
 
         </div>

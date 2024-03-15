@@ -38,8 +38,23 @@
 
       .social-networks-form {
         margin-left: 20px;
-
       }
+
+      .contact-form-btn {
+       margin-left: 24px;
+        border-radius: 5px;
+        padding: 12px 80px;
+        width: 500px;
+        height: 48px;
+        background: #8119b1;
+
+        .btn-text {
+          font: 400 15px / 1.5 "Inter", sans-serif;
+          color: #fff;
+        }
+      }
+
+
 
 
     }
