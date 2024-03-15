@@ -2,26 +2,26 @@
 
 .delivery-to-user-content {
   @media screen and (min-width: $desktop) {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
     .delivery-to-user {
-      max-width: 400px;
-      margin: 100px auto 0;
-      border-radius: 3px;
+      max-width: 300px;
 
       &-btn-visible {
-        background: $secondary-color-blue;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
         font: 500 15px / 1.5 "Inter", sans-serif;
         color: $primary-color-black;
         width: 100%;
         cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 7px 15px;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
 
         span {
-          padding: 15px 0;
+          padding-right: 40px;
           font-size: 20px;
         }
 
