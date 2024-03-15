@@ -1,7 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./SocialNetworks.scss";
+import {ContactDetails} from "../../OrderPage/components/ContactDetails";
+import FormContactYou from "./FormContactYou/FormContactYou";
 
 const SocialNetworks = () => {
+    const [data, setData] = useState({
+        name: "",
+        phone: "",
+        email: "",
+        message: "",
+    })
+
     return (
         <div className="social-networks">
             <div className="social-networks-left">
@@ -37,9 +46,10 @@ const SocialNetworks = () => {
 
             <div className="social-networks-right">
                 <h1 className="social-networks-title">Write and we will contact you</h1>
-
+                <div className="social-networks-form">
+                    <FormContactYou state={data} setState={setData}/>
+                </div>
             </div>
-
 
         </div>
     );
