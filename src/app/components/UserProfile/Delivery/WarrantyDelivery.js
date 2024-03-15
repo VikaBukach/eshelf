@@ -171,30 +171,46 @@ const WarrantyDelivery = () => {
             </div>
 
 
-            {/*<div className="delivery-to-user">*/}
-            {/*    <button*/}
-            {/*        className="delivery-to-user-btn-visible"*/}
-            {/*        onClick={() => toggleQuestion(1)}*/}
-            {/*    >*/}
-            {/*        <span>How can I pay for the goods?</span>*/}
-            {/*        <svg*/}
-            {/*            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-            {/*            <path d="M9.625 18.75L16.375 12L9.625 5.25" stroke="#333333" strokeWidth="0.872238"*/}
-            {/*                  strokeLinecap="round" strokeLinejoin="round"/>*/}
-            {/*        </svg>*/}
-            {/*    </button>*/}
-            {/*    <div*/}
-            {/*        className={activeQuestion === 1 ? "delivery-to-user-btn-toggle animated" : "delivery-to-user-btn-toggle"}*/}
-            {/*        style={{height: activeQuestion === 1 ? `${refHeight.current[1]}` : "0px"}}*/}
-            {/*        ref={(el) => {*/}
-            {/*            refHeight.current[1] = el ? el.scrollHeight : 0*/}
-            {/*        }}*/}
-            {/*    >*/}
-            {/*        <div className="content" aria-hidden={activeQuestion === 1 ? "true" : "false"}>*/}
+            <div className="delivery-to-user">
+                <button
+                    className="delivery-to-user-btn-visible"
+                    onClick={() => toggleQuestion(3)}
+                >
+                    <span>How can I pay for the goods?</span>
+                    <svg
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.625 18.75L16.375 12L9.625 5.25" stroke="#333333" strokeWidth="0.872238"
+                              strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                </button>
+                <div
+                    className={activeQuestion === 3 ? "delivery-to-user-btn-toggle animated" : "delivery-to-user-btn-toggle"}
+                    style={{height: activeQuestion === 3 ? `${refHeight.current[3]}` : "0px"}}
+                    ref={(el) => {
+                        refHeight.current[3] = el ? el.scrollHeight : 0
+                    }}
+                >
+                    <div className="content" aria-hidden={activeQuestion === 3 ? "true" : "false"}>
+                        <p className="delivery-to-user-text">You can typically pay for goods through various payment
+                            methods, depending on the options provided by the seller or the e-commerce platform you're
+                            using. Here are some common payment methods:
+                        </p>
+                        <p className="delivery-to-user-text"><span>Credit or Debit Card:</span> You can pay using your credit or
+                            debit card, either directly on the website or through a secure payment gateway.</p>
+                        <p className="delivery-to-user-text"><span>Digital Wallets:</span> Digital wallet services like PayPal, Apple
+                            Pay, Google Pay, and others allow you to store payment information securely and make
+                            purchases online with ease.</p>
+                        <p className="delivery-to-user-text"><span>Bank Transfer:</span> Some sellers may offer bank transfer as a
+                            payment option. This involves transferring funds directly from your bank account to the
+                            seller's account.</p>
+                        <p className="delivery-to-user-text">Before making a purchase, it's essential to review the
+                            available payment methods on the website or check with the seller to ensure that your
+                            preferred payment method is accepted. Additionally, consider the security measures in place
+                            to protect your payment information during the transaction.</p>
 
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+                    </div>
+                </div>
+            </div>
 
 
         </div>
