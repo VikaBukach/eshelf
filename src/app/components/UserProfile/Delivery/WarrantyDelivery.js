@@ -6,9 +6,9 @@ const WarrantyDelivery = () => {
     const [activeQuestion, setActiveQuestion] = useState(null);
     const refHeight = useRef([]);
 
-   const toggleQuestion = (index) => {
-       setActiveQuestion(activeQuestion === index ? null : index);
-   }
+    const toggleQuestion = (index) => {
+        setActiveQuestion(activeQuestion === index ? null : index);
+    }
 
     return (
         <div className="delivery-to-user-content">
@@ -32,7 +32,7 @@ const WarrantyDelivery = () => {
                     }}
                 >
                     <div aria-hidden={activeQuestion ? "true" : "false"}>
-                        <p className="delivery-to-user-text">You can place an order on the site allo.ua around the
+                        <p className="delivery-to-user-text">You can place an order on the site aShelf around the
                             clock.
                             <p>We will not disturb you and make phone calls if you do not wish to contact us.</p>
                             <p>In the near future you will receive a notification with information on the order, or our
@@ -104,22 +104,16 @@ const WarrantyDelivery = () => {
                             in the store. You can navigate through different categories or use the search feature to
                             find specific items.</p>
                         <p className="delivery-to-user-text"><span>Select Product:</span> Once you find the product you
-                            want to
-                            purchase, click on it to view more details. Make sure to check the product description,
-                            images, and specifications to
-                            ensure it meets your requirements.</p>
+                            want to purchase, click on it to view more details. Make sure to check the product
+                            description,
+                            images, and specifications to ensure it meets your requirements.</p>
                         <p className="delivery-to-user-text"><span>Add to Cart:</span> Add to Cart: If you decide to buy
-                            the product, click on the
-                            "Add to Cart" button. You can continue shopping and add more items to your cart if needed.
+                            the product, click on the "Add to Cart" button. You can continue shopping and add more items
+                            to your cart if needed.
                         </p>
                         <p className="delivery-to-user-text"><span>Review Cart:</span> After adding all desired items to
-                            your
-                            cart, review your cart to make sure everything is correct. You can adjust quantities or
+                            your cart, review your cart to make sure everything is correct. You can adjust quantities or
                             remove items if necessary.</p>
-                        <p className="delivery-to-user-text"><span>Proceed to Checkout:</span> When you're ready to
-                            place your
-                            order, proceed to the checkout page. Here, you'll need to provide your shipping address,
-                            select a shipping method, and choose a payment option.</p>
                         <p className="delivery-to-user-text"><span>Complete Payment:</span> Follow the prompts to
                             complete the payment for your order. You may need to
                             enter your payment details, such as credit card information or use an online payment service
@@ -129,15 +123,9 @@ const WarrantyDelivery = () => {
                             review your order one last time and then click on the "Place Order" or "Complete Purchase"
                             button to finalize your purchase.</p>
                         <p className="delivery-to-user-text"><span>Track Order (Optional):</span> If the store provides
-                            order
-                            tracking, you can use the order number from your confirmation email to track the status of
-                            your shipment and see estimated delivery
-                            times.</p>
-                        <p className="delivery-to-user-text"><span>Receive Goods:</span> Finally, wait for your goods to
-                            be delivered
-                            to your specified shipping address. Once they arrive, inspect the package to ensure
-                            everything is in good
-                            condition.</p>
+                            order tracking, you can use the order number from your confirmation email to track the
+                            status of
+                            your shipment and see estimated delivery times.</p>
                     </div>
                 </div>
             </div>
@@ -146,7 +134,7 @@ const WarrantyDelivery = () => {
             <div className="delivery-to-user">
                 <button
                     className="delivery-to-user-btn-visible"
-                    onClick={() => toggleQuestion(1)}
+                    onClick={() => toggleQuestion(2)}
                 >
                     <span>How much does shipping cost?</span>
                     <svg
@@ -156,43 +144,57 @@ const WarrantyDelivery = () => {
                     </svg>
                 </button>
                 <div
-                    className={activeQuestion === 1 ? "delivery-to-user-btn-toggle animated" : "delivery-to-user-btn-toggle"}
-                    style={{height: activeQuestion === 1 ? `${refHeight.current[1]}` : "0px"}}
+                    className={activeQuestion === 2 ? "delivery-to-user-btn-toggle animated" : "delivery-to-user-btn-toggle"}
+                    style={{height: activeQuestion === 2 ? `${refHeight.current[2]}` : "0px"}}
                     ref={(el) => {
-                        refHeight.current[1] = el ? el.scrollHeight : 0
+                        refHeight.current[2] = el ? el.scrollHeight : 0
                     }}
                 >
-                    <div className="content" aria-hidden={activeQuestion === 1 ? "true" : "false"}>
+                    <div className="content" aria-hidden={activeQuestion === 2 ? "true" : "false"}>
+                        <p className="delivery-to-user-text">The shipping cost can vary depending on several factors
+                            such as the shipping destination,
+                            the weight and dimensions of the package, the shipping method chosen (standard, expedited,
+                            etc.), and any additional services requested (insurance, tracking, etc.).</p>
+
+                        <p className="delivery-to-user-text">To get an accurate estimate of shipping costs, it's best to
+                            check with the specific shipping
+                            carrier or service provider you plan to use.</p>
+                        <p className="delivery-to-user-text">Many companies offer online calculators where
+                            you can input the relevant details to determine the shipping cost for your package.</p>
+                        <p className="delivery-to-user-text">
+                            Additionally, some e-commerce platforms may provide shipping cost estimations
+                            during the
+                            checkout process based on the items in your cart and your shipping address.</p>
 
                     </div>
                 </div>
             </div>
 
 
-            <div className="delivery-to-user">
-                <button
-                    className="delivery-to-user-btn-visible"
-                    onClick={() => toggleQuestion(1)}
-                >
-                    <span>How can I pay for the goods?</span>
-                    <svg
-                        width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.625 18.75L16.375 12L9.625 5.25" stroke="#333333" strokeWidth="0.872238"
-                              strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                </button>
-                <div
-                    className={activeQuestion === 1 ? "delivery-to-user-btn-toggle animated" : "delivery-to-user-btn-toggle"}
-                    style={{height: activeQuestion === 1 ? `${refHeight.current[1]}` : "0px"}}
-                    ref={(el) => {
-                        refHeight.current[1] = el ? el.scrollHeight : 0
-                    }}
-                >
-                    <div className="content" aria-hidden={activeQuestion === 1 ? "true" : "false"}>
+            {/*<div className="delivery-to-user">*/}
+            {/*    <button*/}
+            {/*        className="delivery-to-user-btn-visible"*/}
+            {/*        onClick={() => toggleQuestion(1)}*/}
+            {/*    >*/}
+            {/*        <span>How can I pay for the goods?</span>*/}
+            {/*        <svg*/}
+            {/*            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
+            {/*            <path d="M9.625 18.75L16.375 12L9.625 5.25" stroke="#333333" strokeWidth="0.872238"*/}
+            {/*                  strokeLinecap="round" strokeLinejoin="round"/>*/}
+            {/*        </svg>*/}
+            {/*    </button>*/}
+            {/*    <div*/}
+            {/*        className={activeQuestion === 1 ? "delivery-to-user-btn-toggle animated" : "delivery-to-user-btn-toggle"}*/}
+            {/*        style={{height: activeQuestion === 1 ? `${refHeight.current[1]}` : "0px"}}*/}
+            {/*        ref={(el) => {*/}
+            {/*            refHeight.current[1] = el ? el.scrollHeight : 0*/}
+            {/*        }}*/}
+            {/*    >*/}
+            {/*        <div className="content" aria-hidden={activeQuestion === 1 ? "true" : "false"}>*/}
 
-                    </div>
-                </div>
-            </div>
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
 
         </div>
