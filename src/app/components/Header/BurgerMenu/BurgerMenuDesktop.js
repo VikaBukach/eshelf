@@ -48,35 +48,7 @@ const BurgerMenuDesktop = ({ isOpen, onClose, history }) => {
   return (
     <div className="burger-menu_container">
       <div className="burger-menu">
-        <div className="burger-menu_header">
-          <NavLink to="/" className="burger-menu__logo" onClick={handleNavLinkClick}>
-            <LogoIcon />
-          </NavLink>
-          <button className="burger-menu__button" onClick={handleCloseMenu}>
-            <CloseIcon />
-          </button>
-        </div>
-        <div className="burger-menu_links">
-          <NavLink to="/users" className="burger-menu__link-users" onClick={handleNavLinkClick}>
-            <UserIcon />
-          </NavLink>
-          <div className="burger-menu__link-cart">
-            <Cart
-              activator={
-                <div onClick={open}>
-                  <CartIcon />
-                </div>
-              }
-            />
-          </div>
-          <NavLink to="/comparing" className="burger-menu__link-comparing" onClick={handleNavLinkClick}>
-            <BalanceIcon />
-          </NavLink>
-          <NavLink to="/favorites" className="burger-menu__link-favorites" onClick={handleNavLinkClick}>
-            <HeartIcon />
-          </NavLink>
-        </div>
-        <div className="burger-menu__categories">
+               <div className="burger-menu__categories">
           <nav>
             <h2>Catalog (desktop)</h2>
             <ul>
