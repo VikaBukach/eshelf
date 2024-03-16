@@ -1,9 +1,16 @@
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react"; // додав підрахунок товарів
+import { useDispatch, useSelector } from "react-redux";
 import style from "./Comparing.module.scss";
 import { CompareBody } from "./components/CompareBody";
+import { setCompareTotal } from "../../store/slices/navMenuSlice"; // додав підрахунок товарів
 
 export const ComparingPage = () => {
+  const dispatch = useDispatch(); // додав підрахунок товарів
   const { data: compareData } = useSelector((state) => state.compare);
+
+  useEffect(() => {
+    dispatch(setCompareTotal(compareData.length)); // додав підрахунок товарів
+  }, [dispatch, compareData]);
 
   if (compareData.length === 0) {
     return (

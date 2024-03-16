@@ -57,14 +57,16 @@
     background-color: gray;
   }
 }
-
+.subcategory-menu_wrapper {
+  display: flex;
+}
 .category-link-wrapper {
   display: flex;
 }
 
 .subcategory-menu {
   position: absolute;
-  top: 25%;
+  top: 35%;
   left: 0;
   width: 100%;
   height: 100%;

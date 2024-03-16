@@ -87,7 +87,7 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
         </div>
         <div className="burger-menu__categories">
           <nav>
-            <h2>{currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1)}</h2>
+            <h2>{currentCategory}</h2>
             <ul>
               <li className="category-link">
                 <div className="category-link-wrapper">
@@ -99,16 +99,18 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
                   </NavLink>
                 </div>
                 {smartphonesActive && (
-                  <ul className="subcategory-menu">
-                    <NavLink onClick={handleBackButtonClick}>
-                      <ArrowIconBack />
-                      All categories
-                    </NavLink>
+                  <div className="subcategory-menu_wrapper">
+                    <ul className="subcategory-menu">
+                  <NavLink onClick={handleBackButtonClick}>
+                    <ArrowIconBack />
+                    All categories
+                  </NavLink>
 
-                    <div>Smartphones subcategory1</div>
-                    <div>Smartphones subcategory2</div>
-                    <div>Smartphones subcategory3</div>
-                  </ul>
+                  <div>Smartphones subcategory1</div>
+                  <div>Smartphones subcategory2</div>
+                  <div>Smartphones subcategory3</div>
+                </ul></div>
+
                 )}
                 <ArrowIcon onClick={() => toggleMobileCategories("smartphones")} />
               </li>
