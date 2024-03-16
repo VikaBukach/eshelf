@@ -25,12 +25,8 @@ const Header = () => {
   const selectCartTotal = (state) => state.menu.cartTotal;
   const cartTotal = useSelector(selectCartTotal);
   const favoritesTotal = useSelector((state) => state.menu.favoritesTotal);
-
   const compareTotal = useSelector((state) => state.menu.compareTotal);
 
-  console.log(compareTotal); // перевірка вхідних даних по товарам у порівнянні
-
-  const userCount = useSelector((state) => state.menu.userCount);
   const windowWidth = useWindowWidth();
   useEffect(() => {
     const calculateCartTotal = () => {

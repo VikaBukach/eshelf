@@ -7,7 +7,6 @@ import {
   setActiveMemoryIndex,
   setActiveImageIndex,
 } from "../../store/slices/singleProductSlice";
-import { fetchDataOfProducts } from "../../store/slices/productsSlice";
 import { AboutProduct } from "../../components/SingleProduct/AboutProduct";
 import { CharacteristicProduct } from "../../components/SingleProduct/CharacteristicProduct";
 import { PhotoVideoProduct } from "../../components/SingleProduct/PhotoVideoProduct";
@@ -16,11 +15,13 @@ import Rating from "../../components/SingleProduct/components/Rating";
 import axios from "axios";
 
 const ProductPage = () => {
-  const { collection, id } = useParams();
+  const { id } = useParams();
 
   const dispatch = useDispatch();
 
-  const product = useSelector((state) => state.products.data.find((item) => item._id === id));
+  const storedProduct = JSON.parse(localStorage.getItem("product"));
+
+  const product = useSelector((state) => state.products.data.find((item) => item._id === id)) || storedProduct;
 
   const { tabs } = useSelector((state) => state.product);
 
@@ -52,14 +53,16 @@ const ProductPage = () => {
   }, [product, PORT]);
 
   useEffect(() => {
-    dispatch(fetchDataOfProducts(`${collection}`));
+
+    localStorage.setItem("product", JSON.stringify(product));
+
     return () => {
       dispatch(changeTabs("About the product"));
       dispatch(setActiveColorIndex(0));
       dispatch(setActiveMemoryIndex(0));
       dispatch(setActiveImageIndex(0));
     };
-  }, [dispatch, collection]);
+  }, [dispatch]);
 
   const handleTabClick = (tabName) => {
     dispatch(changeTabs(tabName));
