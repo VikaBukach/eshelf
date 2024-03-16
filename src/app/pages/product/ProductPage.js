@@ -98,7 +98,10 @@ const ProductPage = () => {
           </ul>
           <div className="product-details__body">
             {tabs === "About the product" && <AboutProduct product={product} />}
-            {tabs === "Reviews" && <ReviewsProduct productId={product._id} />}
+            {tabs === "Reviews" && (
+              // Передаємо стан підрахунку відгуків
+              <ReviewsProduct productId={product._id} totalReviews={totalReviews} setTotalReviews={setTotalReviews} />
+            )}
             {tabs === "Characteristic" && <CharacteristicProduct product={product} />}
             {tabs === "Photo and video" && <PhotoVideoProduct />}
           </div>

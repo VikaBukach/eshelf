@@ -1,5 +1,5 @@
-import style from "./Order.module.scss";
-import { useEffect, useState } from "react";
+import "./Order.scss";
+import { useCallback, useEffect, useState } from "react";
 import { Delivery } from "./components/Delivery";
 import { Payment } from "./components/Payment";
 import { ContactDetails } from "./components/ContactDetails";
@@ -13,6 +13,25 @@ import { formatPrice } from "../../utils/formatPrice";
 export const validateEmail = (email) => {
   const basicEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return basicEmailRegex.test(email);
+};
+
+const CartItem = ({ item }) => {
+  return (
+    <div className={"orderPage__product"}>
+      <div className={"orderPage__productImage"}>
+        <img src={item.imageURL} alt={item.title} />
+      </div>
+      <div className={"orderPage__productContent"}>
+        <h3 className={"orderPage__heading"}>{item.title}</h3>
+        <p>&times; {item.quantity}</p>
+        <div className={"orderPage__productQuantity"}>
+          <div className={"orderPage__quantity"}>
+            <div className={"orderPage__price"}>{formatPrice(+item.price * +item.quantity)} $</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const cartState = {
@@ -39,30 +58,12 @@ const OrderPage = () => {
     setButtonDisabled(!isFormComplete() || !validateEmail(state.email));
   }, [state]);
 
-  const CartItem = ({ item }) => {
-    return (
-      <div className={style.product}>
-        <div className={style.productImage}>
-          <img src={item.imageURL} alt={item.title} />
-        </div>
-        <div className={style.productContent}>
-          <h3 className={style.heading}>{item.title}</h3>
-          <p>&times; {item.quantity}</p>
-          <div className={style.productQuantity}>
-            <div className={style.quantity}>
-              <div className={style.price}>{formatPrice(+item.price * +item.quantity)} $</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
   const { active, close, open } = useModal();
 
-  const Cart = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const Cart = useCallback(() => {
     const totalProductsQuantity = cart.reduce((prev, curr) => {
       return prev + curr.quantity;
     }, 0);
@@ -79,7 +80,7 @@ const OrderPage = () => {
 
     return (
       <>
-        <div className={style.cart}>
+        <div className={"orderPage__cart"}>
           <h3>Total payable</h3>
           <div>
             <p>
@@ -92,7 +93,7 @@ const OrderPage = () => {
             <span>{formatPrice(DELIVERY_COST)} $</span>
           </div>
 
-          <div className={style.totals}>
+          <div className={"orderPage__totals"}>
             <p>Total</p>
             <span>{formatPrice(totalProductsPrice + DELIVERY_COST)} $</span>
           </div>
@@ -112,11 +113,11 @@ const OrderPage = () => {
             setState({ ...cartState });
             close();
           }}
-          wrapperStyles={style.successModalWrapper}
+          wrapperStyles={"orderPage__successModalWrapper"}
         >
           {
-            <div className={style.successModal}>
-              <div className={style.successIcon}>
+            <div className={"orderPage__successModal"}>
+              <div className={"orderPage__successIcon"}>
                 <img src="../../../assets/icons/arrow-back-large.svg" alt="" />
               </div>
 
@@ -144,36 +145,36 @@ const OrderPage = () => {
         </Modal>
       </>
     );
-  };
+  });
 
   return (
     <div className="container">
-      <h1 className={style.pageTitle}>Details</h1>
-      <div className={style.pageOrder}>
-        <div className={style.form}>
+      <h1 className={"orderPage__pageTitle"}>Details</h1>
+      <div className={"orderPage__content"}>
+        <div className={"orderPage__form"}>
           <div>
-            <h2 data-index="1" className={style.sectionTitle}>
+            <h2 data-index="1" className={"orderPage__sectionTitle"}>
               Your contact details
             </h2>
             <ContactDetails setState={setState} state={state} />
           </div>
           <div>
-            <h2 data-index="2" className={style.sectionTitle}>
+            <h2 data-index="2" className={"orderPage__sectionTitle"}>
               Delivery
             </h2>
             <Delivery setState={setState} state={state} />
           </div>
 
           <div>
-            <h2 data-index="3" className={style.sectionTitle}>
+            <h2 data-index="3" className={"orderPage__sectionTitle"}>
               Payment
             </h2>
             <Payment setState={setState} state={state} />
           </div>
         </div>
 
-        <div className={style.cartTotals}>
-          <div className={style.cartTotalsList}>
+        <div className={"orderPage__cartTotals"}>
+          <div className={"orderPage__cartTotalsList"}>
             {cart.map((item) => (
               <CartItem key={item.id} item={item} />
             ))}

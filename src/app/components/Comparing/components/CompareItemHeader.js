@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import { toggleCompare } from "../../../store/slices/compareSlice";
-import style from "../Comparing.module.scss";
+import "../Comparing.scss";
 
 export const CompareItemHeader = ({ item }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className={style.compareHeader}>
+    <div className="comparing__header">
       <button
         onClick={() => {
           dispatch(toggleCompare(item));

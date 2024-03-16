@@ -1,12 +1,12 @@
-import style from "./Radio.module.scss";
+import "./Radio.scss";
 import { classNames } from "../../../utils/classNames";
 
 export const Radio = ({ label, onChange, value, selectedOption }) => {
   return (
-    <div className={style.inputWrapper}>
+    <div className={"radio_ui__inputWrapper"}>
       <div
         onClick={() => onChange(value)}
-        className={classNames(style.radio, value === selectedOption ? style.radioActive : "")}
+        className={classNames("radio_ui__radio", value === selectedOption ? "radio_ui__radioActive" : "")}
       ></div>
       <label
         style={{
