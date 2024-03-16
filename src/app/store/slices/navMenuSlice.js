@@ -35,7 +35,7 @@ export const menuSlice = createSlice({
       state.favoritesTotal = action.payload;
     },
     setCompareTotal: (state, action) => {
-      state.favoritesTotal = action.payload;
+      state.compareTotal = action.payload;
     },
   },
 });

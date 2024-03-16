@@ -78,9 +78,11 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
               }
             />
           </div>
+
+          {/* //приховуємо на моб.версії можливість додавання до порівняння товарів
           <NavLink to="/comparing" className="burger-menu__link-comparing" onClick={handleNavLinkClick}>
             <BalanceIcon />
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/favorites" className="burger-menu__link-favorites" onClick={handleNavLinkClick}>
             <HeartIcon />
           </NavLink>

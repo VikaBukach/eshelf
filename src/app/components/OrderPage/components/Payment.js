@@ -1,5 +1,5 @@
 import { RadioGroup } from "../../ui/RadioGroup";
-import style from "../Order.module.scss";
+import "../Order.scss";
 
 export const Payment = ({ state, setState }) => {
   const paymentOptions = [
@@ -22,7 +22,7 @@ export const Payment = ({ state, setState }) => {
   ];
 
   return (
-    <div className={style.payment}>
+    <div className={"orderPage__payment"}>
       <RadioGroup
         options={paymentOptions}
         selectedOption={state.paymentMethod}

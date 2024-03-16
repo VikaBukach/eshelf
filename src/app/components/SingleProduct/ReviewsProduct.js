@@ -5,16 +5,19 @@ import Rating from "./components/Rating";
 import Pagination from "./components/Pagination";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const ReviewsProduct = ({ productId }) => {
+const ReviewsProduct = ({ productId, totalReviews, setTotalReviews }) => {
   const [params, setParams] = useSearchParams();
   const [rating, setRating] = useState(0);
   const [page, setPage] = useState(params.get("page") || 1);
-  const [totalReviews, setTotalReviews] = useState(0);
+  //const [totalReviews, setTotalReviews] = useState(0);
 
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+
+  const user = useSelector((state) => state.user.data);
 
   const formRef = useRef();
 
@@ -40,13 +43,7 @@ const ReviewsProduct = ({ productId }) => {
           productId,
         },
       });
-      // const reviewsTotals = await axios.get(`http://localhost:${PORT}/getProductReviewTotals`, {
-      //   params: {
-      //     productId,
-      //   },
-      // });
 
-      // console.log(reviewsTotals.data);
       setReviews(reviews.data?.reviews);
       setTotalReviews(reviews.data?.total);
       setLoading(false);
@@ -55,16 +52,13 @@ const ReviewsProduct = ({ productId }) => {
     if (!submitting) {
       getReviews();
     }
-
-    return () => {
-      setParams({});
-    };
   }, [page, submitting]);
 
   const sendReview = async (data) => {
     setSubmitting(true);
     try {
       const res = await axios.post(`http://localhost:${PORT}/postProductReview`, {
+        userName: user ? `${user.name} ${user.surname}` : "Guest",
         ...data,
         productId,
       });
@@ -127,7 +121,7 @@ const ReviewsProduct = ({ productId }) => {
           </div>
           <button type="submit" disabled={submitting || rating < 1} className="primary-btn">
             <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 8.5L5.28571 13.25L16 1.375" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M1 8.5L5.28571 13.25L16 1.375" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
 
             <span>Leave a review</span>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Modal from "../Modal";
-import style from "./Cart.module.scss";
+import "./Cart.scss";
 import { useModal } from "../../hooks/useModal";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,22 +20,22 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <div className={style.product}>
-      <div className={style.productImage}>
+    <div className={"cart__product"}>
+      <div className={"cart__productImage"}>
         <img src={item.imageURL} alt={item.title} />
       </div>
-      <div className={style.productContent}>
-        <h3 className={style.heading}>{item.title}</h3>
+      <div className={"cart__productContent"}>
+        <h3 className={"cart__heading"}>{item.title}</h3>
         {/* <p>Code: {item.code}</p> */}
-        <div className={style.productQuantity}>
-          <div className={style.price}>{formatPrice(item.price)} $</div>
-          <div className={style.quantity}>
-            <div className={style.quantityControllers}>
+        <div className={"cart__productQuantity"}>
+          <div className={"cart__price"}>{formatPrice(item.price)} $</div>
+          <div className={"cart__quantity"}>
+            <div className={"cart__quantityControllers"}>
               <div onClick={() => decrease(item.id)}>-</div>
               <span>{item.quantity}</span>
               <div onClick={() => increase(item.id)}>+</div>
             </div>
-            <div className={style.price}>
+            <div className={"cart__price"}>
               {formatPrice(+item.price * +item.quantity)} {item.currency} $
             </div>
           </div>
@@ -65,9 +65,9 @@ const Cart = ({ activator }) => {
 
   const footerElement = (
     <div ref={footerRef}>
-      <span className={style.line}></span>
-      <div className={style.footer}>
-        <p className={style.price}>{formatPrice(totalPrice)} $</p>
+      <span className={"cart__line"}></span>
+      <div className={"cart__footer"}>
+        <p className={"cart__price"}>{formatPrice(totalPrice)} $</p>
         <button
           disabled={!cart.length}
           onClick={() => {
@@ -83,8 +83,8 @@ const Cart = ({ activator }) => {
   );
 
   const headerElement = (
-    <div ref={headerRef} className={style.header}>
-      <p className={style.heading}>Basket</p>
+    <div ref={headerRef} className={"cart__header"}>
+      <p className={"cart__heading"}>Basket</p>
     </div>
   );
 
@@ -115,7 +115,7 @@ const Cart = ({ activator }) => {
       style={{
         maxHeight: listHeight ? `${listHeight}px` : "auto",
       }}
-      className={style.list}
+      className={"cart__list"}
     >
       {cart.length === 0 ? (
         <h2
@@ -142,7 +142,7 @@ const Cart = ({ activator }) => {
         onClose={close}
         header={headerElement}
         footer={footerElement}
-        wrapperStyles={style.cartWrapper}
+        wrapperStyles={"cart__cartWrapper"}
       >
         {contentElement}
       </Modal>
