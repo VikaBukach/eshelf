@@ -48,6 +48,7 @@ const OrderPage = () => {
   const [state, setState] = useState({ ...cartState });
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const cart = useSelector((state) => state.cart.data);
+  const [orderNumber, setOrderNumber] = useState(null); // add for save order nomber
 
   const isFormComplete = () => {
     const { name, surname, phone, email, city, deliveryMethod, paymentMethod } = state;
@@ -78,6 +79,17 @@ const OrderPage = () => {
 
     const DELIVERY_COST = 120;
 
+    const generateRandomOrderNumber = () => {
+      return Math.floor(1000000 + Math.random() * 9000000); //generation number
+    }
+
+    const handleBuyOpen = () => {   //fn adding order number
+      const randomOrderNumber = generateRandomOrderNumber();
+      setOrderNumber(randomOrderNumber);
+      open();
+    }
+
+
     return (
       <>
         <div className={"orderPage__cart"}>
@@ -97,7 +109,12 @@ const OrderPage = () => {
             <p>Total</p>
             <span>{formatPrice(totalProductsPrice + DELIVERY_COST)} $</span>
           </div>
-          <button onClick={open} className="primary-btn" disabled={buttonDisabled}>
+          <button
+              // onClick={open}
+              onClick={handleBuyOpen}
+              className="primary-btn"
+              disabled={buttonDisabled}
+          >
             <img src="" alt="" />
             <span>Buy now</span>
           </button>
@@ -111,6 +128,7 @@ const OrderPage = () => {
           onClose={() => {
             dispatch(clearCart());
             setState({ ...cartState });
+            setOrderNumber(null); // add clear order number at closing modal window
             close();
           }}
           wrapperStyles={"orderPage__successModalWrapper"}
@@ -123,6 +141,8 @@ const OrderPage = () => {
 
               <h4>You have successfully ordered the product</h4>
 
+              <p>Your order number: {orderNumber}</p>
+
               <ul>
                 {cart.map((item) => (
                   <li key={item.id}>{item.title}</li>
@@ -133,6 +153,7 @@ const OrderPage = () => {
                 onClick={() => {
                   dispatch(clearCart());
                   setState({ ...cartState });
+                  setOrderNumber(null); //clear order number
                   navigate("/");
                 }}
                 className={"primary-btn"}
