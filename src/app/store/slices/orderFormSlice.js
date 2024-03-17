@@ -12,17 +12,7 @@ const loadDataFromLocalStorage = () => {
 const initialState = {
     formData: loadDataFromLocalStorage(),
 };
-// const initialState = {
-//     formData: {
-//         name: "",
-//         surname: "",
-//         phone: "",
-//         email: "",
-//         city: "",
-//         deliveryMethod: "",
-//         paymentMethod: "",
-//     },
-// };
+
 
 const orderFormSlice = createSlice({
     name: "orderForm",
