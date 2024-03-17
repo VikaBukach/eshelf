@@ -3,14 +3,14 @@ import "./UserOrders.scss";
 import { useSelector } from "react-redux";
 
 const UserOrders = () => {
-  const orderNumber = useSelector((state) => state.order.orderNumber);
-
-  console.log("orderNumber", orderNumber);
+    const orderNumber = useSelector((state) => state.order.orderNumber);
+    const orderDate = useSelector((state) => state.order.orderDate);
+const formattedOrderDate = orderDate ? orderDate.toLocaleString() : "";
 
   return (
     <div className="user-orders">
       <h3 className="user-orders-title">Order N {orderNumber}</h3>
-      <span className="user-orders-dayoforder">11.03.2022 16:38</span>
+      <span className="user-orders-dayoforder">{formattedOrderDate}</span>
       <ul className="user-orders-info-items">
         <li className="user-orders-info-item">
           <h6 className="user-orders-info-title">Payment method:</h6>
@@ -53,7 +53,7 @@ const UserOrders = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="user-orders-status-item-date">11.03.2022 16:38</span>
+          <span className="user-orders-status-item-date">{formattedOrderDate}</span>
           <p className="user-orders-status-item-descr">Awaiting processing</p>
         </li>
 
@@ -79,7 +79,7 @@ const UserOrders = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="user-orders-status-item-date">11.03.2022 16:38</span>
+          <span className="user-orders-status-item-date">{formattedOrderDate}</span>
           <p className="user-orders-status-item-descr">Employed</p>
         </li>
 
@@ -92,7 +92,7 @@ const UserOrders = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="user-orders-status-item-date">11.03.2022 16:38</span>
+          <span className="user-orders-status-item-date">{formattedOrderDate}</span>
           <p className="user-orders-status-item-descr">Completed</p>
         </li>
 
@@ -105,7 +105,7 @@ const UserOrders = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="user-orders-status-item-date">11.03.2022 16:38</span>
+          <span className="user-orders-status-item-date">{formattedOrderDate}</span>
           <p className="user-orders-status-item-descr">Delivered to carrier</p>
         </li>
 
@@ -128,7 +128,7 @@ const UserOrders = () => {
               stroke="#8119B1"
             />
           </svg>
-          <span className="user-orders-status-item-date">11.03.2022 16:38</span>
+          <span className="user-orders-status-item-date">{formattedOrderDate}</span>
           <p className="user-orders-status-item-descr">Delivered to the department</p>
         </li>
 
@@ -136,7 +136,7 @@ const UserOrders = () => {
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 18.4L10.8571 26L28 7" stroke="#8119B1" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <span className="user-orders-status-item-date">11.03.2022 16:38</span>
+          <span className="user-orders-status-item-date">{formattedOrderDate}</span>
           <p className="user-orders-status-item-descr">Received</p>
         </li>
       </ul>

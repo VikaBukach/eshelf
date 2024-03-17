@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../store/slices/cartSlice";
 import { formatPrice } from "../../utils/formatPrice";
 import { setOrderNumber } from "../../store/slices/orderSlice";
+import {setOrderDate} from "../../store/slices/orderSlice";
 
 export const validateEmail = (email) => {
   const basicEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -50,6 +51,7 @@ const OrderPage = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const cart = useSelector((state) => state.cart.data);
   const orderNumber = useSelector((state) => state.order.orderNumber); // add order number
+  const orderDate = useSelector((state) => state.order.orderDate);
 
   const isFormComplete = () => {
     const { name, surname, phone, email, city, deliveryMethod, paymentMethod } = state;
@@ -88,6 +90,7 @@ const OrderPage = () => {
       //fn adding order number
       const randomOrderNumber = generateRandomOrderNumber();
       dispatch(setOrderNumber(randomOrderNumber));
+      dispatch(setOrderDate(new Date())); // add save current date
       open();
     };
 
