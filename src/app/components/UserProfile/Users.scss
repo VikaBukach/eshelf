@@ -1,19 +1,19 @@
 @import "../../../assets/styles/style";
 
-.users-page {
-  .user-info {
-    @media screen and (max-width: $desktop) {
-      margin-left: 17px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+
+  .users-page {
+    @media screen and (min-width: $mobile) {
+      display: none;
+    }
+
+    @media screen and (min-width: $tablet) {
+      display: block;
+      .user-info {
+        margin-left: 17px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
   }
 
-  @media screen and (max-width: $tablet) {
-    display: none;
-  }
-  @media screen and (max-width: $mobile) {
-    display: none;
-  }
-}
