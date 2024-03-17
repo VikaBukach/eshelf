@@ -1,6 +1,7 @@
 @import "../../../assets/styles/style";
 
 .userprofile_container {
+
   @media screen and (min-width: $desktop) {
     display: flex;
     width: 100%;
@@ -34,4 +35,6 @@
       }
     }
   }
+
+
 }
