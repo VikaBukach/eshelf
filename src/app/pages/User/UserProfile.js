@@ -9,14 +9,18 @@ import WarrantyDelivery from "../../components/UserProfile/Delivery/WarrantyDeli
 import SocialNetworks from "../../components/UserProfile/SocialNetworks/SocialNetworks";
 import { useSelector  } from "react-redux";
 
-const UserProfile = ({ state, setState }) => {
+export const UserProfile = ({ state, setState }) => {
     const {activepage} = useParams();
-    const orderNumber = useSelector((state) => state.order.orderNumber);
+
+    const orderNumber = useSelector((state) => {
+        console.log('state.order', state.order);
+
+        return state.order.orderNumber;
+    });
 
     return (
         <div className="userprofile_container container">
             <h1 className="userprofile-title">Account settings</h1>
-            {/*<h1>Userprofile, showing {activepage}</h1>*/}
             <div className="userprofile">
                 <div className="userprofile-sidebar-left">
                     <UserSidebar activepage={activepage}/>

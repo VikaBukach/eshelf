@@ -50,9 +50,7 @@ const OrderPage = () => {
   const [state, setState] = useState({ ...cartState });
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const cart = useSelector((state) => state.cart.data);
-  // const [orderNumber, setOrderNumber] = useState(null); // add for save order nomber
-  // const userOrdersData = useSelector((state) => state.userOrdersData);
-  const orderNumber = useSelector((state) => state.order.orderNumber);
+  const orderNumber = useSelector((state) => state.order.orderNumber);  // add order number
 
   const isFormComplete = () => {
     const { name, surname, phone, email, city, deliveryMethod, paymentMethod } = state;
@@ -132,7 +130,6 @@ const OrderPage = () => {
           onClose={() => {
             dispatch(clearCart());
             setState({ ...cartState });
-            dispatch(setOrderNumber(null)); // add clear order number at closing modal window
             close();
           }}
           wrapperStyles={"orderPage__successModalWrapper"}
@@ -157,7 +154,6 @@ const OrderPage = () => {
                 onClick={() => {
                   dispatch(clearCart());
                   setState({ ...cartState });
-                  dispatch(setOrderNumber(null)); //clear order number
                   navigate("/");
                 }}
                 className={"primary-btn"}

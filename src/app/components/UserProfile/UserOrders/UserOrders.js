@@ -1,10 +1,15 @@
 import React from 'react';
 import "./UserOrders.scss";
+import { useSelector } from "react-redux";
 
-const UserOrders = ({orderNumber}) => {
+const UserOrders = () => {
+    const orderNumber = useSelector((state) => state.order.orderNumber);
+
+    console.log('orderNumber', orderNumber)
+
     return (
         <div className="user-orders">
-            <h3 className="user-orders-title">Order No.{orderNumber}</h3>
+            <h3 className="user-orders-title">Order N {orderNumber}</h3>
             <span className="user-orders-dayoforder">11.03.2022  16:38</span>
             <ul className="user-orders-info-items">
                 <li className="user-orders-info-item">

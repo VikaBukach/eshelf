@@ -12,6 +12,7 @@ const UserOrderSlice = createSlice({
     reducers: {
 
         setOrderNumber(state, action) {
+             console.log('Payload received:', action.payload)
             state.orderNumber = action.payload;
         },
         clearOrderNumber(state) {
@@ -26,6 +27,6 @@ const UserOrderSlice = createSlice({
     },
 });
 
-export const { setOrderNumber, clearOrderNumber, addUserOrder, clearUserOrders  } = UserOrderSlice.actions;
+export const { setOrderNumber, clearOrderNumber, addUserOrder, clearUserOrders } = UserOrderSlice.actions;
 
 export default UserOrderSlice.reducer;
