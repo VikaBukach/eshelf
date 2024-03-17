@@ -2,7 +2,6 @@ import React from "react";
 import { CharacteristicBuy } from "../CharacteristicBuy";
 
 const ProductDetailsTv = ({ product }) => {
-
   return (
     <div className="characteristic-body">
       <div className="characteristic-body__info">
@@ -138,9 +137,8 @@ const ProductDetailsTv = ({ product }) => {
           </section>
         )}
       </div>
-      
-      <CharacteristicBuy product={product} />
 
+      <CharacteristicBuy product={product} />
     </div>
   );
 };

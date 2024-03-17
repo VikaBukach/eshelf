@@ -94,9 +94,8 @@ const ProductQuadcopters = ({ product }) => {
             )}
           </div>
         </div>
-        
-        <BuyProduct product={product} />
 
+        <BuyProduct product={product} />
       </div>
     </div>
   );

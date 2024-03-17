@@ -53,7 +53,6 @@ const ProductPage = () => {
   }, [product, PORT]);
 
   useEffect(() => {
-
     localStorage.setItem("product", JSON.stringify(product));
 
     return () => {

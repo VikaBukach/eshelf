@@ -1,33 +1,33 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/slices/cartSlice";
 import { ButtonBuy } from "./ButtonBuy";
 import { WeAccept } from "./WeAccept";
 
 export const CharacteristicBuy = ({ product }) => {
-    const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
-    const activeImageIndex = useSelector((state) => state.product.activeImageIndex);
-    const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
+  const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
+  const activeImageIndex = useSelector((state) => state.product.activeImageIndex);
+  const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const { _id: id, colors, category, model: title } = product;
-    const { images, products } = colors[activeColorIndex];
-    const { price, discount_price: discountPrice } = products[activeMemoryIndex];
-    const imageURL = images[activeImageIndex];
+  const { _id: id, colors, category, model: title } = product;
+  const { images, products } = colors[activeColorIndex];
+  const { price, discount_price: discountPrice } = products[activeMemoryIndex];
+  const imageURL = images[activeImageIndex];
 
-    const productDetails = {
-      id,
-      imageURL,
-      category,
-      title,
-      price,
-      discountPrice,
-    };
+  const productDetails = {
+    id,
+    imageURL,
+    category,
+    title,
+    price,
+    discountPrice,
+  };
 
-    const handleAddToCart = () => {
-      dispatch(addToCart(productDetails));
-    };
+  const handleAddToCart = () => {
+    dispatch(addToCart(productDetails));
+  };
   return (
     <div className="characteristic-body__buy">
       <div className="characteristic-body__carriage">
@@ -64,4 +64,4 @@ export const CharacteristicBuy = ({ product }) => {
       </div>
     </div>
   );
-}
+};

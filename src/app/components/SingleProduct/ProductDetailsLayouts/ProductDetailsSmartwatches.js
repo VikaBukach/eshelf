@@ -241,9 +241,8 @@ const ProductDetailsSmartwatches = ({ product }) => {
           </section>
         )}
       </div>
-      
-      <CharacteristicBuy product={product} />
 
+      <CharacteristicBuy product={product} />
     </div>
   );
 };

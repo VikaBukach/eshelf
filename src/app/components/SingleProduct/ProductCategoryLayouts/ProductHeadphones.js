@@ -15,7 +15,6 @@ const ProductHeadphones = ({ product }) => {
 
   return (
     <div className="product-details-body">
-      
       <GalleryProduct product={product} />
 
       <div className="product-details-body__info info-details">
@@ -32,7 +31,7 @@ const ProductHeadphones = ({ product }) => {
           </div>
         )}
 
-       <ChooseColor product={product} />
+        <ChooseColor product={product} />
 
         <div className="info-details__wrap">
           <div className="info-details__header">Characteristics</div>
@@ -66,9 +65,8 @@ const ProductHeadphones = ({ product }) => {
             )}
           </div>
         </div>
-        
-        <BuyProduct product={product} />
 
+        <BuyProduct product={product} />
       </div>
     </div>
   );

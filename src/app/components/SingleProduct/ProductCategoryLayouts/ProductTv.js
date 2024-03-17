@@ -33,7 +33,7 @@ const ProductTv = ({ product }) => {
           </div>
         )}
 
-       <ChooseColor product={product} />
+        <ChooseColor product={product} />
 
         <div className="info-details__wrap">
           <div className="info-details__header">Characteristics</div>
@@ -94,9 +94,8 @@ const ProductTv = ({ product }) => {
             )}
           </div>
         </div>
-       
-        <BuyProduct product={product} />
 
+        <BuyProduct product={product} />
       </div>
     </div>
   );

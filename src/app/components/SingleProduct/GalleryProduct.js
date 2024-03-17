@@ -1,16 +1,15 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setActiveImageIndex } from '../../store/slices/singleProductSlice';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveImageIndex } from "../../store/slices/singleProductSlice";
 
 const GalleryProduct = ({ product }) => {
+  const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
+  const activeImageIndex = useSelector((state) => state.product.activeImageIndex);
+  const dispatch = useDispatch();
 
-const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
-const activeImageIndex = useSelector((state) => state.product.activeImageIndex);
-const dispatch = useDispatch();
-
-const handleSmallImageClick = (index) => {
-  dispatch(setActiveImageIndex(index));
-};
+  const handleSmallImageClick = (index) => {
+    dispatch(setActiveImageIndex(index));
+  };
 
   return (
     <div className="product-details-body__slider">
@@ -26,6 +25,6 @@ const handleSmallImageClick = (index) => {
       </div>
     </div>
   );
-}
+};
 
-export { GalleryProduct }
+export { GalleryProduct };

@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../store/slices/cartSlice";
 import { formatPrice } from "../../utils/formatPrice";
-import {setOrderNumber} from "../../store/slices/orderSlice";
+import { setOrderNumber } from "../../store/slices/orderSlice";
 
 export const validateEmail = (email) => {
   const basicEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -46,11 +46,10 @@ const cartState = {
 };
 
 const OrderPage = () => {
-
   const [state, setState] = useState({ ...cartState });
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const cart = useSelector((state) => state.cart.data);
-  const orderNumber = useSelector((state) => state.order.orderNumber);  // add order number
+  const orderNumber = useSelector((state) => state.order.orderNumber); // add order number
 
   const isFormComplete = () => {
     const { name, surname, phone, email, city, deliveryMethod, paymentMethod } = state;
@@ -83,14 +82,14 @@ const OrderPage = () => {
 
     const generateRandomOrderNumber = () => {
       return Math.floor(1000000 + Math.random() * 9000000); //generation number
-    }
+    };
 
-    const handleBuyOpen = () => {                   //fn adding order number
+    const handleBuyOpen = () => {
+      //fn adding order number
       const randomOrderNumber = generateRandomOrderNumber();
       dispatch(setOrderNumber(randomOrderNumber));
       open();
-    }
-
+    };
 
     return (
       <>
@@ -112,10 +111,10 @@ const OrderPage = () => {
             <span>{formatPrice(totalProductsPrice + DELIVERY_COST)} $</span>
           </div>
           <button
-              // onClick={open}
-              onClick={handleBuyOpen}
-              className="primary-btn"
-              disabled={buttonDisabled}
+            // onClick={open}
+            onClick={handleBuyOpen}
+            className="primary-btn"
+            disabled={buttonDisabled}
           >
             <img src="" alt="" />
             <span>Buy now</span>

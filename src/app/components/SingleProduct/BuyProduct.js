@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorites } from "../../store/slices/favoritesSlice";
 import { toggleCompare } from "../../store/slices/compareSlice";
@@ -7,42 +7,41 @@ import { ButtonBuy } from "./ButtonBuy";
 
 import { ReactComponent as AboutComparingIcon } from "../../../assets/images/Balance.svg";
 import { ReactComponent as AboutFavoritesIcon } from "../../../assets/images/Heart.svg";
-import { WeAccept } from './WeAccept';
+import { WeAccept } from "./WeAccept";
 
 const BuyProduct = ({ product }) => {
+  const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
+  const activeImageIndex = useSelector((state) => state.product.activeImageIndex);
+  const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
+  const favorites = useSelector((state) => state.favorites.data);
+  const compare = useSelector((state) => state.compare.data);
+  const dispatch = useDispatch();
 
-    const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
-    const activeImageIndex = useSelector((state) => state.product.activeImageIndex);
-    const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
-    const favorites = useSelector((state) => state.favorites.data);
-    const compare = useSelector((state) => state.compare.data);
-    const dispatch = useDispatch();
+  const { _id: id, colors, category, model: title } = product;
+  const { images, products } = colors[activeColorIndex];
+  const { price, discount_price: discountPrice } = products[activeMemoryIndex];
+  const imageURL = images[activeImageIndex];
 
-    const { _id: id, colors, category, model: title } = product;
-    const { images, products } = colors[activeColorIndex];
-    const { price, discount_price: discountPrice } = products[activeMemoryIndex];
-    const imageURL = images[activeImageIndex];
+  const productDetails = {
+    id,
+    imageURL,
+    category,
+    title,
+    price,
+    discountPrice,
+  };
 
-    const productDetails = {
-      id,
-      imageURL,
-      category,
-      title,
-      price,
-      discountPrice,
-    };
+  const handleAddToFavorites = () => {
+    dispatch(toggleFavorites(productDetails));
+  };
 
-    const handleAddToFavorites = () => {
-      dispatch(toggleFavorites(productDetails));
-    };
+  const handleAddToCompare = () => {
+    dispatch(toggleCompare(product));
+  };
 
-    const handleAddToCompare = () => {
-      dispatch(toggleCompare(product));
-    };
-
-    const handleAddToCart = () => {
-      dispatch(addToCart(productDetails));
-    };
+  const handleAddToCart = () => {
+    dispatch(addToCart(productDetails));
+  };
 
   return (
     <>
@@ -82,6 +81,6 @@ const BuyProduct = ({ product }) => {
       <WeAccept />
     </>
   );
-}
+};
 
-export { BuyProduct }
+export { BuyProduct };

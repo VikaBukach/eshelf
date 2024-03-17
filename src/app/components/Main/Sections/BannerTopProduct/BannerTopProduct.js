@@ -8,7 +8,11 @@ function BannerTopProduct(props) {
     <>
       <div className="banner_top-product-mobile">
         <h1 className="banner_top-product-mobile-title">Apple Iphone 14</h1>
-        <img className="banner_top-product-mobile-img" src="/img/topbanner/Iphone_14_01-removebg-preview 1.png" alt="img" />
+        <img
+          className="banner_top-product-mobile-img"
+          src="/img/topbanner/Iphone_14_01-removebg-preview 1.png"
+          alt="img"
+        />
         <h4 className="banner_top-product-mobile-subtitle">
           One of the main features of the iPhone 14 was supposed to be the absence of bangs, or reduction of them. In
           version 13...
