@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/slices/authSlice";
+import UserProfile from "./User/UserProfile";
 
 const Users = () => {
   const user = useSelector((state) => state.user.data);
@@ -18,7 +19,8 @@ const Users = () => {
 
   return (
     <div>
-      <p>{user?.name + " " + user?.surname}</p>
+      <p>User: {user?.name + " " + user?.surname}</p>
+        <UserProfile />
       <button
         className="primary-btn"
         onClick={() => {
