@@ -33,6 +33,7 @@ function App() {
   }, []);
 
   const { loading } = useSelector((state) => state.user);
+
   if (loading)
     return (
       <div className="page-loader">
@@ -57,9 +58,8 @@ function App() {
           <Route path="/comparing" element={<Comparing />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/users" element={<Users />} />
           <Route path="/order" element={<Order />} />
-          <Route path="/user/:activepage" element={<UserProfile />} />
+          <Route path="/user/:activepage" element={<Users />} />
           <Route path="/:collection/:id" element={<ProductPage />} />
           <Route path="*" element={<Notfound />} />
         </Route>
