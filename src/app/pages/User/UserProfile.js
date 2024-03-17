@@ -7,8 +7,11 @@ import UserOrders from "../../components/UserProfile/UserOrders/UserOrders";
 import UserView from "../../components/UserProfile/UserView/UserView";
 import WarrantyDelivery from "../../components/UserProfile/Delivery/WarrantyDelivery";
 import SocialNetworks from "../../components/UserProfile/SocialNetworks/SocialNetworks";
+import { useSelector  } from "react-redux";
+
 const UserProfile = ({ state, setState }) => {
     const {activepage} = useParams();
+    const orderNumber = useSelector((state) => state.order.orderNumber);
 
     return (
         <div className="userprofile_container container">

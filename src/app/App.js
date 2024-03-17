@@ -33,6 +33,7 @@ function App() {
   }, []);
 
   const { loading } = useSelector((state) => state.user);
+
   if (loading)
     return (
       <div className="page-loader">
