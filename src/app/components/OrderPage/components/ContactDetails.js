@@ -2,7 +2,13 @@ import "../Order.scss";
 import InputMask from "../../ui/Input/InputMask";
 import { validateEmail } from "..";
 
-export const ContactDetails = ({ state, setState, accountSettingsClass, inputContainerClass, labelClass }) => {
+export const ContactDetails = ({
+  state,
+  setState,
+  accountSettingsClass = "",
+  inputContainerClass = "",
+  labelClass = "",
+}) => {
   const inputs = [
     {
       key: "surname",
@@ -31,25 +37,25 @@ export const ContactDetails = ({ state, setState, accountSettingsClass, inputCon
     },
   ];
 
-  return (//added class ${accountSettingsClass} for overriting styles in UserDetails
-      <div className={`${"orderPage__contactDetails"} ${accountSettingsClass}`}>
-        {inputs.map((input) => (
-            <div className={`${inputContainerClass}`} key={input.key}>
-              <label htmlFor={input.key}
-                     className={`${labelClass}`}
-              >
-                {input.label}
-              </label>
-              <InputMask
-                  id={input.key}
-                  validateFunction={input?.validateFunction}
-                  input={input}
-                  setState={setState}
-                  state={state}
-              />
-            </div>
-        ))}
-      </div>
+  return (
+    //added class ${accountSettingsClass} for overriting styles in UserDetails
+    <div className={`${"orderPage__contactDetails"} ${accountSettingsClass}`}>
+      {inputs.map((input) => (
+        <div className={`${inputContainerClass}`} key={input.key}>
+          <label htmlFor={input.key} className={`${labelClass} orderPage__label`}>
+            {input.label}
+          </label>
+
+          <InputMask
+            id={input.key}
+            validateFunction={input?.validateFunction}
+            input={input}
+            setState={setState}
+            state={state}
+          />
+        </div>
+      ))}
+    </div>
   );
 };
 

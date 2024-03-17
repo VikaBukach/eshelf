@@ -69,6 +69,8 @@ $silver: #a0a0a08f;
       color: #fff;
     }
 
+
+
     @media screen and (min-width: 768px) {
       & {
         left: 0;
@@ -96,6 +98,11 @@ $silver: #a0a0a08f;
         content: "3";
       }
     }
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 0.8rem;
   }
 
   &__contactDetails {
