@@ -9,13 +9,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../store/slices/cartSlice";
 import { formatPrice } from "../../utils/formatPrice";
-import { setOrderNumber } from "../../store/slices/orderSlice";
-import {setOrderDate} from "../../store/slices/orderSlice";
-
-export const validateEmail = (email) => {
-  const basicEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  return basicEmailRegex.test(email);
-};
+import { setOrderNumber , setOrderDate} from "../../store/slices/orderSlice";
+import { validateEmail } from "../../utils/validateEmail";
+import { saveFormData } from "../../store/slices/orderFormSlice";
 
 const CartItem = ({ item }) => {
   return (
@@ -91,8 +87,14 @@ const OrderPage = () => {
       const randomOrderNumber = generateRandomOrderNumber();
       dispatch(setOrderNumber(randomOrderNumber));
       dispatch(setOrderDate(new Date())); // add save current date
+      dispatch(saveFormData(state));     // save form data before opening modal
       open();
-    };
+    }
+
+    const handleSaveOrder = () => {
+      dispatch(saveFormData(state));                 // add save form
+    }
+
 
     return (
       <>

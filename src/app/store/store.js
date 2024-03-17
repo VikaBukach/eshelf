@@ -12,6 +12,7 @@ import singleProductSlice from "./slices/singleProductSlice";
 import favoritesReducer from "./slices/favoritesSlice";
 import userReducer from "./slices/authSlice";
 import orderReducer from "./slices/orderSlice";
+import orderFormReducer from "./slices/orderFormSlice";
 
 export const store = configureStore({
   reducer: {
@@ -28,5 +29,6 @@ export const store = configureStore({
     favorites: favoritesReducer,
     user: userReducer,
     order: orderReducer,
+    orderForm: orderFormReducer,
   },
 });
