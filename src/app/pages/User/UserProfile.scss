@@ -25,6 +25,7 @@
         background: $secondary-color-grey-card;
         border-radius: 20px;
         margin-right: 16px;
+        transition: width 0.5s ease, height 0.5s ease;
       }
 
       &-sidebar-right {
@@ -32,6 +33,7 @@
         width: 1124px;
         height: 577px;
         background: $secondary-color-grey-card;
+        transition: width 0.5s ease, height 0.5s ease;
       }
     }
   }
