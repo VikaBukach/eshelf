@@ -60,7 +60,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/users" element={<Users />} />
           <Route path="/order" element={<Order />} />
-          <Route path="/user/:activepage" element={<UserProfile />} />
+          <Route path="/user/:activepage" element={<Users />} />
+          {/*<Route path="/user/:activepage" element={<UserProfile />} />*/}
           <Route path="/:collection/:id" element={<ProductPage />} />
           <Route path="*" element={<Notfound />} />
         </Route>

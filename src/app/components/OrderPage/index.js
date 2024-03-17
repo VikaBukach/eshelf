@@ -49,6 +49,7 @@ const OrderPage = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const cart = useSelector((state) => state.cart.data);
   const [orderNumber, setOrderNumber] = useState(null); // add for save order nomber
+  const userOrdersData = useSelector((state) => state.userOrdersData);
 
   const isFormComplete = () => {
     const { name, surname, phone, email, city, deliveryMethod, paymentMethod } = state;
