@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   orderNumber: localStorage.getItem("orderNumber") ? JSON.parse(localStorage.getItem("orderNumber")) : null,
-    orderDate: null,
+    // orderDate: null,
+    orderDate: localStorage.getItem("orderDate") ? JSON.parse(localStorage.getItem("orderDate")) : null,
 };
 
 const UserOrderSlice = createSlice({
@@ -15,7 +16,8 @@ const UserOrderSlice = createSlice({
             state.orderNumber = action.payload;
         },
         setOrderDate: (state, action) => {
-            state.orderDate = action.payload
+            localStorage.setItem("orderDate", JSON.stringify(action.payload))
+            // state.orderDate = action.payload
         },
 
   },

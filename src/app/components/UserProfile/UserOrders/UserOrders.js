@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const UserOrders = () => {
     const orderNumber = useSelector((state) => state.order.orderNumber);
     const orderDate = useSelector((state) => state.order.orderDate);
-const formattedOrderDate = orderDate ? orderDate.toLocaleString() : "";
+    const formattedOrderDate = orderDate ? new Date(orderDate).toLocaleString() : "";
 
   return (
     <div className="user-orders">
