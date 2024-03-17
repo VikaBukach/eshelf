@@ -58,7 +58,6 @@ function App() {
           <Route path="/comparing" element={<Comparing />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/users" element={<Users />} />
           <Route path="/order" element={<Order />} />
           <Route path="/user/:activepage" element={<Users />} />
           {/*<Route path="/user/:activepage" element={<UserProfile />} />*/}

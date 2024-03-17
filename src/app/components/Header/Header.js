@@ -81,7 +81,7 @@ const Header = () => {
           </div>
 
           {user ? (
-            <NavLink to="/users" className="header__link-users">
+            <NavLink to="/user/myorders" className="header__link-users">
               <UserIcon />
               <p>
                 Hello, <span>{user.name}</span>

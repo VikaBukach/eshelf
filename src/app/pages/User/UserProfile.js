@@ -24,7 +24,7 @@ const UserProfile = ({ state, setState }) => {
 
                 <div className="userprofile-sidebar-right">
                     {activepage === 'accountsettings' && <UserDetails/>}
-                    {activepage === 'myorders' || !activepage && <UserOrders />}
+                    {activepage === 'myorders' && <UserOrders />}
                     {activepage === 'myview' && <UserView />}
                     {activepage === 'mydelivery' && <WarrantyDelivery />}
                     {activepage === 'socialnetworks' && <SocialNetworks />}
