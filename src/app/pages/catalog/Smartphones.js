@@ -2,16 +2,11 @@ import { useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 import { fetchDataOfProducts, fetchModelNames } from "../../store/slices/productsSlice";
 import { CatalogLayout } from "../../components/catalog/CatalogLayout/CatalogLayout";
-import { setActiveCategoryName } from "../../store/slices/productsSlice";
 
 const Smartphones = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setActiveCategoryName("smartphones"));
-    // dispatch(fetchDataOfProducts({ collection: "smartphones", page: 1, limit: 10 }));
-    // dispatch(fetchModelNames({collection: "smartphones"}));
-  }, [dispatch]);
+
 
   return (
     <div>

@@ -61,7 +61,7 @@ connectToDb((err) => {
 
 const handleCollectionRequest = (collection, req, res, limit) => {
   const page = parseInt(req.query.page) || 1;
-  const actualLimit = limit ? parseInt(limit) : 4; // Используем переданный лимит или по умолчанию 4
+  const actualLimit = limit ? parseInt(limit) : 100000; // Используем переданный лимит или по умолчанию 4
   const skip = (page - 1) * actualLimit;
 
   db.collection(collection)

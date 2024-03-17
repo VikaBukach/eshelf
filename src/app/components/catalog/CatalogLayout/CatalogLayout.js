@@ -12,15 +12,24 @@ import { createFilterSettingsObjectFromUrl, createUrlFromFilterSettings } from "
 import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
 import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
 import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
-import { fetchDataOfProducts, fetchModelNames } from "../../../store/slices/productsSlice";
+import { fetchDataOfProducts, loadPageOfProducts, setPageOfDB, setPagesToLoading } from "../../../store/slices/productsSlice";
 
 const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
+  const productsDataLength = useSelector((state) => state.products.productsDataLength);
   const products = useSelector((state) => state.products.data);
-  const activeCategoryName = useSelector((state) => state.products.activeCategoryName);
+  const pageOfDB = useSelector((state) => state.products.pageOfDB);
+  const pagesToLoading = useSelector((state) => state.products.pagesToLoading);
+  const cardsOnPage = useSelector((state) => state.products.cardsOnPage);
+  const accumulatorOfCards = useSelector((state) => state.products.accumulatorOfCards);
+
+  const isLoaded = useSelector((state) => state.page.isLoaded);
+
+
+
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
@@ -68,46 +77,130 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
     navigate(url);
   };
 
+
   // ЗМІНА СТАНІВ
-  useEffect(() => {
-    dispatch(fetchDataOfProducts({ collection: categoryName, page: 1, limit: 2 }));
-    // dispatch(fetchModelNames({ collection: categoryName }));
-  }, [dispatch]);
 
-  // При завантаженні товарів
-  useEffect(() => {
-    if (fetchStatus === "succeeded") {
-      dispatch(updateBaseFilterData(products));
-      dispatch(updateFilteredProductsWithPrice(products));
-      dispatch(setProductsToResrtSorting(products));
+  const loadToFilterAndSortingSlices = (products) => {
+    dispatch(updateBaseFilterData(products));
+    dispatch(updateFilteredProductsWithPrice(products));
+    dispatch(setProductsToResrtSorting(products));
 
-      if (window.location.search !== "") {
-        const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
-          minValue,
-          maxValue
-        );
+    if (window.location.search !== "") {
+      const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
+        minValue,
+        maxValue
+      );
 
-        if (sortingSettings) {
-          dispatch(setFilterSorting(sortingSettings));
-        }
-        if (filterPriceSettings.priceBy !== 0 && filterPriceSettings.priceTo !== 0) {
-          dispatch(setPriceBy(filterPriceSettings.priceBy));
-          dispatch(setPriceTo(filterPriceSettings.priceTo));
-        }
-        if (Object.keys(filterCheckboxSettings).length !== 0) {
-          dispatch(setCheckboxesSettings(filterCheckboxSettings));
-        }
-      } else {
+      if (sortingSettings) {
+        dispatch(setFilterSorting(sortingSettings));
+      }
+      if (filterPriceSettings.priceBy !== 0 && filterPriceSettings.priceTo !== 0) {
+        dispatch(setPriceBy(filterPriceSettings.priceBy));
+        dispatch(setPriceTo(filterPriceSettings.priceTo));
+      }
+      if (Object.keys(filterCheckboxSettings).length !== 0) {
+        dispatch(setCheckboxesSettings(filterCheckboxSettings));
       }
     }
-  }, [fetchStatus]);
+  }
+
+  const loadPageOfCards = () => {
+    console.log("СРАБАТЫВАНИЕ ПОСЛЕ ЗАГРУЗКИ");
+      console.log("Товары после загрузки:", products);
+
+      const colors = Object.values(products).reduce((accumulator, product) => {
+        return accumulator + product.colors.length;
+      }, 0);
+
+      console.log("Карточек после загрузки", colors);
+
+      if ((pagesToLoading*cardsOnPage) >= colors) {
+        console.log("КАРТОЧЕК МАЛО");
+
+        dispatch(fetchDataOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
+        dispatch(setPageOfDB(pageOfDB + 1));
+
+      } else if ((pagesToLoading*cardsOnPage) < colors) {
+        console.log("КАРТОЧЕК С ОСТАТКОМ");
+        const difference = colors - (pagesToLoading*cardsOnPage);
+        const productsWithRequiredCards = products.slice(0, -1);
+        const productWithRemovedCards = { ...products[products.length - 1] };
+        productWithRemovedCards.colors = productWithRemovedCards.colors.slice(0, -2);
+        const productsWithCardsToDisplay = [...productsWithRequiredCards, productWithRemovedCards];
+        console.log("difference", difference);
+        console.log("Элементы без последнего", productsWithRequiredCards);
+        console.log("Последний с скороченными карточками", productWithRemovedCards);
+        console.log("Готовый массив", productsWithCardsToDisplay);
+        loadToFilterAndSortingSlices(productsWithCardsToDisplay);
+      } 
+      else if ((pagesToLoading*cardsOnPage) == colors) {
+        console.log("КАРТОЧЕК РОВНО СКОЛЬКО НАДО");
+        const difference = colors - (pagesToLoading*cardsOnPage);
+        console.log("difference", difference);
+      }
+  }
+
+
+
+
+
+// При ЗАВАНТАЖЕННІ сторінки, тобто, ОДИН раз
+  useEffect(() => {
+    console.log("ПЕРВАЯ ЗАГРУЗКА ПРИ ЗАПУСКЕ СТРАНИЦЫ");
+    dispatch(loadPageOfProducts({ collection: categoryName, page: 1, limit: 1 }));
+    // dispatch(setPageOfDB(pageOfDB + 1));
+  }, []);
+
+
 
   useEffect(() => {
-    setAllSettings(Object.values(filterSettings).flat());
-    if (filterSettings.length !== 0 || priceBy !== minValue || priceTo !== maxValue) {
-      navigateToUrlWithSettings();
-    }
-  }, [filterSettings]);
+    if (fetchStatus === "succeeded") {
+
+      const colorsInProducts = products.reduce((accumulator, product) => {
+        return accumulator + product.colors.length;
+      }, 0);
+
+      console.log("ЦВЕТОВ А ПРОДУКТАХ СЕЙЧАС", colorsInProducts);
+
+      if ((cardsOnPage * pagesToLoading > colorsInProducts) && (products.length !== productsDataLength)) {
+        dispatch(loadPageOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
+        console.log("case 1");
+      } 
+      if (cardsOnPage * pagesToLoading === colorsInProducts || products.length === productsDataLength) {
+        console.log("case 2");
+        console.log(products);
+        dispatch(updateBaseFilterData(products));
+        dispatch(updateFilteredProductsWithPrice(products));
+        dispatch(setProductsToResrtSorting(products));
+      } 
+
+  }
+  }, [fetchStatus]);
+
+
+  const onClickLoadMore = () => {
+    console.log("-------------------------------------------");
+    dispatch(setPagesToLoading(pagesToLoading + 1));
+    dispatch(loadPageOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
+
+  }
+
+
+
+
+  // При завантаженні товарів
+  // useEffect(() => {
+  //   if (fetchStatus === "succeeded") {
+  //     loadToFilterAndSortingSlices(products);
+  //   }
+  // }, [fetchStatus]);
+
+  // useEffect(() => {
+  //   setAllSettings(Object.values(filterSettings).flat());
+  //   if (filterSettings.length !== 0 || priceBy !== minValue || priceTo !== maxValue) {
+  //     navigateToUrlWithSettings();
+  //   }
+  // }, [filterSettings]);
 
   return (
     <div className="catalog">
@@ -144,7 +237,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
         <CatalogFilter categoryName={categoryName} filterCriterias={filterCriterias} pricePath={pricePath} />
         <div className="catalog__body__list">
           <CatalogProductList />
-          <CatalogPagination />
+          <CatalogPagination onClickFunc={onClickLoadMore}/>
         </div>
       </div>
     </div>

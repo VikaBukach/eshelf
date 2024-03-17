@@ -149,12 +149,12 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
   //   }
   // }, [fetchStatus]);
 
-  useEffect(() => {
-    dispatch(updateBaseFilterData(filterProducts()));
-  }, [filterSettings]);
+  // useEffect(() => {
+  //   dispatch(updateBaseFilterData(filterProducts()));
+  // }, [filterSettings]);
 
   useEffect(() => {
-    // dispatch(fetchDataOfProducts({ collection: activeCategoryName, page: 1, limit: 10 }));
+  //   // dispatch(fetchDataOfProducts({ collection: activeCategoryName, page: 1, limit: 10 }));
     dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
   }, [dispatch]);
 
