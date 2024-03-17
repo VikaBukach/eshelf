@@ -7,12 +7,12 @@ export default function Modal({ children, wrapperStyles, header, footer, onClose
   if (!active || !children) return null;
 
   return ReactDom.createPortal(
-    <div onClick={onClose} className={classNames("modal", "active")}>
+    <div onClick={onClose} className="modal active">
       <div
         onClick={(e) => e.stopPropagation()}
         className={classNames("modal__body", wrapperStyles ? wrapperStyles : "modal__defaultWrapperStyles")}
       >
-        {showClose && <button onClick={onClose} className={"modal__closeIcon"}></button>}
+        {showClose && <button onClick={onClose} className="modal__closeIcon"></button>}
         {header}
         {children}
         {footer}

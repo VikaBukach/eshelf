@@ -1,7 +1,6 @@
 @import "../../../../assets/styles/style";
 
 .mydetails {
-
   @media screen and (min-width: $desktop) {
     margin-top: 60px;
   }
@@ -75,8 +74,4 @@
   .mydetails-btn-save text {
     color: $secondary-color-white;
   }
-
-
 }
-
-

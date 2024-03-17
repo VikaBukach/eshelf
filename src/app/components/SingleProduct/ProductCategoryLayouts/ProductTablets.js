@@ -9,7 +9,6 @@ import { ReactComponent as AboutMemoryIcon } from "../../../../assets/images/pro
 import { ReactComponent as AboutCameraIcon } from "../../../../assets/images/product-icons/Camera.svg";
 import { ReactComponent as AboutMatrixIcon } from "../../../../assets/images/product-icons/Matrix.svg";
 
-
 const ProductTablets = ({ product }) => {
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
   const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
@@ -75,9 +74,8 @@ const ProductTablets = ({ product }) => {
             )}
           </div>
         </div>
-       
-       <BuyProduct product={product} />
 
+        <BuyProduct product={product} />
       </div>
     </div>
   );

@@ -7,7 +7,9 @@
     grid-template-columns: 1fr 1fr;
 
     &-title {
-      font: 500 18px / 1.5 "Inter", sans-serif;
+      font:
+        500 18px / 1.5 "Inter",
+        sans-serif;
       color: $primary-color-black;
       margin-top: 10px;
       padding-left: 20px;
@@ -15,7 +17,9 @@
     }
 
     .social-networks-left p {
-      font: 400 13px / 1.5 "Inter", sans-serif;
+      font:
+        400 13px / 1.5 "Inter",
+        sans-serif;
       color: $primary-color-black;
       padding-bottom: 20px;
     }
@@ -24,24 +28,23 @@
       display: grid;
       grid-template-columns: 250px 250px;
     }
-    .social-networks-icons div{
+    .social-networks-icons div {
       margin: 0 10px 20px 10px;
       display: flex;
       flex-direction: row;
       align-items: center;
     }
-    .social-networks-icons img{
+    .social-networks-icons img {
       padding-right: 10px;
     }
 
-    .social-networks-right{
-
+    .social-networks-right {
       .social-networks-form {
         margin-left: 20px;
       }
 
       .contact-form-btn {
-       margin-left: 24px;
+        margin-left: 24px;
         border-radius: 5px;
         padding: 12px 80px;
         width: 500px;
@@ -49,14 +52,12 @@
         background: #8119b1;
 
         .btn-text {
-          font: 400 15px / 1.5 "Inter", sans-serif;
+          font:
+            400 15px / 1.5 "Inter",
+            sans-serif;
           color: #fff;
         }
       }
-
-
-
-
     }
   }
 }

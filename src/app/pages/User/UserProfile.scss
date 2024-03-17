@@ -1,42 +1,59 @@
 @import "../../../assets/styles/style";
 
 .userprofile_container {
-
-  @media screen and (min-width: $desktop) {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    position: relative;
-
-    .userprofile-title {
-      position: absolute;
-      left: 17px;
-      flex-direction: row;
-      font: 400 24px / 1.5 "Inter", sans-serif;
-      color: #333;
-    }
+  @media screen and (max-width: 1124px) {
     .userprofile {
-      display: flex;
-      margin-top: 10vh;
-
-      &-sidebar-left {
-        width: 540px;
-        height: 400px;
-        background: $secondary-color-grey-card;
-        border-radius: 20px;
-        margin-right: 16px;
-        transition: width 0.5s ease, height 0.5s ease;
-      }
-
-      &-sidebar-right {
-        border-radius: 20px;
-        width: 1124px;
-        height: 577px;
-        background: $secondary-color-grey-card;
-        transition: width 0.5s ease, height 0.5s ease;
-      }
+      align-items: stretch;
+      flex-direction: column;
     }
   }
 
+  // @media screen and (min-width: $desktop) {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: relative;
 
+  .userprofile-title {
+    position: absolute;
+    left: 17px;
+    flex-direction: row;
+    font:
+      400 24px / 1.5 "Inter",
+      sans-serif;
+    color: #333;
+  }
+
+  .userprofile {
+    display: flex;
+    margin-top: 10vh;
+    align-items: self-start;
+    width: 100%;
+    gap: 1.6rem;
+
+    &-sidebar-left {
+      flex-basis: 540px;
+      flex-shrink: 0.3;
+      width: 100%;
+      background: $secondary-color-grey-card;
+      border-radius: 20px;
+      transition:
+        width 0.5s ease,
+        height 0.5s ease;
+    }
+
+    &-sidebar-right {
+      border-radius: 20px;
+      max-width: 1124px;
+      padding: 2rem;
+      width: 100%;
+      min-height: 577px;
+      background: $secondary-color-grey-card;
+      transition:
+        width 0.5s ease,
+        height 0.5s ease;
+    }
+  }
+
+  // }
 }

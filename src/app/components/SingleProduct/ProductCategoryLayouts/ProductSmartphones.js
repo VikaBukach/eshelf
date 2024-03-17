@@ -1,8 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setActiveMemoryIndex,
-} from "../../../store/slices/singleProductSlice";
+import { setActiveMemoryIndex } from "../../../store/slices/singleProductSlice";
 
 import { ReactComponent as AboutBatteryIcon } from "../../../../assets/images/product-icons/Diagonal.svg";
 import { ReactComponent as AboutMainCameraIcon } from "../../../../assets/images/product-icons/Camera.svg";
@@ -26,7 +24,6 @@ const ProductSmartphones = ({ product }) => {
 
   return (
     <div className="product-details-body">
-
       <GalleryProduct product={product} />
 
       <div className="product-details-body__info info-details">
@@ -115,7 +112,7 @@ const ProductSmartphones = ({ product }) => {
             )}
           </div>
         </div>
-       <BuyProduct product={product} />
+        <BuyProduct product={product} />
       </div>
     </div>
   );

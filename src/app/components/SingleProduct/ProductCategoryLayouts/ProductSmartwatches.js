@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GalleryProduct } from "../GalleryProduct";
 import { ChooseColor } from "../ChooseColor";
 import { BuyProduct } from "../BuyProduct";
-import {
-  setActiveMemoryIndex,
-} from "../../../store/slices/singleProductSlice";
+import { setActiveMemoryIndex } from "../../../store/slices/singleProductSlice";
 
 import { ReactComponent as AboutBatteryIcon } from "../../../../assets/images/product-icons/Diagonal.svg";
 import { ReactComponent as AboutFrontCameraIcon } from "../../../../assets/images/product-icons/front-camera.svg";
@@ -13,7 +11,6 @@ import { ReactComponent as AboutBatteryElementIcon } from "../../../../assets/im
 import { ReactComponent as AboutFrequencyIcon } from "../../../../assets/images/product-icons/Mobile.svg";
 import { ReactComponent as AboutProcessorIcon } from "../../../../assets/images/product-icons/Hardware.svg";
 import { ReactComponent as AboutMemoryIcon } from "../../../../assets/images/product-icons/Memory.svg";
-
 
 const ProductSmartwatches = ({ product }) => {
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
@@ -114,9 +111,8 @@ const ProductSmartwatches = ({ product }) => {
             )}
           </div>
         </div>
-        
-        <BuyProduct product={product} />
 
+        <BuyProduct product={product} />
       </div>
     </div>
   );

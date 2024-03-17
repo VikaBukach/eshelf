@@ -16,7 +16,6 @@ const ProductMonitors = ({ product }) => {
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
   const activeMemoryIndex = useSelector((state) => state.product.activeMemoryIndex);
 
-
   return (
     <div className="product-details-body">
       <GalleryProduct product={product} />
@@ -96,9 +95,8 @@ const ProductMonitors = ({ product }) => {
             )}
           </div>
         </div>
-        
-        <BuyProduct product={product} />
 
+        <BuyProduct product={product} />
       </div>
     </div>
   );

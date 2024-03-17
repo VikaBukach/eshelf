@@ -2,7 +2,6 @@ import React from "react";
 import { CharacteristicBuy } from "../CharacteristicBuy";
 
 const ProductDetailsTablets = ({ product }) => {
-
   return (
     <div className="characteristic-body">
       <div className="characteristic-body__info">
@@ -140,9 +139,8 @@ const ProductDetailsTablets = ({ product }) => {
           </section>
         )}
       </div>
-    
-      <CharacteristicBuy product={product} />        
 
+      <CharacteristicBuy product={product} />
     </div>
   );
 };
