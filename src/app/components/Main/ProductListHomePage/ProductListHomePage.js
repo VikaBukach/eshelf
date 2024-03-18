@@ -90,9 +90,9 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                     <path
                       d="M5.25 10.2914L12 17.0414L18.75 10.2914"
                       stroke="#8119B1"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 }
