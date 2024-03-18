@@ -73,7 +73,7 @@ function PopularCategory() {
             text={"Smartphones"}
           />
         </NavLink>
-          <NavLink to="/mouses">
+          <NavLink to="/monitors">
           <Button
             btnClass="popular_category-btn-components"
             svg={
@@ -107,7 +107,7 @@ function PopularCategory() {
             text={"Tablets, photos, videos"}
           />
             </NavLink>
-          <NavLink to="/quadcopters">
+          <NavLink to="/smartwatches">
           <Button
             btnClass="popular_category-btn-others"
             svg={
@@ -121,7 +121,7 @@ function PopularCategory() {
                 />
               </svg>
             }
-            text={"Quadcopters"}
+            text={"Smartwatches"}
           />
           </NavLink>
         </div>
