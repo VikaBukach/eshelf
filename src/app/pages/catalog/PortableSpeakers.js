@@ -3,25 +3,24 @@ import React, { useEffect } from "react";
 import { fetchDataOfProducts } from "../../store/slices/productsSlice";
 import { CatalogLayout } from "../../components/catalog/CatalogLayout/CatalogLayout";
 
-const Monitors = () => {
+const PortableSpeakers = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchDataOfProducts("monitors"));
+    dispatch(fetchDataOfProducts("portable-speakers"));
   }, [dispatch]);
 
   return (
     <div>
       <CatalogLayout
-        title="Monitors"
+        title="Portable Speakers"
         filterCriterias={[
           { title: "Brand", path: "brand" },
           { title: "Model", path: "model" },
           { title: "Color", path: "colors.color" },
-          { title: "Display diagonal", path: "specifications.display.display_diagonal" },
-          { title: "Frequency", path: "specifications.display.frequency" },
-          { title: "Matrix type", path: "specifications.display.display_matrix_type" },
-          { title: "Options", path: "specifications.additional_options.options" }
+          { title: "Waterproof", path: "specifications.waterproof" },
+          { title: "Output power", path: "specifications.output_power" },
+          { title: "Frequency response", path: "specifications.frequency_response" }
         ]}
         pricePath="colors.products.price"
       />
@@ -29,4 +28,4 @@ const Monitors = () => {
   );
 };
 
-export { Monitors };
+export { PortableSpeakers };

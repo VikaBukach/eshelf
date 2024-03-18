@@ -9,14 +9,16 @@ import { Users } from "./pages/Users";
 import { Favorites } from "./pages/Favorites";
 import { Notfound } from "./pages/Notfound";
 import { Order } from "./pages/Order";
+import { Smartphones } from "./pages/catalog/Smartphones";
+import { EReaders } from "./pages/catalog/EReaders";
 import { Headphones } from "./pages/catalog/Headphones";
 import { Monitors } from "./pages/catalog/Monitors";
 import { Mouses } from "./pages/catalog/Mouses";
+import { PortableSpeakers } from "./pages/catalog/PortableSpeakers";
 import { Quadcopters } from "./pages/catalog/Quadcopters";
 import { Smartwatches } from "./pages/catalog/Smartwatches";
-import { Smartphones } from "./pages/catalog/Smartphones";
 import { Tablets } from "./pages/catalog/Tablets";
-import { Tv } from "./pages/catalog/Tv";
+import { TV } from "./pages/catalog/Tv";
 import { Laptops } from "./pages/catalog/Laptops";
 import Cart from "./components/Cart";
 import { ProductPage } from "./pages/product/ProductPage";
@@ -46,15 +48,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/smartphones" element={<Smartphones />} />
+          <Route path="/e-readers" element={<EReaders />} />
           <Route path="/headphones" element={<Headphones />} />
+          <Route path="/laptops" element={<Laptops />} />
           <Route path="/monitors" element={<Monitors />} />
           <Route path="/mouses" element={<Mouses />} />
+          <Route path="/portable-speakers" element={<PortableSpeakers />} />
           <Route path="/quadcopters" element={<Quadcopters />} />
           <Route path="/smartwatches" element={<Smartwatches />} />
           <Route path="/tablets" element={<Tablets />} />
-          <Route path="/tv" element={<Tv />} />
-          <Route path="/smartphones" element={<Smartphones />} />
-          <Route path="/laptops" element={<Laptops />} />
+          <Route path="/tv" element={<TV />} />
           <Route path="/comparing" element={<Comparing />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/cart" element={<Cart />} />
