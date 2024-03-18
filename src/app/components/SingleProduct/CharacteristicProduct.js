@@ -7,6 +7,7 @@ import { ProductDetailsQuadcopters } from "./ProductDetailsLayouts/ProductDetail
 import { ProductDetailsTv } from "./ProductDetailsLayouts/ProductDetailsTv";
 import { ProductDetailsTablets } from "./ProductDetailsLayouts/ProductDetailsTablets";
 import { ProductDetailsHeadphones } from "./ProductDetailsLayouts/ProductDetailsHeadphones";
+import { ProductDetailsLaptops } from "./ProductDetailsLayouts/ProductDetailsLaptops";
 
 const CharacteristicProduct = ({ product }) => {
   let DetailsComponent;
@@ -35,6 +36,9 @@ const CharacteristicProduct = ({ product }) => {
       break;
     case "headphones":
       DetailsComponent = ProductDetailsHeadphones;
+      break;
+    case "laptops":
+      DetailsComponent = ProductDetailsLaptops;
       break;
     default:
       DetailsComponent = () => <div className="characteristic-body">Unsupported product category</div>;
