@@ -90,9 +90,9 @@ app.get("/tv", (req, res) => {
 app.get("/especiallyforyou", (req, res) => {
   handleCollectionRequest("especiallyforyou", req, res);
 });
-app.get("/topproduct", (req, res) => {
-  handleCollectionRequest("topproduct", req, res);
-});
+// app.get("/topproduct", (req, res) => {
+//   handleCollectionRequest("topproduct", req, res);
+// });
 
 app.use(reviewRouter);
 app.use(authRouter);
