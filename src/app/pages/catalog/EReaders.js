@@ -3,25 +3,25 @@ import React, { useEffect } from "react";
 import { fetchDataOfProducts } from "../../store/slices/productsSlice";
 import { CatalogLayout } from "../../components/catalog/CatalogLayout/CatalogLayout";
 
-const Monitors = () => {
+const EReaders = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchDataOfProducts("monitors"));
+    dispatch(fetchDataOfProducts("e-readers"));
   }, [dispatch]);
 
   return (
     <div>
       <CatalogLayout
-        title="Monitors"
+        title="E-Readers"
         filterCriterias={[
           { title: "Brand", path: "brand" },
           { title: "Model", path: "model" },
           { title: "Color", path: "colors.color" },
-          { title: "Display diagonal", path: "specifications.display.display_diagonal" },
-          { title: "Frequency", path: "specifications.display.frequency" },
-          { title: "Matrix type", path: "specifications.display.display_matrix_type" },
-          { title: "Options", path: "specifications.additional_options.options" }
+          { title: "Display size", path: "specifications.display_size" },
+          { title: "Resolution", path: "specifications.display_resolution" },
+          { title: "Storage", path: "specifications.storage" },
+          { title: "Waterproof", path: "specifications.waterproof" },
         ]}
         pricePath="colors.products.price"
       />
@@ -29,4 +29,4 @@ const Monitors = () => {
   );
 };
 
-export { Monitors };
+export { EReaders };
