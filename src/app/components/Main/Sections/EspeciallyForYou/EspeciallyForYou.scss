@@ -35,14 +35,14 @@
 
   &-products {
     display: flex;
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
 
     .section-especially-item {
-      width: 140px;
+      //width: 140px;
       @media (min-width: $tablet) {
-        width: 234px;
+        //width: 33%;
       }
     }
   }
