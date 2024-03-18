@@ -5,9 +5,10 @@ export const fetchDataOfProducts = createAsyncThunk(
   "products/fetchDataOfProducts",
   async (collection, { dispatch }) => {
     const PORT = process.env.REACT_APP_PORT || 5000;
+    const REACT_APP_BACK_URL = process.env.REACT_APP_BACK_URL || 'http://localhost';
 
     try {
-      const response = await axios.get(`http://localhost:${PORT}/${collection}`);
+      const response = await axios.get(`${REACT_APP_BACK_URL}:${PORT}/${collection}`);
       dispatch(setProducts(response.data));
       return response.data;
     } catch (err) {

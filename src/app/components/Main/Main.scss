@@ -2,6 +2,7 @@
 
 main {
   @media (min-width: $desktop) {
-    margin-top: 88px;
+    //margin-top: 88px;
+    //відступ не потрібен при position: sticky
   }
 }

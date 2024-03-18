@@ -1,5 +1,5 @@
-import style from "./Order.module.scss";
-import { useEffect, useState } from "react";
+import "./Order.scss";
+import { useCallback, useEffect, useState } from "react";
 import { Delivery } from "./components/Delivery";
 import { Payment } from "./components/Payment";
 import { ContactDetails } from "./components/ContactDetails";
@@ -9,10 +9,27 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../store/slices/cartSlice";
 import { formatPrice } from "../../utils/formatPrice";
+import { setOrderNumber , setOrderDate} from "../../store/slices/orderSlice";
+import { validateEmail } from "../../utils/validateEmail";
+import { saveFormData } from "../../store/slices/orderFormSlice";
 
-export const validateEmail = (email) => {
-  const basicEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  return basicEmailRegex.test(email);
+const CartItem = ({ item }) => {
+  return (
+    <div className={"orderPage__product"}>
+      <div className={"orderPage__productImage"}>
+        <img src={item.imageURL} alt={item.title} />
+      </div>
+      <div className={"orderPage__productContent"}>
+        <h3 className={"orderPage__heading"}>{item.title}</h3>
+        <p>&times; {item.quantity}</p>
+        <div className={"orderPage__productQuantity"}>
+          <div className={"orderPage__quantity"}>
+            <div className={"orderPage__price"}>{formatPrice(+item.price * +item.quantity)} $</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const cartState = {
@@ -29,6 +46,8 @@ const OrderPage = () => {
   const [state, setState] = useState({ ...cartState });
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const cart = useSelector((state) => state.cart.data);
+  const orderNumber = useSelector((state) => state.order.orderNumber); // add order number
+  const orderDate = useSelector((state) => state.order.orderDate);
 
   const isFormComplete = () => {
     const { name, surname, phone, email, city, deliveryMethod, paymentMethod } = state;
@@ -39,30 +58,12 @@ const OrderPage = () => {
     setButtonDisabled(!isFormComplete() || !validateEmail(state.email));
   }, [state]);
 
-  const CartItem = ({ item }) => {
-    return (
-      <div className={style.product}>
-        <div className={style.productImage}>
-          <img src={item.imageURL} alt={item.title} />
-        </div>
-        <div className={style.productContent}>
-          <h3 className={style.heading}>{item.title}</h3>
-          <p>&times; {item.quantity}</p>
-          <div className={style.productQuantity}>
-            <div className={style.quantity}>
-              <div className={style.price}>{formatPrice(+item.price * +item.quantity)} $</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
   const { active, close, open } = useModal();
 
-  const Cart = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const Cart = useCallback(() => {
     const totalProductsQuantity = cart.reduce((prev, curr) => {
       return prev + curr.quantity;
     }, 0);
@@ -77,9 +78,27 @@ const OrderPage = () => {
 
     const DELIVERY_COST = 120;
 
+    const generateRandomOrderNumber = () => {
+      return Math.floor(1000000 + Math.random() * 9000000); //generation number
+    };
+
+    const handleBuyOpen = () => {
+      //fn adding order number
+      const randomOrderNumber = generateRandomOrderNumber();
+      dispatch(setOrderNumber(randomOrderNumber));
+      dispatch(setOrderDate(new Date())); // add save current date
+      dispatch(saveFormData(state));     // save form data before opening modal
+      open();
+    }
+
+    const handleSaveOrder = () => {
+      dispatch(saveFormData(state));                 // add save form
+    }
+
+
     return (
       <>
-        <div className={style.cart}>
+        <div className={"orderPage__cart"}>
           <h3>Total payable</h3>
           <div>
             <p>
@@ -92,11 +111,16 @@ const OrderPage = () => {
             <span>{formatPrice(DELIVERY_COST)} $</span>
           </div>
 
-          <div className={style.totals}>
+          <div className={"orderPage__totals"}>
             <p>Total</p>
             <span>{formatPrice(totalProductsPrice + DELIVERY_COST)} $</span>
           </div>
-          <button onClick={open} className="primary-btn" disabled={buttonDisabled}>
+          <button
+            // onClick={open}
+            onClick={handleBuyOpen}
+            className="primary-btn"
+            disabled={buttonDisabled}
+          >
             <img src="" alt="" />
             <span>Buy now</span>
           </button>
@@ -112,15 +136,17 @@ const OrderPage = () => {
             setState({ ...cartState });
             close();
           }}
-          wrapperStyles={style.successModalWrapper}
+          wrapperStyles={"orderPage__successModalWrapper"}
         >
           {
-            <div className={style.successModal}>
-              <div className={style.successIcon}>
+            <div className={"orderPage__successModal"}>
+              <div className={"orderPage__successIcon"}>
                 <img src="../../../assets/icons/arrow-back-large.svg" alt="" />
               </div>
 
               <h4>You have successfully ordered the product</h4>
+
+              <p>Your order number: {orderNumber}</p>
 
               <ul>
                 {cart.map((item) => (
@@ -144,36 +170,36 @@ const OrderPage = () => {
         </Modal>
       </>
     );
-  };
+  });
 
   return (
     <div className="container">
-      <h1 className={style.pageTitle}>Details</h1>
-      <div className={style.pageOrder}>
-        <div className={style.form}>
+      <h1 className={"orderPage__pageTitle"}>Details</h1>
+      <div className={"orderPage__content"}>
+        <div className={"orderPage__form"}>
           <div>
-            <h2 data-index="1" className={style.sectionTitle}>
+            <h2 data-index="1" className={"orderPage__sectionTitle"}>
               Your contact details
             </h2>
             <ContactDetails setState={setState} state={state} />
           </div>
           <div>
-            <h2 data-index="2" className={style.sectionTitle}>
+            <h2 data-index="2" className={"orderPage__sectionTitle"}>
               Delivery
             </h2>
             <Delivery setState={setState} state={state} />
           </div>
 
           <div>
-            <h2 data-index="3" className={style.sectionTitle}>
+            <h2 data-index="3" className={"orderPage__sectionTitle"}>
               Payment
             </h2>
             <Payment setState={setState} state={state} />
           </div>
         </div>
 
-        <div className={style.cartTotals}>
-          <div className={style.cartTotalsList}>
+        <div className={"orderPage__cartTotals"}>
+          <div className={"orderPage__cartTotalsList"}>
             {cart.map((item) => (
               <CartItem key={item.id} item={item} />
             ))}

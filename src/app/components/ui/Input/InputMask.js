@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from "./Input.module.scss";
+import "./Input.scss";
 import { IMaskInput } from "react-imask";
 import { classNames } from "../../../utils/classNames";
 
@@ -25,7 +25,7 @@ export default function InputMask({ input, setState, state, validateFunction = (
           [input.key]: value,
         }));
       }}
-      className={classNames(style.input, !isValid ? style.error : "")}
+      className={classNames("input_ui__input", !isValid ? "input_ui__error" : "")}
       placeholder={input.placeholder}
       key={input.key}
     />

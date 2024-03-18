@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import style from "./Input.module.scss";
+import "./Input.scss";
 
 export const Input = ({ label, placeholder, onChange, value }) => {
   const inputRef = useRef();
 
   return (
-    <div className={style.inputWrapper}>
+    <div className={"input_ui__inputWrapper"}>
       <label
         style={{
           alignSelf: "start",
@@ -15,7 +15,7 @@ export const Input = ({ label, placeholder, onChange, value }) => {
         {label}
       </label>
       <input
-        className={style.input}
+        className={"input_ui__input"}
         onChange={(e) => onChange(e.target.value)}
         ref={inputRef}
         placeholder={placeholder}

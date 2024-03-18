@@ -19,7 +19,7 @@ const ReviewCard = ({ review }) => {
     <div className="card-product-review">
       <div className="card-product-review__header">
         <div className="card-product-review__header-left">
-          <p className="card-product-review__user-name card-product-review__title">Anton</p>
+          <p className="card-product-review__user-name card-product-review__title">{review.userName}</p>
           <div style={{ "--rating": review.rating }} className="star-rating"></div>
         </div>
         <div className="card-product-review__header-right">

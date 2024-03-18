@@ -8,6 +8,10 @@
   box-sizing: border-box;
   cursor: pointer;
   border: 1.8px solid $secondary-color-purple-light;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   &__image-container {
     width: 100%;
@@ -36,6 +40,11 @@
       background-color: rgba(255, 255, 255, 0.56);
       border-radius: 5px;
 
+      // Забираємо порівняння на телефонах
+      &:nth-child(2) {
+        display: none;
+      }
+
       &--active {
         background-color: $secondary-color-blue;
 
@@ -51,6 +60,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    flex: 1 1 auto;
 
     &__category {
       display: none;
@@ -68,6 +78,8 @@
     &__rating {
       display: flex;
       gap: 4px;
+      flex: 1 1 auto;
+      align-self: flex-start;
     }
 
     &__price-container {
@@ -100,6 +112,13 @@
       position: absolute;
       top: 8px;
       right: 8px;
+
+      // показуємо порівняння на планшетах та пк
+      &__button {
+        &:nth-child(2) {
+          display: block;
+        }
+      }
     }
 
     &__info {

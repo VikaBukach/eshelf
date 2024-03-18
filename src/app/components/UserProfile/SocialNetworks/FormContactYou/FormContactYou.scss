@@ -1,0 +1,41 @@
+@import "../../../../../assets/styles/style";
+
+.form-contact {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 100%;
+}
+.form-contact-input {
+  position: relative;
+  background: #fff;
+  border-radius: 10px;
+  width: 506px;
+  height: 56px;
+  margin-bottom: 40px;
+}
+.form-contact-input input {
+  width: 100%;
+  text-align: left;
+  padding-top: 18px;
+  padding-left: 20px;
+}
+
+.form-contact-input input::placeholder {
+  font:
+    400 14px / 1.5 "Inter",
+    sans-serif;
+  color: rgba(51, 51, 51, 0.2);
+}
+
+.form-contact-label {
+  font:
+    400 13px / 1.5 "Inter",
+    sans-serif;
+  color: #333;
+  position: absolute;
+  top: -20px;
+  display: flex;
+  flex-direction: column;
+}

@@ -79,7 +79,7 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
           </button>
         </div>
         <div className="burger-menu_links">
-          <NavLink to="/users" className="burger-menu__link-users" onClick={handleNavLinkClick}>
+          <NavLink to="/user/myorders" className="burger-menu__link-users" onClick={handleNavLinkClick}>
             <UserIcon />
           </NavLink>
           <div className="burger-menu__link-cart">
@@ -91,9 +91,11 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
               }
             />
           </div>
+
+          {/* //приховуємо на моб.версії можливість додавання до порівняння товарів
           <NavLink to="/comparing" className="burger-menu__link-comparing" onClick={handleNavLinkClick}>
             <BalanceIcon />
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/favorites" className="burger-menu__link-favorites" onClick={handleNavLinkClick}>
             <HeartIcon />
           </NavLink>

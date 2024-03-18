@@ -1,6 +1,6 @@
 import { Input } from "../../ui/Input";
 import { RadioGroup } from "../../ui/RadioGroup";
-import style from "../Order.module.scss";
+import "../Order.scss";
 
 export const Delivery = ({ state, setState }) => {
   const cities = ["Kyiv", "Lviv", "Dnipro", "Odesa"];
@@ -20,7 +20,7 @@ export const Delivery = ({ state, setState }) => {
   ];
 
   return (
-    <div className={style.delivery}>
+    <div className={"orderPage__delivery"}>
       <div>
         <Input
           label={"Your city"}

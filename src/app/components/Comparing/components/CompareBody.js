@@ -1,5 +1,5 @@
 import { humanizeText, getFirstColumnKeys, getFieldData } from "../helpers";
-import style from "../Comparing.module.scss";
+import "../Comparing.scss";
 import { CompareItemHeader } from "./CompareItemHeader";
 import { classNames } from "../../../utils/classNames";
 import ProductCard from "../../ProductCard/ProductCard";
@@ -7,9 +7,9 @@ import ProductCard from "../../ProductCard/ProductCard";
 export const CompareBody = ({ data }) => {
   const getCompareBody = (arr, products, headerData, columns) => {
     return (
-      <div className={classNames(style.compareWrapper)}>
+      <div className="comparing__content-wrapper">
         <div
-          className={style.grid}
+          className="comparing__grid"
           style={{
             "--cols": columns,
           }}
@@ -19,24 +19,24 @@ export const CompareBody = ({ data }) => {
             <CompareItemHeader key={item.id} item={item} />
           ))}
         </div>
-        <div className={style.compareRow}>
+        <div className="comparing__content-row">
           {arr.map((obj, idx) =>
             Object.entries(obj).map(([key, val]) => (
               <div key={idx + key}>
-                <h2 className={style.firstColumnHeader}>{humanizeText(key)}</h2>
-                <ul className={style.firstColumnList}>
+                <h2 className="comparing__content-row-header">{humanizeText(key)}</h2>
+                <ul className="comparing__content-row-list">
                   {val.map((i, idx) => (
                     <li
                       key={idx}
-                      className={classNames(style.grid, style.table)}
+                      className="comparing__grid comparing__table"
                       style={{
                         "--cols": columns,
                       }}
                     >
                       <div>{humanizeText(i)}</div>
-                      {products[key].map((pi, idx) => {
-                        const val = pi.find((y) => Object.keys(y) == i);
 
+                      {products[key].map((pi, idx) => {
+                        const val = pi.find((y) => Object.keys(y) == i) || {};
                         return <div key={idx}>{val[i] || "--"}</div>;
                       })}
                     </li>
@@ -47,7 +47,7 @@ export const CompareBody = ({ data }) => {
           )}
         </div>
         <div
-          className={classNames(style.grid, style.productCart)}
+          className="comparing__grid comparing__product-card"
           style={{
             "--cols": columns,
           }}

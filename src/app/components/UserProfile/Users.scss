@@ -1,0 +1,19 @@
+@import "../../../assets/styles/style";
+
+
+  .users-page {
+    @media screen and (min-width: $mobile) {
+      display: none;
+    }
+
+    @media screen and (min-width: $tablet) {
+      display: block;
+      .user-info {
+        margin-left: 17px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+

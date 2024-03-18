@@ -61,20 +61,22 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
             {status === "loading" && <div>Loading...</div>}
             {status === "failed" && <div>Error: {error} </div>}
             {status === "succeeded" && data.length > 0 ? (
-              data.slice(0, itemsToShow).map((item, index) => (
-                <div className="section-especially-item" key={index}>
-                  {item && (
-                    <ProductCard
-                      id={item._id}
-                      imageURL={item.colors[0].images[0]}
-                      category={item.category}
-                      title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity}
-                      price={item.colors[0].products[0].price}
-                      discountPrice={item.discountPrice}
-                    />
-                  )}
-                </div>
-              ))
+              <div className="section-especially-items">
+                {data.slice(0, itemsToShow).map((item, index) => (
+                  <div className="section-especially-item" key={index}>
+                    {item && (
+                      <ProductCard
+                        id={item._id}
+                        imageURL={item.colors[0].images[0]}
+                        category={item.category}
+                        title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity}
+                        price={item.colors[0].products[0].price}
+                        discountPrice={item.discountPrice}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
             ) : (
               <div>No data available</div>
             )}
@@ -88,9 +90,9 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                     <path
                       d="M5.25 10.2914L12 17.0414L18.75 10.2914"
                       stroke="#8119B1"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 }

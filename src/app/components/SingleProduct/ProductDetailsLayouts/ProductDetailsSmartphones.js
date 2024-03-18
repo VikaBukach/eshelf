@@ -244,7 +244,6 @@ const ProductDetailsSmartphones = ({ product }) => {
       </div>
 
       <CharacteristicBuy product={product} />
-
     </div>
   );
 };

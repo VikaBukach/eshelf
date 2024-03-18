@@ -75,10 +75,12 @@
       min-width: 360px;
       min-height: 240px;
       margin-top: 54px;
+
+      max-width: 100%;
     }
     @media (min-width: $desktop) {
       margin-top: 65px;
-      width: 100%;
+      //width: 100%;
     }
   }
 

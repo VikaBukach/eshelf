@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const getUser = createAsyncThunk("authorize", async () => {
   const PORT = process.env.REACT_APP_PORT || 3001;
+  const REACT_APP_BACK_URL = process.env.REACT_APP_BACK_URL || 'http://localhost';
   const token = localStorage.getItem("token");
 
   if (!token) {
@@ -10,7 +11,7 @@ export const getUser = createAsyncThunk("authorize", async () => {
   }
 
   try {
-    const response = await axios.get(`http://localhost:${PORT}/authorize`, {
+    const response = await axios.get(`${REACT_APP_BACK_URL}:${PORT}/authorize`, {
       headers: {
         Authorization: JSON.parse(token),
       },

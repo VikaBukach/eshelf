@@ -47,6 +47,14 @@ app.get("/smartphones", (req, res) => {
   handleCollectionRequest("smartphones", req, res);
 });
 
+app.get("/e-readers", (req, res) => {
+  handleCollectionRequest("e-readers", req, res);
+});
+
+app.get("/headphones", (req, res) => {
+  handleCollectionRequest("headphones", req, res);
+});
+
 app.get("/laptops", (req, res) => {
   handleCollectionRequest("laptops", req, res);
 });
@@ -55,20 +63,20 @@ app.get("/monitors", (req, res) => {
   handleCollectionRequest("monitors", req, res);
 });
 
-app.get("/smartwatches", (req, res) => {
-  handleCollectionRequest("smartwatches", req, res);
-});
-
 app.get("/mouses", (req, res) => {
   handleCollectionRequest("mouses", req, res);
+});
+
+app.get("/portable-speakers", (req, res) => {
+  handleCollectionRequest("portable_speakers", req, res);
 });
 
 app.get("/quadcopters", (req, res) => {
   handleCollectionRequest("quadcopters", req, res);
 });
 
-app.get("/headphones", (req, res) => {
-  handleCollectionRequest("headphones", req, res);
+app.get("/smartwatches", (req, res) => {
+  handleCollectionRequest("smartwatches", req, res);
 });
 
 app.get("/tablets", (req, res) => {
@@ -82,9 +90,9 @@ app.get("/tv", (req, res) => {
 app.get("/especiallyforyou", (req, res) => {
   handleCollectionRequest("especiallyforyou", req, res);
 });
-app.get("/topproduct", (req, res) => {
-  handleCollectionRequest("topproduct", req, res);
-});
+// app.get("/topproduct", (req, res) => {
+//   handleCollectionRequest("topproduct", req, res);
+// });
 
 app.use(reviewRouter);
 app.use(authRouter);
