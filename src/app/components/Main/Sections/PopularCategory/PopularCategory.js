@@ -130,6 +130,7 @@ function PopularCategory() {
             <img className="popular_category-item-img" src="/img/popularcategory/smartf.png" alt="Smartphones" />
             <h4 className="popular_category-title">Smartphones</h4>
           </li>
+
           <li className="popular_category-item">
             <img className="popular_category-item-img" src="/img/popularcategory/headphone.png" alt="Headphones" />
             <h4 className="popular_category-title">Headphones</h4>
@@ -154,7 +155,7 @@ function PopularCategory() {
 
         <div className="popular_category-items-carousel slider-container">
           <div className="popular_category-container">
-            <h3 className="popular_category-title">See all</h3>
+            {/*<h3 className="popular_category-title">See all</h3>*/}
             <div className="especially_arrow-svg-container-prev">
               <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()} />
             </div>
