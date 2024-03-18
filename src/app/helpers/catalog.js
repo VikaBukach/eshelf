@@ -58,4 +58,18 @@ const findValueByPath = (product, path) => {
   return { value: result, arrayOfObjects: arrayOfObjects };
 };
 
-export { isContainArrayOfObjects, normalizeValue, findValueByPath };
+  // Визначення мінімальної та максимальної ціни з фільтрованих товарів
+  const findMinAndMaxPrice = (productArray) => {
+    const pricePath = "colors.products.price";
+    let allPrices = [];
+    productArray.forEach((product) => {
+      allPrices = [...allPrices, ...findValueByPath(product, pricePath).value];
+    });
+    return {
+      minValue: isFinite(Math.min(...allPrices)) ? Math.min(...allPrices) : 0,
+      maxValue: isFinite(Math.max(...allPrices)) ? Math.max(...allPrices) : 0,
+    };
+  };
+
+
+export { findMinAndMaxPrice, isContainArrayOfObjects, normalizeValue, findValueByPath };

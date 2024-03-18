@@ -146,7 +146,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
 
 // При ЗАВАНТАЖЕННІ сторінки, тобто, ОДИН раз
   useEffect(() => {
-    console.log("ПЕРВАЯ ЗАГРУЗКА ПРИ ЗАПУСКЕ СТРАНИЦЫ");
+    // console.log("ПЕРВАЯ ЗАГРУЗКА ПРИ ЗАПУСКЕ СТРАНИЦЫ");
     dispatch(loadPageOfProducts({ collection: categoryName, page: 1, limit: 1 }));
     // dispatch(setPageOfDB(pageOfDB + 1));
   }, []);
@@ -160,15 +160,15 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
         return accumulator + product.colors.length;
       }, 0);
 
-      console.log("ЦВЕТОВ А ПРОДУКТАХ СЕЙЧАС", colorsInProducts);
+      // console.log("ЦВЕТОВ А ПРОДУКТАХ СЕЙЧАС", colorsInProducts);
 
       if ((cardsOnPage * pagesToLoading > colorsInProducts) && (products.length !== productsDataLength)) {
         dispatch(loadPageOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
-        console.log("case 1");
+        // console.log("case 1");
       } 
       if (cardsOnPage * pagesToLoading === colorsInProducts || products.length === productsDataLength) {
-        console.log("case 2");
-        console.log(products);
+        // console.log("case 2");
+        // console.log(products);
         dispatch(updateBaseFilterData(products));
         dispatch(updateFilteredProductsWithPrice(products));
         dispatch(setProductsToResrtSorting(products));

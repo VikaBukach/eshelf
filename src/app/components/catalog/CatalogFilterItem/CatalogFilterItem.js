@@ -4,13 +4,15 @@ import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice
 import { NumberOfEligibleProducts } from "../NumberOfEligibleProducts/NumberOfEligibleProducts";
 import { Accordion } from "../../ui/Accordion/Accordion";
 import { findValueByPath } from "../../../helpers/catalog";
+import { findNumberOfValue } from "../../../store/slices/productsSlice";
 
 const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
   const dispatch = useDispatch();
 
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
-
+  const numberOfValues = useSelector((state) => state.filterSettings.numberOfValues);
+  
   const filterSettingsToUpdate = { ...filterSettings };
 
   const handleCheckboxChange = (event) => {
@@ -81,7 +83,7 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
                   ></span>
                   {checkBoxName}
                 </label>
-                <NumberOfEligibleProducts number={findNumberOfValue(checkBoxName)} />
+                <NumberOfEligibleProducts number={numberOfValues[criteriaPath][checkBoxName]} />
               </div>
             );
           })}

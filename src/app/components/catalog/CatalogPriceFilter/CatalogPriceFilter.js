@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
 import { selectFilteredProductsStatus } from "../../../store/slices/filteredProductsSlice";
-import { findValueByPath } from "../../../helpers/catalog";
+import { findValueByPath, findMinAndMaxPrice } from "../../../helpers/catalog";
 import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
 import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
 import { createUrlFromFilterSettings } from "../../../utils/filter-url";
@@ -31,17 +31,7 @@ const CatalogPriceFilter = ({ pricePath }) => {
     setIsPriceToError(priceTo < minValue || priceTo > maxValue || priceTo < priceBy);
   };
 
-  // Визначення мінімальної та максимальної ціни з фільтрованих товарів
-  const findMinAndMaxPrice = (productArray) => {
-    let allPrices = [];
-    productArray.forEach((product) => {
-      allPrices = [...allPrices, ...findValueByPath(product, pricePath).value];
-    });
-    return {
-      minValue: isFinite(Math.min(...allPrices)) ? Math.min(...allPrices) : 0,
-      maxValue: isFinite(Math.max(...allPrices)) ? Math.max(...allPrices) : 0,
-    };
-  };
+
 
   // Фільтрація базового масиву по ціні
   const filterByPrice = () => {

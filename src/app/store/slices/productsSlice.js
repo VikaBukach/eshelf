@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { findValueByPath } from "../../helpers/catalog";
-import { setFilterCriteriasWithTypes } from "./filterSettingsSlice";
+import { findValueByPath, findMinAndMaxPrice } from "../../helpers/catalog";
+import { setFilterCriteriasWithTypes, setNumberOfValues } from "./filterSettingsSlice";
+import { setMinPrice, setMaxPrice, setPriceBy, setPriceTo } from "./filterSettingsSlice";
 
 
 export const selectProducts = (state) => state.products.data;
@@ -36,21 +37,36 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
       const response = await axios.get(`http://localhost:${PORT}/${collection}`);
       const products = response.data;
       dispatch(setProductsDataLength(response.data.length));
+      dispatch(setMinPrice(findMinAndMaxPrice(products).minValue));
+      dispatch(setMaxPrice(findMinAndMaxPrice(products).maxValue));
+      dispatch(setPriceBy(findMinAndMaxPrice(products).minValue));
+      dispatch(setPriceTo(findMinAndMaxPrice(products).maxValue));
       const updatedFilterCriterias = [];
+      const numberOfValues = {};
       filterCriterias.forEach((criteria) => {
         criteria.types = [];
+        numberOfValues[criteria.path] = {};
         products.forEach((product) => {
           const { value: findVariations } = findValueByPath(product, criteria.path);
 
           findVariations.forEach((findVariation) => {
+            if (numberOfValues[criteria.path][findVariation] && numberOfValues[criteria.path][findVariation] >= 1) {
+              numberOfValues[criteria.path][findVariation]++;
+            } else {
+              numberOfValues[criteria.path][findVariation] = 1;
+            }
+
             if (!criteria.types.includes(findVariation)) {
               criteria.types.push(findVariation);
             }
           });
         });
+
         updatedFilterCriterias.push({ title: criteria.title, types: criteria.types, path: criteria.path });
       });
+
       dispatch(setFilterCriteriasWithTypes(updatedFilterCriterias));
+      dispatch(setNumberOfValues(numberOfValues));
       return updatedFilterCriterias;
     } catch (err) {
       console.log("Error fetching brand names:", err);
@@ -79,23 +95,23 @@ export const loadPageOfProducts = createAsyncThunk(
       const response = await axios.get(`http://localhost:${PORT}/${collection}?page=${page}&limit=${limit}`);
 
       const loadedProduct = response.data[0];
-      console.log(loadedProduct);
+      // console.log(loadedProduct);
       const colorsInLoadedProduct = Object.values(response.data).reduce((accumulator, { colors }) => {
         return accumulator + colors.length;
       }, 0);
-      console.log("Цветов в загруженном товаре:",colorsInLoadedProduct);
+      // console.log("Цветов в загруженном товаре:",colorsInLoadedProduct);
 
-      console.log("PAGE:", pagesToLoading);
+      // console.log("PAGE:", pagesToLoading);
 
       const lastProduct = {...currentProducts[currentProducts.length - 1]}
 
       let currentProductsWithoutLast;
 
       if (lastProduct._id === loadedProduct._id) {
-        console.log("ПОВТОРЕНИЕ ТОВАРА");
+        // console.log("ПОВТОРЕНИЕ ТОВАРА");
 
         currentProductsWithoutLast = currentProducts.slice(0, -1);
-        console.log("Товары, с убранным повторением:", currentProductsWithoutLast);
+        // console.log("Товары, с убранным повторением:", currentProductsWithoutLast);
         
       } else {
         currentProductsWithoutLast = currentProducts;
@@ -109,25 +125,25 @@ export const loadPageOfProducts = createAsyncThunk(
 
       // Если карточек ХВАТАЕТ
       if (cardsOnPage * pagesToLoading === colorsInLoadedProduct + countOfProductCards) {
-        console.log("Карточек сколько нужно");
+        // console.log("Карточек сколько нужно");
         dispatch(setPageOfDB(pageOfDB + 1));
       } 
       else if (cardsOnPage * pagesToLoading < colorsInLoadedProduct + countOfProductCards) {
-        console.log("Карточек больше, чем нужно");
+        // console.log("Карточек больше, чем нужно");
         const difference = (colorsInLoadedProduct + countOfProductCards) - (pagesToLoading * cardsOnPage);
-        console.log("Карточек больше на", difference);
+        // console.log("Карточек больше на", difference);
         loadedProduct.colors = loadedProduct.colors.slice(0, -difference);
-        console.log("Убрали лишние карточки-цвета", loadedProduct);
+        // console.log("Убрали лишние карточки-цвета", loadedProduct);
         // loadedProduct - продукт, с сокращенным количеством карточек
       }
       else if (cardsOnPage * pagesToLoading > colorsInLoadedProduct + countOfProductCards) {
-        console.log("Карточек МЕНЬШЕ, чем нужно");
+        // console.log("Карточек МЕНЬШЕ, чем нужно");
         dispatch(setPageOfDB(pageOfDB + 1));
       }
 
         const allProducts = [...currentProductsWithoutLast, loadedProduct];
 
-        console.log("Список товаров на ЗАВЕРШЕНИЕ функции", allProducts);
+        // console.log("Список товаров на ЗАВЕРШЕНИЕ функции", allProducts);
 
       return allProducts;
     } catch (err) {
