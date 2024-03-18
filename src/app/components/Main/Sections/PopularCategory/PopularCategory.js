@@ -121,7 +121,7 @@ function PopularCategory() {
                 />
               </svg>
             }
-            text={"Others"}
+            text={"Quadcopters"}
           />
           </NavLink>
         </div>
