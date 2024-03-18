@@ -35,6 +35,9 @@ const ChooseColor = ({ product }) => {
     grey: "#9F9F9F",
     orange: "#FFB900",
     platinum: "#e5e4e2",
+    "space gray": "#888888",
+    "platinum silver with black carbon fiber palmrest": "#909090",
+    "nightfall black": "#151A35",
   };
 
   return (
