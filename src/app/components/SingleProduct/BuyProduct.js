@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorites } from "../../store/slices/favoritesSlice";
 import { toggleCompare } from "../../store/slices/compareSlice";
@@ -18,7 +18,7 @@ const BuyProduct = ({ product }) => {
   const dispatch = useDispatch();
 
   const { _id: id, colors, category, model: title } = product;
-  const { images, products } = colors[activeColorIndex];
+  const { images, products, color } = colors[activeColorIndex];
   const { price, discount_price: discountPrice } = products[activeMemoryIndex];
   const imageURL = images[activeImageIndex];
 
@@ -29,6 +29,7 @@ const BuyProduct = ({ product }) => {
     title,
     price,
     discountPrice,
+    color
   };
 
   const handleAddToFavorites = () => {

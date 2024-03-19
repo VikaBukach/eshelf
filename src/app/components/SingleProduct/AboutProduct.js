@@ -28,7 +28,7 @@ const AboutProduct = ({ product }) => {
     case "quadcopters":
       ProductComponent = ProductQuadcopters;
       break;
-    case "televisions":
+    case "tv":
       ProductComponent = ProductTv;
       break;
     case "tablets":
