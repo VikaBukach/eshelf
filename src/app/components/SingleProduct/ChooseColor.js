@@ -1,13 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveColorIndex } from "../../store/slices/singleProductSlice";
+import { useNavigate } from "react-router-dom";
 
 const ChooseColor = ({ product }) => {
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
-  const handleColorItemClick = (index) => {
+  const handleColorItemClick = (index, color) => {
+    const formattedColor = color.includes(" ") ? color.replace(/\s+/g, "-") : color;
     dispatch(setActiveColorIndex(index));
+    navigate(`/${product.category}/${product._id}/${formattedColor}`);
   };
 
   const colorMap = {
@@ -49,7 +53,7 @@ const ChooseColor = ({ product }) => {
             {product.colors.map((item, i) => (
               <div
                 key={i}
-                onClick={() => handleColorItemClick(i)}
+                onClick={() => handleColorItemClick(i, item.color)}
                 style={{ backgroundColor: `${colorMap[item.color] || item.color}` }}
                 className={`info-details__color-item ${i === activeColorIndex ? "info-details__color-active" : ""}`}
               ></div>

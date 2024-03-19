@@ -15,13 +15,18 @@ import Rating from "../../components/SingleProduct/components/Rating";
 import axios from "axios";
 
 const ProductPage = () => {
-    const {id} = useParams();
+    const {id, color} = useParams();
 
     const dispatch = useDispatch();
 
     const storedProduct = JSON.parse(localStorage.getItem("product"));
 
-    const product = useSelector((state) => state.products.data.find((item) => item._id === id)) || storedProduct;
+    const regColor = (color) => {
+      return color.includes(" ") ? color.replace(/\s+/g, "-") : color;
+    };
+
+    const products = useSelector((state) => state.products.data)
+    const product = products.find((item) => item._id === id && item.colors.some((c) => regColor(c.color) === regColor(color))) || storedProduct;
 
     const {tabs} = useSelector((state) => state.product);
 
@@ -54,6 +59,7 @@ const ProductPage = () => {
     }, [product, PORT]);
 
     useEffect(() => {
+        dispatch(setActiveColorIndex(product.colors.findIndex((c) => regColor(c.color) === regColor(color))));
         localStorage.setItem("product", JSON.stringify(product));
 
         return () => {
@@ -61,6 +67,7 @@ const ProductPage = () => {
             dispatch(setActiveColorIndex(0));
             dispatch(setActiveMemoryIndex(0));
             dispatch(setActiveImageIndex(0));
+            localStorage.removeItem("product");
         };
     }, [dispatch]);
 
