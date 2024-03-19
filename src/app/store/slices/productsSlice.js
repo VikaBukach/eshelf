@@ -3,6 +3,7 @@ import axios from "axios";
 import { findValueByPath, findMinAndMaxPrice } from "../../helpers/catalog";
 import { setFilterCriteriasWithTypes, setNumberOfValues } from "./filterSettingsSlice";
 import { setMinPrice, setMaxPrice, setPriceBy, setPriceTo } from "./filterSettingsSlice";
+import { filterProducts } from "../../helpers/catalog";
 
 
 export const selectProducts = (state) => state.products.data;
@@ -10,6 +11,7 @@ export const selectPageOfDB = (state) => state.products.pageOfDB;
 export const selectProductsDataLength = (state) => state.products.productsDataLength;
 export const selectCardsOnPage = (state) => state.products.cardsOnPage;
 export const selectPagesToLoading = (state) => state.products.pagesToLoading;
+export const selectFilterSettings = (state) => state.filterSettings.checkboxes;
 
 
 const PORT = process.env.REACT_APP_PORT || 5000;
@@ -29,6 +31,10 @@ export const fetchDataOfProducts = createAsyncThunk(
     }
   }
 );
+
+export const deleteDataOfProducts = createAsyncThunk("products/deleteDataOfProducts", async () => {
+  return [];
+});
 
 export const addVariationsToFilterCriterias = createAsyncThunk(
   "products/addVariationsToFilterCriterias",
@@ -67,6 +73,7 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
 
       dispatch(setFilterCriteriasWithTypes(updatedFilterCriterias));
       dispatch(setNumberOfValues(numberOfValues));
+
       return updatedFilterCriterias;
     } catch (err) {
       console.log("Error fetching brand names:", err);
@@ -74,10 +81,6 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
     }
   }
 );
-
-
-
-
 
 
 export const loadPageOfProducts = createAsyncThunk(
@@ -90,62 +93,105 @@ export const loadPageOfProducts = createAsyncThunk(
     const pageOfDB = selectPageOfDB(getState());
     const pagesToLoading = selectPagesToLoading(getState());
     const productsDataLength = selectProductsDataLength(getState());
+    const filterSettings = selectFilterSettings(getState());
 
     try {
       const response = await axios.get(`http://localhost:${PORT}/${collection}?page=${page}&limit=${limit}`);
-
-      const loadedProduct = response.data[0];
+      let loadedProduct = response.data[0];
       // console.log(loadedProduct);
-      const colorsInLoadedProduct = Object.values(response.data).reduce((accumulator, { colors }) => {
-        return accumulator + colors.length;
-      }, 0);
-      // console.log("Цветов в загруженном товаре:",colorsInLoadedProduct);
+      console.log("НОМЕР ТОВАРА на НАЧАЛО:", pageOfDB);
 
-      // console.log("PAGE:", pagesToLoading);
-
-      const lastProduct = {...currentProducts[currentProducts.length - 1]}
-
-      let currentProductsWithoutLast;
-
-      if (lastProduct._id === loadedProduct._id) {
-        // console.log("ПОВТОРЕНИЕ ТОВАРА");
-
-        currentProductsWithoutLast = currentProducts.slice(0, -1);
-        // console.log("Товары, с убранным повторением:", currentProductsWithoutLast);
-        
-      } else {
-        currentProductsWithoutLast = currentProducts;
+      if (!loadedProduct) {
+        dispatch(setPageOfDB(pageOfDB + 1));
+          return currentProducts;
       }
 
-      const countOfProductCards = currentProductsWithoutLast.reduce((accumulator, product) => {
-        return accumulator + product.colors.length;
-      }, 0);
+      // Якщо є налаштування фільтрації
+      if (filterSettings.length !== 0) {
+        const filteredLoadedProduct = (filterProducts([loadedProduct], filterSettings));
+        console.log(filteredLoadedProduct);
+        
+
+        if (filteredLoadedProduct.length === 0) {
+          console.log(loadedProduct);
+          dispatch(setPageOfDB(pageOfDB + 1));
+          return currentProducts;
+        }
+
+        loadedProduct = filteredLoadedProduct[0];
+
+
+        
+        
+
+
+
+        
+        
+      } 
+      // Якщо налаштувань фільтрації немає
+      
+
+        // const colorsInLoadedProduct = Object.values([loadedProduct]).reduce((accumulator, { colors }) => {
+        //   console.log([loadedProduct]);
+        //   return accumulator + colors.length;
+        // }, 0);
+        console.log(loadedProduct.colors);
+        const colorsInLoadedProduct = loadedProduct.colors.length;
+        console.log("Цветов в загруженном товаре:",colorsInLoadedProduct);
+  
+        // console.log("PAGE:", pagesToLoading);
+  
+        const lastProduct = {...currentProducts[currentProducts.length - 1]}
+  
+        let currentProductsWithoutLast;
+  
+        if (lastProduct._id === loadedProduct._id) {
+          // console.log("ПОВТОРЕНИЕ ТОВАРА");
+  
+          currentProductsWithoutLast = currentProducts.slice(0, -1);
+          // console.log("Товары, с убранным повторением:", currentProductsWithoutLast);
+          
+        } else {
+          currentProductsWithoutLast = currentProducts;
+        }
+  
+        const countOfProductCards = currentProductsWithoutLast.reduce((accumulator, product) => {
+          return accumulator + product.colors.length;
+        }, 0);
+  
+        
+  
+        // Если карточек ХВАТАЕТ
+        if (cardsOnPage * pagesToLoading === colorsInLoadedProduct + countOfProductCards) {
+          // console.log("Карточек сколько нужно");
+          dispatch(setPageOfDB(pageOfDB + 1));
+        } 
+        else if (cardsOnPage * pagesToLoading < colorsInLoadedProduct + countOfProductCards) {
+          // console.log("Карточек больше, чем нужно");
+          const difference = (colorsInLoadedProduct + countOfProductCards) - (pagesToLoading * cardsOnPage);
+          // console.log("Карточек больше на", difference);
+          loadedProduct.colors = loadedProduct.colors.slice(0, -difference);
+          // console.log("Убрали лишние карточки-цвета", loadedProduct);
+          // loadedProduct - продукт, с сокращенным количеством карточек
+        }
+        else if (cardsOnPage * pagesToLoading > colorsInLoadedProduct + countOfProductCards) {
+          // console.log("Карточек МЕНЬШЕ, чем нужно");
+          dispatch(setPageOfDB(pageOfDB + 1));
+        }
+  
+          const allProducts = [...currentProductsWithoutLast, loadedProduct];
+  
+          console.log("Список товаров на ЗАВЕРШЕНИЕ функции", allProducts);
+          return allProducts;
 
       
 
-      // Если карточек ХВАТАЕТ
-      if (cardsOnPage * pagesToLoading === colorsInLoadedProduct + countOfProductCards) {
-        // console.log("Карточек сколько нужно");
-        dispatch(setPageOfDB(pageOfDB + 1));
-      } 
-      else if (cardsOnPage * pagesToLoading < colorsInLoadedProduct + countOfProductCards) {
-        // console.log("Карточек больше, чем нужно");
-        const difference = (colorsInLoadedProduct + countOfProductCards) - (pagesToLoading * cardsOnPage);
-        // console.log("Карточек больше на", difference);
-        loadedProduct.colors = loadedProduct.colors.slice(0, -difference);
-        // console.log("Убрали лишние карточки-цвета", loadedProduct);
-        // loadedProduct - продукт, с сокращенным количеством карточек
-      }
-      else if (cardsOnPage * pagesToLoading > colorsInLoadedProduct + countOfProductCards) {
-        // console.log("Карточек МЕНЬШЕ, чем нужно");
-        dispatch(setPageOfDB(pageOfDB + 1));
-      }
+      
+      
+      
 
-        const allProducts = [...currentProductsWithoutLast, loadedProduct];
-
-        // console.log("Список товаров на ЗАВЕРШЕНИЕ функции", allProducts);
-
-      return allProducts;
+      
     } catch (err) {
       console.log("Error fetching products:", err);
       throw err;
@@ -214,6 +260,21 @@ const productsSlice = createSlice({
         state.error = null;
       })
       .addCase(loadPageOfProducts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+
+      builder
+      // Обработчики для deleteDataOfProducts
+      .addCase(deleteDataOfProducts.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteDataOfProducts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = [];
+        state.error = null;
+      })
+      .addCase(deleteDataOfProducts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

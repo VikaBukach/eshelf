@@ -104,41 +104,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
     }
   }
 
-  const loadPageOfCards = () => {
-    console.log("СРАБАТЫВАНИЕ ПОСЛЕ ЗАГРУЗКИ");
-      console.log("Товары после загрузки:", products);
 
-      const colors = Object.values(products).reduce((accumulator, product) => {
-        return accumulator + product.colors.length;
-      }, 0);
-
-      console.log("Карточек после загрузки", colors);
-
-      if ((pagesToLoading*cardsOnPage) >= colors) {
-        console.log("КАРТОЧЕК МАЛО");
-
-        dispatch(fetchDataOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
-        dispatch(setPageOfDB(pageOfDB + 1));
-
-      } else if ((pagesToLoading*cardsOnPage) < colors) {
-        console.log("КАРТОЧЕК С ОСТАТКОМ");
-        const difference = colors - (pagesToLoading*cardsOnPage);
-        const productsWithRequiredCards = products.slice(0, -1);
-        const productWithRemovedCards = { ...products[products.length - 1] };
-        productWithRemovedCards.colors = productWithRemovedCards.colors.slice(0, -2);
-        const productsWithCardsToDisplay = [...productsWithRequiredCards, productWithRemovedCards];
-        console.log("difference", difference);
-        console.log("Элементы без последнего", productsWithRequiredCards);
-        console.log("Последний с скороченными карточками", productWithRemovedCards);
-        console.log("Готовый массив", productsWithCardsToDisplay);
-        loadToFilterAndSortingSlices(productsWithCardsToDisplay);
-      } 
-      else if ((pagesToLoading*cardsOnPage) == colors) {
-        console.log("КАРТОЧЕК РОВНО СКОЛЬКО НАДО");
-        const difference = colors - (pagesToLoading*cardsOnPage);
-        console.log("difference", difference);
-      }
-  }
 
 
 
@@ -155,20 +121,25 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
 
   useEffect(() => {
     if (fetchStatus === "succeeded") {
-
+      console.log("PROD:",products );
       const colorsInProducts = products.reduce((accumulator, product) => {
         return accumulator + product.colors.length;
       }, 0);
 
-      // console.log("ЦВЕТОВ А ПРОДУКТАХ СЕЙЧАС", colorsInProducts);
+      console.log("ЦВЕТОВ А ПРОДУКТАХ СЕЙЧАС", colorsInProducts);
 
-      if ((cardsOnPage * pagesToLoading > colorsInProducts) && (products.length !== productsDataLength)) {
+      if (
+        cardsOnPage * pagesToLoading > colorsInProducts &&
+        (products.length <= productsDataLength || (productsDataLength === 0 && products.length > 0)) &&
+        pageOfDB <= productsDataLength || (productsDataLength === 0 && pageOfDB > 0)
+      ) {
         dispatch(loadPageOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
-        // console.log("case 1");
-      } 
-      if (cardsOnPage * pagesToLoading === colorsInProducts || products.length === productsDataLength) {
-        // console.log("case 2");
-        // console.log(products);
+      }
+      if (
+        cardsOnPage * pagesToLoading === colorsInProducts ||
+        products.length > productsDataLength ||
+        pageOfDB > productsDataLength
+      ) {
         dispatch(updateBaseFilterData(products));
         dispatch(updateFilteredProductsWithPrice(products));
         dispatch(setProductsToResrtSorting(products));

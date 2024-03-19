@@ -72,4 +72,61 @@ const findValueByPath = (product, path) => {
   };
 
 
-export { findMinAndMaxPrice, isContainArrayOfObjects, normalizeValue, findValueByPath };
+
+
+
+
+
+
+  const filterProducts = (products, filterSettings) => {
+    const filteredProductsArray = [];
+    const entriesOfFilterSettings = Object.entries(filterSettings);
+
+    products.forEach((product) => {
+      let isMatch = true;
+
+      for (const [path, parametersOfSetting] of entriesOfFilterSettings) {
+        const trueValues = parametersOfSetting;
+
+        const { value, arrayOfObjects } = findValueByPath(product, path);
+
+        // Відмічаємо "false" ті продукти, або частини продуктів, які нам НЕ підходять:
+        if (value && trueValues.length > 0) {
+          // Якщо це значення з одним варіантом вибору
+          if (value.length === 1 && !trueValues.includes(value[0]) && !arrayOfObjects) {
+            isMatch = false;
+          }
+          // Якщо це массив значень (Наприклад, список функцій)
+          else if (value.length > 1 && !trueValues.every((key) => value.includes(key)) && !arrayOfObjects) {
+            isMatch = false;
+          }
+          // Якщо є массив об'єктів: фільтрація по КОЛЬОРАХ (адже кожен є ОКРЕМИМ товаром)
+          else if (path === "colors.color" && arrayOfObjects) {
+            const filteredColors = arrayOfObjects.filter((colorObject) => trueValues.includes(colorObject.color));
+            if (filteredColors.length === 0) {
+              isMatch = false;
+            } else {
+              product = { ...product, colors: filteredColors };
+            }
+          }
+          // Якщо є массив об'єктів: фільтрація по іншим критеріям
+          else if (arrayOfObjects && !trueValues.some((trueValue) => value.includes(trueValue))) {
+            isMatch = false;
+          }
+          // Прибираємо всі продукти з пустими значаннями, якщо такі є
+          else if (value.length < 1) {
+            isMatch = false;
+          }
+        }
+      }
+      if (isMatch) {
+        filteredProductsArray.push(product);
+      }
+    });
+    return filteredProductsArray;
+  };
+
+
+
+
+export { findMinAndMaxPrice, isContainArrayOfObjects, normalizeValue, findValueByPath, filterProducts };

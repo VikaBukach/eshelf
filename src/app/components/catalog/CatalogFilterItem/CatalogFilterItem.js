@@ -76,10 +76,10 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
                     name={checkBoxName}
                     checked={isCheckboxChecked(checkBoxName)}
                     onChange={handleCheckboxChange}
-                    disabled={findNumberOfValue(checkBoxName) === 0 ? true : false}
+                    disabled={numberOfValues[criteriaPath][checkBoxName] === 0 ? true : false}
                   />
                   <span
-                    className={`filter-item__custom-checkbox ${isCheckboxChecked(checkBoxName) ? "filter-item__custom-checkbox--checked" : ""} ${findNumberOfValue(checkBoxName) === 0 ? "filter-item__custom-checkbox--disabled" : ""}`}
+                    className={`filter-item__custom-checkbox ${isCheckboxChecked(checkBoxName) ? "filter-item__custom-checkbox--checked" : ""} ${numberOfValues[criteriaPath][checkBoxName] === 0 ? "filter-item__custom-checkbox--disabled" : ""}`}
                   ></span>
                   {checkBoxName}
                 </label>

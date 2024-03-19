@@ -23,37 +23,7 @@ const PORT = process.env.REACT_APP_PORT || 5000;
 
 
 
-export const findNumberOfValue = createAsyncThunk(
-  "filterSettings/findNumberOfValue",
-  async ({ collection, name, criteriaPath }, { dispatch }) => {
-    try {
-      const response = await axios.get(`http://localhost:${PORT}/${collection}`);
-      const products = response.data;
 
-      
-
-      // const updatedFilterCriterias = [];
-      // filterCriterias.forEach((criteria) => {
-      //   criteria.types = [];
-      //   products.forEach((product) => {
-      //     const { value: findVariations } = findValueByPath(product, criteria.path);
-
-      //     findVariations.forEach((findVariation) => {
-      //       if (!criteria.types.includes(findVariation)) {
-      //         criteria.types.push(findVariation);
-      //       }
-      //     });
-      //   });
-      //   updatedFilterCriterias.push({ title: criteria.title, types: criteria.types, path: criteria.path });
-      // });
-      // dispatch(setFilterCriteriasWithTypes(updatedFilterCriterias));
-      // return updatedFilterCriterias;
-    } catch (err) {
-      console.log("Error fetching brand names:", err);
-      throw err;
-    }
-  }
-);
 
 
 

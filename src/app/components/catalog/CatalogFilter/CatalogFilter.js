@@ -9,7 +9,8 @@ import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/sl
 import { Accordion } from "../../ui/Accordion/Accordion";
 import { createUrlFromFilterSettings } from "../../../utils/filter-url";
 import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
-import { addVariationsToFilterCriterias } from "../../../store/slices/productsSlice";
+import { addVariationsToFilterCriterias, setProducts } from "../../../store/slices/productsSlice";
+import { fetchDataOfProducts, loadPageOfProducts, deleteDataOfProducts, setPageOfDB, setPagesToLoading } from "../../../store/slices/productsSlice";
 
 const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
@@ -52,53 +53,53 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
 
   // ОБРОБКА ФІЛЬТРАЦІЇ (ПІСЛЯ НАТИСКАННЯ КНОПКИ)
 
-  const filterProducts = () => {
-    const filteredProductsArray = [];
-    const entriesOfFilterSettings = Object.entries(filterSettings);
+  // const filterProducts = (products) => {
+  //   const filteredProductsArray = [];
+  //   const entriesOfFilterSettings = Object.entries(filterSettings);
 
-    products.forEach((product) => {
-      let isMatch = true;
+  //   products.forEach((product) => {
+  //     let isMatch = true;
 
-      for (const [path, parametersOfSetting] of entriesOfFilterSettings) {
-        const trueValues = parametersOfSetting;
+  //     for (const [path, parametersOfSetting] of entriesOfFilterSettings) {
+  //       const trueValues = parametersOfSetting;
 
-        const { value, arrayOfObjects } = findValueByPath(product, path);
+  //       const { value, arrayOfObjects } = findValueByPath(product, path);
 
-        // Відмічаємо "false" ті продукти, або частини продуктів, які нам НЕ підходять:
-        if (value && trueValues.length > 0) {
-          // Якщо це значення з одним варіантом вибору
-          if (value.length === 1 && !trueValues.includes(value[0]) && !arrayOfObjects) {
-            isMatch = false;
-          }
-          // Якщо це массив значень (Наприклад, список функцій)
-          else if (value.length > 1 && !trueValues.every((key) => value.includes(key)) && !arrayOfObjects) {
-            isMatch = false;
-          }
-          // Якщо є массив об'єктів: фільтрація по КОЛЬОРАХ (адже кожен є ОКРЕМИМ товаром)
-          else if (path === "colors.color" && arrayOfObjects) {
-            const filteredColors = arrayOfObjects.filter((colorObject) => trueValues.includes(colorObject.color));
-            if (filteredColors.length === 0) {
-              isMatch = false;
-            } else {
-              product = { ...product, colors: filteredColors };
-            }
-          }
-          // Якщо є массив об'єктів: фільтрація по іншим критеріям
-          else if (arrayOfObjects && !trueValues.some((trueValue) => value.includes(trueValue))) {
-            isMatch = false;
-          }
-          // Прибираємо всі продукти з пустими значаннями, якщо такі є
-          else if (value.length < 1) {
-            isMatch = false;
-          }
-        }
-      }
-      if (isMatch) {
-        filteredProductsArray.push(product);
-      }
-    });
-    return filteredProductsArray;
-  };
+  //       // Відмічаємо "false" ті продукти, або частини продуктів, які нам НЕ підходять:
+  //       if (value && trueValues.length > 0) {
+  //         // Якщо це значення з одним варіантом вибору
+  //         if (value.length === 1 && !trueValues.includes(value[0]) && !arrayOfObjects) {
+  //           isMatch = false;
+  //         }
+  //         // Якщо це массив значень (Наприклад, список функцій)
+  //         else if (value.length > 1 && !trueValues.every((key) => value.includes(key)) && !arrayOfObjects) {
+  //           isMatch = false;
+  //         }
+  //         // Якщо є массив об'єктів: фільтрація по КОЛЬОРАХ (адже кожен є ОКРЕМИМ товаром)
+  //         else if (path === "colors.color" && arrayOfObjects) {
+  //           const filteredColors = arrayOfObjects.filter((colorObject) => trueValues.includes(colorObject.color));
+  //           if (filteredColors.length === 0) {
+  //             isMatch = false;
+  //           } else {
+  //             product = { ...product, colors: filteredColors };
+  //           }
+  //         }
+  //         // Якщо є массив об'єктів: фільтрація по іншим критеріям
+  //         else if (arrayOfObjects && !trueValues.some((trueValue) => value.includes(trueValue))) {
+  //           isMatch = false;
+  //         }
+  //         // Прибираємо всі продукти з пустими значаннями, якщо такі є
+  //         else if (value.length < 1) {
+  //           isMatch = false;
+  //         }
+  //       }
+  //     }
+  //     if (isMatch) {
+  //       filteredProductsArray.push(product);
+  //     }
+  //   });
+  //   return filteredProductsArray;
+  // };
 
   // Прибираємо розділювальну риску на останнтому елементі
   const accordions = document.querySelectorAll(".filter .accordion");
@@ -118,6 +119,9 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
   // Запуск базового фільтру
   const onFilterSubmit = () => {
     // dispatch(updateBaseFilterData(filterProducts()));   ПРИ ЗМІНІ ЧЕКБРКСУ ВЖЕ СПРАЦЮВАЛО
+    dispatch(setPagesToLoading(1));
+    dispatch(setPageOfDB(1));
+    dispatch(deleteDataOfProducts());
     closeFilter();
   };
 
@@ -154,9 +158,21 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
   // }, [filterSettings]);
 
   useEffect(() => {
-  //   // dispatch(fetchDataOfProducts({ collection: activeCategoryName, page: 1, limit: 10 }));
     dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
   }, [dispatch]);
+
+
+  //   useEffect(() => {
+  //     dispatch(setPagesToLoading(1));
+  //     dispatch(setPageOfDB(1));
+  //     // dispatch(deleteDataOfProducts());
+  // }, [filterSettings]);
+
+
+
+
+
+
 
   return (
     <div className="filter">
