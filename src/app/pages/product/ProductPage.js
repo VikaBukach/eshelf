@@ -67,7 +67,7 @@ const ProductPage = () => {
             dispatch(setActiveColorIndex(0));
             dispatch(setActiveMemoryIndex(0));
             dispatch(setActiveImageIndex(0));
-            localStorage.removeItem("product");
+            //localStorage.removeItem("product");
         };
     }, [dispatch]);
 
