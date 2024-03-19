@@ -7,10 +7,12 @@ import { toggleFavorites } from "../../store/slices/favoritesSlice";
 import { classNames } from "../../utils/classNames";
 import { toggleCompare } from "../../store/slices/compareSlice";
 
-export default function ProductCard({ id, imageURL, category, title, price, discountPrice }) {
-  const product = { id, imageURL, category, title, price, discountPrice };
+export default function ProductCard({ id, imageURL, category, title, price, discountPrice, color }) {
+  const product = { id, imageURL, category, title, price, discountPrice};
 
-  const urlProduct = `/${category}/${id}`;
+  const formatColor = color.includes(' ') ? color.replace(/\s+/g, '-') : color;
+
+  const urlProduct = `/${category}/${id}/${formatColor}`;
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
