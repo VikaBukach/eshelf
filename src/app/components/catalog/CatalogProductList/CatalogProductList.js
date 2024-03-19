@@ -16,7 +16,7 @@ const CatalogProductList = () => {
       productItem.fullName = product.brand + " " + product.model + " " + color.color;
       productItem.index = product._id + color.color;
       productItem.image = color.images[0];
-      productItem.category = product.product;
+      productItem.category = product.category;
       productItem.priceBy = color.products[0].price;
       let l = color.products.length - 1;
       productItem.priceTo = color.products[l].price;
