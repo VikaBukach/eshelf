@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
+ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -7,9 +8,19 @@ import "./Banner_main.scss";
 import Arrow from "../../Arrow/Arrow";
 
 function BannerMain({ product }) {
-  const data = useSelector((state) => state.products.data);
-
   const dispatch = useDispatch();
+  const sliderRef = useRef(null);
+  const navigate = useNavigate();
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+
 
   const slides = [
     {
@@ -44,16 +55,6 @@ function BannerMain({ product }) {
       imagePathDesktop: "/img/mainbanner/applewatchbigbanner.png",
     },
   ]; //add sliders
-
-  const sliderRef = useRef(null);
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
 
   return (
     <div className="banner_main slider-container">
