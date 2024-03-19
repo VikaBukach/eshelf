@@ -33,44 +33,44 @@ const CatalogPriceFilter = ({ pricePath }) => {
 
 
 
-  // Фільтрація базового масиву по ціні
-  const filterByPrice = () => {
-    const filteredProductsArray = [];
+  // // Фільтрація базового масиву по ціні
+  // const filterByPrice = (products) => {
+  //   const filteredProductsArray = [];
 
-    if (priceBy !== 0 && priceTo !== 0) {
-      filteredProducts.forEach((product) => {
-        const { minValue, maxValue } = findMinAndMaxPrice([product]);
+  //   if (priceBy !== 0 && priceTo !== 0) {
+  //     products.forEach((product) => {
+  //       const { minValue, maxValue } = findMinAndMaxPrice([product]);
 
-        if (
-          (minValue >= priceBy && minValue <= priceTo) ||
-          (maxValue >= priceBy && maxValue <= priceTo) ||
-          (minValue <= priceBy && maxValue >= priceBy) ||
-          (minValue <= priceTo && maxValue >= priceTo)
-        ) {
-          filteredProductsArray.push(product);
-        }
-      });
-      return filteredProductsArray;
-    } else {
-      return filteredProducts;
-    }
-  };
+  //       if (
+  //         (minValue >= priceBy && minValue <= priceTo) ||
+  //         (maxValue >= priceBy && maxValue <= priceTo) ||
+  //         (minValue <= priceBy && maxValue >= priceBy) ||
+  //         (minValue <= priceTo && maxValue >= priceTo)
+  //       ) {
+  //         filteredProductsArray.push(product);
+  //       }
+  //     });
+  //     return filteredProductsArray;
+  //   } else {
+  //     return products;
+  //   }
+  // };
 
   // Фільтр-посилання
   const navigateToUrlWithSettings = () => {
-    const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
-    navigate(url);
+    // const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
+    // navigate(url);
   };
 
   // ------- ФІЛЬТРАЦІЯ ПО ЦІНІ - по кнопці і при кожній зміні статусу BASE
   const submitFilterByPrice = () => {
-    if (!isPriceByError && !isPriceToError) {
-      dispatch(updateFilteredProductsWithPrice(filterByPrice()));
-      dispatch(setProductsToResrtSorting(filterByPrice()));
-      if (filterSettings.length !== 0 || priceBy !== minValue || priceTo !== maxValue) {
-        navigateToUrlWithSettings();
-      }
-    }
+    // if (!isPriceByError && !isPriceToError) {
+    //   dispatch(updateFilteredProductsWithPrice(filterByPrice()));
+    //   dispatch(setProductsToResrtSorting(filterByPrice()));
+    //   if (filterSettings.length !== 0 || priceBy !== minValue || priceTo !== maxValue) {
+    //     navigateToUrlWithSettings();
+    //   }
+    // }
   };
 
   // ДІЇ ПО КНОПКАХ
@@ -89,25 +89,25 @@ const CatalogPriceFilter = ({ pricePath }) => {
   // ЗМІНА СТАНІВ
 
   useEffect(() => {
-    if (baseFilterProductsStatus === "idle") {
-      dispatch(setMinPrice(findMinAndMaxPrice(filteredProducts).minValue));
-      dispatch(setMaxPrice(findMinAndMaxPrice(filteredProducts).maxValue));
-      if (priceBy === 0 || priceTo === 0) {
-        dispatch(setPriceBy(findMinAndMaxPrice(filteredProducts).minValue));
-        dispatch(setPriceTo(findMinAndMaxPrice(filteredProducts).maxValue));
-      }
+    // if (baseFilterProductsStatus === "idle") {
+    //   dispatch(setMinPrice(findMinAndMaxPrice(filteredProducts).minValue));
+    //   dispatch(setMaxPrice(findMinAndMaxPrice(filteredProducts).maxValue));
+    //   if (priceBy === 0 || priceTo === 0) {
+    //     dispatch(setPriceBy(findMinAndMaxPrice(filteredProducts).minValue));
+    //     dispatch(setPriceTo(findMinAndMaxPrice(filteredProducts).maxValue));
+    //   }
 
-      if (priceBy !== 0 || priceTo !== 0) {
-        dispatch(updateFilteredProductsWithPrice(filterByPrice()));
-        dispatch(setProductsToResrtSorting(filterByPrice()));
-      } else if (minValue === 0 || maxValue === 0) {
-        dispatch(updateFilteredProductsWithPrice(filteredProducts));
-        dispatch(setProductsToResrtSorting(filteredProducts));
-      } else {
-        dispatch(updateFilteredProductsWithPrice(filterByPrice()));
-        dispatch(setProductsToResrtSorting(filterByPrice()));
-      }
-    }
+    //   if (priceBy !== 0 || priceTo !== 0) {
+    //     dispatch(updateFilteredProductsWithPrice(filterByPrice()));
+    //     dispatch(setProductsToResrtSorting(filterByPrice()));
+    //   } else if (minValue === 0 || maxValue === 0) {
+    //     dispatch(updateFilteredProductsWithPrice(filteredProducts));
+    //     dispatch(setProductsToResrtSorting(filteredProducts));
+    //   } else {
+    //     dispatch(updateFilteredProductsWithPrice(filterByPrice()));
+    //     dispatch(setProductsToResrtSorting(filterByPrice()));
+    //   }
+    // }
   }, [baseFilterProductsStatus]);
 
   return (

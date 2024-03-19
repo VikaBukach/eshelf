@@ -9,8 +9,9 @@ import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/sl
 import { Accordion } from "../../ui/Accordion/Accordion";
 import { createUrlFromFilterSettings } from "../../../utils/filter-url";
 import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
-import { addVariationsToFilterCriterias, setProducts } from "../../../store/slices/productsSlice";
+import { setProducts } from "../../../store/slices/productsSlice";
 import { fetchDataOfProducts, loadPageOfProducts, deleteDataOfProducts, setPageOfDB, setPagesToLoading } from "../../../store/slices/productsSlice";
+import { addVariationsToFilterCriterias } from "../../../store/slices/filterSettingsSlice";
 
 const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
@@ -158,7 +159,7 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
   // }, [filterSettings]);
 
   useEffect(() => {
-    dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
+    
   }, [dispatch]);
 
 

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { findValueByPath, findMinAndMaxPrice } from "../../helpers/catalog";
+import { findValueByPath, findMinAndMaxPrice, filterByPrice } from "../../helpers/catalog";
 import { setFilterCriteriasWithTypes, setNumberOfValues } from "./filterSettingsSlice";
 import { setMinPrice, setMaxPrice, setPriceBy, setPriceTo } from "./filterSettingsSlice";
 import { filterProducts } from "../../helpers/catalog";
@@ -12,6 +12,9 @@ export const selectProductsDataLength = (state) => state.products.productsDataLe
 export const selectCardsOnPage = (state) => state.products.cardsOnPage;
 export const selectPagesToLoading = (state) => state.products.pagesToLoading;
 export const selectFilterSettings = (state) => state.filterSettings.checkboxes;
+
+export const selectPriceBy = (state) => state.filterSettings.priceBy;
+export const selectPriceTo = (state) => state.filterSettings.priceTo;
 
 
 const PORT = process.env.REACT_APP_PORT || 5000;
@@ -36,56 +39,56 @@ export const deleteDataOfProducts = createAsyncThunk("products/deleteDataOfProdu
   return [];
 });
 
-export const addVariationsToFilterCriterias = createAsyncThunk(
-  "products/addVariationsToFilterCriterias",
-  async ({ collection, filterCriterias }, { dispatch }) => {
-    try {
-      const response = await axios.get(`http://localhost:${PORT}/${collection}`);
-      const products = response.data;
-      dispatch(setProductsDataLength(response.data.length));
-      dispatch(setMinPrice(findMinAndMaxPrice(products).minValue));
-      dispatch(setMaxPrice(findMinAndMaxPrice(products).maxValue));
-      dispatch(setPriceBy(findMinAndMaxPrice(products).minValue));
-      dispatch(setPriceTo(findMinAndMaxPrice(products).maxValue));
-      const updatedFilterCriterias = [];
-      const numberOfValues = {};
-      filterCriterias.forEach((criteria) => {
-        criteria.types = [];
-        numberOfValues[criteria.path] = {};
-        products.forEach((product) => {
-          const { value: findVariations } = findValueByPath(product, criteria.path);
+// export const addVariationsToFilterCriterias = createAsyncThunk(
+//   "products/addVariationsToFilterCriterias",
+//   async ({ collection, filterCriterias }, { dispatch }) => {
+//     try {
+//       const response = await axios.get(`http://localhost:${PORT}/${collection}`);
+//       const products = response.data;
+//       dispatch(setProductsDataLength(response.data.length));
+//       dispatch(setMinPrice(findMinAndMaxPrice(products).minValue));
+//       dispatch(setMaxPrice(findMinAndMaxPrice(products).maxValue));
+//       dispatch(setPriceBy(findMinAndMaxPrice(products).minValue));
+//       dispatch(setPriceTo(findMinAndMaxPrice(products).maxValue));
+//       const updatedFilterCriterias = [];
+//       const numberOfValues = {};
+//       filterCriterias.forEach((criteria) => {
+//         criteria.types = [];
+//         numberOfValues[criteria.path] = {};
+//         products.forEach((product) => {
+//           const { value: findVariations } = findValueByPath(product, criteria.path);
 
-          findVariations.forEach((findVariation) => {
-            if (numberOfValues[criteria.path][findVariation] && numberOfValues[criteria.path][findVariation] >= 1) {
-              numberOfValues[criteria.path][findVariation]++;
-            } else {
-              numberOfValues[criteria.path][findVariation] = 1;
-            }
+//           findVariations.forEach((findVariation) => {
+//             if (numberOfValues[criteria.path][findVariation] && numberOfValues[criteria.path][findVariation] >= 1) {
+//               numberOfValues[criteria.path][findVariation]++;
+//             } else {
+//               numberOfValues[criteria.path][findVariation] = 1;
+//             }
 
-            if (!criteria.types.includes(findVariation)) {
-              criteria.types.push(findVariation);
-            }
-          });
-        });
+//             if (!criteria.types.includes(findVariation)) {
+//               criteria.types.push(findVariation);
+//             }
+//           });
+//         });
 
-        updatedFilterCriterias.push({ title: criteria.title, types: criteria.types, path: criteria.path });
-      });
+//         updatedFilterCriterias.push({ title: criteria.title, types: criteria.types, path: criteria.path });
+//       });
 
-      dispatch(setFilterCriteriasWithTypes(updatedFilterCriterias));
-      dispatch(setNumberOfValues(numberOfValues));
+//       dispatch(setFilterCriteriasWithTypes(updatedFilterCriterias));
+//       dispatch(setNumberOfValues(numberOfValues));
 
-      return updatedFilterCriterias;
-    } catch (err) {
-      console.log("Error fetching brand names:", err);
-      throw err;
-    }
-  }
-);
+//       return updatedFilterCriterias;
+//     } catch (err) {
+//       console.log("Error fetching brand names:", err);
+//       throw err;
+//     }
+//   }
+// );
 
 
 export const loadPageOfProducts = createAsyncThunk(
   "products/loadPageOfProducts",
-  async ({ collection, page, limit }, { dispatch, getState }) => {
+  async ({ collection, page, limit}, { dispatch, getState }) => {
     const PORT = process.env.REACT_APP_PORT || 5000;
 
     const currentProducts = selectProducts(getState());
@@ -94,6 +97,8 @@ export const loadPageOfProducts = createAsyncThunk(
     const pagesToLoading = selectPagesToLoading(getState());
     const productsDataLength = selectProductsDataLength(getState());
     const filterSettings = selectFilterSettings(getState());
+    const priceBy = selectPriceBy(getState());
+    const priceTo = selectPriceTo(getState());
 
     try {
       const response = await axios.get(`http://localhost:${PORT}/${collection}?page=${page}&limit=${limit}`);
@@ -106,19 +111,31 @@ export const loadPageOfProducts = createAsyncThunk(
           return currentProducts;
       }
 
+      // let filteredLoadedProduct = filterByPrice(([loadedProduct], priceBy, priceTo))
+      let filteredLoadedProduct;
+
+      console.log(loadedProduct);
+      // console.log(priceBy);
+      // console.log(priceTo);
+      console.log(filterByPrice([loadedProduct], priceBy, priceTo));
+
+      filteredLoadedProduct = filterByPrice([loadedProduct], priceBy, priceTo);
+
+      
+      
+      
+      
+
+      console.log(filteredLoadedProduct);
       // Якщо є налаштування фільтрації
-      if (filterSettings.length !== 0) {
-        const filteredLoadedProduct = (filterProducts([loadedProduct], filterSettings));
+      if (filterSettings.length !== 0 && filteredLoadedProduct.length !== 0) {
+        filteredLoadedProduct = (filterProducts([loadedProduct], filterSettings));
         console.log(filteredLoadedProduct);
         
 
-        if (filteredLoadedProduct.length === 0) {
-          console.log(loadedProduct);
-          dispatch(setPageOfDB(pageOfDB + 1));
-          return currentProducts;
-        }
+        
 
-        loadedProduct = filteredLoadedProduct[0];
+       
 
 
         
@@ -130,15 +147,20 @@ export const loadPageOfProducts = createAsyncThunk(
         
       } 
       // Якщо налаштувань фільтрації немає
+      loadedProduct = filteredLoadedProduct[0];
+      console.log(loadedProduct);
+
+      if (!loadedProduct) {
+        console.log(loadedProduct);
+        dispatch(setPageOfDB(pageOfDB + 1));
+        return currentProducts;
+      }
       
 
-        // const colorsInLoadedProduct = Object.values([loadedProduct]).reduce((accumulator, { colors }) => {
-        //   console.log([loadedProduct]);
-        //   return accumulator + colors.length;
-        // }, 0);
-        console.log(loadedProduct.colors);
+
         const colorsInLoadedProduct = loadedProduct.colors.length;
-        console.log("Цветов в загруженном товаре:",colorsInLoadedProduct);
+        
+        
   
         // console.log("PAGE:", pagesToLoading);
   

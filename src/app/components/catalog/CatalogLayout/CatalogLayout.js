@@ -12,7 +12,8 @@ import { createFilterSettingsObjectFromUrl, createUrlFromFilterSettings } from "
 import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
 import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
 import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
-import { fetchDataOfProducts, loadPageOfProducts, setPageOfDB, setPagesToLoading } from "../../../store/slices/productsSlice";
+import { fetchDataOfProducts, loadPageOfProducts, setPageOfDB, setPagesToLoading} from "../../../store/slices/productsSlice";
+import { addVariationsToFilterCriterias } from "../../../store/slices/filterSettingsSlice";
 
 const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
@@ -25,6 +26,8 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const pagesToLoading = useSelector((state) => state.products.pagesToLoading);
   const cardsOnPage = useSelector((state) => state.products.cardsOnPage);
   const accumulatorOfCards = useSelector((state) => state.products.accumulatorOfCards);
+  
+  const filterCriteriasWithTypes = useSelector((state) => state.filterSettings.filterCriteriasWithTypes);
 
   const isLoaded = useSelector((state) => state.page.isLoaded);
 
@@ -36,6 +39,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
   const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
   const fetchStatus = useSelector((state) => state.products.status);
+  const loadingFilterSettingsStatus = useSelector((state) => state.filterSettings.status);
 
   const [allSettings, setAllSettings] = useState([]);
 
@@ -113,9 +117,19 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
 // При ЗАВАНТАЖЕННІ сторінки, тобто, ОДИН раз
   useEffect(() => {
     // console.log("ПЕРВАЯ ЗАГРУЗКА ПРИ ЗАПУСКЕ СТРАНИЦЫ");
-    dispatch(loadPageOfProducts({ collection: categoryName, page: 1, limit: 1 }));
+    dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
     // dispatch(setPageOfDB(pageOfDB + 1));
   }, []);
+
+  useEffect(() => {
+    // console.log("ПЕРВАЯ ЗАГРУЗКА ПРИ ЗАПУСКЕ СТРАНИЦЫ");
+    if (loadingFilterSettingsStatus === "succeeded") {
+      console.log("qqqqqqqqqqqqqqqqqqqqqqqqq");
+      console.log(priceBy);
+      dispatch(loadPageOfProducts({ collection: categoryName, page: 1, limit: 1 }));
+    // dispatch(setPageOfDB(pageOfDB + 1));
+    }
+  }, [loadingFilterSettingsStatus]);
 
 
 

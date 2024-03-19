@@ -129,4 +129,35 @@ const findValueByPath = (product, path) => {
 
 
 
-export { findMinAndMaxPrice, isContainArrayOfObjects, normalizeValue, findValueByPath, filterProducts };
+
+    // Фільтрація базового масиву по ціні
+    const filterByPrice = (products, priceBy, priceTo) => {
+      const filteredProductsArray = [];
+
+      console.log('priceBy', priceBy);
+      console.log('priceTo', priceTo);
+      console.log('products', products);
+  
+      if (priceBy !== 0 && priceTo !== 0) {
+        products.forEach((product) => {
+          const { minValue, maxValue } = findMinAndMaxPrice([product]);
+  
+          if (
+            (minValue >= priceBy && minValue <= priceTo) ||
+            (maxValue >= priceBy && maxValue <= priceTo) ||
+            (minValue <= priceBy && maxValue >= priceBy) ||
+            (minValue <= priceTo && maxValue >= priceTo)
+          ) {
+            filteredProductsArray.push(product);
+          }
+        });
+        return filteredProductsArray;
+      } else {
+        return products;
+      }
+    };
+
+
+
+
+export { findMinAndMaxPrice, isContainArrayOfObjects, normalizeValue, findValueByPath, filterProducts, filterByPrice };
