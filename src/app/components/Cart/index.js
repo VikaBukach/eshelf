@@ -22,13 +22,13 @@ const CartItem = ({ item }) => {
   return (
     <div className={"cart__product"}>
       <div className={"cart__productImage"}>
-        <img src={item.imageURL} alt={item.title} />
+        <img src={"/" + item.imageURL} alt={item.title} />
       </div>
       <div className={"cart__productContent"}>
         <h3 className={"cart__heading"}>{item.title}</h3>
         {/* <p>Code: {item.code}</p> */}
         <div className={"cart__productQuantity"}>
-          <div className={"cart__price"}>{formatPrice(item.price)} $</div>
+          <div className={"cart__price"}>{formatPrice(item?.discountPrice || item.price)} $</div>
           <div className={"cart__quantity"}>
             <div className={"cart__quantityControllers"}>
               <div onClick={() => decrease(item.id)}>-</div>
@@ -36,7 +36,7 @@ const CartItem = ({ item }) => {
               <div onClick={() => increase(item.id)}>+</div>
             </div>
             <div className={"cart__price"}>
-              {formatPrice(+item.price * +item.quantity)} {item.currency} $
+              {formatPrice(+(item?.discountPrice || item.price) * +item.quantity)} {item.currency} $
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@ const Cart = ({ activator }) => {
   const headerRef = useRef();
 
   const totalPrice = cart.reduce((prev, curr) => {
-    return prev + curr.quantity * curr.price;
+    return prev + curr.quantity * (curr?.discountPrice || curr.price);
   }, 0);
 
   // додав обчислення загальної суми
