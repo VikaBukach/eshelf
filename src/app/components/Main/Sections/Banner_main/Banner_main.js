@@ -34,7 +34,7 @@ function BannerMain({ product }) {
       imagePath:
         "/img/mainbanner/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3 1.png",
       imagePathDesktop: "/img/mainbanner/mavic-big.png",
-      url: "/quadcopters/65ed92ac1043a88a8fdc4baa",  //  перехід на стор цього товару
+      url: "/quadcopters/",  //  перехід на стор цього товару
     },
     {
       title: "iPhone 15 Pro Max",
@@ -45,7 +45,7 @@ function BannerMain({ product }) {
       validOffer: "The offer is valid from 25.03 to 29.04",
       imagePath: "/img/mainbanner/ipnall.png",
       imagePathDesktop: "/img/mainbanner/ipnallbig.png",
-      url: "/smartphones/65cb5895f88b23255ef42f64",
+      url: "/smartphones/",
     },
     {
       title: "Apple Watch Series 9 GPS",
@@ -56,7 +56,7 @@ function BannerMain({ product }) {
       validOffer: "The offer is valid from 05.03 to 31.03",
       imagePath: "/img/mainbanner/appwatchall.png",
       imagePathDesktop: "/img/mainbanner/applewatchbigbanner.png",
-      url:"/smartwatches/65ea3be2c0ec8c764e385d64",
+      url:"/smartwatches/",
     },
   ]; //add sliders
 
