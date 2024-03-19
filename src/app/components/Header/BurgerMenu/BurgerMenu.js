@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveCategory, resetActiveCategories } from "../../../store/actions/categoryActions";
 import { closeBurgerMenu } from "../../../store/actions/burgerMenuActions";
@@ -27,6 +27,21 @@ const BurgerMenu = ({ onClose, history }) => {
   const activeCategories = useSelector((state) => state.category.activeCategories);
 
   const { open } = useModal();
+  const menuRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        handleCloseMenu();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
 
   const handleCloseMenu = () => {
     dispatch(closeBurgerMenu());
@@ -84,7 +99,7 @@ const BurgerMenu = ({ onClose, history }) => {
             <HeartIcon />
           </NavLink>
         </div>
-        <div className="burger-menu__categories">
+        <div ref={menuRef} className="burger-menu__categories">
           <nav>
             <h2>Catalog</h2>
             <ul>
