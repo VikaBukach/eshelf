@@ -47,7 +47,7 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
     infinite: true,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToScroll: 2,
   };
 
   return (
