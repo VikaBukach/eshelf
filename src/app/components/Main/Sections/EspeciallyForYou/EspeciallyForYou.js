@@ -9,9 +9,9 @@ function EspeciallyForYou() {
   return (
     <ProductListHomePage
       title="Espessially for you"
-      category="smartphones"
+      category="smartwatches"
       initialItemsToShow={5}
-      fetchDataOfProducts={() => fetchDataOfProducts("smartphones")}
+      fetchDataOfProducts={() => fetchDataOfProducts("smartwatches")}
     />
   );
 }

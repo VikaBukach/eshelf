@@ -47,7 +47,7 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
     infinite: true,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 2,
+    slidesToScroll: 5,
   };
 
   return (
@@ -127,8 +127,7 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                         item.brand +
                         " " +
                         item.model +
-                        " " +
-                        item.colors[0].products[0].capacity +
+
                         " " +
                         item.colors[0].color +
                         " " +
