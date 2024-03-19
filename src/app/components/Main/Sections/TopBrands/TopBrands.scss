@@ -19,11 +19,10 @@
   }
 
   &-items {
-    height: 109px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 0 16px;
+    padding: 0 5px;
+    justify-content: space-evenly;
     @media (min-width: $tablet) {
       display: none;
     }
@@ -34,7 +33,7 @@
 
   .section_top-brands-logo {
     display: flex;
-    margin-right: 40px;
+    margin-right: 20px;
     height: auto;
     align-items: center;
   }

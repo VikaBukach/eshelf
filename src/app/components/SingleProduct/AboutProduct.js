@@ -7,6 +7,7 @@ import { ProductQuadcopters } from "./ProductCategoryLayouts/ProductQuadcopters"
 import { ProductTv } from "./ProductCategoryLayouts/ProductTv";
 import { ProductTablets } from "./ProductCategoryLayouts/ProductTablets";
 import { ProductHeadphones } from "./ProductCategoryLayouts/ProductHeadphones";
+import { ProductLaptops } from "./ProductCategoryLayouts/ProductLaptops";
 
 const AboutProduct = ({ product }) => {
   let ProductComponent;
@@ -35,6 +36,9 @@ const AboutProduct = ({ product }) => {
       break;
     case "headphones":
       ProductComponent = ProductHeadphones;
+      break;
+    case "laptops":
+      ProductComponent = ProductLaptops;
       break;
     default:
       ProductComponent = () => <div className="product-details-body">Unsupported product category</div>;

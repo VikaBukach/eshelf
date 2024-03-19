@@ -12,8 +12,7 @@ import { useSelector } from "react-redux";
 export const UserProfile = ({ state, setState }) => {
   const { activepage } = useParams();
 
-  const orderNumber = useSelector((state) => {
-    console.log("state.order", state.order);
+    const orderNumber = useSelector((state) => {
 
     return state.order.orderNumber;
   });

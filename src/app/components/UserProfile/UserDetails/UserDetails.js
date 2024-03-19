@@ -1,50 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import "./UserDetails.scss";
 import { ContactDetails } from "../../OrderPage/components/ContactDetails";
 import Button from "../../Main/Button/Button";
-const UserDetails = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [userData, setUserData] = useState({
-    name: "",
-    surname: "",
-    phone: "",
-    email: "",
-  });
+import {useDispatch, useSelector} from "react-redux";
+import { saveFormData } from "../../../store/slices/orderFormSlice";
 
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
+const UserDetails = () => {
+  const dispatch = useDispatch();
+    const formData = useSelector((state) => state.orderForm.formData);
+    const [isEditing, setIsEditing] = useState(false);
+
+    const handleEditClick = () => {
+        setIsEditing(true);
+    }
 
   const handleCancelClick = () => {
     setIsEditing(false);
   };
 
-  const handleSaveClick = () => {
-    // Логіка для збереження даних
-    setIsEditing(false);
-  };
+    const handleSaveClick = () => {
+        setIsEditing(false);
+        dispatch(saveFormData(formData));
+    };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUserData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  const handleChange = (updatedData) => {
+        setUserData(updatedData);
+    }
+    const [userData, setUserData] = useState(formData);
 
-  useEffect(() => {}, []);
+    return (
+        <div className="mydetails">
 
-  return (
-    <div className="mydetails">
-      <ContactDetails
-        state={userData}
-        setState={setUserData}
-        accountSettingsClass="account-settings"
-        inputContainerClass="input-settings-container"
-        labelClass="label-settings"
-        disabled={!isEditing}
-        onChange={handleChange}
-      />
+            <ContactDetails
+                state={userData}
+                setState={setUserData}
+                accountSettingsClass="account-settings"
+                inputContainerClass="input-settings-container"
+                labelClass="label-settings"
+                disabled={!isEditing}
+                onChange={handleChange}
+            />
+
       {isEditing ? (
         <div className="mydetails-btn-change">
           <Button
@@ -54,8 +50,8 @@ const UserDetails = () => {
                 <path
                   d="M5.6319 14.369L10.0008 10.0002M14.3696 5.63135L10.0008 10.0002M10.0008 10.0002L5.6319 5.63135M10.0008 10.0002L14.3696 14.369"
                   stroke="#8119B1"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             }

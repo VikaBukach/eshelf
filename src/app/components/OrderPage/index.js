@@ -16,6 +16,9 @@ export const validateEmail = (email) => {
   const basicEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return basicEmailRegex.test(email);
 };
+import { setOrderNumber, setOrderDate } from "../../store/slices/orderSlice";
+import { validateEmail } from "../../utils/validateEmail";
+import { saveFormData } from "../../store/slices/orderFormSlice";
 
 const CartItem = ({ item }) => {
   return (
@@ -53,6 +56,7 @@ const OrderPage = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const cart = useSelector((state) => state.cart.data);
   const orderNumber = useSelector((state) => state.order.orderNumber); // add order number
+  // const orderDate = useSelector((state) => state.order.orderDate);
 
   const isFormComplete = () => {
     const { name, surname, phone, email, city, deliveryMethod, paymentMethod } = state;
@@ -119,7 +123,15 @@ const OrderPage = () => {
         .finally(() => {
           setLoading(false);
         });
+
+      dispatch(setOrderDate(new Date())); // add save current date
+      dispatch(saveFormData(state)); // save form data before opening modal
+      open();
     };
+
+    // const handleSaveOrder = () => {
+    //   dispatch(saveFormData(state));                 // add save form
+    // }
 
     return (
       <>

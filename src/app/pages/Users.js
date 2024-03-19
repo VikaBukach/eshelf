@@ -20,8 +20,6 @@ const Users = () => {
 
   if (!user) return null;
 
-  console.log("orderNumber:", orderNumber);
-
   return (
     <div className="users-page container">
       <div className="user-info">
