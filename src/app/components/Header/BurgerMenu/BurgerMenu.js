@@ -1,72 +1,55 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveCategory, resetActiveCategories } from "../../../store/actions/categoryActions";
+import { closeBurgerMenu } from "../../../store/actions/burgerMenuActions";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as LogoIcon } from "../../../../assets/images/Logo.svg";
-import { ReactComponent as BalanceIcon } from "../../../../assets/images/Balance.svg";
+//import { ReactComponent as BalanceIcon } from "../../../../assets/images/Balance.svg";
 import { ReactComponent as HeartIcon } from "../../../../assets/images/Heart.svg";
 import { ReactComponent as CartIcon } from "../../../../assets/images/Cart.svg";
 import { ReactComponent as UserIcon } from "../../../../assets/images/Profile page.svg";
 import { ReactComponent as CloseIcon } from "../../../../assets/images/times-solid.svg";
 import { ReactComponent as MobileIcon } from "../../../../assets/images/burger-menu/mobile-phone.svg";
+import { ReactComponent as EreadersIcon } from "../../../../assets/images/burger-menu/Frame 252.svg";
+import { ReactComponent as HeadphonesIcon } from "../../../../assets/images/burger-menu/Headphones.svg";
 import { ReactComponent as LaptopIcon } from "../../../../assets/images/burger-menu/LapTop.svg";
 import { ReactComponent as TvIcon } from "../../../../assets/images/burger-menu/Tv.svg";
 import { ReactComponent as PcIcon } from "../../../../assets/images/burger-menu/Pc.svg";
-
 import { ReactComponent as ArrowIcon } from "../../../../assets/images/burger-menu/Arrow.svg";
 import { ReactComponent as ArrowIconBack } from "../../../../assets/images/burger-menu/ArrowBack.svg";
 
 import { useModal } from "../../../hooks/useModal";
 import Cart from "../../Cart";
 
-const BurgerMenu = ({ isOpen, onClose, history }) => {
-  const [menuOpen, setMenuOpen] = useState(isOpen);
-  const [burgerMenuOpen, setBurgerMenuOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState(null);
-  const [smartphonesActive, setSmartphonesActive] = useState(false);
-  const [laptopsActive, setLaptopsActive] = useState(false);
-  const [tvActive, setTvActive] = useState(false);
-  const [pcActive, setPcActive] = useState(false);
-
+const BurgerMenu = ({ onClose, history }) => {
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state) => state.burgerMenu.isOpen);
+  const activeCategories = useSelector((state) => state.category.activeCategories);
 
   const { open } = useModal();
 
   const handleCloseMenu = () => {
-    setBurgerMenuOpen(false);
+    dispatch(closeBurgerMenu());
     onClose();
   };
-  const handleOpenMenu = () => {
-    setBurgerMenuOpen(true);
-  };
+
   const handleNavLinkClick = () => {
     handleCloseMenu();
     history.push("/");
   };
 
   const toggleMobileCategories = (category) => {
-    if (activeCategory !== category) {
-      setSmartphonesActive(category === "smartphones");
-      setLaptopsActive(category === "laptops");
-      setTvActive(category === "tv");
-      setPcActive(category === "pc");
-
-
+    if (activeCategories[category]) {
+      dispatch(resetActiveCategories());
     } else {
-      setActiveCategory(null);
-      setSmartphonesActive(false);
-      setLaptopsActive(false);
-      setTvActive(false);
-      setPcActive(false);
-
-
+      dispatch(setActiveCategory(category));
     }
   };
 
   const handleBackButtonClick = () => {
-    setSmartphonesActive(false);
-    setLaptopsActive(false);
-    setTvActive(false);
-    setPcActive(false);
-
+    dispatch(resetActiveCategories());
   };
+
   return (
     <div className="burger-menu_container">
       <div className="burger-menu">
@@ -96,6 +79,7 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
           <NavLink to="/comparing" className="burger-menu__link-comparing" onClick={handleNavLinkClick}>
             <BalanceIcon />
           </NavLink> */}
+
           <NavLink to="/favorites" className="burger-menu__link-favorites" onClick={handleNavLinkClick}>
             <HeartIcon />
           </NavLink>
@@ -104,103 +88,29 @@ const BurgerMenu = ({ isOpen, onClose, history }) => {
           <nav>
             <h2>Catalog</h2>
             <ul>
-            <li className="category-link">
-                <div className="category-link-wrapper">
-                  <MobileIcon
-                    className={`category-image ${activeCategory === "smartphones" && smartphonesActive ? "active" : "not-active"}`}
-                  />
-                  <NavLink to="/smartphones" onClick={handleNavLinkClick}>
-                  Smartphones
-                  </NavLink>
-                </div>
-                {smartphonesActive && (
-                  <ul className="subcategory-menu">
-                    <h2>Smartphones</h2>
-                    <NavLink onClick={handleBackButtonClick}>
-                      <ArrowIconBack />
-                      All categories
+              {Object.keys(activeCategories).map((category) => (
+                <li className="category-link" key={category}>
+                  <div className="category-link-wrapper">
+                    <MobileIcon className={`category-image ${activeCategories[category] ? "active" : "not-active"}`} />
+                    <NavLink to={`/${category}`} onClick={handleNavLinkClick}>
+                      {category.charAt(0).toUpperCase() + category.slice(1)}
                     </NavLink>
-
-                    <div>Laptops subcategory1</div>
-                    <div>Laptops subcategory2</div>
-                    <div>Laptops subcategory3</div>
-                  </ul>
-                )}
-                <ArrowIcon onClick={() => toggleMobileCategories("laptops")} />
-              </li>
-              <li className="category-link">
-                <div className="category-link-wrapper">
-                  <LaptopIcon
-                    className={`category-image ${activeCategory === "laptops" && laptopsActive ? "active" : "not-active"}`}
-                  />
-                  <NavLink to="/laptops" onClick={handleNavLinkClick}>
-                    Laptops
-                  </NavLink>
-                </div>
-                {laptopsActive && (
-                  <ul className="subcategory-menu">
-                    <h2>Laptops</h2>
-                    <NavLink onClick={handleBackButtonClick}>
-                      <ArrowIconBack />
-                      All categories
-                    </NavLink>
-
-                    <div>Laptops subcategory1</div>
-                    <div>Laptops subcategory2</div>
-                    <div>Laptops subcategory3</div>
-                  </ul>
-                )}
-                <ArrowIcon onClick={() => toggleMobileCategories("laptops")} />
-              </li>
-              <li className="category-link">
-                <div className="category-link-wrapper">
-                  <TvIcon
-                    className={`category-image ${activeCategory === "tv" && tvActive ? "active" : "not-active"}`}
-                  />
-                  <NavLink to="/tv" onClick={handleNavLinkClick}>
-                    Televisons
-                  </NavLink>
-                </div>
-                {tvActive && (
-                  <ul className="subcategory-menu">
-                    <h2>Televisons</h2>
-                    <NavLink onClick={handleBackButtonClick}>
-                      <ArrowIconBack />
-                      All categories
-                    </NavLink>
-
-                    <div>Televisons subcategory1</div>
-                    <div>Televisons subcategory2</div>
-                    <div>Televisons subcategory3</div>
-                  </ul>
-                )}
-                <ArrowIcon onClick={() => toggleMobileCategories("tv")} />
-              </li>
-              <li className="category-link">
-                <div className="category-link-wrapper">
-                  <PcIcon
-                    className={`category-image ${activeCategory === "pc" && pcActive ? "active" : "not-active"}`}
-                  />
-                  <NavLink to="/pc" onClick={handleNavLinkClick}>
-                    PC and components
-                  </NavLink>
-                </div>
-                {pcActive && (
-                  <ul className="subcategory-menu">
-                    <h2>PC and components</h2>
-                    <NavLink onClick={handleBackButtonClick}>
-                      <ArrowIconBack />
-                      All categories
-                    </NavLink>
-
-                    <div>PC and components subcategory1</div>
-                    <div>PC and components subcategory2</div>
-                    <div>PC and components subcategory3</div>
-                  </ul>
-                )}
-                <ArrowIcon onClick={() => toggleMobileCategories("pc")} />
-              </li>
-
+                  </div>
+                  <ArrowIcon onClick={() => toggleMobileCategories(category)} />
+                  {activeCategories[category] && (
+                    <ul className="subcategory-menu">
+                      <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+                      <NavLink className="subcategory-menu_link" onClick={handleBackButtonClick}>
+                        <ArrowIconBack />
+                        All categories
+                      </NavLink>
+                      <div>{category.charAt(0).toUpperCase() + category.slice(1)} subcategory1</div>
+                      <div>{category.charAt(0).toUpperCase() + category.slice(1)} subcategory2</div>
+                      <div>{category.charAt(0).toUpperCase() + category.slice(1)} subcategory3</div>
+                    </ul>
+                  )}
+                </li>
+              ))}
             </ul>
           </nav>
         </div>

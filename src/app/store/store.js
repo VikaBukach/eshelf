@@ -13,6 +13,8 @@ import favoritesReducer from "./slices/favoritesSlice";
 import userReducer from "./slices/authSlice";
 import orderReducer from "./slices/orderSlice";
 import orderFormReducer from "./slices/orderFormSlice";
+import burgerMenuReducer from "./reducers/burgerMenuReducer";
+import categoryReducer from "./reducers/categoryReducer";
 
 export const store = configureStore({
   reducer: {
@@ -30,5 +32,7 @@ export const store = configureStore({
     user: userReducer,
     order: orderReducer,
     orderForm: orderFormReducer,
+    burgerMenu: burgerMenuReducer,
+    category: categoryReducer,
   },
 });
