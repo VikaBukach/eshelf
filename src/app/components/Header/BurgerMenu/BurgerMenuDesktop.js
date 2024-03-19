@@ -10,11 +10,11 @@ import { ReactComponent as CartIcon } from "../../../../assets/images/Cart.svg";
 import { ReactComponent as UserIcon } from "../../../../assets/images/Profile page.svg";
 import { ReactComponent as CloseIcon } from "../../../../assets/images/times-solid.svg";
 import { ReactComponent as MobileIcon } from "../../../../assets/images/burger-menu/mobile-phone.svg";
-import { ReactComponent as EreadersIcon } from "../../../../assets/images/burger-menu/Frame 252.svg";
-import { ReactComponent as HeadphonesIcon } from "../../../../assets/images/burger-menu/Headphones.svg";
-import { ReactComponent as LaptopIcon } from "../../../../assets/images/burger-menu/LapTop.svg";
-import { ReactComponent as TvIcon } from "../../../../assets/images/burger-menu/Tv.svg";
-import { ReactComponent as PcIcon } from "../../../../assets/images/burger-menu/Pc.svg";
+// import { ReactComponent as EreadersIcon } from "../../../../assets/images/burger-menu/Frame 252.svg";
+// import { ReactComponent as HeadphonesIcon } from "../../../../assets/images/burger-menu/Headphones.svg";
+// import { ReactComponent as LaptopIcon } from "../../../../assets/images/burger-menu/LapTop.svg";
+// import { ReactComponent as TvIcon } from "../../../../assets/images/burger-menu/Tv.svg";
+// import { ReactComponent as PcIcon } from "../../../../assets/images/burger-menu/Pc.svg";
 import { ReactComponent as ArrowIcon } from "../../../../assets/images/burger-menu/Arrow.svg";
 import { ReactComponent as ArrowIconBack } from "../../../../assets/images/burger-menu/ArrowBack.svg";
 
