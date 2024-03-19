@@ -12,6 +12,7 @@ export const selectProductsDataLength = (state) => state.products.productsDataLe
 export const selectCardsOnPage = (state) => state.products.cardsOnPage;
 export const selectPagesToLoading = (state) => state.products.pagesToLoading;
 export const selectFilterSettings = (state) => state.filterSettings.checkboxes;
+export const selectCheckedSortingValue = (state) => state.filterSorting.mode;
 
 export const selectPriceBy = (state) => state.filterSettings.priceBy;
 export const selectPriceTo = (state) => state.filterSettings.priceTo;
@@ -99,9 +100,10 @@ export const loadPageOfProducts = createAsyncThunk(
     const filterSettings = selectFilterSettings(getState());
     const priceBy = selectPriceBy(getState());
     const priceTo = selectPriceTo(getState());
+    const checkedSortingValue = selectCheckedSortingValue(getState());
 
     try {
-      const response = await axios.get(`http://localhost:${PORT}/${collection}?page=${page}&limit=${limit}`);
+      const response = await axios.get(`http://localhost:${PORT}/${collection}?page=${page}&limit=${limit}&sortingMode=${checkedSortingValue}`);
       let loadedProduct = response.data[0];
       // console.log(loadedProduct);
       console.log("НОМЕР ТОВАРА на НАЧАЛО:", pageOfDB);

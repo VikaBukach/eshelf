@@ -24,28 +24,28 @@ const CatalogSorting = ({}) => {
   const filteredProductsWithPriceStatus = useSelector(selectFilteredProductsWithPriceStatus);
 
   // Сортування по існуючих варіантах
-  const productsSorting = (mode) => {
-    switch (mode) {
-      case "From cheap":
-        return filteredProductsWithPrice
-          .slice()
-          .sort(
-            (a, b) =>
-              Math.min(...findValueByPath(a, "colors.products.price").value) -
-              Math.min(...findValueByPath(b, "colors.products.price").value)
-          );
-      case "From expensive":
-        return filteredProductsWithPrice
-          .slice()
-          .sort(
-            (a, b) =>
-              Math.min(...findValueByPath(b, "colors.products.price").value) -
-              Math.min(...findValueByPath(a, "colors.products.price").value)
-          );
-      default: // "bestsellers"
-        return productsToResrtSorting;
-    }
-  };
+  // const productsSorting = (mode) => {
+  //   switch (mode) {
+  //     case "From cheap":
+  //       return filteredProductsWithPrice
+  //         .slice()
+  //         .sort(
+  //           (a, b) =>
+  //             Math.min(...findValueByPath(a, "colors.products.price").value) -
+  //             Math.min(...findValueByPath(b, "colors.products.price").value)
+  //         );
+  //     case "From expensive":
+  //       return filteredProductsWithPrice
+  //         .slice()
+  //         .sort(
+  //           (a, b) =>
+  //             Math.min(...findValueByPath(b, "colors.products.price").value) -
+  //             Math.min(...findValueByPath(a, "colors.products.price").value)
+  //         );
+  //     default: // "bestsellers"
+  //       return productsToResrtSorting;
+  //   }
+  // };
 
   // ДІЇ ПО КНОПКАХ
 
@@ -67,12 +67,12 @@ const CatalogSorting = ({}) => {
 
   // ЗМІНА СТАНІВ
 
-  useEffect(() => {
-    if (filteredProductsWithPriceStatus === "idle") {
-      const sortingProductsArray = productsSorting(checkedValue);
-      dispatch(setFilteredProductsWithPrice(sortingProductsArray));
-    }
-  }, [filteredProductsWithPriceStatus, checkedValue]);
+  // useEffect(() => {
+  //   if (filteredProductsWithPriceStatus === "idle") {
+  //     const sortingProductsArray = productsSorting(checkedValue);
+  //     dispatch(setFilteredProductsWithPrice(sortingProductsArray));
+  //   }
+  // }, [checkedValue]);
 
   return (
     <>

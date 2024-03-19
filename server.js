@@ -59,14 +59,33 @@ connectToDb((err) => {
 // };
 
 
-const handleCollectionRequest = (collection, req, res, limit) => {
+const handleCollectionRequest = (collection, req, res, limit, sortingMode = "Best Seller") => {
   const page = parseInt(req.query.page) || 1;
   const actualLimit = limit ? parseInt(limit) : 100000; // Используем переданный лимит или по умолчанию 4
   const skip = (page - 1) * actualLimit;
 
+  console.log(sortingMode);
+
+  let sortQuery = {};
+  let sortKey;
+
+  switch (sortingMode) {
+    case "From cheap":
+      sortKey = "colors.0.products.0.price";
+      sortQuery[sortKey] = 1;
+      break;
+    case "From expensive":
+      sortKey = "colors.0.products.0.price";
+      sortQuery[sortKey] = -1;
+      break;
+    default:
+      sortQuery = { model: 1 };
+      break;
+  }
+
   db.collection(collection)
     .find()
-    .sort({ model: 1 })
+    .sort(sortQuery)
     .skip(skip)
     .limit(actualLimit)
     .toArray()
@@ -78,10 +97,9 @@ const handleCollectionRequest = (collection, req, res, limit) => {
     });
 };
 
-
 app.get("/smartphones", (req, res) => {
-  const { limit } = req.query;
-  handleCollectionRequest("smartphones", req, res, limit);
+  const { limit, sortingMode } = req.query;
+  handleCollectionRequest("smartphones", req, res, limit, sortingMode);
 });
 
 // app.get("/smartphones", (req, res) => {

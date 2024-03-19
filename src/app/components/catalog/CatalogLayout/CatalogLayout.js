@@ -12,7 +12,7 @@ import { createFilterSettingsObjectFromUrl, createUrlFromFilterSettings } from "
 import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
 import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
 import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
-import { fetchDataOfProducts, loadPageOfProducts, setPageOfDB, setPagesToLoading} from "../../../store/slices/productsSlice";
+import { fetchDataOfProducts, loadPageOfProducts, setPageOfDB, setPagesToLoading, deleteDataOfProducts} from "../../../store/slices/productsSlice";
 import { addVariationsToFilterCriterias } from "../../../store/slices/filterSettingsSlice";
 
 const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
@@ -124,12 +124,16 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   useEffect(() => {
     // console.log("ПЕРВАЯ ЗАГРУЗКА ПРИ ЗАПУСКЕ СТРАНИЦЫ");
     if (loadingFilterSettingsStatus === "succeeded") {
-      console.log("qqqqqqqqqqqqqqqqqqqqqqqqq");
-      console.log(priceBy);
       dispatch(loadPageOfProducts({ collection: categoryName, page: 1, limit: 1 }));
     // dispatch(setPageOfDB(pageOfDB + 1));
     }
   }, [loadingFilterSettingsStatus]);
+
+  useEffect(() => {
+    dispatch(setPagesToLoading(1));
+    dispatch(setPageOfDB(1));
+    dispatch(deleteDataOfProducts());
+  }, [checkedSortingValue]);
 
 
 
