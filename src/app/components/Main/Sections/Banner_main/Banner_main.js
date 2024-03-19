@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
  import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Banner_main.scss";
 import Arrow from "../../Arrow/Arrow";
+import { Link } from "react-router-dom";
 
 function BannerMain({ product }) {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function BannerMain({ product }) {
       imagePath:
         "/img/mainbanner/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3 1.png",
       imagePathDesktop: "/img/mainbanner/mavic-big.png",
+      url: "/quadcopters/65ed92ac1043a88a8fdc4baa",
     },
     {
       title: "iPhone 15 Pro Max",
@@ -43,6 +45,7 @@ function BannerMain({ product }) {
       validOffer: "The offer is valid from 25.03 to 29.04",
       imagePath: "/img/mainbanner/ipnall.png",
       imagePathDesktop: "/img/mainbanner/ipnallbig.png",
+      url: "/smartphones/65cb5895f88b23255ef42f64",
     },
     {
       title: "Apple Watch Series 9 GPS",
@@ -53,6 +56,7 @@ function BannerMain({ product }) {
       validOffer: "The offer is valid from 05.03 to 31.03",
       imagePath: "/img/mainbanner/appwatchall.png",
       imagePathDesktop: "/img/mainbanner/applewatchbigbanner.png",
+      url:"/smartwatches/65ea3be2c0ec8c764e385d64",
     },
   ]; //add sliders
 
@@ -61,6 +65,7 @@ function BannerMain({ product }) {
       <Slider {...settings} ref={sliderRef}>
         {slides.map((slide, index) => (
           <div key={index} className={`banner_main-slider-item banner_main-slider-item-${index + 1}`}>
+
             <h1 className="banner_main-title">{slide.title}</h1>
             <h4 className="banner_main-descr">{slide.description}</h4>
             <div className="arrow-svg-container-next">
@@ -68,8 +73,10 @@ function BannerMain({ product }) {
             </div>
 
             <div className="banner_main-img-container">
+              <Link to={slide.url}>
               <img className="banner_main-img" src={slide.imagePath} alt={slide.title} />
               <img className="banner_main-img-desktop" src={slide.imagePathDesktop} alt={slide.title} />
+              </Link>
             </div>
             <div className="arrow-svg-container-prev">
               <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()} />
@@ -79,6 +86,7 @@ function BannerMain({ product }) {
               <div className="banner_main-new-price">{slide.newPrice}</div>
             </div>
             <p className="banner_main-text">{slide.validOffer}</p>
+
           </div>
         ))}
       </Slider>
