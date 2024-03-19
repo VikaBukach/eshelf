@@ -34,7 +34,7 @@ function BannerMain({ product }) {
       imagePath:
         "/img/mainbanner/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3 1.png",
       imagePathDesktop: "/img/mainbanner/mavic-big.png",
-      url: "/quadcopters/65ed92ac1043a88a8fdc4baa",
+      url: "/quadcopters/65ed92ac1043a88a8fdc4baa",  //  перехід на стор цього товару
     },
     {
       title: "iPhone 15 Pro Max",
