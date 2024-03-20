@@ -5,7 +5,7 @@ import Arrow from "../../Arrow/Arrow";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import {Link} from "react-router-dom";
+import { Link, NavLink }  from "react-router-dom";
 
 function PopularCategory() {
 
@@ -62,7 +62,7 @@ function PopularCategory() {
             <div className="popular_category">
                 <h1 className="popular_category-title">Popular category </h1>
                 <div className="popular_category-btn">
-                    <Link to="/smartphones">
+                    <NavLink to="/smartphones">
                         <Button
                             btnClass="popular_category-btn-smartpnones"
                             svg={
@@ -79,8 +79,8 @@ function PopularCategory() {
                             }
                             text={"Smartphones"}
                         />
-                    </Link>
-                    <Link to="/monitors">
+                    </NavLink>
+                    <NavLink to="/monitors">
                         <Button
                             btnClass="popular_category-btn-components"
                             svg={
@@ -97,8 +97,8 @@ function PopularCategory() {
                             }
                             text={"Monitors"}
                         />
-                    </Link>
-                    <Link to="/tablets">
+                    </NavLink>
+                    <NavLink to="/tablets">
                         <Button
                             btnClass="popular_category-btn-tablets"
                             svg={
@@ -115,8 +115,8 @@ function PopularCategory() {
                             }
                             text={"Tablets"}
                         />
-                    </Link>
-                    <Link to="/smartwatches">
+                    </NavLink>
+                    <NavLink to="/smartwatches">
                         <Button
                             btnClass="popular_category-btn-others"
                             svg={
@@ -133,7 +133,7 @@ function PopularCategory() {
                             }
                             text={"Smartwatches"}
                         />
-                    </Link>
+                    </NavLink>
                 </div>
 
                 <ul className="popular_category-items">
@@ -179,12 +179,12 @@ function PopularCategory() {
                         {slides.map((slide, index) => (
                             <div key={index}
                                  className={`popular_category-slider-item-${index + 1} .unique-item-${index}`}>
-                                <Link to={slide.url}>
+                                <NavLink to={slide.url}>
                                     <div className="card-product__image-container">
                                         <img src={slide.imagePathDesk} alt={slide.title}/>
                                     </div>
                                     <h1 className="popular_category-title-des">{slide.title}</h1>
-                                </Link>
+                                </NavLink>
                             </div>
                         ))}
                     </Slider>
