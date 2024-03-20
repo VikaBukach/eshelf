@@ -1,63 +1,15 @@
-import React, { useRef } from "react";
+import React from "react";
 import Button from "../../Button/Button";
 import "./PopularCategory.scss";
-import Arrow from "../../Arrow/Arrow";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import { NavLink } from "react-router-dom";
 
 function PopularCategory() {
-  const slides = [
-    {
-      title: "Smartphones",
-      imagePathDesk: "/img/popularcategory/smartf.png",
-      url: "/smartphones",
-    },
-    {
-      title: "Headphones",
-      imagePathDesk: "/img/popularcategory/headphone.png",
-      url: "/headphones",
-    },
-    {
-      title: "Tablets",
-      imagePathDesk: "/img/popularcategory/tablets.png",
-      url: "/tablets",
-    },
-    {
-      title: "Smartwatches",
-      imagePathDesk: "/img/popularcategory/smartw.png",
-      url: "/smartwatches",
-    },
-    {
-      title: "TVs",
-      imagePathDesk: "/img/popularcategory/tvs.png",
-      url: "/tv",
-    },
-    {
-      title: "Quadrocopters",
-      imagePathDesk: "/img/popularcategory/quadro.png",
-      url: "/quadcopters",
-    },
-    {
-      title: "Mouses",
-      imagePathDesk: "/assets/images/Products/Mouses/img.png",
-      url: "/mouses",
-    },
-  ];
-  const sliderRef = useRef(null);
-
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 2,
-  };
 
   return (
     <>
-      <div className="popular_category">
+      <div className="popular_category container">
         <h1 className="popular_category-title">Popular category </h1>
         <div className="popular_category-btn">
           <NavLink to="/smartphones">
@@ -131,52 +83,50 @@ function PopularCategory() {
         </div>
 
         <ul className="popular_category-items">
+          <NavLink to={"/smartphones"}>
           <li className="popular_category-item">
             <img className="popular_category-item-img" src="/img/popularcategory/smartf.png" alt="Smartphones" />
             <h4 className="popular_category-title">Smartphones</h4>
           </li>
+        </NavLink>
+          <NavLink to={"/headphones"}>
           <li className="popular_category-item">
             <img className="popular_category-item-img" src="/img/popularcategory/headphone.png" alt="Headphones" />
             <h4 className="popular_category-title">Headphones</h4>
           </li>
+        </NavLink>
+          <NavLink to={"/tablets"}>
           <li className="popular_category-item">
             <img className="popular_category-item-img" src="/img/popularcategory/tablets.png" alt="Tablets" />
             <h4 className="popular_category-title">Tablets</h4>
           </li>
+          </NavLink>
+          <NavLink to="/smartwatches">
           <li className="popular_category-item">
             <img className="popular_category-item-img" src="/img/popularcategory/smartw.png" alt="Smartwatches" />
             <h4 className="popular_category-title">Smartwatches</h4>
           </li>
+          </NavLink>
+          <NavLink to="/laptops">
           <li className="popular_category-item">
-            <img className="popular_category-item-img" src="/img/popularcategory/tvs.png" alt="TVs" />
-            <h4 className="popular_category-title">TVs</h4>
+            <img className="popular_category-item-img" src="/img/popularcategory/mac.png" alt="img" />
+            <h4 className="popular_category-title">Laptops</h4>
           </li>
+          </NavLink>
+          <NavLink to="/quadcopters">
           <li className="popular_category-item">
             <img className="popular_category-item-img" src="/img/popularcategory/quadro.png" alt="Quadrocopters" />
             <h4 className="popular_category-title">Quadrocopters</h4>
           </li>
-        </ul>
+          </NavLink>
 
-        <div className="popular_category-items-carousel slider-container">
-          <div className="popular_category-container">
-            {/*<h3 className="popular_category-title">See all</h3>*/}
-            <div className="especially_arrow-svg-container-prev">
-              <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()} />
-            </div>
-          </div>
-          <Slider {...settings} ref={sliderRef}>
-            {slides.map((slide, index) => (
-              <div key={index} className={`popular_category-slider-item-${index + 1} .unique-item-${index}`}>
-                <NavLink to={slide.url}>
-                  <div className="card-product__image-container">
-                    <img src={slide.imagePathDesk} alt={slide.title} />
-                  </div>
-                  <h1 className="popular_category-title-des">{slide.title}</h1>
-                </NavLink>
-              </div>
-            ))}
-          </Slider>
-        </div>
+          <NavLink to="/tv">
+            <li className="popular_category-item">
+              <img className="popular_category-item-img" src="/img/popularcategory/tvs.png" alt="Quadrocopters" />
+              <h4 className="popular_category-title">Tvs</h4>
+            </li>
+          </NavLink>
+        </ul>
       </div>
     </>
   );
