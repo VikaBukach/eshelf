@@ -24,7 +24,7 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
     fetchData();
   }, [dispatch, category]);
 
-  const [itemsToShow, setItemsToShow] = useState(window.innerWidth >= 768 ? 5 : 2);
+  const [itemsToShow, setItemsToShow] = useState(window.innerWidth >= 768 ? 3 : 2);
 
   const handleResize = useCallback(() => {
     setItemsToShow(window.innerWidth >= 768 ? 3 : 2);
