@@ -31,11 +31,11 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
       const productsWithFilter =
         filterSettings.length !== 0 ? filterProducts(response.data, filterSettings) : response.data;
 
-      dispatch(setProductsDataLength(response.data.length));
-      dispatch(setMinPrice(findMinAndMaxPrice(products).minValue));
-      dispatch(setMaxPrice(findMinAndMaxPrice(products).maxValue));
-      dispatch(setPriceBy(findMinAndMaxPrice(products).minValue));
-      dispatch(setPriceTo(findMinAndMaxPrice(products).maxValue));
+      dispatch(setProductsDataLength(productsWithFilter.length));
+      dispatch(setMinPrice(findMinAndMaxPrice(productsWithFilter).minValue));
+      dispatch(setMaxPrice(findMinAndMaxPrice(productsWithFilter).maxValue));
+      dispatch(setPriceBy(findMinAndMaxPrice(productsWithFilter).minValue));
+      dispatch(setPriceTo(findMinAndMaxPrice(productsWithFilter).maxValue));
       const updatedFilterCriterias = [];
       const numberOfValues = {};
       filterCriterias.forEach((criteria) => {
