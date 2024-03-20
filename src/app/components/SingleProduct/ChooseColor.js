@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ChooseColor = ({ product }) => {
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleColorItemClick = (index, color) => {
     const formattedColor = color.includes(" ") ? color.replace(/\s+/g, "-") : color;

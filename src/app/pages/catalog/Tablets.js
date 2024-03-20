@@ -21,7 +21,7 @@ const Tablets = () => {
           { title: "Display size", path: "specifications.display_size" },
           { title: "Processor", path: "specifications.processor" },
           { title: "RAM", path: "specifications.RAM" },
-          { title: "Camera", path: "specifications.camera" }
+          { title: "Camera", path: "specifications.camera" },
         ]}
         pricePath="colors.products.price"
       />

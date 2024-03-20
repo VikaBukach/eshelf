@@ -9,11 +9,11 @@ function EspeciallyForYou() {
   return (
     <ProductListHomePage
       title="Espessially for you"
-      category="smartphones"
-      // category="special"
+      // category="smartphones"
+      category="especiallyforyou"
       initialItemsToShow={5}
-      fetchDataOfProducts={() => fetchDataOfProducts("smartphones")}
-      // fetchDataOfProducts={() => fetchDataOfProducts("special")}
+      // fetchDataOfProducts={() => fetchDataOfProducts("smartphones")}
+      fetchDataOfProducts={() => fetchDataOfProducts("especiallyforyou")}
     />
   );
 }

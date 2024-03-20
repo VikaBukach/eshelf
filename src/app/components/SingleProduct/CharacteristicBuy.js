@@ -33,7 +33,7 @@ export const CharacteristicBuy = ({ product }) => {
       <div className="characteristic-body__carriage">
         <div className="characteristic-body__wrapper characteristic-aside">
           <div className="characteristic-aside__img">
-            <img src={`/${product.colors[activeColorIndex].images[0]}`} alt={`${product.model}`} />
+            <img src={`${product.colors[activeColorIndex].images[0]}`} alt={`${product.model}`} />
           </div>
           <div className="characteristic-aside__details">
             {product.model && <div className="characteristic-aside__title">{product.model}</div>}

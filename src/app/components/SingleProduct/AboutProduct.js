@@ -10,6 +10,8 @@ import { ProductHeadphones } from "./ProductCategoryLayouts/ProductHeadphones";
 import { ProductLaptops } from "./ProductCategoryLayouts/ProductLaptops";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { ProductEReaders } from "./ProductCategoryLayouts/ProductEReaders";
+import { ProductSpeakers } from "./ProductCategoryLayouts/ProductSpeakers";
 
 const AboutProduct = ({ product }) => {
   let ProductComponent;
@@ -30,7 +32,7 @@ const AboutProduct = ({ product }) => {
     case "quadcopters":
       ProductComponent = ProductQuadcopters;
       break;
-    case "televisions":
+    case "tv":
       ProductComponent = ProductTv;
       break;
     case "tablets":
@@ -41,6 +43,12 @@ const AboutProduct = ({ product }) => {
       break;
     case "laptops":
       ProductComponent = ProductLaptops;
+      break;
+    case "e-readers":
+      ProductComponent = ProductEReaders;
+      break;
+    case "portable-speakers":
+      ProductComponent = ProductSpeakers;
       break;
     default:
       ProductComponent = () => <div className="product-details-body">Unsupported product category</div>;

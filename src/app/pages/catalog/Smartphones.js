@@ -22,7 +22,7 @@ const Smartphones = () => {
           { title: "Screen diagonal", path: "specifications.display.screen_diagonal" },
           { title: "Processor type", path: "specifications.processor.type" },
           { title: "Main camera MP", path: "specifications.camera.main_camera" },
-          { title: "Battery capacity", path: "specifications.battery.capacity" }
+          { title: "Battery capacity", path: "specifications.battery.capacity" },
         ]}
         pricePath="colors.products.price"
       />

@@ -87,8 +87,8 @@ app.get("/tv", (req, res) => {
   handleCollectionRequest("tv", req, res);
 });
 
-app.get("/special", (req, res) => {
-  handleCollectionRequest("special", req, res);
+app.get("/especiallyforyou", (req, res) => {
+  handleCollectionRequest("especiallyforyou", req, res);
 });
 
 app.use(reviewRouter);

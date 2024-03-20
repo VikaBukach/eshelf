@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
- import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -21,8 +21,6 @@ function BannerMain({ product }) {
     slidesToScroll: 1,
   };
 
-
-
   const slides = [
     {
       title: " DJI Mavic 3 Pro V2",
@@ -34,7 +32,7 @@ function BannerMain({ product }) {
       imagePath:
         "/img/mainbanner/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3 1.png",
       imagePathDesktop: "/img/mainbanner/mavic-big.png",
-      url: "/quadcopters/",  //  перехід на стор цього товару
+      url: "/quadcopters/", //  перехід на стор цього товару
     },
     {
       title: "iPhone 15 Pro Max",
@@ -56,7 +54,7 @@ function BannerMain({ product }) {
       validOffer: "The offer is valid from 05.03 to 31.03",
       imagePath: "/img/mainbanner/appwatchall.png",
       imagePathDesktop: "/img/mainbanner/applewatchbigbanner.png",
-      url:"/smartwatches/",
+      url: "/smartwatches/",
     },
   ]; //add sliders
 
@@ -65,7 +63,6 @@ function BannerMain({ product }) {
       <Slider {...settings} ref={sliderRef}>
         {slides.map((slide, index) => (
           <div key={index} className={`banner_main-slider-item banner_main-slider-item-${index + 1}`}>
-
             <h1 className="banner_main-title">{slide.title}</h1>
             <h4 className="banner_main-descr">{slide.description}</h4>
             <div className="arrow-svg-container-next">
@@ -74,8 +71,8 @@ function BannerMain({ product }) {
 
             <div className="banner_main-img-container">
               <Link to={slide.url}>
-              <img className="banner_main-img" src={slide.imagePath} alt={slide.title} />
-              <img className="banner_main-img-desktop" src={slide.imagePathDesktop} alt={slide.title} />
+                <img className="banner_main-img" src={slide.imagePath} alt={slide.title} />
+                <img className="banner_main-img-desktop" src={slide.imagePathDesktop} alt={slide.title} />
               </Link>
             </div>
             <div className="arrow-svg-container-prev">
@@ -86,7 +83,6 @@ function BannerMain({ product }) {
               <div className="banner_main-new-price">{slide.newPrice}</div>
             </div>
             <p className="banner_main-text">{slide.validOffer}</p>
-
           </div>
         ))}
       </Slider>

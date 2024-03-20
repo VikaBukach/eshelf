@@ -21,7 +21,7 @@ const Monitors = () => {
           { title: "Display diagonal", path: "specifications.display.display_diagonal" },
           { title: "Frequency", path: "specifications.display.frequency" },
           { title: "Matrix type", path: "specifications.display.display_matrix_type" },
-          { title: "Options", path: "specifications.additional_options.options" }
+          { title: "Options", path: "specifications.additional_options.options" },
         ]}
         pricePath="colors.products.price"
       />

@@ -22,7 +22,7 @@ const Smartwatches = () => {
           { title: "Processor type", path: "specifications.processor.type" },
           { title: "Memory", path: "specifications.memory.memory" },
           { title: "Battery capacity", path: "specifications.battery_capacity.capacity" },
-          { title: "Wireless capabilities", path: "specifications.wireless_capabilities.payment" }
+          { title: "Wireless capabilities", path: "specifications.wireless_capabilities.payment" },
         ]}
         pricePath="colors.products.price"
       />

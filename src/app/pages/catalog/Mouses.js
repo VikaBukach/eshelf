@@ -18,7 +18,7 @@ const Mouses = () => {
           { title: "Brand", path: "brand" },
           { title: "Model", path: "model" },
           { title: "Color", path: "colors.color" },
-          { title: "Sensor type", path: "specifications.characteristics.sensor_type" }
+          { title: "Sensor type", path: "specifications.characteristics.sensor_type" },
         ]}
         pricePath="colors.products.price"
       />

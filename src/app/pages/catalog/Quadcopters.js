@@ -25,7 +25,7 @@ const Quadcopters = () => {
           { title: "Battery capacity", path: "specifications.characteristics.battery_capacity" },
           { title: "Flight time", path: "specifications.characteristics.flight_time" },
           { title: "Range of action", path: "specifications.characteristics.range_of_action" },
-          { title: "Video broadcast", path: "specifications.characteristics.video_broadcast" }
+          { title: "Video broadcast", path: "specifications.characteristics.video_broadcast" },
         ]}
         pricePath="colors.products.price"
       />

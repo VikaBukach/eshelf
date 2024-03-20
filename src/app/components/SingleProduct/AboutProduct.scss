@@ -3,7 +3,6 @@
   flex-direction: column;
 
   gap: 32px;
-  margin-bottom: 100px;
 
   @media screen and (min-width: $desktop) {
     flex-direction: row;
@@ -218,9 +217,6 @@
     cursor: pointer;
     &:hover {
       border-color: $main-background;
-      svg {
-        fill: $main-background;
-      }
     }
   }
 

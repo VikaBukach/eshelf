@@ -1,6 +1,5 @@
 .product-details {
-  @include adaptiveValue("margin-bottom", 30, 50);
-  margin-bottom: 50px;
+  @include adaptiveValue("margin-bottom", 40, 70);
   &__title {
     @include adaptiveValue("font-size", 16, 24);
     @include adaptiveValue("padding-top", 30, 50);

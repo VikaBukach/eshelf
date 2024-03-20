@@ -10,7 +10,9 @@ const Footer = () => {
       <footer className="footer">
         <div className="container">
           <div className="footer__wrapper">
-            <div className="footer__copyright">&copy; <span>All rights reserved</span> REGIMENT TRADE LLC, 2010–2024</div>
+            <div className="footer__copyright">
+              &copy; <span>All rights reserved</span> REGIMENT TRADE LLC, 2010–2024
+            </div>
             <div className="footer__payments">
               <div className="footer__payments-item">
                 <PaymentPay />
