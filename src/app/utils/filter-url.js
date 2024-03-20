@@ -7,11 +7,9 @@ export const createUrlFromFilterSettings = (
   checkedSortingValue
 ) => {
   let filterUrl = "";
-  console.log(filterSettings);
 
   for (const setting in filterSettings) {
     if (filterSettings[setting].length !== 0) {
-      console.log(filterSettings[setting]);
       filterUrl = filterUrl + setting.toString() + "=" + filterSettings[setting].join(",") + ";";
     }
   }
@@ -35,7 +33,6 @@ export const createFilterSettingsObjectFromUrl = (minValue, maxValue, locationUr
   };
   let sortingSettings = "";
   const url = locationUrl ? locationUrl : window.location.search;
-  console.log(url);
 
   if (url) {
     const parametrs = url.substring(1).split(";");

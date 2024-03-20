@@ -1,53 +1,12 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+// Slices
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
-import { findValueByPath } from "../../../helpers/catalog";
-import {
-  setFilteredProductsWithPrice,
-  selectFilteredProductsWithPriceStatus,
-} from "../../../store/slices/filteredProductsWithPriceSlice";
-import { createUrlFromFilterSettings } from "../../../utils/filter-url";
 
 const CatalogSorting = ({}) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const checkedValue = useSelector((state) => state.filterSorting.mode);
-  const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
-  const priceBy = useSelector((state) => state.filterSettings.priceBy);
-  const priceTo = useSelector((state) => state.filterSettings.priceTo);
-  const minValue = useSelector((state) => state.filterSettings.minPrice);
-  const maxValue = useSelector((state) => state.filterSettings.maxPrice);
-  const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
-  const productsToResrtSorting = useSelector((state) => state.filterSorting.productsToResrtSorting);
-  const filteredProductsWithPriceStatus = useSelector(selectFilteredProductsWithPriceStatus);
-
-  // Сортування по існуючих варіантах
-  // const productsSorting = (mode) => {
-  //   switch (mode) {
-  //     case "From cheap":
-  //       return filteredProductsWithPrice
-  //         .slice()
-  //         .sort(
-  //           (a, b) =>
-  //             Math.min(...findValueByPath(a, "colors.products.price").value) -
-  //             Math.min(...findValueByPath(b, "colors.products.price").value)
-  //         );
-  //     case "From expensive":
-  //       return filteredProductsWithPrice
-  //         .slice()
-  //         .sort(
-  //           (a, b) =>
-  //             Math.min(...findValueByPath(b, "colors.products.price").value) -
-  //             Math.min(...findValueByPath(a, "colors.products.price").value)
-  //         );
-  //     default: // "bestsellers"
-  //       return productsToResrtSorting;
-  //   }
-  // };
-
-  // ДІЇ ПО КНОПКАХ
 
   // Підкривання-закривання варіантів
   const openOptions = () => {
@@ -59,20 +18,8 @@ const CatalogSorting = ({}) => {
     option.addEventListener("click", () => {
       document.querySelector(".catalog-sorting__options").classList.remove("catalog-sorting__options--open");
       dispatch(setFilterSorting(option.getAttribute("data-value")));
-
-      const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, option.getAttribute("data-value"))}`;
-      navigate(url);
     });
   });
-
-  // ЗМІНА СТАНІВ
-
-  // useEffect(() => {
-  //   if (filteredProductsWithPriceStatus === "idle") {
-  //     const sortingProductsArray = productsSorting(checkedValue);
-  //     dispatch(setFilteredProductsWithPrice(sortingProductsArray));
-  //   }
-  // }, [checkedValue]);
 
   return (
     <>

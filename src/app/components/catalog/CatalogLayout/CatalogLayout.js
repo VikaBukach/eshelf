@@ -1,44 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation  } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+// Components
 import { CatalogProductList } from "../CatalogProductList/CatalogProductList";
 import { CatalogFilter } from "../CatalogFilter/CatalogFilter";
 import { CatalogSorting } from "../CatalogSorting/CatalogSorting";
 import { CatalogPagination } from "../CatalogPagination/CatalogPagination";
-import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
-import { setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
+// Slices
+import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
-import { createFilterSettingsObjectFromUrl, createUrlFromFilterSettings } from "../../../utils/filter-url";
-import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
-import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
-import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
-import { fetchDataOfProducts, loadPageOfProducts, setPageOfDB, setPagesToLoading, deleteDataOfProducts, setProducts} from "../../../store/slices/productsSlice";
+import { loadPageOfProducts, setPagesToLoading } from "../../../store/slices/productsSlice";
 import { addVariationsToFilterCriterias } from "../../../store/slices/filterSettingsSlice";
+// Another
+import { createFilterSettingsObjectFromUrl } from "../../../utils/filter-url";
 
 const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
 
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
+  const priceBy = useSelector((state) => state.filterSettings.priceBy);
+  const priceTo = useSelector((state) => state.filterSettings.priceTo);
+  const minValue = useSelector((state) => state.filterSettings.minPrice);
+  const maxValue = useSelector((state) => state.filterSettings.maxPrice);
+
   const productsDataLength = useSelector((state) => state.products.productsDataLength);
   const products = useSelector((state) => state.products.data);
   const pageOfDB = useSelector((state) => state.products.pageOfDB);
   const pagesToLoading = useSelector((state) => state.products.pagesToLoading);
   const cardsOnPage = useSelector((state) => state.products.cardsOnPage);
-  const accumulatorOfCards = useSelector((state) => state.products.accumulatorOfCards);
-  
-  const filterCriteriasWithTypes = useSelector((state) => state.filterSettings.filterCriteriasWithTypes);
 
-  const isLoaded = useSelector((state) => state.page.isLoaded);
-
-
-
-  const priceBy = useSelector((state) => state.filterSettings.priceBy);
-  const priceTo = useSelector((state) => state.filterSettings.priceTo);
-  const minValue = useSelector((state) => state.filterSettings.minPrice);
-  const maxValue = useSelector((state) => state.filterSettings.maxPrice);
-  const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
   const fetchStatus = useSelector((state) => state.products.status);
   const loadingFilterSettingsStatus = useSelector((state) => state.filterSettings.status);
 
@@ -63,10 +54,8 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
         (item) => item !== event.target.getAttribute("data-value")
       );
     }
-    // dispatch(setCheckboxesSettings(newFilterSettings));
+    dispatch(setCheckboxesSettings(newFilterSettings));
   };
-
-  // ДОПОМІЖНІ ЕЛЕМЕНТИ
 
   // Кружечок з кількістю фільтрів (мобільна версія)
   const checkCount = () => {
@@ -75,180 +64,59 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
     return allSettings.length + pricePlus;
   };
 
-  // Фільтр-посилання
-  const navigateToUrlWithSettings = () => {
-    // console.log(filterSettings);
-    const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
-    navigate(url);
-  };
-
-
-  // ЗМІНА СТАНІВ
-
-  const loadToFilterAndSortingSlices = (products) => {
-    dispatch(updateBaseFilterData(products));
-    dispatch(updateFilteredProductsWithPrice(products));
-    dispatch(setProductsToResrtSorting(products));
-
-    if (window.location.search !== "") {
-      const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
-        minValue,
-        maxValue
-      );
-
-      if (sortingSettings) {
-        dispatch(setFilterSorting(sortingSettings));
-      }
-      if (filterPriceSettings.priceBy !== 0 && filterPriceSettings.priceTo !== 0) {
-        dispatch(setPriceBy(filterPriceSettings.priceBy));
-        dispatch(setPriceTo(filterPriceSettings.priceTo));
-      }
-      if (Object.keys(filterCheckboxSettings).length !== 0) {
-        dispatch(setCheckboxesSettings(filterCheckboxSettings));
-      }
-    }
-  }
-
-
-
-
-
-let searchUrl = "";
-
-// При ЗАВАНТАЖЕННІ сторінки, тобто, ОДИН раз
+  // При ЗАВАНТАЖЕННІ сторінки, тобто, ОДИН раз
   useEffect(() => {
-    // console.log("ПЕРВАЯ ЗАГРУЗКА ПРИ ЗАПУСКЕ СТРАНИЦЫ");
     if (location.search !== "") {
       const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
         minValue,
         maxValue,
         location.search
       );
-      console.log(filterCheckboxSettings);
-      console.log("Check");
 
       if (sortingSettings) {
         dispatch(setFilterSorting(sortingSettings));
       }
-      console.log(filterPriceSettings.priceBy);
-      console.log(filterPriceSettings.priceTo);
-        dispatch(setPriceBy(filterPriceSettings.priceBy));
-        dispatch(setPriceTo(filterPriceSettings.priceTo));
+      dispatch(setPriceBy(filterPriceSettings.priceBy));
+      dispatch(setPriceTo(filterPriceSettings.priceTo));
       if (Object.keys(filterCheckboxSettings).length !== 0) {
         dispatch(setCheckboxesSettings(filterCheckboxSettings));
       }
     }
-    searchUrl = location.search;
-    console.log(location.search);
 
-    dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
-    // dispatch(setPageOfDB(pageOfDB + 1));
-
-
+    dispatch(addVariationsToFilterCriterias({ collection: categoryName, filterCriterias: filterCriterias }));
   }, []);
 
-  
-
   useEffect(() => {
-    // console.log("ПЕРВАЯ ЗАГРУЗКА ПРИ ЗАПУСКЕ СТРАНИЦЫ");
     if (loadingFilterSettingsStatus === "succeeded") {
-      
       dispatch(loadPageOfProducts({ collection: categoryName, page: 1, limit: 1 }));
-    // dispatch(setPageOfDB(pageOfDB + 1));
     }
   }, [loadingFilterSettingsStatus]);
 
-  // useEffect(() => {
-  //   dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
-  //   dispatch(setPagesToLoading(1));
-  //   dispatch(setPageOfDB(1));
-  //   dispatch(setProducts([]));
-  // }, [checkedSortingValue]);
-
-
-
   useEffect(() => {
     if (fetchStatus === "succeeded") {
-
-      console.log(searchUrl);
-    if (searchUrl !== "") {
-      const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
-        minValue,
-        maxValue,
-        searchUrl
-      );
-      console.log(filterCheckboxSettings);
-      console.log("Check");
-
-      if (sortingSettings) {
-        dispatch(setFilterSorting(sortingSettings));
-      }
-      if (filterPriceSettings.priceBy !== 0 && filterPriceSettings.priceTo !== 0) {
-        dispatch(setPriceBy(filterPriceSettings.priceBy));
-        dispatch(setPriceTo(filterPriceSettings.priceTo));
-      }
-      if (Object.keys(filterCheckboxSettings).length !== 0) {
-        dispatch(setCheckboxesSettings(filterCheckboxSettings));
-      }
-    }
-
-
-
-
-
-
-
-      // console.log("PROD:",products );
       const colorsInProducts = products.reduce((accumulator, product) => {
         return accumulator + product.colors.length;
       }, 0);
 
-      // console.log("ЦВЕТОВ А ПРОДУКТАХ СЕЙЧАС", colorsInProducts);
-
       if (
-        cardsOnPage * pagesToLoading > colorsInProducts &&
-        (products.length <= productsDataLength || (productsDataLength === 0 && products.length > 0)) &&
-        pageOfDB <= productsDataLength || (productsDataLength === 0 && pageOfDB > 0)
+        (cardsOnPage * pagesToLoading > colorsInProducts &&
+          (products.length <= productsDataLength || (productsDataLength === 0 && products.length > 0)) &&
+          pageOfDB <= productsDataLength) ||
+        (productsDataLength === 0 && pageOfDB > 0)
       ) {
         dispatch(loadPageOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
       }
-      if (
-        cardsOnPage * pagesToLoading === colorsInProducts ||
-        products.length > productsDataLength ||
-        pageOfDB > productsDataLength
-      ) {
-        dispatch(updateBaseFilterData(products));
-        dispatch(updateFilteredProductsWithPrice(products));
-        dispatch(setProductsToResrtSorting(products));
-      } 
-
-  }
+    }
   }, [fetchStatus]);
 
-
   const onClickLoadMore = () => {
-    console.log("-------------------------------------------");
     dispatch(setPagesToLoading(pagesToLoading + 1));
     dispatch(loadPageOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
+  };
 
-  }
-
-
-
-
-  // При завантаженні товарів
-  // useEffect(() => {
-  //   if (fetchStatus === "succeeded") {
-  //     loadToFilterAndSortingSlices(products);
-  //   }
-  // }, [fetchStatus]);
-
-  // useEffect(() => {
-  //   setAllSettings(Object.values(filterSettings).flat());
-  //   if (filterSettings.length !== 0 || priceBy !== minValue || priceTo !== maxValue) {
-  //     navigateToUrlWithSettings();
-  //   }
-  // }, [filterSettings]);
+  useEffect(() => {
+    setAllSettings(Object.values(filterSettings).flat());
+  }, [filterSettings]);
 
   return (
     <div className="catalog">
@@ -285,7 +153,7 @@ let searchUrl = "";
         <CatalogFilter categoryName={categoryName} filterCriterias={filterCriterias} pricePath={pricePath} />
         <div className="catalog__body__list">
           <CatalogProductList />
-          <CatalogPagination onClickFunc={onClickLoadMore}/>
+          <CatalogPagination onClickFunc={onClickLoadMore} />
         </div>
       </div>
     </div>

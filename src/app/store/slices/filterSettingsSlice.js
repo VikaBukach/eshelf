@@ -3,12 +3,6 @@ import axios from "axios";
 import { findValueByPath, findMinAndMaxPrice } from "../../helpers/catalog";
 import { filterProducts } from "../../helpers/catalog";
 import { setProductsDataLength } from "./productsSlice";
-import { createFilterSettingsObjectFromUrl } from "../../utils/filter-url";
-import { setFilterSorting } from "./filterSortingSlice";
-
-
-
-
 
 export const selectProducts = (state) => state.products.data;
 export const selectPageOfDB = (state) => state.products.pageOfDB;
@@ -19,46 +13,7 @@ export const selectFilterSettings = (state) => state.filterSettings.checkboxes;
 export const selectPriceBy = (state) => state.filterSettings.priceBy;
 export const selectPriceTo = (state) => state.filterSettings.priceTo;
 
-
-
-
 const PORT = process.env.REACT_APP_PORT || 5000;
-
-
-// const findNumberOfValues = (filterCriterias, filteredProducts, products) => {
-//   const numberOfValues = {};
-
-//   filterCriterias.forEach((criteria) => {
-//     let allValuesInFilteredProducts = [];
-//     let allValuesInAllProducts = [];
-
-//     criteria.types = [];
-//     numberOfValues[criteria.path] = {};
-
-//     filteredProducts.forEach((product) => {
-//       const { value: findValues } = findValueByPath(product, criteria.path);
-//       allValuesInFilteredProducts = [...allValuesInFilteredProducts, ...findValues];
-//     });
-
-//     products.forEach((product) => {
-//       const { value: findValues } = findValueByPath(product, criteria.path);
-//       allValuesInAllProducts = [...allValuesInAllProducts, ...findValues];
-//     });
-
-//     allValuesInAllProducts = [...new Set(allValuesInAllProducts)];
-
-//     allValuesInAllProducts.forEach((value) => {
-//       const numberOfVariationInFilteredProducts = allValuesInFilteredProducts.filter(
-//         (valueInFilteredProduct) => valueInFilteredProduct === value
-//       ).length;
-
-//       numberOfValues[criteria.path][value] = numberOfVariationInFilteredProducts;
-//     });
-
-//     // updatedFilterCriterias.push({ title: criteria.title, types: allValuesInAllProducts, path: criteria.path });
-//   });
-//   return { allValuesInAllProducts: allValuesInAllProducts, numberOfValues: numberOfValues };
-// };
 
 export const addVariationsToFilterCriterias = createAsyncThunk(
   "filterSettings/addVariationsToFilterCriterias",
@@ -72,41 +27,6 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
       const products = response.data;
       const productsWithFilter =
         filterSettings.length !== 0 ? filterProducts(response.data, filterSettings) : response.data;
-
-      let priceByFromUrl;
-      let priceToFromUrl;
-
-      // if (searchUrl) {
-      //   console.log("1");
-      //   const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
-      //     findMinAndMaxPrice(productsWithFilter).minValue,
-      //     findMinAndMaxPrice(productsWithFilter).maxValue,
-      //     searchUrl
-      //   );
-      //   console.log(filterCheckboxSettings);
-      //   console.log(filterPriceSettings);
-      //   console.log(sortingSettings);
-  
-      //   if (sortingSettings) {
-      //     dispatch(setFilterSorting(sortingSettings));
-      //   }
-      //   if (filterPriceSettings.priceBy !== 0 && filterPriceSettings.priceTo !== 0) {
-      //     priceByFromUrl = filterPriceSettings.priceBy;
-      //     priceToFromUrl = filterPriceSettings.priceTo;
-      //   }
-      //   if (Object.keys(filterCheckboxSettings).length !== 0) {
-      //     filterSettings = filterCheckboxSettings;
-      //     dispatch(setCheckboxesSettings(filterCheckboxSettings));
-      //   }
-      // }
-
-
-
-
-
-
-
-      
 
       dispatch(setProductsDataLength(products.length));
       dispatch(setMinPrice(findMinAndMaxPrice(productsWithFilter).minValue));
@@ -154,7 +74,6 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
       dispatch(setFilterCriteriasWithTypes(updatedFilterCriterias));
       dispatch(setNumberOfValues(numberOfValues));
 
-
       return updatedFilterCriterias;
     } catch (err) {
       console.log("Error fetching brand names:", err);
@@ -162,20 +81,6 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
     }
   }
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export const updateByFilter = createAsyncThunk(
   "filterSettings/updateByFilter",
@@ -217,40 +122,35 @@ export const updateByFilter = createAsyncThunk(
         dispatch(setPriceTo(maxValue));
       }
 
-
       const numberOfValues = {};
 
-  filterCriterias.forEach((criteria) => {
-    let allValuesInFilteredProducts = [];
-    let allValuesInAllProducts = [];
+      filterCriterias.forEach((criteria) => {
+        let allValuesInFilteredProducts = [];
+        let allValuesInAllProducts = [];
 
-    criteria.types = [];
-    numberOfValues[criteria.path] = {};
+        criteria.types = [];
+        numberOfValues[criteria.path] = {};
 
-    filteredProducts.forEach((product) => {
-      const { value: findValues } = findValueByPath(product, criteria.path);
-      allValuesInFilteredProducts = [...allValuesInFilteredProducts, ...findValues];
-    });
+        filteredProducts.forEach((product) => {
+          const { value: findValues } = findValueByPath(product, criteria.path);
+          allValuesInFilteredProducts = [...allValuesInFilteredProducts, ...findValues];
+        });
 
-    products.forEach((product) => {
-      const { value: findValues } = findValueByPath(product, criteria.path);
-      allValuesInAllProducts = [...allValuesInAllProducts, ...findValues];
-    });
+        products.forEach((product) => {
+          const { value: findValues } = findValueByPath(product, criteria.path);
+          allValuesInAllProducts = [...allValuesInAllProducts, ...findValues];
+        });
 
-    allValuesInAllProducts = [...new Set(allValuesInAllProducts)];
+        allValuesInAllProducts = [...new Set(allValuesInAllProducts)];
 
-    allValuesInAllProducts.forEach((value) => {
-      const numberOfVariationInFilteredProducts = allValuesInFilteredProducts.filter(
-        (valueInFilteredProduct) => valueInFilteredProduct === value
-      ).length;
+        allValuesInAllProducts.forEach((value) => {
+          const numberOfVariationInFilteredProducts = allValuesInFilteredProducts.filter(
+            (valueInFilteredProduct) => valueInFilteredProduct === value
+          ).length;
 
-      numberOfValues[criteria.path][value] = numberOfVariationInFilteredProducts;
-    });
-
-  });
-
-
-
+          numberOfValues[criteria.path][value] = numberOfVariationInFilteredProducts;
+        });
+      });
 
       dispatch(setNumberOfValues(numberOfValues));
 
@@ -262,26 +162,11 @@ export const updateByFilter = createAsyncThunk(
   }
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const filterSettingsSlice = createSlice({
   name: "filterSettings",
   initialState: {
     checkboxes: [],
-    filterCriteriasWithTypes:[],
+    filterCriteriasWithTypes: [],
     minPrice: 0,
     maxPrice: 0,
     priceBy: 0,
@@ -314,7 +199,7 @@ const filterSettingsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-      builder
+    builder
       // Обработчики для addVariationsToFilterCriterias
       .addCase(addVariationsToFilterCriterias.pending, (state) => {
         state.status = "loading";
@@ -328,7 +213,7 @@ const filterSettingsSlice = createSlice({
         state.error = action.error.message;
       });
 
-      builder
+    builder
       // Обработчики для updateByFilter
       .addCase(updateByFilter.pending, (state) => {
         state.status = "loading";
@@ -344,5 +229,13 @@ const filterSettingsSlice = createSlice({
   },
 });
 
-export const { setCheckboxesSettings, setMinPrice, setMaxPrice, setPriceBy, setPriceTo, setFilterCriteriasWithTypes, setNumberOfValues } = filterSettingsSlice.actions;
+export const {
+  setCheckboxesSettings,
+  setMinPrice,
+  setMaxPrice,
+  setPriceBy,
+  setPriceTo,
+  setFilterCriteriasWithTypes,
+  setNumberOfValues,
+} = filterSettingsSlice.actions;
 export default filterSettingsSlice.reducer;

@@ -26,39 +26,6 @@ connectToDb((err) => {
   }
 });
 
-// const handleCollectionRequest = (collection, req, res) => {
-//   const page = parseInt(req.query.page) || 1;
-//   const limit = parseInt(req.query.limit) || 4;
-//   const skip = (page - 1) * limit;
-
-//   db.collection(collection)
-//     .find()
-//     .sort({ model: 1 })
-//     .skip(skip)
-//     .limit(limit)
-//     .toArray()
-//     .then((products) => {
-//       res.status(200).json(products);
-//     })
-//     .catch(() => {
-//       res.status(500).json({ error: "Something goes wrong..." });
-//     });
-// };
-
-// const handleCollectionRequest = (collection, req, res) => {
-//   db.collection(collection)
-//     .find()
-//     .sort({ model: 1 })
-//     .toArray()
-//     .then((products) => {
-//       res.status(200).json(products);
-//     })
-//     .catch(() => {
-//       res.status(500).json({ error: "Something goes wrong..." });
-//     });
-// };
-
-
 const handleCollectionRequest = (collection, req, res, limit, sortingMode = "Best Seller") => {
   const page = parseInt(req.query.page) || 1;
   const actualLimit = limit ? parseInt(limit) : 100000;
@@ -100,40 +67,49 @@ app.get("/smartphones", (req, res) => {
   handleCollectionRequest("smartphones", req, res, limit, sortingMode);
 });
 
-// app.get("/smartphones", (req, res) => {
-//   handleCollectionRequest("smartphones", req, res);
-// });
-
 app.get("/laptops", (req, res) => {
-  handleCollectionRequest("laptops", req, res);
+  const { limit, sortingMode } = req.query;
+  handleCollectionRequest("laptops", req, res, limit, sortingMode);
 });
 
 app.get("/monitors", (req, res) => {
-  handleCollectionRequest("monitors", req, res);
+  const { limit, sortingMode } = req.query;
+  handleCollectionRequest("monitors", req, res, limit, sortingMode);
 });
 
 app.get("/smartwatches", (req, res) => {
-  handleCollectionRequest("smartwatches", req, res);
+  const { limit, sortingMode } = req.query;
+  handleCollectionRequest("smartwatches", req, res, limit, sortingMode);
 });
 
 app.get("/mouses", (req, res) => {
-  handleCollectionRequest("mouses", req, res);
+  const { limit, sortingMode } = req.query;
+  handleCollectionRequest("mouses", req, res, limit, sortingMode);
 });
 
 app.get("/quadcopters", (req, res) => {
-  handleCollectionRequest("quadcopters", req, res);
+  const { limit, sortingMode } = req.query;
+  handleCollectionRequest("quadcopters", req, res, limit, sortingMode);
 });
 
 app.get("/headphones", (req, res) => {
-  handleCollectionRequest("headphones", req, res);
+  const { limit, sortingMode } = req.query;
+  handleCollectionRequest("headphones", req, res, limit, sortingMode);
 });
 
 app.get("/tablets", (req, res) => {
-  handleCollectionRequest("tablets", req, res);
+  const { limit, sortingMode } = req.query;
+  handleCollectionRequest("tablets", req, res, limit, sortingMode);
 });
 
 app.get("/tv", (req, res) => {
-  handleCollectionRequest("tv", req, res);
+  const { limit, sortingMode } = req.query;
+  handleCollectionRequest("tv", req, res, limit, sortingMode);
+});
+
+app.get("/smartphones", (req, res) => {
+  const { limit, sortingMode } = req.query;
+  handleCollectionRequest("smartphones", req, res, limit, sortingMode);
 });
 
 app.get("/especiallyforyou", (req, res) => {

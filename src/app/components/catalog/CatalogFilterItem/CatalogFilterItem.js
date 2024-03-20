@@ -1,18 +1,19 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
+// Components
 import { NumberOfEligibleProducts } from "../NumberOfEligibleProducts/NumberOfEligibleProducts";
 import { Accordion } from "../../ui/Accordion/Accordion";
+// Slices
+import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
+// Another
 import { findValueByPath } from "../../../helpers/catalog";
-import { findNumberOfValue } from "../../../store/slices/productsSlice";
 
 const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
   const dispatch = useDispatch();
 
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
-  const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
   const numberOfValues = useSelector((state) => state.filterSettings.numberOfValues);
-  
+
   const filterSettingsToUpdate = { ...filterSettings };
 
   const handleCheckboxChange = (event) => {
@@ -28,7 +29,6 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
       filterSettingsToUpdate[criteriaPath] = filterSettingsToUpdate[criteriaPath].filter((item) => item !== name);
     }
 
-    console.log(filterSettingsToUpdate);
     dispatch(setCheckboxesSettings(filterSettingsToUpdate));
   };
 
@@ -48,17 +48,6 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
     } else {
       return false;
     }
-  };
-
-  const findNumberOfValue = (name) => {
-    const numberOfValue = findAllValues(filteredProductsWithPrice, criteriaPath).reduce((accumulator, currentValue) => {
-      if (currentValue === name) {
-        return accumulator + 1;
-      } else {
-        return accumulator;
-      }
-    }, 0);
-    return numberOfValue;
   };
 
   return (
