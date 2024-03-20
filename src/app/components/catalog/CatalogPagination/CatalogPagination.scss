@@ -1,14 +1,9 @@
 .pagination {
     @include flex-container(row, center, center, nowrap);
-
-    &__pages-numbers {
         margin-top: 40px;
         margin-bottom: 48px;
-        @include flex-container(row, center, center, nowrap);
-        gap: 16px;
-    }
 
-    &__page-number {
+    &__load-more-btn {
         padding: 12px;
         border: 1px solid rgba($primary-color-black, 0.2);
         border-radius: 5px;

@@ -23,6 +23,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
+  const cardsInAllFilteredProducts = useSelector((state) => state.filterSettings.cardsInAllFilteredProducts);
 
   const productsDataLength = useSelector((state) => state.products.productsDataLength);
   const products = useSelector((state) => state.products.data);
@@ -34,6 +35,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const loadingFilterSettingsStatus = useSelector((state) => state.filterSettings.status);
 
   const [allSettings, setAllSettings] = useState([]);
+  const [visibleButton, setvisibleButton] = useState(true);
 
   // ДІЇ ПО КНОПКАХ
 
@@ -106,6 +108,12 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
       ) {
         dispatch(loadPageOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
       }
+
+      if (cardsInAllFilteredProducts === colorsInProducts) {
+        setvisibleButton(false);
+      } else {
+        setvisibleButton(true);
+      }
     }
   }, [fetchStatus]);
 
@@ -153,7 +161,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
         <CatalogFilter categoryName={categoryName} filterCriterias={filterCriterias} pricePath={pricePath} />
         <div className="catalog__body__list">
           <CatalogProductList />
-          <CatalogPagination onClickFunc={onClickLoadMore} />
+          {visibleButton ? <CatalogPagination onClickFunc={onClickLoadMore} /> : null}
         </div>
       </div>
     </div>
