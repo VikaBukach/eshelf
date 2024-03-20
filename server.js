@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { connectToDb, getDb } = require("./db");
-const { reviewRouter, authRouter } = require("./backend/router");
+const { reviewRouter, authRouter, orderRouter, userInfoRouter } = require("./backend/router");
 
 const PORT = process.env.REACT_APP_PORT || 5000;
 
@@ -91,6 +91,7 @@ app.get("/especiallyforyou", (req, res) => {
   handleCollectionRequest("especiallyforyou", req, res);
 });
 
-
 app.use(reviewRouter);
 app.use(authRouter);
+app.use(orderRouter);
+app.use(userInfoRouter);

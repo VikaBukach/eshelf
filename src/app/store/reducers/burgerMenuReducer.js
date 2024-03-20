@@ -1,7 +1,7 @@
 import { OPEN_BURGER_MENU, CLOSE_BURGER_MENU } from "../actions/burgerMenuActions";
 
 const initialState = {
-  isOpen: false
+  isOpen: false,
 };
 
 const burgerMenuReducer = (state = initialState, action) => {
@@ -9,12 +9,12 @@ const burgerMenuReducer = (state = initialState, action) => {
     case OPEN_BURGER_MENU:
       return {
         ...state,
-        isOpen: true
+        isOpen: true,
       };
     case CLOSE_BURGER_MENU:
       return {
         ...state,
-        isOpen: false
+        isOpen: false,
       };
     default:
       return state;

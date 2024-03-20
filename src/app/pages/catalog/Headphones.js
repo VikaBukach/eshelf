@@ -19,7 +19,7 @@ const Headphones = () => {
           { title: "Model", path: "model" },
           { title: "Color", path: "colors.color" },
           { title: "Type", path: "specifications.type" },
-          { title: "Bluetooth version", path: "specifications.bluetooth_version" }
+          { title: "Bluetooth version", path: "specifications.bluetooth_version" },
         ]}
         pricePath="colors.products.price"
       />

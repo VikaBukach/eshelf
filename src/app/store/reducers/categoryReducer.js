@@ -14,8 +14,8 @@ const initialState = {
     smartwatches: false,
     tablets: false,
     tv: false,
-    pc: false
-  }
+    pc: false,
+  },
 };
 
 const categoryReducer = (state = initialState, action) => {
@@ -29,13 +29,13 @@ const categoryReducer = (state = initialState, action) => {
       return {
         ...state,
         activeCategory: category,
-        activeCategories: updatedCategories
+        activeCategories: updatedCategories,
       };
     case RESET_ACTIVE_CATEGORIES:
       return {
         ...state,
         activeCategory: null,
-        activeCategories: initialState.activeCategories
+        activeCategories: initialState.activeCategories,
       };
     default:
       return state;

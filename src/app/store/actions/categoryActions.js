@@ -4,12 +4,12 @@ export const RESET_ACTIVE_CATEGORIES = "RESET_ACTIVE_CATEGORIES";
 export const setActiveCategory = (category) => {
   return {
     type: SET_ACTIVE_CATEGORY,
-    payload: category
+    payload: category,
   };
 };
 
 export const resetActiveCategories = () => {
   return {
-    type: RESET_ACTIVE_CATEGORIES
+    type: RESET_ACTIVE_CATEGORIES,
   };
 };

@@ -118,28 +118,27 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
               {status === "failed" && <div>Error: {error} </div>}
 
               {status === "succeeded" && data.length > 0 ? (
-
                 data.map((item, index) => (
                   <div className="section-especially-item-desktop" key={index}>
                     {item && (
-                    <ProductCard
-                      id={item._id}
-                      imageURL={item.colors[0].images[0]}
-                      category={item.category}
-                      title={
-                        item.brand +
-                        " " +
-                        item.model +
-                        " " +
-                        item.colors[0].color +
-                        " " +
-                        item.colors[0].products[0].article
-                      }
-                      price={item.colors[0].products[0].price}
-                      discountPrice={item.colors[0].products[0]["discount_price"]}
-                      color={item.colors[0].color}
-                    />
-                        )}
+                      <ProductCard
+                        id={item._id}
+                        imageURL={item.colors[0].images[0]}
+                        category={item.category}
+                        title={
+                          item.brand +
+                          " " +
+                          item.model +
+                          " " +
+                          item.colors[0].color +
+                          " " +
+                          item.colors[0].products[0].article
+                        }
+                        price={item.colors[0].products[0].price}
+                        discountPrice={item.colors[0].products[0]["discount_price"]}
+                        color={item.colors[0].color}
+                      />
+                    )}
                   </div>
                 ))
               ) : (

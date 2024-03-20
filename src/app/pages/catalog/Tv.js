@@ -21,7 +21,7 @@ const TV = () => {
           { title: "Display size", path: "specifications.display_size" },
           { title: "Display technology", path: "specifications.display_technology" },
           { title: "Refresh rate", path: "specifications.refresh_rate" },
-          { title: "Processor", path: "specifications.processor" }
+          { title: "Processor", path: "specifications.processor" },
         ]}
         pricePath="colors.products.price"
       />

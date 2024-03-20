@@ -104,8 +104,9 @@ const BurgerMenuDesktop = ({ onClose, history }) => {
             <h2>Catalog</h2>
             <ul>
               {Object.keys(activeCategories).map((category) => (
-                <li className="category-link" 
-                  key={category}   
+                <li
+                  className="category-link"
+                  key={category}
                   onMouseEnter={() => toggleCategories(category, true)}
                   onMouseLeave={() => toggleCategories(category, false)}
                 >

@@ -29,7 +29,7 @@ const BuyProduct = ({ product }) => {
     title,
     price,
     discountPrice,
-    color
+    color,
   };
 
   const handleAddToFavorites = () => {

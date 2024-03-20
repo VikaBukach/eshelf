@@ -9,7 +9,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../store/slices/cartSlice";
 import { formatPrice } from "../../utils/formatPrice";
-import { setOrderNumber , setOrderDate} from "../../store/slices/orderSlice";
+import axios from "axios";
+
+// export const validateEmail = (email) => {
+//   const basicEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+//   return basicEmailRegex.test(email);
+// };
+import { setOrderNumber, setOrderDate } from "../../store/slices/orderSlice";
 import { validateEmail } from "../../utils/validateEmail";
 import { saveFormData } from "../../store/slices/orderFormSlice";
 
@@ -24,7 +30,9 @@ const CartItem = ({ item }) => {
         <p>&times; {item.quantity}</p>
         <div className={"orderPage__productQuantity"}>
           <div className={"orderPage__quantity"}>
-            <div className={"orderPage__price"}>{formatPrice(+item.price * +item.quantity)} $</div>
+            <div className={"orderPage__price"}>
+              {formatPrice(+(item?.discountPrice || item.price) * +item.quantity)} $
+            </div>
           </div>
         </div>
       </div>
@@ -43,11 +51,27 @@ const cartState = {
 };
 
 const OrderPage = () => {
-  const [state, setState] = useState({ ...cartState });
+  const user = useSelector((state) => state.user.data);
+  const [state, setState] = useState({
+    ...cartState,
+    ...(user && {
+      ...user,
+    }),
+  });
+
+  useEffect(() => {
+    if (user) {
+      setState({
+        ...cartState,
+        ...user,
+      });
+    }
+  }, [user]);
+
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const cart = useSelector((state) => state.cart.data);
   const orderNumber = useSelector((state) => state.order.orderNumber); // add order number
-  const orderDate = useSelector((state) => state.order.orderDate);
+  // const orderDate = useSelector((state) => state.order.orderDate);
 
   const isFormComplete = () => {
     const { name, surname, phone, email, city, deliveryMethod, paymentMethod } = state;
@@ -62,6 +86,7 @@ const OrderPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const Cart = useCallback(() => {
     const totalProductsQuantity = cart.reduce((prev, curr) => {
@@ -69,7 +94,7 @@ const OrderPage = () => {
     }, 0);
 
     const totalProductsPrice = cart.reduce((prev, curr) => {
-      return prev + curr.quantity * curr.price;
+      return prev + curr.quantity * (curr?.discountPrice || curr.price);
     }, 0);
 
     const plural = (text, num) => {
@@ -82,19 +107,46 @@ const OrderPage = () => {
       return Math.floor(1000000 + Math.random() * 9000000); //generation number
     };
 
-    const handleBuyOpen = () => {
+    const handleBuyOpen = async () => {
       //fn adding order number
+      setLoading(true);
       const randomOrderNumber = generateRandomOrderNumber();
       dispatch(setOrderNumber(randomOrderNumber));
+
+      const PORT = process.env.REACT_APP_PORT || 5000;
+
+      const orderData = {
+        ...state,
+        orderNumber: randomOrderNumber,
+        payment: {
+          deliveryCost: DELIVERY_COST,
+          totalPayment: totalProductsPrice,
+        },
+        items: cart.map((p) => p.id),
+      };
+
+      await axios
+        .post(`http://localhost:${PORT}/postOrder`, {
+          ...orderData,
+        })
+        .catch((err) => {
+          alert("Something went wrong!");
+        })
+        .then(() => {
+          open();
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+
       dispatch(setOrderDate(new Date())); // add save current date
-      dispatch(saveFormData(state));     // save form data before opening modal
+      dispatch(saveFormData(state)); // save form data before opening modal
       open();
-    }
+    };
 
-    const handleSaveOrder = () => {
-      dispatch(saveFormData(state));                 // add save form
-    }
-
+    // const handleSaveOrder = () => {
+    //   dispatch(saveFormData(state));                 // add save form
+    // }
 
     return (
       <>
@@ -119,7 +171,7 @@ const OrderPage = () => {
             // onClick={open}
             onClick={handleBuyOpen}
             className="primary-btn"
-            disabled={buttonDisabled}
+            disabled={buttonDisabled || loading}
           >
             <img src="" alt="" />
             <span>Buy now</span>

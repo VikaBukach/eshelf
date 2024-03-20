@@ -22,7 +22,7 @@ const Laptops = () => {
           { title: "Processor", path: "specifications.processor" },
           { title: "Storage", path: "specifications.storage" },
           { title: "Graphics", path: "specifications.graphics" },
-          { title: "Operating system", path: "specifications.operating_system" }
+          { title: "Operating system", path: "specifications.operating_system" },
         ]}
         pricePath="colors.products.price"
       />

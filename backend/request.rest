@@ -9,6 +9,9 @@ GET http://localhost:5500/getProductReview?productId=65cb593bf88b23255ef42f6a&ta
 GET http://localhost:5500/getProductReviewTotals?productId=65cb593bf88b23255ef42f6a
 ###
 
+GET http://localhost:5500/getRevised
+###
+
 GET http://localhost:5500/authorize
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRkOWFkZmNjLTc4YTgtNGFmZS1iNTNmLThmNjMzOWEwY2FhMSIsImlhdCI6MTcwOTkxMTIwNX0.tidJKMBR0Ld0BrnchbhAy5s9A2u8JOiJq_cLziRF954
 
