@@ -46,8 +46,8 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 2,
+    slidesToShow: Math.min(data.length, 5),
+    slidesToScroll: 1,
   };
 
   return (
@@ -116,9 +116,12 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
             <Slider {...settings} ref={sliderRef}>
               {status === "loading" && <div>Loading...</div>}
               {status === "failed" && <div>Error: {error} </div>}
+
               {status === "succeeded" && data.length > 0 ? (
-                data.slice(0, itemsToShow).map((item, index) => (
+
+                data.map((item, index) => (
                   <div className="section-especially-item-desktop" key={index}>
+                    {item && (
                     <ProductCard
                       id={item._id}
                       imageURL={item.colors[0].images[0]}
@@ -136,6 +139,7 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                       discountPrice={item.colors[0].products[0]["discount_price"]}
                       color={item.colors[0].color}
                     />
+                        )}
                   </div>
                 ))
               ) : (
