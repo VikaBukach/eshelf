@@ -103,38 +103,40 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
 
   return (
     <div className="catalog">
-      <div className="catalog__shadow"></div>
-      <div className="catalog__head-line">
-        <div className="catalog__head-line__head">
-          <p className="catalog__head-line__breadcrumb">˂ Breadcrumb</p>
-          <h3 className="catalog__head-line__title">{title}</h3>
+      <div className="container">
+        <div className="catalog__shadow"></div>
+        <div className="catalog__head-line">
+          <div className="catalog__head-line__head">
+            <p className="catalog__head-line__breadcrumb">˂ Breadcrumb</p>
+            <h3 className="catalog__head-line__title">{title}</h3>
+          </div>
+          <div className="catalog__head-line__container">
+            <button className="catalog__head-line__filter-btn" type="button" onClick={openFilter}>
+              <img className="catalog__head-line__filter-btn__img" src="../assets/icons/filter.svg" alt="Icon" />
+              Filter
+              <div className="catalog__head-line__filter-btn__count">{checkCount()}</div>
+            </button>
+            <CatalogSorting className="catalog__head-line__sorting" />
+          </div>
+          <ul className="catalog__filter-settings">
+            {allSettings.map((setting, index) => (
+              <li className="catalog__filter-settings__item" key={index}>
+                {setting}
+                <img
+                  className="catalog__filter-settings__close"
+                  src="../assets/icons/close2.svg"
+                  alt="Icon"
+                  data-value={setting}
+                  onClick={deleteSetting}
+                />
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className="catalog__head-line__container">
-          <button className="catalog__head-line__filter-btn" type="button" onClick={openFilter}>
-            <img className="catalog__head-line__filter-btn__img" src="../assets/icons/filter.svg" alt="Icon" />
-            Filter
-            <div className="catalog__head-line__filter-btn__count">{checkCount()}</div>
-          </button>
-          <CatalogSorting className="catalog__head-line__sorting" />
+        <div className="catalog__body">
+          <CatalogFilter filterCriterias={filterCriterias} pricePath={pricePath} />
+          <CatalogProductList />
         </div>
-        <ul className="catalog__filter-settings">
-          {allSettings.map((setting, index) => (
-            <li className="catalog__filter-settings__item" key={index}>
-              {setting}
-              <img
-                className="catalog__filter-settings__close"
-                src="../assets/icons/close2.svg"
-                alt="Icon"
-                data-value={setting}
-                onClick={deleteSetting}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="catalog__body">
-        <CatalogFilter filterCriterias={filterCriterias} pricePath={pricePath} />
-        <CatalogProductList />
       </div>
     </div>
   );
