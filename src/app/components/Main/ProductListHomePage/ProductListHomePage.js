@@ -127,7 +127,6 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                         item.brand +
                         " " +
                         item.model +
-
                         " " +
                         item.colors[0].color +
                         " " +

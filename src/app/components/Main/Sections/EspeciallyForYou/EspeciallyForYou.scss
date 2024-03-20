@@ -35,8 +35,8 @@
 
   &-products {
     display: flex;
-    //flex-wrap: wrap;
-    gap: 15px;
+    flex-wrap: wrap;
+    //gap: 15px;
     justify-content: center;
 
     .section-especially-item {
