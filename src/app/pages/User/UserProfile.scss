@@ -1,39 +1,37 @@
 @import "../../../assets/styles/style";
 
-.userprofile_container {
-  @media screen and (max-width: 1124px) {
-    .userprofile {
-      align-items: stretch;
-      flex-direction: column;
-    }
-  }
-
-  // @media screen and (min-width: $desktop) {
+.user-info {
   display: flex;
-  width: 100vw;
+  margin-top: 30px;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.userprofile_container {
   min-height: 100vh;
+  // width: 100vw;
   position: relative;
   padding-bottom: 3rem;
 
   .userprofile-title {
-    position: absolute;
-    left: 17px;
+    margin-bottom: 2rem;
     flex-direction: row;
-    font:
-      400 24px / 1.5 "Inter",
-      sans-serif;
+    font: 400 24px / 1.5 "Inter", sans-serif;
     color: #333;
   }
 
   .userprofile {
     display: flex;
-    margin-top: 10vh;
     align-items: self-start;
+    flex-direction: column;
     width: 100%;
     gap: 1.6rem;
 
     &-sidebar-left {
-      flex-basis: 540px;
+
       flex-shrink: 0.3;
       width: 100%;
       background: $secondary-color-grey-card;
@@ -56,5 +54,29 @@
     }
   }
 
+  // @media screen and (max-width: 1124px) {
+  //   .userprofile {
+  //     align-items: stretch;
+  //     flex-direction: column;
+  //   }
   // }
+
+  @media screen and (min-width: $tablet) {
+    .userprofile {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+
+
+  @media screen and (min-width: $desktop) {
+    .userprofile {
+      align-items: flex-start;
+      flex-direction: row;
+
+      &-sidebar-left {
+        flex-basis: 540px;
+      }
+    }
+  }
 }

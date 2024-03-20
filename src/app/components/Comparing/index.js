@@ -7,6 +7,7 @@ import { setCompareTotal } from "../../store/slices/navMenuSlice"; // додав
 export const ComparingPage = () => {
   const dispatch = useDispatch(); // додав підрахунок товарів
   const { data: compareData } = useSelector((state) => state.compare);
+  console.log(compareData);
 
   useEffect(() => {
     dispatch(setCompareTotal(compareData.length)); // додав підрахунок товарів

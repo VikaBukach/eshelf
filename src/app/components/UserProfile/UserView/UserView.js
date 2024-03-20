@@ -70,29 +70,26 @@ const UserView = () => {
   return (
     <div className="user-viewed">
       <div>
-        <h4>My views:</h4>
         {isLoading ? ( // Перевірка стану завантаження для рендерингу "Завантажується"
           <div className="loader" />
         ) : (
           Object.entries(productsViews).map(([date, arr], idx) => (
-            <div>
-              <h2>{date}</h2>
-              {arr.map((productItem, index) => (
-                <ul>
-                  <li key={idx + "_" + index}>
-                    <ProductCard
-                      key={productItem.index}
-                      id={productItem.index}
-                      imageURL={productItem.image}
-                      category={productItem.category}
-                      title={productItem.fullName}
-                      price={productItem.priceBy}
-                      discountPrice={productItem.discountPriceBy}
-                      color={productItem.colorIndex}
-                    />
-                  </li>
-                </ul>
-              ))}
+            <div className="user-viewed__box">
+              <h2 className="user-viewed__title">{date}</h2>
+              <div className="user-viewed__list">
+                {arr.map((productItem, index) => (
+                  <ProductCard
+                    key={productItem.index}
+                    id={productItem.index}
+                    imageURL={productItem.image}
+                    category={productItem.category}
+                    title={productItem.fullName}
+                    price={productItem.priceBy}
+                    discountPrice={productItem.discountPriceBy}
+                    color={productItem.colorIndex}
+                  />
+                ))}
+              </div>
             </div>
           ))
         )}
