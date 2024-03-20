@@ -1,18 +1,12 @@
-import { useDispatch } from "react-redux";
-import React, { useEffect } from "react";
-import { fetchDataOfProducts } from "../../store/slices/productsSlice";
+import React from "react";
 import { CatalogLayout } from "../../components/catalog/CatalogLayout/CatalogLayout";
 
 const Mouses = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchDataOfProducts("mouses"));
-  }, [dispatch]);
 
   return (
     <div>
       <CatalogLayout
+        categoryName="mouses"
         title="Mouses"
         filterCriterias={[
           { title: "Brand", path: "brand" },

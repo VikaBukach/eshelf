@@ -25,14 +25,14 @@ export const createUrlFromFilterSettings = (
   return filterUrl.slice(0, -1);
 };
 
-export const createFilterSettingsObjectFromUrl = (minValue, maxValue) => {
+export const createFilterSettingsObjectFromUrl = (minValue, maxValue, locationUrl = false) => {
   const filterCheckboxSettings = {};
   const filterPriceSettings = {
-    priceBy: minValue,
-    priceTo: maxValue,
+    priceBy: 0,
+    priceTo: 0,
   };
   let sortingSettings = "";
-  const url = window.location.search;
+  const url = locationUrl ? locationUrl : window.location.search;
 
   if (url) {
     const parametrs = url.substring(1).split(";");
