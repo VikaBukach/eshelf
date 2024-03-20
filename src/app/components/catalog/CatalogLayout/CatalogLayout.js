@@ -6,6 +6,7 @@ import { CatalogProductList } from "../CatalogProductList/CatalogProductList";
 import { CatalogFilter } from "../CatalogFilter/CatalogFilter";
 import { CatalogSorting } from "../CatalogSorting/CatalogSorting";
 import { CatalogPagination } from "../CatalogPagination/CatalogPagination";
+import { Breadcrumbs } from "../../ui/Breadcrumbs/Breadcrumbs";
 // Slices
 import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
@@ -131,7 +132,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
       <div className="catalog__shadow"></div>
       <div className="catalog__head-line">
         <div className="catalog__head-line__head">
-          <p className="catalog__head-line__breadcrumb">˂ Breadcrumb</p>
+          <Breadcrumbs />
           <h3 className="catalog__head-line__title">{title}</h3>
         </div>
         <div className="catalog__head-line__container">

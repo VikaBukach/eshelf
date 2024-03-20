@@ -145,8 +145,7 @@ export const updateByFilter = createAsyncThunk(
         const colorsInProducts = filterByPrice(filteredProducts, priceBy, priceTo).reduce((accumulator, product) => {
           return accumulator + product.colors.length;
         }, 0);
-        console.log(filterByPrice(filteredProducts, priceBy, priceTo));
-  
+
         dispatch(setCardsInAllFilteredProducts(colorsInProducts));
 
         products.forEach((product) => {
