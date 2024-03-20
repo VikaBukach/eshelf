@@ -61,10 +61,8 @@ connectToDb((err) => {
 
 const handleCollectionRequest = (collection, req, res, limit, sortingMode = "Best Seller") => {
   const page = parseInt(req.query.page) || 1;
-  const actualLimit = limit ? parseInt(limit) : 100000; // Используем переданный лимит или по умолчанию 4
+  const actualLimit = limit ? parseInt(limit) : 100000;
   const skip = (page - 1) * actualLimit;
-
-  console.log(sortingMode);
 
   let sortQuery = {};
   let sortKey;

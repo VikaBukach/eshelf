@@ -106,7 +106,7 @@ export const loadPageOfProducts = createAsyncThunk(
       const response = await axios.get(`http://localhost:${PORT}/${collection}?page=${page}&limit=${limit}&sortingMode=${checkedSortingValue}`);
       let loadedProduct = response.data[0];
       // console.log(loadedProduct);
-      console.log("НОМЕР ТОВАРА на НАЧАЛО:", pageOfDB);
+      // console.log("НОМЕР ТОВАРА на НАЧАЛО:", pageOfDB);
 
       if (!loadedProduct) {
         dispatch(setPageOfDB(pageOfDB + 1));
@@ -116,10 +116,10 @@ export const loadPageOfProducts = createAsyncThunk(
       // let filteredLoadedProduct = filterByPrice(([loadedProduct], priceBy, priceTo))
       let filteredLoadedProduct;
 
-      console.log(loadedProduct);
+      // console.log(loadedProduct);
       // console.log(priceBy);
       // console.log(priceTo);
-      console.log(filterByPrice([loadedProduct], priceBy, priceTo));
+      // console.log(filterByPrice([loadedProduct], priceBy, priceTo));
 
       filteredLoadedProduct = filterByPrice([loadedProduct], priceBy, priceTo);
 
@@ -128,11 +128,11 @@ export const loadPageOfProducts = createAsyncThunk(
       
       
 
-      console.log(filteredLoadedProduct);
+      // console.log(filteredLoadedProduct);
       // Якщо є налаштування фільтрації
       if (filterSettings.length !== 0 && filteredLoadedProduct.length !== 0) {
         filteredLoadedProduct = (filterProducts([loadedProduct], filterSettings));
-        console.log(filteredLoadedProduct);
+        // console.log(filteredLoadedProduct);
         
 
         
@@ -150,10 +150,10 @@ export const loadPageOfProducts = createAsyncThunk(
       } 
       // Якщо налаштувань фільтрації немає
       loadedProduct = filteredLoadedProduct[0];
-      console.log(loadedProduct);
+      // console.log(loadedProduct);
 
       if (!loadedProduct) {
-        console.log(loadedProduct);
+        // console.log(loadedProduct);
         dispatch(setPageOfDB(pageOfDB + 1));
         return currentProducts;
       }
@@ -206,7 +206,7 @@ export const loadPageOfProducts = createAsyncThunk(
   
           const allProducts = [...currentProductsWithoutLast, loadedProduct];
   
-          console.log("Список товаров на ЗАВЕРШЕНИЕ функции", allProducts);
+          // console.log("Список товаров на ЗАВЕРШЕНИЕ функции", allProducts);
           return allProducts;
 
       

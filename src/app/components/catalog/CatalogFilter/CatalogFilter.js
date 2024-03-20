@@ -123,6 +123,7 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
     dispatch(setPagesToLoading(1));
     dispatch(setPageOfDB(1));
     dispatch(deleteDataOfProducts());
+    dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
     closeFilter();
   };
 

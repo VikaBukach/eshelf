@@ -133,10 +133,6 @@ const findValueByPath = (product, path) => {
     // Фільтрація базового масиву по ціні
     const filterByPrice = (products, priceBy, priceTo) => {
       const filteredProductsArray = [];
-
-      console.log('priceBy', priceBy);
-      console.log('priceTo', priceTo);
-      console.log('products', products);
   
       if (priceBy !== 0 && priceTo !== 0) {
         products.forEach((product) => {

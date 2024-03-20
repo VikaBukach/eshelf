@@ -13,6 +13,7 @@ export const selectPageOfDB = (state) => state.products.pageOfDB;
 export const selectProductsDataLength = (state) => state.products.productsDataLength;
 export const selectCardsOnPage = (state) => state.products.cardsOnPage;
 export const selectPagesToLoading = (state) => state.products.pagesToLoading;
+export const selectFilterSettings = (state) => state.filterSettings.checkboxes;
 
 
 const PORT = process.env.REACT_APP_PORT || 5000;
@@ -20,10 +21,16 @@ const PORT = process.env.REACT_APP_PORT || 5000;
 
 export const addVariationsToFilterCriterias = createAsyncThunk(
   "filterSettings/addVariationsToFilterCriterias",
-  async ({ collection, filterCriterias }, { dispatch }) => {
+  async ({ collection, filterCriterias }, { dispatch, getState }) => {
+    const filterSettings = selectFilterSettings(getState());
+
     try {
       const response = await axios.get(`http://localhost:${PORT}/${collection}`);
       const products = response.data;
+
+      const productsWithFilter =
+        filterSettings.length !== 0 ? filterProducts(response.data, filterSettings) : response.data;
+
       dispatch(setProductsDataLength(response.data.length));
       dispatch(setMinPrice(findMinAndMaxPrice(products).minValue));
       dispatch(setMaxPrice(findMinAndMaxPrice(products).maxValue));
@@ -32,10 +39,18 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
       const updatedFilterCriterias = [];
       const numberOfValues = {};
       filterCriterias.forEach((criteria) => {
+        let productsWithFilterValues = [];
+        productsWithFilter.forEach((product) => {
+          const { value: findValues } = findValueByPath(product, criteria.path);
+          productsWithFilterValues = [...productsWithFilterValues, ...findValues];
+        });
+
+        let allVariations = [];
         criteria.types = [];
         numberOfValues[criteria.path] = {};
         products.forEach((product) => {
           const { value: findVariations } = findValueByPath(product, criteria.path);
+          allVariations = [...allVariations, ...findVariations];
 
           findVariations.forEach((findVariation) => {
             if (numberOfValues[criteria.path][findVariation] && numberOfValues[criteria.path][findVariation] >= 1) {
@@ -43,14 +58,20 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
             } else {
               numberOfValues[criteria.path][findVariation] = 1;
             }
-
-            if (!criteria.types.includes(findVariation)) {
-              criteria.types.push(findVariation);
-            }
           });
         });
 
-        updatedFilterCriterias.push({ title: criteria.title, types: criteria.types, path: criteria.path });
+        allVariations = [...new Set(allVariations)];
+
+        allVariations.forEach((variation) => {
+          const numberOfVariationInFilteredProducts = productsWithFilterValues.filter(
+            (product) => product === variation
+          ).length;
+
+          numberOfValues[criteria.path][variation] = numberOfVariationInFilteredProducts;
+        });
+
+        updatedFilterCriterias.push({ title: criteria.title, types: allVariations, path: criteria.path });
       });
 
       dispatch(setFilterCriteriasWithTypes(updatedFilterCriterias));

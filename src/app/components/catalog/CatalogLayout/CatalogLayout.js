@@ -12,7 +12,7 @@ import { createFilterSettingsObjectFromUrl, createUrlFromFilterSettings } from "
 import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
 import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
 import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
-import { fetchDataOfProducts, loadPageOfProducts, setPageOfDB, setPagesToLoading, deleteDataOfProducts} from "../../../store/slices/productsSlice";
+import { fetchDataOfProducts, loadPageOfProducts, setPageOfDB, setPagesToLoading, deleteDataOfProducts, setProducts} from "../../../store/slices/productsSlice";
 import { addVariationsToFilterCriterias } from "../../../store/slices/filterSettingsSlice";
 
 const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
@@ -76,7 +76,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
 
   // Фільтр-посилання
   const navigateToUrlWithSettings = () => {
-    console.log(filterSettings);
+    // console.log(filterSettings);
     const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
     navigate(url);
   };
@@ -124,27 +124,29 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   useEffect(() => {
     // console.log("ПЕРВАЯ ЗАГРУЗКА ПРИ ЗАПУСКЕ СТРАНИЦЫ");
     if (loadingFilterSettingsStatus === "succeeded") {
+      
       dispatch(loadPageOfProducts({ collection: categoryName, page: 1, limit: 1 }));
     // dispatch(setPageOfDB(pageOfDB + 1));
     }
   }, [loadingFilterSettingsStatus]);
 
   useEffect(() => {
+    dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
     dispatch(setPagesToLoading(1));
     dispatch(setPageOfDB(1));
-    dispatch(deleteDataOfProducts());
+    dispatch(setProducts([]));
   }, [checkedSortingValue]);
 
 
 
   useEffect(() => {
     if (fetchStatus === "succeeded") {
-      console.log("PROD:",products );
+      // console.log("PROD:",products );
       const colorsInProducts = products.reduce((accumulator, product) => {
         return accumulator + product.colors.length;
       }, 0);
 
-      console.log("ЦВЕТОВ А ПРОДУКТАХ СЕЙЧАС", colorsInProducts);
+      // console.log("ЦВЕТОВ А ПРОДУКТАХ СЕЙЧАС", colorsInProducts);
 
       if (
         cardsOnPage * pagesToLoading > colorsInProducts &&
