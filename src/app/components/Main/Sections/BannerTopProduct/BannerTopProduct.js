@@ -19,7 +19,7 @@ function BannerTopProduct({ product }) {
         <Button
           btnClass="banner_top-product-mobile-pre-order-btn"
           text={"Pre-order"}
-          onClick={() => navigate(`/smartphones`)}
+          onClick={() => navigate(`smartphones?brand=Apple`)}
         />
       </div>
 
@@ -41,7 +41,7 @@ function BannerTopProduct({ product }) {
           <Buttun_perple
             btnClass="banner_top-product-desktop-pre-order-btn"
             text={"Pre-order"}
-            onClick={() => navigate(`/smartphones`)}
+            onClick={() => navigate(`smartphones?brand=Apple`)}
           />
         </div>
       </div>
