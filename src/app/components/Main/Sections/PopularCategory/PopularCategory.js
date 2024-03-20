@@ -5,7 +5,7 @@ import Arrow from "../../Arrow/Arrow";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { Link, NavLink }  from "react-router-dom";
+import { NavLink }  from "react-router-dom";
 
 function PopularCategory() {
 
@@ -189,8 +189,6 @@ function PopularCategory() {
                         ))}
                     </Slider>
                 </div>
-
-
             </div>
         </>
     );
