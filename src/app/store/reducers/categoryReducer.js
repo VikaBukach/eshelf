@@ -14,7 +14,7 @@ const initialState = {
     smartwatches: false,
     tablets: false,
     tv: false,
-    pc: false,
+    //pc: false,
   },
 };
 
