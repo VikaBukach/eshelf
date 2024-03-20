@@ -8,7 +8,11 @@ import { formatPrice } from "../../../utils/formatPrice";
 const UserOrders = () => {
   // const orderNumber = useSelector((state) => state.order.orderNumber);
 
+  // Добавила отримання ордерів з бекенду і динамічне відмалювання
+
   const user = useSelector((state) => state.user.data);
+
+  // Запит на отрмання ордерів
   const { data, loading } = useFetch(`getOrders?email=${user.email}`);
 
   if (loading) {
@@ -17,6 +21,10 @@ const UserOrders = () => {
         <div className="loader"></div>
       </div>
     );
+  }
+
+  if (!data) {
+    return null;
   }
 
   const { orders } = data;
@@ -39,9 +47,10 @@ const UserOrders = () => {
   };
 
   return (
+    // Вивід всіх ордерів через цикл
     <>
       {orders.map((order) => (
-        <div className="user-orders">
+        <div key={order.orderNumber} className="user-orders">
           <h3 className="user-orders-title">Order № {order.orderNumber}</h3>
           <span className="user-orders-dayoforder">{formatDateWithTime(order.createdAt)}</span>
           <ul className="user-orders-info-items">
@@ -91,6 +100,7 @@ const UserOrders = () => {
                   strokeLinejoin="round"
                 />
               </svg>
+              {/* Вивід дати створення ордеру з БД */}
               <span className="user-orders-status-item-date">{getDateTime(order.createdAt)}</span>
               <p className="user-orders-status-item-descr">Awaiting processing</p>
             </li>

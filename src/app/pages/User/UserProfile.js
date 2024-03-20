@@ -10,27 +10,32 @@ import SocialNetworks from "../../components/UserProfile/SocialNetworks/SocialNe
 import { useSelector } from "react-redux";
 
 export const UserProfile = ({ state, setState }) => {
-  const { activepage } = useParams();
+  let { activepage } = useParams();
 
-    const orderNumber = useSelector((state) => {
+  // Використання стандартного значення, якщо activepage відсутній
+  activepage = activepage ?? "accountsettings";
 
+  const orderNumber = useSelector((state) => {
     return state.order.orderNumber;
   });
 
   return (
-    <div className="userprofile_container container">
-      <h1 className="userprofile-title">Account settings</h1>
-      <div className="userprofile">
-        <div className="userprofile-sidebar-left">
-          <UserSidebar activepage={activepage} />
-        </div>
+    // Винесла контейнер в окремий дів
+    <div className="container">
+      <div className="userprofile_container ">
+        <h1 className="userprofile-title">Account settings</h1>
+        <div className="userprofile">
+          <div className="userprofile-sidebar-left">
+            <UserSidebar activepage={activepage} />
+          </div>
 
-        <div className="userprofile-sidebar-right">
-          {activepage === "accountsettings" && <UserDetails />}
-          {activepage === "myorders" && <UserOrders orderNumber={orderNumber} />}
-          {activepage === "myview" && <UserView />}
-          {activepage === "mydelivery" && <WarrantyDelivery />}
-          {activepage === "socialnetworks" && <SocialNetworks />}
+          <div className="userprofile-sidebar-right">
+            {activepage === "accountsettings" && <UserDetails />}
+            {activepage === "myorders" && <UserOrders orderNumber={orderNumber} />}
+            {activepage === "myview" && <UserView />}
+            {activepage === "mydelivery" && <WarrantyDelivery />}
+            {activepage === "socialnetworks" && <SocialNetworks />}
+          </div>
         </div>
       </div>
     </div>

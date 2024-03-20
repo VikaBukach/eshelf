@@ -1,45 +1,48 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import "./UserDetails.scss";
 import { ContactDetails } from "../../OrderPage/components/ContactDetails";
 import Button from "../../Main/Button/Button";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveFormData } from "../../../store/slices/orderFormSlice";
 
 const UserDetails = () => {
   const dispatch = useDispatch();
-    const formData = useSelector((state) => state.orderForm.formData);
-    const [isEditing, setIsEditing] = useState(false);
-
-    const handleEditClick = () => {
-        setIsEditing(true);
-    }
+  // Беремо дані користувача з авторизації
+  const user = useSelector((state) => state.user.data);
+  // const formData = useSelector((state) => state.orderForm.formData);
+  const formData = {
+    ...user,
+  };
+  const [isEditing, setIsEditing] = useState(false);
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
 
   const handleCancelClick = () => {
     setIsEditing(false);
   };
 
-    const handleSaveClick = () => {
-        setIsEditing(false);
-        dispatch(saveFormData(formData));
-    };
+  const handleSaveClick = () => {
+    setIsEditing(false);
+    dispatch(saveFormData(formData));
+  };
 
   const handleChange = (updatedData) => {
-        setUserData(updatedData);
-    }
-    const [userData, setUserData] = useState(formData);
+    setUserData(updatedData);
+  };
+  const [userData, setUserData] = useState(formData);
 
-    return (
-        <div className="mydetails">
-
-            <ContactDetails
-                state={userData}
-                setState={setUserData}
-                accountSettingsClass="account-settings"
-                inputContainerClass="input-settings-container"
-                labelClass="label-settings"
-                disabled={!isEditing}
-                onChange={handleChange}
-            />
+  return (
+    <div className="mydetails">
+      <ContactDetails
+        state={userData}
+        setState={setUserData}
+        accountSettingsClass="account-settings"
+        inputContainerClass="input-settings-container"
+        labelClass="label-settings"
+        disabled={!isEditing}
+        onChange={handleChange}
+      />
 
       {isEditing ? (
         <div className="mydetails-btn-change">

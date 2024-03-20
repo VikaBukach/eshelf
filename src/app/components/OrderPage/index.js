@@ -9,13 +9,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../store/slices/cartSlice";
 import { formatPrice } from "../../utils/formatPrice";
-import { setOrderNumber } from "../../store/slices/orderSlice";
 import axios from "axios";
 
-export const validateEmail = (email) => {
-  const basicEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  return basicEmailRegex.test(email);
-};
+// export const validateEmail = (email) => {
+//   const basicEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+//   return basicEmailRegex.test(email);
+// };
 import { setOrderNumber, setOrderDate } from "../../store/slices/orderSlice";
 import { validateEmail } from "../../utils/validateEmail";
 import { saveFormData } from "../../store/slices/orderFormSlice";
@@ -52,7 +51,23 @@ const cartState = {
 };
 
 const OrderPage = () => {
-  const [state, setState] = useState({ ...cartState });
+  const user = useSelector((state) => state.user.data);
+  const [state, setState] = useState({
+    ...cartState,
+    ...(user && {
+      ...user,
+    }),
+  });
+
+  useEffect(() => {
+    if (user) {
+      setState({
+        ...cartState,
+        ...user,
+      });
+    }
+  }, [user]);
+
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const cart = useSelector((state) => state.cart.data);
   const orderNumber = useSelector((state) => state.order.orderNumber); // add order number
