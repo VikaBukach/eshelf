@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import ProductCard from "../../ProductCard/ProductCard";
 
 const CatalogProductList = () => {
-  const filteredProductsWithPrice = useSelector((state) => state.filteredProductsWithPrice.data);
+  const products = useSelector((state) => state.products.data);
 
   let productItems = [];
 
-  filteredProductsWithPrice.forEach((product) => {
+  products.forEach((product) => {
     product.colors.forEach((color) => {
       const cloneProduct = JSON.parse(JSON.stringify(product));
       delete cloneProduct.colors;

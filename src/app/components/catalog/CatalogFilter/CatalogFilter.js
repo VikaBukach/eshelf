@@ -11,7 +11,7 @@ import { createUrlFromFilterSettings } from "../../../utils/filter-url";
 import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
 import { setProducts } from "../../../store/slices/productsSlice";
 import { fetchDataOfProducts, loadPageOfProducts, deleteDataOfProducts, setPageOfDB, setPagesToLoading } from "../../../store/slices/productsSlice";
-import { addVariationsToFilterCriterias } from "../../../store/slices/filterSettingsSlice";
+import { addVariationsToFilterCriterias, updateByFilter } from "../../../store/slices/filterSettingsSlice";
 
 const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
@@ -115,6 +115,26 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
     navigate(url);
   };
 
+
+  const onFilterSubmitActionsAndsDispatches = () => {
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // ДІЇ ПО КНОПКАХ
 
   // Запуск базового фільтру
@@ -122,16 +142,27 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
     // dispatch(updateBaseFilterData(filterProducts()));   ПРИ ЗМІНІ ЧЕКБРКСУ ВЖЕ СПРАЦЮВАЛО
     dispatch(setPagesToLoading(1));
     dispatch(setPageOfDB(1));
-    dispatch(deleteDataOfProducts());
-    dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
+    // dispatch(deleteDataOfProducts());
+
+    // dispatch(deleteDataOfProducts());
+    dispatch(setProducts([]));
+    // dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
+    console.log(filterCriterias);
+        dispatch(updateByFilter(({collection: categoryName, filterCriterias: filterCriterias})));
     closeFilter();
   };
 
   // Натиск RESET
   const onResetSubmit = () => {
+    console.log("Ckick");
     dispatch(setPriceBy(0));
     dispatch(setPriceTo(0));
+    dispatch(setPagesToLoading(1));
+    dispatch(setPageOfDB(1));
     dispatch(setCheckboxesSettings([]));
+    dispatch(setProducts([]));
+    dispatch(updateByFilter(({collection: categoryName, filterCriterias: filterCriterias, isReset: true})));
+    
 
     closeFilter();
     navigateToUrlWithSettings();
