@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation  } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { CatalogProductList } from "../CatalogProductList/CatalogProductList";
 import { CatalogFilter } from "../CatalogFilter/CatalogFilter";
@@ -18,6 +18,7 @@ import { addVariationsToFilterCriterias } from "../../../store/slices/filterSett
 const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const productsDataLength = useSelector((state) => state.products.productsDataLength);
@@ -112,14 +113,41 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
 
 
 
-
+let searchUrl = "";
 
 // При ЗАВАНТАЖЕННІ сторінки, тобто, ОДИН раз
   useEffect(() => {
     // console.log("ПЕРВАЯ ЗАГРУЗКА ПРИ ЗАПУСКЕ СТРАНИЦЫ");
+    if (location.search !== "") {
+      const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
+        minValue,
+        maxValue,
+        location.search
+      );
+      console.log(filterCheckboxSettings);
+      console.log("Check");
+
+      if (sortingSettings) {
+        dispatch(setFilterSorting(sortingSettings));
+      }
+      console.log(filterPriceSettings.priceBy);
+      console.log(filterPriceSettings.priceTo);
+        dispatch(setPriceBy(filterPriceSettings.priceBy));
+        dispatch(setPriceTo(filterPriceSettings.priceTo));
+      if (Object.keys(filterCheckboxSettings).length !== 0) {
+        dispatch(setCheckboxesSettings(filterCheckboxSettings));
+      }
+    }
+    searchUrl = location.search;
+    console.log(location.search);
+
     dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
     // dispatch(setPageOfDB(pageOfDB + 1));
+
+
   }, []);
+
+  
 
   useEffect(() => {
     // console.log("ПЕРВАЯ ЗАГРУЗКА ПРИ ЗАПУСКЕ СТРАНИЦЫ");
@@ -130,17 +158,46 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
     }
   }, [loadingFilterSettingsStatus]);
 
-  useEffect(() => {
-    dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
-    dispatch(setPagesToLoading(1));
-    dispatch(setPageOfDB(1));
-    dispatch(setProducts([]));
-  }, [checkedSortingValue]);
+  // useEffect(() => {
+  //   dispatch(addVariationsToFilterCriterias({collection: categoryName, filterCriterias: filterCriterias}));
+  //   dispatch(setPagesToLoading(1));
+  //   dispatch(setPageOfDB(1));
+  //   dispatch(setProducts([]));
+  // }, [checkedSortingValue]);
 
 
 
   useEffect(() => {
     if (fetchStatus === "succeeded") {
+
+      console.log(searchUrl);
+    if (searchUrl !== "") {
+      const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
+        minValue,
+        maxValue,
+        searchUrl
+      );
+      console.log(filterCheckboxSettings);
+      console.log("Check");
+
+      if (sortingSettings) {
+        dispatch(setFilterSorting(sortingSettings));
+      }
+      if (filterPriceSettings.priceBy !== 0 && filterPriceSettings.priceTo !== 0) {
+        dispatch(setPriceBy(filterPriceSettings.priceBy));
+        dispatch(setPriceTo(filterPriceSettings.priceTo));
+      }
+      if (Object.keys(filterCheckboxSettings).length !== 0) {
+        dispatch(setCheckboxesSettings(filterCheckboxSettings));
+      }
+    }
+
+
+
+
+
+
+
       // console.log("PROD:",products );
       const colorsInProducts = products.reduce((accumulator, product) => {
         return accumulator + product.colors.length;

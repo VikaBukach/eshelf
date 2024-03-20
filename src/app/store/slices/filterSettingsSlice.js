@@ -3,6 +3,8 @@ import axios from "axios";
 import { findValueByPath, findMinAndMaxPrice } from "../../helpers/catalog";
 import { filterProducts } from "../../helpers/catalog";
 import { setProductsDataLength } from "./productsSlice";
+import { createFilterSettingsObjectFromUrl } from "../../utils/filter-url";
+import { setFilterSorting } from "./filterSortingSlice";
 
 
 
@@ -60,21 +62,57 @@ const PORT = process.env.REACT_APP_PORT || 5000;
 
 export const addVariationsToFilterCriterias = createAsyncThunk(
   "filterSettings/addVariationsToFilterCriterias",
-  async ({ collection, filterCriterias }, { dispatch, getState }) => {
-    const filterSettings = selectFilterSettings(getState());
+  async ({ collection, filterCriterias, searchUrl = false }, { dispatch, getState }) => {
+    let filterSettings = selectFilterSettings(getState());
+    const priceBy = selectPriceBy(getState());
+    const priceTo = selectPriceTo(getState());
 
     try {
       const response = await axios.get(`http://localhost:${PORT}/${collection}`);
       const products = response.data;
-
       const productsWithFilter =
         filterSettings.length !== 0 ? filterProducts(response.data, filterSettings) : response.data;
+
+      let priceByFromUrl;
+      let priceToFromUrl;
+
+      // if (searchUrl) {
+      //   console.log("1");
+      //   const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
+      //     findMinAndMaxPrice(productsWithFilter).minValue,
+      //     findMinAndMaxPrice(productsWithFilter).maxValue,
+      //     searchUrl
+      //   );
+      //   console.log(filterCheckboxSettings);
+      //   console.log(filterPriceSettings);
+      //   console.log(sortingSettings);
+  
+      //   if (sortingSettings) {
+      //     dispatch(setFilterSorting(sortingSettings));
+      //   }
+      //   if (filterPriceSettings.priceBy !== 0 && filterPriceSettings.priceTo !== 0) {
+      //     priceByFromUrl = filterPriceSettings.priceBy;
+      //     priceToFromUrl = filterPriceSettings.priceTo;
+      //   }
+      //   if (Object.keys(filterCheckboxSettings).length !== 0) {
+      //     filterSettings = filterCheckboxSettings;
+      //     dispatch(setCheckboxesSettings(filterCheckboxSettings));
+      //   }
+      // }
+
+
+
+
+
+
+
+      
 
       dispatch(setProductsDataLength(products.length));
       dispatch(setMinPrice(findMinAndMaxPrice(productsWithFilter).minValue));
       dispatch(setMaxPrice(findMinAndMaxPrice(productsWithFilter).maxValue));
-      dispatch(setPriceBy(findMinAndMaxPrice(productsWithFilter).minValue));
-      dispatch(setPriceTo(findMinAndMaxPrice(productsWithFilter).maxValue));
+      dispatch(setPriceBy(priceBy ? priceBy : findMinAndMaxPrice(productsWithFilter).minValue));
+      dispatch(setPriceTo(priceTo ? priceTo : findMinAndMaxPrice(productsWithFilter).maxValue));
       const updatedFilterCriterias = [];
       const numberOfValues = {};
       filterCriterias.forEach((criteria) => {
@@ -116,8 +154,6 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
       dispatch(setFilterCriteriasWithTypes(updatedFilterCriterias));
       dispatch(setNumberOfValues(numberOfValues));
 
-      console.log("updatedFilterCriterias", updatedFilterCriterias);
-      console.log("numberOfValues", numberOfValues);
 
       return updatedFilterCriterias;
     } catch (err) {
@@ -126,6 +162,20 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
     }
   }
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const updateByFilter = createAsyncThunk(
   "filterSettings/updateByFilter",

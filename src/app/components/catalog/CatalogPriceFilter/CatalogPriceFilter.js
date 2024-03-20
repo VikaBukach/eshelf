@@ -9,7 +9,7 @@ import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSl
 import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
 import { createUrlFromFilterSettings } from "../../../utils/filter-url";
 
-const CatalogPriceFilter = ({ pricePath }) => {
+const CatalogPriceFilter = ({ pricePath, onClickFunction}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -64,13 +64,13 @@ const CatalogPriceFilter = ({ pricePath }) => {
 
   // ------- ФІЛЬТРАЦІЯ ПО ЦІНІ - по кнопці і при кожній зміні статусу BASE
   const submitFilterByPrice = () => {
-    // if (!isPriceByError && !isPriceToError) {
-    //   dispatch(updateFilteredProductsWithPrice(filterByPrice()));
-    //   dispatch(setProductsToResrtSorting(filterByPrice()));
-    //   if (filterSettings.length !== 0 || priceBy !== minValue || priceTo !== maxValue) {
-    //     navigateToUrlWithSettings();
-    //   }
-    // }
+    if (
+      !isPriceByError &&
+      !isPriceToError &&
+      (filterSettings.length !== 0 || priceBy !== minValue || priceTo !== maxValue)
+    ) {
+      onClickFunction();
+    }
   };
 
   // ДІЇ ПО КНОПКАХ

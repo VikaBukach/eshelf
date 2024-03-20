@@ -110,10 +110,17 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
   }
 
   // Фільтр-посилання при ресеті
-  const navigateToUrlWithSettings = () => {
+  const navigateToUrlWithSettingsOnReset = () => {
     const url = `?${createUrlFromFilterSettings([], 0, 0, 0, 0, checkedSortingValue)}`;
     navigate(url);
   };
+
+    // Фільтр-посилання
+    const navigateToUrlWithSettings = () => {
+      // console.log(filterSettings);
+      const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
+      navigate(url);
+    };
 
 
   const onFilterSubmitActionsAndsDispatches = () => {
@@ -150,11 +157,20 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
     console.log(filterCriterias);
         dispatch(updateByFilter(({collection: categoryName, filterCriterias: filterCriterias})));
     closeFilter();
+    navigateToUrlWithSettings();
+
+
+
   };
+
+  useEffect(() => {
+    onFilterSubmit();
+  }, [filterSettings, checkedSortingValue, priceBy, priceTo]);
+
+
 
   // Натиск RESET
   const onResetSubmit = () => {
-    console.log("Ckick");
     dispatch(setPriceBy(0));
     dispatch(setPriceTo(0));
     dispatch(setPagesToLoading(1));
@@ -165,7 +181,7 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
     
 
     closeFilter();
-    navigateToUrlWithSettings();
+    navigateToUrlWithSettingsOnReset();
   };
 
   // Закрити фільтр (мобільна і таблет-версії)
@@ -214,7 +230,7 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
         <h1 className="filter__title">Filter</h1>
         <img className="filter__close-btn" src="../assets/icons/close.svg" alt="Close" onClick={closeFilter} />
       </div>
-      <Accordion title="Price" content={<CatalogPriceFilter pricePath={pricePath} />} />
+      <Accordion title="Price" content={<CatalogPriceFilter pricePath={pricePath} onClickFunction={onFilterSubmit}/>} />
       {filterCriteriasWithTypes.map((criteria, index) => (
         <React.Fragment key={index}>
           <CatalogFilterItem filterTitle={criteria.title} checkBoxNames={criteria.types} criteriaPath={criteria.path} />
