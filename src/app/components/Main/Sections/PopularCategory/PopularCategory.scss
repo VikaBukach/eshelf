@@ -74,10 +74,6 @@
         border: 1.8px solid $secondary-color-purple-light;
         transition: transform 0.3s ease;
 
-        &:nth-child(7) {
-          display: none;
-        }
-
         &:hover {
           transform: scale(1.05);
         }
@@ -99,8 +95,9 @@
 
   @media (min-width: $desktop) {
     .popular_category-items {
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+       gap: 16px;
 
       .popular_category-item {
         width: 224px;

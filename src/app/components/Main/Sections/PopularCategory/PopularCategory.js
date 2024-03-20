@@ -120,12 +120,6 @@ function PopularCategory() {
           </li>
           </NavLink>
 
-          <NavLink to="/tv">
-            <li className="popular_category-item">
-              <img className="popular_category-item-img" src="/img/popularcategory/tvs.png" alt="Quadrocopters" />
-              <h4 className="popular_category-title">Tvs</h4>
-            </li>
-          </NavLink>
         </ul>
       </div>
     </>
