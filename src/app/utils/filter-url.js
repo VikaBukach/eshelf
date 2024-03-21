@@ -14,8 +14,8 @@ export const createUrlFromFilterSettings = (
     }
   }
 
-  if ((priceBy !== minValue || priceTo !== maxValue) && priceBy !== 0 && priceTo !== 0) {
-    filterUrl = filterUrl + "price" + "=" + priceBy.toString() + "-" + priceTo.toString() + ";";
+  if ((priceBy !== minValue || priceTo !== maxValue)) {
+    filterUrl = filterUrl + "price" + "=" + (priceBy === 0 ? minValue.toString() : priceBy.toString()) + "-" + (priceTo === 0 ? maxValue.toString() : priceTo.toString()) + ";";
   }
 
   if (checkedSortingValue !== "Best Seller") {

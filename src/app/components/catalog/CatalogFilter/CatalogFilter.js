@@ -56,9 +56,14 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
     navigateToUrlWithSettings();
   };
 
+
   useEffect(() => {
     onFilterSubmit();
-  }, [filterSettings, checkedSortingValue, priceBy, priceTo]);
+  }, [filterSettings, checkedSortingValue]);
+
+  useEffect(() => {
+    navigateToUrlWithSettings();
+  }, [priceBy, priceTo]);
 
   // Натиск RESET
   const onResetSubmit = () => {

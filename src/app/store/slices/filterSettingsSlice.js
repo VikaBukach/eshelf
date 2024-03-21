@@ -37,8 +37,8 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
       dispatch(setProductsDataLength(products.length));
       dispatch(setMinPrice(findMinAndMaxPrice(productsWithFilter).minValue));
       dispatch(setMaxPrice(findMinAndMaxPrice(productsWithFilter).maxValue));
-      dispatch(setPriceBy(priceBy ? priceBy : findMinAndMaxPrice(productsWithFilter).minValue));
-      dispatch(setPriceTo(priceTo ? priceTo : findMinAndMaxPrice(productsWithFilter).maxValue));
+      dispatch(setPriceBy(priceBy ? priceBy : 0));
+      dispatch(setPriceTo(priceTo ? priceTo : 0));
       const updatedFilterCriterias = [];
       const numberOfValues = {};
       filterCriterias.forEach((criteria) => {
@@ -82,7 +82,7 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
 
       return updatedFilterCriterias;
     } catch (err) {
-      console.log("Error fetching brand names:", err);
+      console.log("Error:", err);
       throw err;
     }
   }
@@ -119,14 +119,6 @@ export const updateByFilter = createAsyncThunk(
 
       dispatch(setMinPrice(minValue));
       dispatch(setMaxPrice(maxValue));
-
-      if (priceBy === 0 || priceBy < minValue) {
-        dispatch(setPriceBy(minValue));
-      }
-
-      if (priceTo === 0 || priceTo > maxValue) {
-        dispatch(setPriceTo(maxValue));
-      }
 
       const numberOfValues = {};
 
@@ -168,7 +160,7 @@ export const updateByFilter = createAsyncThunk(
 
       return true;
     } catch (err) {
-      console.log("Error fetching brand names:", err);
+      console.log("Error:", err);
       throw err;
     }
   }
