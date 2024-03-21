@@ -17,8 +17,8 @@ const CatalogPriceFilter = ({ onClickFunction }) => {
 
   // Перевірка валідності значень інпутів
   const ckeckValidation = () => {
-    setIsPriceByError(priceBy < minValue || priceBy > maxValue || priceBy > priceTo);
-    setIsPriceToError(priceTo < minValue || priceTo > maxValue || priceTo < priceBy);
+    setIsPriceByError(priceBy !== 0 && (priceBy < minValue || priceBy > maxValue || priceBy > priceTo));
+    setIsPriceToError(priceTo !== 0 && (priceTo < minValue || priceTo > maxValue || priceTo < priceBy));
   };
 
   const submitFilterByPrice = () => {

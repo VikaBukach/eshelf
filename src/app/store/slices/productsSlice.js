@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { filterByPrice } from "../../helpers/catalog";
 import { filterProducts } from "../../helpers/catalog";
-import { setCardsInAllFilteredProducts } from "./filterSettingsSlice";
 
 export const selectProducts = (state) => state.products.data;
 export const selectPageOfDB = (state) => state.products.pageOfDB;
@@ -102,7 +101,7 @@ export const loadPageOfProducts = createAsyncThunk(
 
       return allProducts;
     } catch (err) {
-      console.log("Error fetching products:", err);
+      console.log("Error:", err);
       throw err;
     }
   }
