@@ -6,6 +6,7 @@ import { CatalogProductList } from "../CatalogProductList/CatalogProductList";
 import { CatalogFilter } from "../CatalogFilter/CatalogFilter";
 import { CatalogSorting } from "../CatalogSorting/CatalogSorting";
 import { CatalogPagination } from "../CatalogPagination/CatalogPagination";
+import { Breadcrumbs } from "../../ui/Breadcrumbs/Breadcrumbs";
 // Slices
 import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
@@ -23,6 +24,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
+  const cardsInAllFilteredProducts = useSelector((state) => state.filterSettings.cardsInAllFilteredProducts);
 
   const productsDataLength = useSelector((state) => state.products.productsDataLength);
   const products = useSelector((state) => state.products.data);
@@ -34,6 +36,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const loadingFilterSettingsStatus = useSelector((state) => state.filterSettings.status);
 
   const [allSettings, setAllSettings] = useState([]);
+  const [visibleButton, setvisibleButton] = useState(true);
 
   // ДІЇ ПО КНОПКАХ
 
@@ -61,7 +64,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const checkCount = () => {
     let pricePlus;
     priceBy > minValue || priceTo < maxValue ? (pricePlus = 1) : (pricePlus = 0);
-    return allSettings.length + pricePlus;
+    return Object.values(filterSettings).flat().length + pricePlus;
   };
 
   // При ЗАВАНТАЖЕННІ сторінки, тобто, ОДИН раз
@@ -106,6 +109,12 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
       ) {
         dispatch(loadPageOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
       }
+
+      if (cardsInAllFilteredProducts === colorsInProducts) {
+        setvisibleButton(false);
+      } else {
+        setvisibleButton(true);
+      }
     }
   }, [fetchStatus]);
 
@@ -119,11 +128,12 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   }, [filterSettings]);
 
   return (
+    <div className="container">
     <div className="catalog">
       <div className="catalog__shadow"></div>
       <div className="catalog__head-line">
         <div className="catalog__head-line__head">
-          <p className="catalog__head-line__breadcrumb">˂ Breadcrumb</p>
+          <Breadcrumbs />
           <h3 className="catalog__head-line__title">{title}</h3>
         </div>
         <div className="catalog__head-line__container">
@@ -153,9 +163,10 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
         <CatalogFilter categoryName={categoryName} filterCriterias={filterCriterias} pricePath={pricePath} />
         <div className="catalog__body__list">
           <CatalogProductList />
-          <CatalogPagination onClickFunc={onClickLoadMore} />
+          {visibleButton ? <CatalogPagination onClickFunc={onClickLoadMore} /> : null}
         </div>
       </div>
+    </div>
     </div>
   );
 };

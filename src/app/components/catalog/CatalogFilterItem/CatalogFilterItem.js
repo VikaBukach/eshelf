@@ -5,8 +5,6 @@ import { NumberOfEligibleProducts } from "../NumberOfEligibleProducts/NumberOfEl
 import { Accordion } from "../../ui/Accordion/Accordion";
 // Slices
 import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
-// Another
-import { findValueByPath } from "../../../helpers/catalog";
 
 const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
   const dispatch = useDispatch();
@@ -30,16 +28,6 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
     }
 
     dispatch(setCheckboxesSettings(filterSettingsToUpdate));
-  };
-
-  // Складання масиву з усіх значень (з повтореннями) згідно з шляхом пошуку
-  const findAllValues = (array, path) => {
-    const valuesOfCriteria = [];
-    array.forEach((product) => {
-      const { value: findVariations } = findValueByPath(product, path);
-      valuesOfCriteria.push(...findVariations);
-    });
-    return valuesOfCriteria;
   };
 
   const isCheckboxChecked = (checkBoxName) => {

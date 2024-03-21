@@ -12,10 +12,12 @@ const Smartphones = () => {
           { title: "Brand", path: "brand" },
           { title: "Model", path: "model" },
           { title: "Color", path: "colors.color" },
-          { title: "Boolean Test", path: "test_boolean" },
+          { title: "Display frequency", path: "specifications.display.frequency" },
+          { title: "Matrix type", path: "specifications.display.display_matrix_type" },
+          { title: "Screen diagonal", path: "specifications.display.screen_diagonal" },
+          { title: "Front camera", path: "specifications.camera.front_camera" },
+          { title: "Battery capacity", path: "specifications.battery.capacity" },
           { title: "Functions", path: "specifications.camera.functions" },
-          { title: "Display_matrix_type", path: "specifications.display.display_matrix_type" },
-          { title: "Capacity", path: "colors.products.capacity" },
         ]}
         pricePath="colors.products.price"
       />

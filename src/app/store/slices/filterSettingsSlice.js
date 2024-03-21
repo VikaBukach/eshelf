@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { findValueByPath, findMinAndMaxPrice } from "../../helpers/catalog";
-import { filterProducts } from "../../helpers/catalog";
+import { filterProducts, filterByPrice } from "../../helpers/catalog";
 import { setProductsDataLength } from "./productsSlice";
 
 export const selectProducts = (state) => state.products.data;
@@ -17,7 +17,7 @@ const PORT = process.env.REACT_APP_PORT || 5000;
 
 export const addVariationsToFilterCriterias = createAsyncThunk(
   "filterSettings/addVariationsToFilterCriterias",
-  async ({ collection, filterCriterias, searchUrl = false }, { dispatch, getState }) => {
+  async ({ collection, filterCriterias }, { dispatch, getState }) => {
     let filterSettings = selectFilterSettings(getState());
     const priceBy = selectPriceBy(getState());
     const priceTo = selectPriceTo(getState());
@@ -27,6 +27,12 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
       const products = response.data;
       const productsWithFilter =
         filterSettings.length !== 0 ? filterProducts(response.data, filterSettings) : response.data;
+
+      const colorsInProducts = filterByPrice(productsWithFilter).reduce((accumulator, product) => {
+        return accumulator + product.colors.length;
+      }, 0);
+
+      dispatch(setCardsInAllFilteredProducts(colorsInProducts));
 
       dispatch(setProductsDataLength(products.length));
       dispatch(setMinPrice(findMinAndMaxPrice(productsWithFilter).minValue));
@@ -136,6 +142,12 @@ export const updateByFilter = createAsyncThunk(
           allValuesInFilteredProducts = [...allValuesInFilteredProducts, ...findValues];
         });
 
+        const colorsInProducts = filterByPrice(filteredProducts, priceBy, priceTo).reduce((accumulator, product) => {
+          return accumulator + product.colors.length;
+        }, 0);
+
+        dispatch(setCardsInAllFilteredProducts(colorsInProducts));
+
         products.forEach((product) => {
           const { value: findValues } = findValueByPath(product, criteria.path);
           allValuesInAllProducts = [...allValuesInAllProducts, ...findValues];
@@ -172,6 +184,7 @@ const filterSettingsSlice = createSlice({
     priceBy: 0,
     priceTo: 0,
     numberOfValues: {},
+    cardsInAllFilteredProducts: 0,
     status: "idle",
     error: null,
   },
@@ -196,6 +209,9 @@ const filterSettingsSlice = createSlice({
     },
     setNumberOfValues: (state, action) => {
       state.numberOfValues = action.payload;
+    },
+    setCardsInAllFilteredProducts: (state, action) => {
+      state.cardsInAllFilteredProducts = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -237,5 +253,6 @@ export const {
   setPriceTo,
   setFilterCriteriasWithTypes,
   setNumberOfValues,
+  setCardsInAllFilteredProducts,
 } = filterSettingsSlice.actions;
 export default filterSettingsSlice.reducer;

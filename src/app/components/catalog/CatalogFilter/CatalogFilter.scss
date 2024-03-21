@@ -71,6 +71,8 @@
 
       .filter__buttons {
         width: 288px;
+        bottom: 11px;
+        
       }
     }
   }
@@ -79,7 +81,7 @@
 @media screen and (min-width: $desktop) {
   .filter {
     position: static;
-    width: 100%;
+    width: 30%;
     min-width: 320px;
     max-width: 397px;
     height: auto;
