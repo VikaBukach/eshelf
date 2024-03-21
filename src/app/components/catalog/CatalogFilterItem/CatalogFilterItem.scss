@@ -14,6 +14,7 @@
   &__label {
     position: relative;
     @include flex-container(row, flex-start, center, nowrap);
+    max-width: calc(100% - 26px);
   }
 
   &__custom-checkbox {
@@ -58,7 +59,7 @@
 @media screen and (min-width: $tablet) {
   .filter-item {
     &__checkbox-line {
-      min-width: 288px;
+      min-width: 90%;
     }
   }
 }

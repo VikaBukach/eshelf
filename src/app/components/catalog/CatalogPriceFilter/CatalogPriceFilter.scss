@@ -54,9 +54,18 @@
     }
 
     &__inputs-cover {
+      width: 200px;
       height: 48px;
       margin: 0px;
       margin-bottom: 6px;
+    }
+  }
+}
+
+@media screen and (min-width: 1380px) {
+  .price-filter {
+    &__inputs-cover {
+      width: 250px;
     }
   }
 }

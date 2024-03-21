@@ -13,7 +13,12 @@ const Accordion = ({ title, content }) => {
     if (contentRef.current) {
       const contentElement = contentRef.current;
       if (isOpen) {
-        contentElement.style.maxHeight = contentElement.scrollHeight + "px";
+        if (contentElement.scrollHeight > 200) {
+          contentElement.style.maxHeight = "200px";
+          contentElement.style.overflowY = "auto";
+        } else {
+          contentElement.style.maxHeight = contentElement.scrollHeight + "px";
+        }
       } else {
         contentElement.style.maxHeight = "0";
       }

@@ -64,7 +64,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   const checkCount = () => {
     let pricePlus;
     priceBy > minValue || priceTo < maxValue ? (pricePlus = 1) : (pricePlus = 0);
-    return allSettings.length + pricePlus;
+    return Object.values(filterSettings).flat().length + pricePlus;
   };
 
   // При ЗАВАНТАЖЕННІ сторінки, тобто, ОДИН раз
@@ -128,6 +128,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   }, [filterSettings]);
 
   return (
+    <div className="container">
     <div className="catalog">
       <div className="catalog__shadow"></div>
       <div className="catalog__head-line">
@@ -165,6 +166,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
           {visibleButton ? <CatalogPagination onClickFunc={onClickLoadMore} /> : null}
         </div>
       </div>
+    </div>
     </div>
   );
 };

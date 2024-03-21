@@ -1,13 +1,14 @@
 .breadcrumbs {
-    @include flex-container(row, center, center, nowrap);
-    gap: 5px;
+  @include flex-container(row, center, center, nowrap);
+  gap: 5px;
+  margin-top: 10px;
+  color: $primary-color-black;
+
+  a {
     color: $primary-color-black;
+  }
 
-    a {
-        color: $primary-color-black; 
-    }
-
-    &__item {
-        text-transform: capitalize;
-    }
+  &__item {
+    text-transform: capitalize;
+  }
 }
