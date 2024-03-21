@@ -20,21 +20,30 @@ export const humanizeText = (text) => {
   return humanizedText;
 };
 
+// Функція приймає об'єкт obj і повертає масив ключів першого стовпця
 export const getFirstColumnKeys = (obj) => {
+  // Створюємо новий масив, використовуючи метод Object.entries(), щоб отримати масив пар ключ-значення об'єкта
   const res = Object.entries(obj).map(([rawKey, val]) => {
+    // Перетворюємо ключі, замінюючи пробіли на підкреслення
     const key = rawKey.split(" ").join("_");
+
+    // // Якщо значення є масивом, повертаємо сам ключ
     if (Array.isArray(val)) {
       return key;
     }
+
+    // Якщо значення є об'єктом, рекурсивно викликаємо функцію для отримання ключів першого стовпця
     if (typeof val == "object") {
       return {
-        [key]: getFirstColumnKeys(val),
+        [key]: getFirstColumnKeys(val), // Виклик рекурсії
       };
     }
+
+    // Якщо значення є простим типом даних, повертаємо ключ
     return key;
   });
 
-  return res;
+  return res; // Повертаємо масив ключів першого стовпця
 };
 
 export const getFieldData = (arr) => {
