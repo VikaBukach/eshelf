@@ -22,7 +22,7 @@ const CartItem = ({ item }) => {
   return (
     <div className={"cart__product"}>
       <div className={"cart__productImage"}>
-        <img src={"/" + item.imageURL} alt={item.title} />
+        <img src={item.imageURL} alt={item.title} />
       </div>
       <div className={"cart__productContent"}>
         <h3 className={"cart__heading"}>{item.title}</h3>

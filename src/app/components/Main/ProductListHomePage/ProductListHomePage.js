@@ -69,9 +69,9 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                         id={item._id}
                         imageURL={item.colors[0].images[0]}
                         category={item.category}
-                        title={item.brand + " " + item.model + " " + item.colors[0].products[0].capacity}
+                        title={item.brand + " " + item.model}
                         price={item.colors[0].products[0].price}
-                        discountPrice={item.discountPrice}
+                        // discountPrice={item.discountPrice}
                         color={item.colors[0].color}
                       />
                     )}

@@ -1,9 +1,15 @@
 .product-list {
-  @include grid-container(2, 8px);
-  width: 100%;
+    @include grid-container(1, 16px);
+  }
 
-  &__item {
-    list-style: none;
+@media screen and (min-width: $mobile) {
+  .product-list {
+    @include grid-container(2, 8px);
+    width: 100%;
+  
+    &__item {
+      list-style: none;
+    }
   }
 }
 
@@ -14,6 +20,13 @@
 }
 
 @media screen and (min-width: $desktop) {
+  .product-list {
+    @include grid-container(3, 16px);
+  }
+}
+
+
+@media screen and (min-width: 1250px) {
   .product-list {
     @include grid-container(4, 16px);
   }
