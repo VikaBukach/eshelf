@@ -114,6 +114,7 @@ const OrderPage = () => {
       dispatch(setOrderNumber(randomOrderNumber));
 
       const PORT = process.env.REACT_APP_PORT || 5000;
+      const REACT_APP_BACK_URL = process.env.REACT_APP_BACK_URL || "http://localhost";
 
       const orderData = {
         ...state,
@@ -126,7 +127,8 @@ const OrderPage = () => {
       };
 
       await axios
-        .post(`http://localhost:${PORT}/postOrder`, {
+
+        .post(`${REACT_APP_BACK_URL}:${PORT}/postOrder`, {
           ...orderData,
         })
         .catch((err) => {
