@@ -15,6 +15,46 @@ export const selectPriceTo = (state) => state.filterSettings.priceTo;
 
 const PORT = process.env.REACT_APP_PORT || 5000;
 
+
+
+export const fetchDataOfProducts1 = createAsyncThunk(
+  "products/fetchDataOfProducts",
+  async (collection, { dispatch }) => {
+    const PORT = process.env.REACT_APP_PORT || 5000;
+    const REACT_APP_BACK_URL = process.env.REACT_APP_BACK_URL || "http://localhost";
+
+    try {
+      console.log("2222222222222222");
+      const response = await axios.get(
+        `http://localhost:${PORT}/${'smartphones'}?page=${1}&limit=${3}`
+      );
+      console.log(response.data);
+      dispatch(setProducts(response.data.products));
+    
+      return response.data.products;
+    } catch (err) {
+      console.log("Error fetching products:", err);
+      throw err;
+    }
+  }
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const fetchDataOfProducts = createAsyncThunk(
   "products/fetchDataOfProducts",
   async (collection, { dispatch }) => {

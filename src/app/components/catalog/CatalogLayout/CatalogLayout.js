@@ -10,8 +10,8 @@ import { Breadcrumbs } from "../../ui/Breadcrumbs/Breadcrumbs";
 // Slices
 import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
-import { loadPageOfProducts, setPagesToLoading } from "../../../store/slices/productsSlice";
-import { addVariationsToFilterCriterias } from "../../../store/slices/filterSettingsSlice";
+import { loadPageOfProducts, setPagesToLoading, fetchDataOfProducts1 } from "../../../store/slices/productsSlice";
+import { addVariationsToFilterCriterias, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
 // Another
 import { createFilterSettingsObjectFromUrl } from "../../../utils/filter-url";
 
@@ -68,64 +68,69 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   };
 
   // При ЗАВАНТАЖЕННІ сторінки, тобто, ОДИН раз
+  // useEffect(() => {
+  //   if (location.search !== "") {
+  //     const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
+  //       minValue,
+  //       maxValue,
+  //       location.search
+  //     );
+
+  //     if (sortingSettings) {
+  //       dispatch(setFilterSorting(sortingSettings));
+  //     }
+  //     dispatch(setPriceBy(filterPriceSettings.priceBy));
+  //     dispatch(setPriceTo(filterPriceSettings.priceTo));
+  //     if (Object.keys(filterCheckboxSettings).length !== 0) {
+  //       dispatch(setCheckboxesSettings(filterCheckboxSettings));
+  //     }
+  //   }
+
+  //   dispatch(addVariationsToFilterCriterias({ collection: categoryName, filterCriterias: filterCriterias }));
+  // }, []);
+
+  const testFilterCriterias = 
+    {"specifications.display.display_matrix_type": "Super Retina XDR display", "colors.color": "blue"}
+  ;
+
   useEffect(() => {
-    if (location.search !== "") {
-      const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
-        minValue,
-        maxValue,
-        location.search
-      );
-
-      if (sortingSettings) {
-        dispatch(setFilterSorting(sortingSettings));
-      }
-      dispatch(setPriceBy(filterPriceSettings.priceBy));
-      dispatch(setPriceTo(filterPriceSettings.priceTo));
-      if (Object.keys(filterCheckboxSettings).length !== 0) {
-        dispatch(setCheckboxesSettings(filterCheckboxSettings));
-      }
-    }
-
-    dispatch(addVariationsToFilterCriterias({ collection: categoryName, filterCriterias: filterCriterias }));
+    console.log("1111111");
+      dispatch(fillTheFilter({ collection: categoryName, filterSettings: testFilterCriterias}));
+      // dispatch(fetchDataOfProducts1({ collection: {categoryName}, page: 1, limit: 10000 }));
+    
   }, []);
 
-  useEffect(() => {
-    if (loadingFilterSettingsStatus === "succeeded") {
-      dispatch(loadPageOfProducts({ collection: categoryName, page: 1, limit: 1 }));
-    }
-  }, [loadingFilterSettingsStatus]);
+  // useEffect(() => {
+  //   if (fetchStatus === "succeeded") {
+  //     const colorsInProducts = products.reduce((accumulator, product) => {
+  //       return accumulator + product.colors.length;
+  //     }, 0);
 
-  useEffect(() => {
-    if (fetchStatus === "succeeded") {
-      const colorsInProducts = products.reduce((accumulator, product) => {
-        return accumulator + product.colors.length;
-      }, 0);
+  //     if (
+  //       (cardsOnPage * pagesToLoading > colorsInProducts &&
+  //         (products.length <= productsDataLength || (productsDataLength === 0 && products.length > 0)) &&
+  //         pageOfDB <= productsDataLength) ||
+  //       (productsDataLength === 0 && pageOfDB > 0)
+  //     ) {
+  //       dispatch(loadPageOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
+  //     }
 
-      if (
-        (cardsOnPage * pagesToLoading > colorsInProducts &&
-          (products.length <= productsDataLength || (productsDataLength === 0 && products.length > 0)) &&
-          pageOfDB <= productsDataLength) ||
-        (productsDataLength === 0 && pageOfDB > 0)
-      ) {
-        dispatch(loadPageOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
-      }
-
-      if (cardsInAllFilteredProducts === colorsInProducts) {
-        setvisibleButton(false);
-      } else {
-        setvisibleButton(true);
-      }
-    }
-  }, [fetchStatus]);
+  //     if (cardsInAllFilteredProducts === colorsInProducts) {
+  //       setvisibleButton(false);
+  //     } else {
+  //       setvisibleButton(true);
+  //     }
+  //   }
+  // }, [fetchStatus]);
 
   const onClickLoadMore = () => {
     dispatch(setPagesToLoading(pagesToLoading + 1));
     dispatch(loadPageOfProducts({ collection: categoryName, page: pageOfDB, limit: 1 }));
   };
 
-  useEffect(() => {
-    setAllSettings(Object.values(filterSettings).flat());
-  }, [filterSettings]);
+  // useEffect(() => {
+  //   setAllSettings(Object.values(filterSettings).flat());
+  // }, [filterSettings]);
 
   return (
     <div className="container">
