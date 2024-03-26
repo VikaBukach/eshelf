@@ -89,19 +89,18 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
   //   dispatch(addVariationsToFilterCriterias({ collection: categoryName, filterCriterias: filterCriterias }));
   // }, []);
 
-  const testFilterCriterias = 
-    {"specifications.display.display_matrix_type": "Super Retina XDR display", "colors.color": "blue"}
-  ;
+  // const testFilterCriterias =
+  //   {"specifications.display.display_matrix_type": "Super Retina XDR display", "colors.color": "blue"}
+  // ;
 
+  const testFilterCriterias = {};
 
   useEffect(() => {
-
-  
-
-      dispatch(getMinAndMaxPrice({ collection: categoryName, filterSettings: testFilterCriterias}));
-      dispatch(fillTheFilter({ collection: categoryName, filterSettings: testFilterCriterias, filterCriterias: filterCriterias}));
-      // dispatch(fetchDataOfProducts1({ collection: {categoryName}, page: 1, limit: 10000 }));
-    
+    dispatch(getMinAndMaxPrice({ collection: categoryName, filterSettings: testFilterCriterias }));
+    dispatch(
+      fillTheFilter({ collection: categoryName, filterSettings: testFilterCriterias, filterCriterias: filterCriterias, priceBy: priceBy, priceTo: priceTo })
+    );
+    // dispatch(fetchDataOfProducts1({ collection: {categoryName}, page: 1, limit: 10000 }));
   }, []);
 
   // useEffect(() => {
@@ -138,44 +137,44 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
 
   return (
     <div className="container">
-    <div className="catalog">
-      <div className="catalog__shadow"></div>
-      <div className="catalog__head-line">
-        <div className="catalog__head-line__head">
-          <Breadcrumbs />
-          <h3 className="catalog__head-line__title">{title}</h3>
+      <div className="catalog">
+        <div className="catalog__shadow"></div>
+        <div className="catalog__head-line">
+          <div className="catalog__head-line__head">
+            <Breadcrumbs />
+            <h3 className="catalog__head-line__title">{title}</h3>
+          </div>
+          <div className="catalog__head-line__container">
+            <button className="catalog__head-line__filter-btn" type="button" onClick={openFilter}>
+              <img className="catalog__head-line__filter-btn__img" src="../assets/icons/filter.svg" alt="Icon" />
+              Filter
+              <div className="catalog__head-line__filter-btn__count">{checkCount()}</div>
+            </button>
+            <CatalogSorting className="catalog__head-line__sorting" />
+          </div>
+          <ul className="catalog__filter-settings">
+            {allSettings.map((setting, index) => (
+              <li className="catalog__filter-settings__item" key={index}>
+                {setting}
+                <img
+                  className="catalog__filter-settings__close"
+                  src="../assets/icons/close2.svg"
+                  alt="Icon"
+                  data-value={setting}
+                  onClick={deleteSetting}
+                />
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className="catalog__head-line__container">
-          <button className="catalog__head-line__filter-btn" type="button" onClick={openFilter}>
-            <img className="catalog__head-line__filter-btn__img" src="../assets/icons/filter.svg" alt="Icon" />
-            Filter
-            <div className="catalog__head-line__filter-btn__count">{checkCount()}</div>
-          </button>
-          <CatalogSorting className="catalog__head-line__sorting" />
+        <div className="catalog__body">
+          <CatalogFilter categoryName={categoryName} filterCriterias={filterCriterias} pricePath={pricePath} />
+          <div className="catalog__body__list">
+            <CatalogProductList />
+            {visibleButton ? <CatalogPagination onClickFunc={onClickLoadMore} /> : null}
+          </div>
         </div>
-        <ul className="catalog__filter-settings">
-          {allSettings.map((setting, index) => (
-            <li className="catalog__filter-settings__item" key={index}>
-              {setting}
-              <img
-                className="catalog__filter-settings__close"
-                src="../assets/icons/close2.svg"
-                alt="Icon"
-                data-value={setting}
-                onClick={deleteSetting}
-              />
-            </li>
-          ))}
-        </ul>
       </div>
-      <div className="catalog__body">
-        <CatalogFilter categoryName={categoryName} filterCriterias={filterCriterias} pricePath={pricePath} />
-        <div className="catalog__body__list">
-          <CatalogProductList />
-          {visibleButton ? <CatalogPagination onClickFunc={onClickLoadMore} /> : null}
-        </div>
-      </div>
-    </div>
     </div>
   );
 };

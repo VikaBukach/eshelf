@@ -46,7 +46,7 @@ export const getMinAndMaxPrice =
   };
 
 export const fillTheFilter =
-  ({ collection, filterSettings, filterCriterias }) =>
+  ({ collection, filterSettings, filterCriterias, priceBy, priceTo }) =>
   async (dispatch) => {
     try {
       const filterCriteriasArray = [];
@@ -58,6 +58,8 @@ export const fillTheFilter =
         params: {
           filterSettings: filterSettings,
           filterCriterias: filterCriteriasArray,
+          priceBy: priceBy,
+          priceTo: priceTo
         },
       });
       dispatch({ type: "FILL_FILTER", payload: res.data });
@@ -272,8 +274,8 @@ const filterSettingsSlice = createSlice({
     filterCriteriasWithTypes: [],
     minPrice: 0,
     maxPrice: 0,
-    priceBy: 0,
-    priceTo: 0,
+    priceBy: 500,
+    priceTo: 1200,
     numberOfValues: {},
     cardsInAllFilteredProducts: 0,
     status: "idle",

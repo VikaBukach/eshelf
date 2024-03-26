@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Smartphone = require("../models/Smartphone");
 
-const getMinAndMaxPrices = async (collectionModel, filterSettingsArray) => {
+const getMinAndMaxPrices = async (collectionModel, filterSettings) => {
   try {
     let collection;
     switch (collectionModel) {
@@ -15,7 +15,9 @@ const getMinAndMaxPrices = async (collectionModel, filterSettingsArray) => {
     const result = await collection.aggregate([
       { $unwind: "$colors" },
       { $unwind: "$colors.products" },
-      { $match: filterSettingsArray },
+      filterSettings && Object.keys(filterSettings).length > 0
+        ? { $match: filterSettings }
+        : { $match: {} },
       {
         $group: {
           _id: null,
