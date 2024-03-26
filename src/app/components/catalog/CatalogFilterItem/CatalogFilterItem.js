@@ -11,6 +11,7 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
 
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const numberOfValues = useSelector((state) => state.filterSettings.numberOfValues);
+  const filterCriteriasWithTypes = useSelector((state) => state.filterSettings.filterCriteriasWithTypes);
 
   const filterSettingsToUpdate = { ...filterSettings };
 
@@ -27,7 +28,6 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
       filterSettingsToUpdate[criteriaPath] = filterSettingsToUpdate[criteriaPath].filter((item) => item !== name);
     }
 
-    dispatch(setCheckboxesSettings(filterSettingsToUpdate));
   };
 
   const isCheckboxChecked = (checkBoxName) => {

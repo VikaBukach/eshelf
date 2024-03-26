@@ -15,43 +15,82 @@ export const selectPriceTo = (state) => state.filterSettings.priceTo;
 
 const PORT = process.env.REACT_APP_PORT || 5000;
 
-
 // export const fillFilterCriterias = (collectionName) => async (dispatch) => {
 //   try {
 //     console.log("22222222");
 //     const res = await axios.get(`http://localhost:5000/getMinAndMaxPrices/${collectionName}`);
 //     dispatch({ type: 'FILL_FILTER', payload: res.data });
 //     console.log(res.data);
-//   } catch (error) { 
+//   } catch (error) {
 //     console.error('Error fetching min and max prices:', error);
 //     throw error;
 //   }
 // };
 
+export const getMinAndMaxPrice =
+  ({ collection, filterSettings }) =>
+  async (dispatch) => {
+    try {
+      const res = await axios.get(`http://localhost:5000/getMinAndMaxPrices/?collection=${collection}`, {
+        params: {
+          filterSettings: filterSettings,
+        },
+      });
+      dispatch({ type: "FILL_FILTER", payload: res.data });
+      dispatch(setMinPrice(res.data.minPrice));
+      dispatch(setMaxPrice(res.data.maxPrice));
+    } catch (error) {
+      console.error("Error fetching min and max prices:", error);
+      throw error;
+    }
+  };
 
+export const fillTheFilter =
+  ({ collection, filterSettings, filterCriterias }) =>
+  async (dispatch) => {
+    try {
+      const filterCriteriasArray = [];
+      filterCriterias.forEach((criteria) => {
+        filterCriteriasArray.push(criteria.path);
+      });
 
-export const fillTheFilter = ({collection, filterSettings}) => async (dispatch) => {
-  try {
-    const res = await axios.get(`http://localhost:5000/getMinAndMaxPrices/?collection=${collection}`, {
-      params: {
-        filterSettings: filterSettings
-      }
-    });
-    dispatch({ type: 'FILL_FILTER', payload: res.data });
-    dispatch(setMinPrice(res.data.minPrice));
-    dispatch(setMaxPrice(res.data.maxPrice));
-  } catch (error) { 
-    console.error('Error fetching min and max prices:', error);
-    throw error;
-  }
-};
+      const res = await axios.get(`http://localhost:5000/fill-the-filter/?collection=${collection}`, {
+        params: {
+          filterSettings: filterSettings,
+          filterCriterias: filterCriteriasArray,
+        },
+      });
+      dispatch({ type: "FILL_FILTER", payload: res.data });
 
+      const { allValuesFromAllProducts, allValuesFromFilteredProducts } = res.data;
 
+      const updatedFilterCriterias = filterCriterias.map((criteria) => {
+        return {
+          ...criteria,
+          types: [...new Set(allValuesFromAllProducts[criteria.path])],
+        };
+      });
 
+      const numberOfValues = {};
 
+      updatedFilterCriterias.forEach((criteria) => {
+        numberOfValues[criteria.path] = {};
+        criteria.types.forEach((type) => {
+          numberOfValues[criteria.path][type] = 0;
 
+          numberOfValues[criteria.path][type] = allValuesFromFilteredProducts[criteria.path].filter(
+            (value) => value === type
+          ).length;
+        });
+      });
 
-
+      dispatch(setFilterCriteriasWithTypes(updatedFilterCriterias));
+      dispatch(setNumberOfValues(numberOfValues));
+    } catch (error) {
+      console.error("Error fetching filter fill:", error);
+      throw error;
+    }
+  };
 
 // export const fillTheFilter = createAsyncThunk(
 //   "products/fillTheFilter",
@@ -63,7 +102,7 @@ export const fillTheFilter = ({collection, filterSettings}) => async (dispatch) 
 //       console.log(checkboxFilterSettings);
 //       const response = await axios.get(`http://localhost:${PORT}/getMinAndMaxPrices/${"Smartphone"}`);
 //       console.log(response.data);
-    
+
 //       return response.data;
 //     } catch (err) {
 //       console.log("Error fetching products:", err);
@@ -72,12 +111,8 @@ export const fillTheFilter = ({collection, filterSettings}) => async (dispatch) 
 //   }
 // );
 
-
-
-
-
 export const addVariationsToFilterCriterias = createAsyncThunk(
-  "filterSettings/addVariationsToFilterCriterias",
+  "filterSettings/addVariationsToFilterCriterias"
   // async ({ collection, filterCriterias }, { dispatch, getState }) => {
   //   let filterSettings = selectFilterSettings(getState());
   //   const priceBy = selectPriceBy(getState());
@@ -86,6 +121,7 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
   //   try {
   //     const response = await axios.get(`http://localhost:${PORT}/${collection}`);
   //     const products = response.data;
+
   //     const productsWithFilter =
   //       filterSettings.length !== 0 ? filterProducts(response.data, filterSettings) : response.data;
 
@@ -94,14 +130,16 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
   //     }, 0);
 
   //     dispatch(setCardsInAllFilteredProducts(colorsInProducts));
-
   //     dispatch(setProductsDataLength(products.length));
   //     dispatch(setMinPrice(findMinAndMaxPrice(productsWithFilter).minValue));
   //     dispatch(setMaxPrice(findMinAndMaxPrice(productsWithFilter).maxValue));
   //     dispatch(setPriceBy(priceBy ? priceBy : 0));
   //     dispatch(setPriceTo(priceTo ? priceTo : 0));
+
   //     const updatedFilterCriterias = [];
+
   //     const numberOfValues = {};
+
   //     filterCriterias.forEach((criteria) => {
   //       let productsWithFilterValues = [];
   //       productsWithFilter.forEach((product) => {
@@ -150,7 +188,7 @@ export const addVariationsToFilterCriterias = createAsyncThunk(
 );
 
 export const updateByFilter = createAsyncThunk(
-  "filterSettings/updateByFilter",
+  "filterSettings/updateByFilter"
   // async ({ collection, filterCriterias, isReset = false }, { dispatch, getState }) => {
   //   let filterSettings = selectFilterSettings(getState());
   //   const priceBy = selectPriceBy(getState());

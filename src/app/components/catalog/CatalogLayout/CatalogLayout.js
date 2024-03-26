@@ -11,7 +11,7 @@ import { Breadcrumbs } from "../../ui/Breadcrumbs/Breadcrumbs";
 import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
 import { loadPageOfProducts, setPagesToLoading, fetchDataOfProducts1 } from "../../../store/slices/productsSlice";
-import { addVariationsToFilterCriterias, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
+import { addVariationsToFilterCriterias, getMinAndMaxPrice, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
 // Another
 import { createFilterSettingsObjectFromUrl } from "../../../utils/filter-url";
 
@@ -93,9 +93,13 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
     {"specifications.display.display_matrix_type": "Super Retina XDR display", "colors.color": "blue"}
   ;
 
+
   useEffect(() => {
-    console.log("1111111");
-      dispatch(fillTheFilter({ collection: categoryName, filterSettings: testFilterCriterias}));
+
+  
+
+      dispatch(getMinAndMaxPrice({ collection: categoryName, filterSettings: testFilterCriterias}));
+      dispatch(fillTheFilter({ collection: categoryName, filterSettings: testFilterCriterias, filterCriterias: filterCriterias}));
       // dispatch(fetchDataOfProducts1({ collection: {categoryName}, page: 1, limit: 10000 }));
     
   }, []);

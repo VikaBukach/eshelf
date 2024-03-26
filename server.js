@@ -4,7 +4,7 @@
 const cors = require("cors");
 // const bodyParser = require("body-parser");
 // const { connectToDb, getDb } = require("./db");
-const { reviewRouter, authRouter, orderRouter, userInfoRouter, products, minAndMaxPrice } = require("./backend/router");
+const { reviewRouter, authRouter, orderRouter, userInfoRouter, products, minAndMaxPriceRouter, fillTheFilterRouter } = require("./backend/router");
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -49,7 +49,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use('/smartphones', products);
-app.use('/getMinAndMaxPrices', minAndMaxPrice);
+app.use('/getMinAndMaxPrices', minAndMaxPriceRouter);
+app.use('/fill-the-filter', fillTheFilterRouter);
 
 
 
