@@ -6,7 +6,7 @@ import { setCompareTotal } from "../../store/slices/navMenuSlice"; // додав
 
 export const ComparingPage = () => {
   const dispatch = useDispatch(); // додав підрахунок товарів
-  const { data: compareData } = useSelector((state) => state.compare);
+  const { data: compareData, selectedCategory } = useSelector((state) => state.compare);
   console.log(compareData);
 
   useEffect(() => {
@@ -22,6 +22,11 @@ export const ComparingPage = () => {
       </div>
     );
   }
+
+  if (compareData.length && selectedCategory !== "smartphones") {
+    return <h3>In developing progress...</h3>;
+  }
+
   // if (compareData.length === 1) {
   //   return (
   //     <div className="container">

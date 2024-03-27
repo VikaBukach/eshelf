@@ -28,14 +28,15 @@ const Header = () => {
   const compareTotal = useSelector((state) => state.menu.compareTotal);
 
   const windowWidth = useWindowWidth();
-  useEffect(() => {
-    const calculateCartTotal = () => {
-      const total = 0;
-      dispatch(setCartTotal(total));
-    };
+  // Скидувало cartTotal
+  // useEffect(() => {
+  //   const calculateCartTotal = () => {
+  //     const total = 0;
+  //     dispatch(setCartTotal(total));
+  //   };
 
-    calculateCartTotal();
-  }, [dispatch]);
+  //   calculateCartTotal();
+  // }, [dispatch]);
 
   const handleToggleMenu = () => {
     dispatch(toggleMenu());

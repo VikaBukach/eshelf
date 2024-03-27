@@ -1,5 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Обчислюємо загальну вартість корзини
+const getTotalCart = () => {
+  const cart = localStorage.getItem("cart");
+  if (cart) {
+    return JSON.parse(cart).reduce((prev, curr) => {
+      return prev + curr.quantity * (curr?.discountPrice || curr.price);
+    }, 0);
+  } else {
+    return 0;
+  }
+};
+
 export const menuSlice = createSlice({
   name: "menu",
   initialState: {
@@ -8,7 +20,7 @@ export const menuSlice = createSlice({
     favoritesCount: 0,
     cartCount: 1,
     userCount: 1,
-    cartTotal: 0,
+    cartTotal: getTotalCart(), // Встановлюємо початкове значення для загальної вартості товарів в корзині
     favoritesTotal: 0,
     compareTotal: 0,
   },

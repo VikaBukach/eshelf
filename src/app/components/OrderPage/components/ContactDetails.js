@@ -1,25 +1,36 @@
 import "../Order.scss";
+import { validateEmail } from "../../../utils/validateEmail";
 import InputMask from "../../ui/Input/InputMask";
-import { validateEmail } from "..";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import { useRef, useEffect } from "react";
+
+const DetailsSchema = Yup.object().shape({
+  name: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
+  surname: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
+  email: Yup.string().email("Invalid email").required("Required"),
+  phone: Yup.string().length(17).required("Required"),
+});
 
 export const ContactDetails = ({
   state,
   setState,
+  setValid,
   accountSettingsClass = "",
   inputContainerClass = "",
   labelClass = "",
 }) => {
   const inputs = [
     {
-      key: "surname",
-      label: "Surname",
-      placeholder: "Enter your last name",
-      mask: /^[\p{L}]*$/u,
-    },
-    {
       key: "name",
       label: "Name",
       placeholder: "Enter your first name",
+      mask: /^[\p{L}]*$/u,
+    },
+    {
+      key: "surname",
+      label: "Surname",
+      placeholder: "Enter your last name",
       mask: /^[\p{L}]*$/u,
     },
     {
@@ -33,77 +44,82 @@ export const ContactDetails = ({
       label: "E-mail",
       placeholder: "Enter your email",
       mask: /^\S*@?\S*$/,
-      // validateFunction: (val) => validateEmail(val),
     },
   ];
 
-  return (
-    //added class ${accountSettingsClass} for overriting styles in UserDetails
-    <div className={`${"orderPage__contactDetails"} ${accountSettingsClass}`}>
-      {inputs.map((input) => (
-        <div className={`${inputContainerClass}`} key={input.key}>
-          <label htmlFor={input.key} className={`${labelClass} orderPage__label`}>
-            {input.label}
-          </label>
+  const formRef = useRef(null);
 
-          <InputMask
-            id={input.key}
-            validateFunction={input?.validateFunction}
-            input={input}
-            setState={setState}
-            state={state}
-          />
-        </div>
-      ))}
-    </div>
+  useEffect(() => {
+    // Update validity status outside of the render function
+    setValid(formRef.current.isValid);
+  }, [setValid, formRef.current]);
+
+  return (
+    <Formik
+      validationSchema={DetailsSchema}
+      initialValues={{
+        name: state.name,
+        surname: state.surname,
+        email: state.email,
+        phone: state.phone,
+      }}
+      validateOnChange={false}
+      validateOnBlur={true}
+      innerRef={formRef}
+      isInitialValid={false}
+    >
+      {({ errors, validateField, setValues, isValid }) => (
+        <Form>
+          <div className={`${"orderPage__contactDetails"} ${accountSettingsClass}`}>
+            {inputs.map((input) => (
+              <div className={`${inputContainerClass}`} key={input.key}>
+                <label htmlFor={input.key} className={`${labelClass} orderPage__label`}>
+                  {input.label}
+                </label>
+
+                {input.key === "phone" ? (
+                  <InputMask
+                    validateFunction={validateField}
+                    input={input}
+                    state={state}
+                    setState={(value) => {
+                      setState((prev) => ({
+                        ...prev,
+                        [input.key]: value,
+                      }));
+                      setValues((prev) => ({
+                        ...prev,
+                        [input.key]: value,
+                      }));
+                    }}
+                  />
+                ) : (
+                  <Field
+                    className="input_ui__input"
+                    name={input.key}
+                    value={state[input.key]}
+                    onChange={(e) => {
+                      setState((prev) => ({
+                        ...prev,
+                        [input.key]: e.target.value,
+                      }));
+                      setValues((prev) => ({
+                        ...prev,
+                        [input.key]: e.target.value,
+                      }));
+                    }}
+                    onBlur={() => {
+                      validateField(input.key); // Trigger validation on blur
+                    }}
+                  />
+                )}
+
+                {errors[input.key] && <div>{errors[input.key]}</div>}
+              </div>
+            ))}
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 };
-
-// import { IMaskInput } from "react-imask";
-// import style from "../Order.module.scss";
-
-// export const ContactDetails = ({ state, setState }) => {
-//   const inputs = [
-//     {
-//       key: "surname",
-//       label: "Surname",
-//       placeholder: "Enter your last name",
-//       mask: String,
-//     },
-//     {
-//       key: "name",
-//       label: "Name",
-//       placeholder: "Enter your first name",
-//     },
-//     {
-//       key: "phone",
-//       label: "Mobile phone",
-//       placeholder: "Enter your phone number",
-//     },
-//     {
-//       key: "email",
-//       label: "E-mail",
-//       placeholder: "Enter your  email",
-//     },
-//   ];
-
-//   return (
-//     <div className={style.contactDetails}>
-//       {inputs.map((input) => (
-//         <IMaskInput
-//           mask={input.type}
-//           label={input.label}
-//           placeholder={input.placeholder}
-//           key={input.key}
-//           value={state[input.key]}
-//           onChange={(val) => {
-//             setState((prev) => ({
-//               ...prev,
-//               [input.key]: val,
-//             }));
-//           }}
-//         />
-//       ))}
-//     </div>
-//   );
-// };
