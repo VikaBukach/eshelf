@@ -63,9 +63,10 @@ const AboutProduct = ({ product }) => {
     const fetchData = async () => {
       try {
         const PORT = process.env.REACT_APP_PORT || 5000;
+        const REACT_APP_BACK_URL = process.env.REACT_APP_BACK_URL || "http://localhost";
 
         const response = await axios.post(
-          `http://localhost:${PORT}/postRevised`,
+          `${REACT_APP_BACK_URL}:${PORT}/postRevised`,
           {
             userEmail: user.email,
             productId: product?._id,
