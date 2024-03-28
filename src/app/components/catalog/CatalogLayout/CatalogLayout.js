@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // Components
@@ -8,10 +8,9 @@ import { CatalogSorting } from "../CatalogSorting/CatalogSorting";
 import { CatalogPagination } from "../CatalogPagination/CatalogPagination";
 import { Breadcrumbs } from "../../ui/Breadcrumbs/Breadcrumbs";
 // Slices
-import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
+import { setCheckboxesSettings, setPriceBy, setPriceTo, getMinAndMaxPrices, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
 import { setPagesToLoading, loadOnePageOfProducts } from "../../../store/slices/productsSlice";
-import { getMinAndMaxPrices, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
 // Another
 import { createFilterSettingsObjectFromUrl, createUrlFromFilterSettings } from "../../../utils/filter-url";
 import { convertSettingsToMongoType } from "../../../helpers/catalog";
@@ -128,47 +127,61 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
     }
   };
 
-  // Зміна підказок при зміні ціни (видаленні)
-  const changePricePrompt = () => {
-    setPriceByPrompt(priceBy);
-  };
+  // Зміна підказок при зміні ціни
+  const changePricePrompt = useMemo(() => {
+    return () => {
+      setPriceByPrompt(priceBy);
+      setPriceToPrompt(priceTo);
+    };
+  }, [priceBy, priceTo]);
 
-  const deletePricePrompt = (priceType) => {
-    const newPriceBy = priceType === "by" ? 0 : priceBy;
-    const newPriceTo = priceType === "to" ? 0 : priceTo;
+  const deletePricePrompt = useMemo(() => {
+    return (priceType) => {
+      const newPriceBy = priceType === "by" ? 0 : priceBy;
+      const newPriceTo = priceType === "to" ? 0 : priceTo;
 
-    setPriceByPrompt(newPriceBy);
-    setPriceToPrompt(newPriceTo);
+      setPriceByPrompt(newPriceBy);
+      setPriceToPrompt(newPriceTo);
 
-    dispatch(setPriceBy(newPriceBy));
-    dispatch(setPriceTo(newPriceTo));
+      dispatch(setPriceBy(newPriceBy));
+      dispatch(setPriceTo(newPriceTo));
 
-    dispatch(
-      fillTheFilter({
-        collection: categoryName,
-        filterSettings: convertSettingsToMongoType(filterSettings),
-        filterCriterias: filterCriterias,
-        priceBy: newPriceBy,
-        priceTo: newPriceTo,
-      })
-    );
-    dispatch(
-      loadOnePageOfProducts({
-        collection: categoryName,
-        filterSettings: convertSettingsToMongoType(filterSettings),
-        priceBy: newPriceBy,
-        priceTo: newPriceTo,
-        limit: cardsOnPage,
-        page: 1,
-        sortingMode: sortingMode,
-      })
-    );
-    if (pagesToLoading !== 1) {
-      dispatch(setPagesToLoading(1));
-    }
-    const url = `?${createUrlFromFilterSettings(filterSettings, newPriceBy, newPriceTo, sortingMode)}`;
-    navigate(url);
-  };
+      dispatch(
+        fillTheFilter({
+          collection: categoryName,
+          filterSettings: convertSettingsToMongoType(filterSettings),
+          filterCriterias: filterCriterias,
+          priceBy: newPriceBy,
+          priceTo: newPriceTo,
+        })
+      );
+      dispatch(
+        loadOnePageOfProducts({
+          collection: categoryName,
+          filterSettings: convertSettingsToMongoType(filterSettings),
+          priceBy: newPriceBy,
+          priceTo: newPriceTo,
+          limit: cardsOnPage,
+          page: 1,
+          sortingMode: sortingMode,
+        })
+      );
+      if (pagesToLoading !== 1) {
+        dispatch(setPagesToLoading(1));
+      }
+      const url = `?${createUrlFromFilterSettings(filterSettings, newPriceBy, newPriceTo, sortingMode)}`;
+      navigate(url);
+    };
+  }, [
+    priceBy,
+    priceTo,
+    categoryName,
+    filterSettings,
+    filterCriterias,
+    cardsOnPage,
+    pagesToLoading,
+    sortingMode,
+  ]);
 
   // Дії при ЗАВАНТАЖЕННІ сторінки
   useEffect(() => {

@@ -82,7 +82,6 @@ const filterSettingsSlice = createSlice({
     priceBy: 0,
     priceTo: 0,
     numberOfValues: {},
-    cardsInAllFilteredProducts: 0,
     status: "idle",
     error: null,
   },
@@ -107,9 +106,6 @@ const filterSettingsSlice = createSlice({
     },
     setNumberOfValues: (state, action) => {
       state.numberOfValues = action.payload;
-    },
-    setCardsInAllFilteredProducts: (state, action) => {
-      state.cardsInAllFilteredProducts = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -149,6 +145,5 @@ export const {
   setPriceTo,
   setFilterCriteriasWithTypes,
   setNumberOfValues,
-  setCardsInAllFilteredProducts,
 } = filterSettingsSlice.actions;
 export default filterSettingsSlice.reducer;

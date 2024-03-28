@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // Components
@@ -6,12 +6,10 @@ import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
 import { Accordion } from "../../ui/Accordion/Accordion";
 // Slices
-import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
-import { setPagesToLoading } from "../../../store/slices/productsSlice";
-import { loadOnePageOfProducts } from "../../../store/slices/productsSlice";
+import { setCheckboxesSettings, setPriceBy, setPriceTo, getMinAndMaxPrices, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
+import { setPagesToLoading, loadOnePageOfProducts } from "../../../store/slices/productsSlice";
 // Another
 import { createUrlFromFilterSettings } from "../../../utils/filter-url";
-import { getMinAndMaxPrices, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
 import { convertSettingsToMongoType } from "../../../helpers/catalog";
 
 const CatalogFilter = ({ categoryName, filterCriterias, pricePath, changePricePromptFunction }) => {
@@ -55,36 +53,38 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath, changePricePr
   };
 
   // Запуск фільтру
-  const filterActions = () => {
-    dispatch(
-      getMinAndMaxPrices({ collection: categoryName, filterSettings: convertSettingsToMongoType(filterSettings) })
-    );
-    dispatch(
-      fillTheFilter({
-        collection: categoryName,
-        filterSettings: convertSettingsToMongoType(filterSettings),
-        filterCriterias: filterCriterias,
-        priceBy: priceBy,
-        priceTo: priceTo,
-      })
-    );
-    dispatch(
-      loadOnePageOfProducts({
-        collection: categoryName,
-        filterSettings: convertSettingsToMongoType(filterSettings),
-        priceBy: priceBy,
-        priceTo: priceTo,
-        limit: cardsOnPage,
-        page: 1,
-        sortingMode: sortingMode,
-      })
-    );
-    if (pagesToLoading !== 1) {
-      dispatch(setPagesToLoading(1));
-    }
-    navigateToUrlWithSettings();
-    changePricePromptFunction();
-  };
+  const filterActions = useMemo(() => {
+    return () => {
+      dispatch(
+        getMinAndMaxPrices({ collection: categoryName, filterSettings: convertSettingsToMongoType(filterSettings) })
+      );
+      dispatch(
+        fillTheFilter({
+          collection: categoryName,
+          filterSettings: convertSettingsToMongoType(filterSettings),
+          filterCriterias: filterCriterias,
+          priceBy: priceBy,
+          priceTo: priceTo,
+        })
+      );
+      dispatch(
+        loadOnePageOfProducts({
+          collection: categoryName,
+          filterSettings: convertSettingsToMongoType(filterSettings),
+          priceBy: priceBy,
+          priceTo: priceTo,
+          limit: cardsOnPage,
+          page: 1,
+          sortingMode: sortingMode,
+        })
+      );
+      if (pagesToLoading !== 1) {
+        dispatch(setPagesToLoading(1));
+      }
+      navigateToUrlWithSettings();
+      changePricePromptFunction();
+    };
+  }, [categoryName, filterCriterias, filterSettings, priceBy, priceTo, cardsOnPage, pagesToLoading, sortingMode]);
 
   // Натиск кнопки SUBMIT
   const onFilterSubmit = () => {
