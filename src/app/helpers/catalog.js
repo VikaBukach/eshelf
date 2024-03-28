@@ -142,4 +142,15 @@ const filterByPrice = (products, priceBy, priceTo) => {
   }
 };
 
-export { findMinAndMaxPrice, isContainArrayOfObjects, normalizeValue, findValueByPath, filterProducts, filterByPrice };
+const convertSettingsToMongoType = (settings) => {
+  const mongoFilterSettings = {};
+  for (const path in settings) {
+    if (settings.hasOwnProperty(path)) {
+      const values = settings[path];
+      mongoFilterSettings[path] = { $in: values };
+    }
+  }
+  return mongoFilterSettings;
+};
+
+export { findMinAndMaxPrice, isContainArrayOfObjects, normalizeValue, findValueByPath, filterProducts, filterByPrice, convertSettingsToMongoType };

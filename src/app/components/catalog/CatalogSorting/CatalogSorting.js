@@ -1,25 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // Slices
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
 
-const CatalogSorting = ({}) => {
+const CatalogSorting = ({ onChangeFunction }) => {
   const dispatch = useDispatch();
-
   const checkedValue = useSelector((state) => state.filterSorting.mode);
 
-  // Підкривання-закривання варіантів
   const openOptions = () => {
     document.querySelector(".catalog-sorting__options").classList.toggle("catalog-sorting__options--open");
   };
 
-  // Вибір опції - клік
-  document.querySelectorAll(".catalog-sorting__option").forEach((option) => {
-    option.addEventListener("click", () => {
+  useEffect(() => {
+    const onClickFunction = (event) => {
       document.querySelector(".catalog-sorting__options").classList.remove("catalog-sorting__options--open");
-      dispatch(setFilterSorting(option.getAttribute("data-value")));
+      const selectedValue = event.target.getAttribute("data-value");
+      if (checkedValue !== selectedValue) {
+        dispatch(setFilterSorting(selectedValue));
+        onChangeFunction(selectedValue);
+      }
+    };
+
+    document.querySelectorAll(".catalog-sorting__option").forEach((option) => {
+      option.addEventListener("click", onClickFunction);
     });
-  });
+
+    return () => {
+      document.querySelectorAll(".catalog-sorting__option").forEach((option) => {
+        option.removeEventListener("click", onClickFunction);
+      });
+    };
+  }, [checkedValue]);
 
   return (
     <>

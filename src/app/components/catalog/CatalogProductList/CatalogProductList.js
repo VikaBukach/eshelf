@@ -7,24 +7,23 @@ const CatalogProductList = () => {
 
   let productItems = [];
 
-  products.forEach((product) => {
-    product.colors.forEach((color) => {
-      const cloneProduct = JSON.parse(JSON.stringify(product));
-      delete cloneProduct.colors;
-      const productItem = { ...cloneProduct, color };
-      productItem.fullName = product.brand + " " + product.model + " " + color.color;
+  if (products && products.length !== 0) {
+    products.forEach((product) => {
+      const productItem = {};
+
+      productItem.fullName = product.brand + " " + product.model + " " + product.colors.color;
       productItem.index = product._id;
-      productItem.colorIndex = color.color;
-      productItem.image = color.images[0];
+      productItem.colorIndex = product.colors.color;
+      productItem.image = product.colors.images[0];
       productItem.category = product.category;
-      productItem.priceBy = color.products[0].price;
-      let l = color.products.length - 1;
-      productItem.priceTo = color.products[l].price;
-      productItem.discountPriceBy = color.products[0].discount_price;
+      productItem.priceBy = product.colors.products[0].price;
+      let l = product.colors.products.length - 1;
+      productItem.priceTo = product.colors.products[l].price;
+      productItem.discountPriceBy = product.colors.products[0].discount_price;
 
       productItems.push(productItem);
     });
-  });
+  }
 
   return (
     <ul className="product-list">

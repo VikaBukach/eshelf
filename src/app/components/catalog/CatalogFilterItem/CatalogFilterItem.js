@@ -26,7 +26,6 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
     if (!checked) {
       filterSettingsToUpdate[criteriaPath] = filterSettingsToUpdate[criteriaPath].filter((item) => item !== name);
     }
-
     dispatch(setCheckboxesSettings(filterSettingsToUpdate));
   };
 
