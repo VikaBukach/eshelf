@@ -7,43 +7,41 @@ import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
 import { Accordion } from "../../ui/Accordion/Accordion";
 // Slices
 import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
-import { setPageOfDB, setPagesToLoading } from "../../../store/slices/productsSlice";
+import { setPagesToLoading } from "../../../store/slices/productsSlice";
 import { loadOnePageOfProducts } from "../../../store/slices/productsSlice";
 // Another
 import { createUrlFromFilterSettings } from "../../../utils/filter-url";
 import { getMinAndMaxPrices, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
 import { convertSettingsToMongoType } from "../../../helpers/catalog";
 
-const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
+const CatalogFilter = ({ categoryName, filterCriterias, pricePath, changePricePromptFunction }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const screenWidth = window.innerWidth;
+
+  // filterSettings
   const filterCriteriasWithTypes = useSelector((state) => state.filterSettings.filterCriteriasWithTypes);
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
-  const minValue = useSelector((state) => state.filterSettings.minPrice);
-  const maxValue = useSelector((state) => state.filterSettings.maxPrice);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
-  const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
-  const cardsOnPage = useSelector((state) => state.products.cardsOnPage);
+  // filterSorting
   const sortingMode = useSelector((state) => state.filterSorting.mode);
-
-  // Прибираємо розділювальну риску на останнтому елементі
-  const accordions = document.querySelectorAll(".filter .accordion");
-  if (accordions.length > 1) {
-    accordions[accordions.length - 1].style.borderBottom = "0px";
-    accordions[accordions.length - 1].style.marginBottom = "0px";
-  }
-
-  // Фільтр-посилання при ресеті
-  const navigateToUrlWithSettingsOnReset = () => {
-    const url = `?${createUrlFromFilterSettings([], 0, 0, 0, 0, checkedSortingValue)}`;
-    navigate(url);
-  };
+  //products
+  const cardsOnPage = useSelector((state) => state.products.cardsOnPage);
+  const fetchStatus = useSelector((state) => state.products.status);
+  const products = useSelector((state) => state.products.data);
+  const pagesToLoading = useSelector((state) => state.products.pagesToLoading);
 
   // Фільтр-посилання
   const navigateToUrlWithSettings = () => {
-    const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
+    const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, sortingMode)}`;
+    navigate(url);
+  };
+
+  // Фільтр-посилання при ресеті
+  const navigateToUrlWithSettingsOnReset = () => {
+    const url = `?${createUrlFromFilterSettings([], 0, 0, sortingMode)}`;
     navigate(url);
   };
 
@@ -56,9 +54,7 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
     }
   };
 
-  // ДІЇ ПО КНОПКАХ
-
-  // Запуск базового фільтру
+  // Запуск фільтру
   const filterActions = () => {
     dispatch(
       getMinAndMaxPrices({ collection: categoryName, filterSettings: convertSettingsToMongoType(filterSettings) })
@@ -83,31 +79,37 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
         sortingMode: sortingMode,
       })
     );
-    dispatch(setPagesToLoading(1));
+    if (pagesToLoading !== 1) {
+      dispatch(setPagesToLoading(1));
+    }
+    navigateToUrlWithSettings();
+    changePricePromptFunction();
   };
 
+  // Натиск кнопки SUBMIT
   const onFilterSubmit = () => {
-    filterActions();
     closeFilter();
+    filterActions();
     navigateToUrlWithSettings();
   };
-
-  useEffect(() => {
-    navigateToUrlWithSettings();
-  }, [sortingMode]);
-
-  useEffect(() => {
-    filterActions();
-    navigateToUrlWithSettings();
-  }, [filterSettings]);
 
   // Натиск RESET
   const onResetSubmit = () => {
     dispatch(setPriceBy(0));
     dispatch(setPriceTo(0));
-    dispatch(setPagesToLoading(1));
     dispatch(setCheckboxesSettings([]));
     closeFilter();
+
+    dispatch(getMinAndMaxPrices({ collection: categoryName, filterSettings: [] }));
+    dispatch(
+      fillTheFilter({
+        collection: categoryName,
+        filterSettings: [],
+        filterCriterias: filterCriterias,
+        priceBy: 0,
+        priceTo: 0,
+      })
+    );
     dispatch(
       loadOnePageOfProducts({
         collection: categoryName,
@@ -119,8 +121,24 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
         sortingMode: sortingMode,
       })
     );
+    if (pagesToLoading !== 1) {
+      dispatch(setPagesToLoading(1));
+    }
     navigateToUrlWithSettingsOnReset();
   };
+
+  // Зберігання моду сортування у посиланні
+  useEffect(() => {
+    navigateToUrlWithSettings();
+  }, [sortingMode]);
+
+  // Фільтрація безпосередньо при натисканні чекбоксу для великих екранів
+  useEffect(() => {
+    if (fetchStatus === "succeeded" && products.length > 0 && screenWidth >= 1024) {
+      filterActions();
+      navigateToUrlWithSettings();
+    }
+  }, [filterSettings]);
 
   return (
     <div className="filter">
@@ -129,10 +147,7 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
         <h1 className="filter__title">Filter</h1>
         <img className="filter__close-btn" src="../assets/icons/close.svg" alt="Close" onClick={closeFilter} />
       </div>
-      <Accordion
-        title="Price"
-        content={<CatalogPriceFilter pricePath={pricePath} onClickFunction={onFilterSubmit} />}
-      />
+      <Accordion title="Price" content={<CatalogPriceFilter pricePath={pricePath} onClickFunction={filterActions} />} />
       {filterCriteriasWithTypes.map((criteria, index) => (
         <React.Fragment key={index}>
           <CatalogFilterItem filterTitle={criteria.title} checkBoxNames={criteria.types} criteriaPath={criteria.path} />

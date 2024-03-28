@@ -16,7 +16,7 @@ const CatalogFilterItem = ({ filterTitle, checkBoxNames, criteriaPath }) => {
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
-    
+
     if (!filterSettingsToUpdate[criteriaPath]) {
       filterSettingsToUpdate[criteriaPath] = [];
     }

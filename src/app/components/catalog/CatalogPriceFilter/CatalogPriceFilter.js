@@ -6,7 +6,6 @@ import { setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlic
 const CatalogPriceFilter = ({ onClickFunction }) => {
   const dispatch = useDispatch();
 
-  const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
@@ -17,16 +16,14 @@ const CatalogPriceFilter = ({ onClickFunction }) => {
 
   // Перевірка валідності значень інпутів
   const ckeckValidation = () => {
-    setIsPriceByError(priceBy !== 0 && (priceBy < minValue || priceBy > maxValue || (priceTo !== 0 && priceBy > priceTo)));
+    setIsPriceByError(
+      priceBy !== 0 && (priceBy < minValue || priceBy > maxValue || (priceTo !== 0 && priceBy > priceTo))
+    );
     setIsPriceToError(priceTo !== 0 && (priceTo < minValue || priceTo > maxValue || priceTo < priceBy));
   };
 
   const submitFilterByPrice = () => {
-    if (
-      !isPriceByError &&
-      !isPriceToError &&
-      (priceBy !== minValue || priceTo !== maxValue)
-    ) {
+    if (!isPriceByError && !isPriceToError && (priceBy !== minValue || priceTo !== maxValue)) {
       onClickFunction();
     }
   };

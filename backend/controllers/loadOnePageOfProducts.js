@@ -1,7 +1,15 @@
 const { filterByPrice } = require("../utils/filterByPrice");
 const { findCollection } = require("../utils/findCollection");
 
-const loadOnePageOfProducts = async (collectionModel, filterSettings, priceBy = 0, priceTo = 0, limit, page, sortingMode) => {
+const loadOnePageOfProducts = async (
+  collectionModel,
+  filterSettings,
+  priceBy = 0,
+  priceTo = 0,
+  limit,
+  page,
+  sortingMode
+) => {
   try {
     const collection = findCollection(collectionModel);
 
