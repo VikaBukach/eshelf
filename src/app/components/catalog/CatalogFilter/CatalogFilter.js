@@ -8,10 +8,11 @@ import { Accordion } from "../../ui/Accordion/Accordion";
 // Slices
 import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { setPageOfDB, setPagesToLoading } from "../../../store/slices/productsSlice";
-import { setProducts } from "../../../store/slices/productsSlice";
-import { updateByFilter } from "../../../store/slices/filterSettingsSlice";
+import { loadOnePageOfProducts } from "../../../store/slices/productsSlice";
 // Another
 import { createUrlFromFilterSettings } from "../../../utils/filter-url";
+import { getMinAndMaxPrices, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
+import { convertSettingsToMongoType } from "../../../helpers/catalog";
 
 const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
   const dispatch = useDispatch();
@@ -24,6 +25,8 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
   const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
+  const cardsOnPage = useSelector((state) => state.products.cardsOnPage);
+  const sortingMode = useSelector((state) => state.filterSorting.mode);
 
   // Прибираємо розділювальну риску на останнтому елементі
   const accordions = document.querySelectorAll(".filter .accordion");
@@ -44,41 +47,6 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
     navigate(url);
   };
 
-  // ДІЇ ПО КНОПКАХ
-
-  // Запуск базового фільтру
-  const onFilterSubmit = () => {
-    dispatch(setPagesToLoading(1));
-    dispatch(setPageOfDB(1));
-    dispatch(setProducts([]));
-    dispatch(updateByFilter({ collection: categoryName, filterCriterias: filterCriterias }));
-    closeFilter();
-    navigateToUrlWithSettings();
-  };
-
-
-  useEffect(() => {
-    onFilterSubmit();
-  }, [filterSettings, checkedSortingValue]);
-
-  useEffect(() => {
-    navigateToUrlWithSettings();
-  }, [priceBy, priceTo]);
-
-  // Натиск RESET
-  const onResetSubmit = () => {
-    dispatch(setPriceBy(0));
-    dispatch(setPriceTo(0));
-    dispatch(setPagesToLoading(1));
-    dispatch(setPageOfDB(1));
-    dispatch(setCheckboxesSettings([]));
-    dispatch(setProducts([]));
-    dispatch(updateByFilter({ collection: categoryName, filterCriterias: filterCriterias, isReset: true }));
-
-    closeFilter();
-    navigateToUrlWithSettingsOnReset();
-  };
-
   // Закрити фільтр (мобільна і таблет-версії)
   const closeFilter = () => {
     if (window.innerWidth < 1024) {
@@ -86,6 +54,72 @@ const CatalogFilter = ({ categoryName, filterCriterias, pricePath }) => {
       document.querySelector("body").classList.toggle("body-to-filter");
       document.querySelector(".catalog__shadow").classList.toggle("catalog__shadow--open");
     }
+  };
+
+  // ДІЇ ПО КНОПКАХ
+
+  // Запуск базового фільтру
+  const filterActions = () => {
+    dispatch(
+      getMinAndMaxPrices({ collection: categoryName, filterSettings: convertSettingsToMongoType(filterSettings) })
+    );
+    dispatch(
+      fillTheFilter({
+        collection: categoryName,
+        filterSettings: convertSettingsToMongoType(filterSettings),
+        filterCriterias: filterCriterias,
+        priceBy: priceBy,
+        priceTo: priceTo,
+      })
+    );
+    dispatch(
+      loadOnePageOfProducts({
+        collection: categoryName,
+        filterSettings: convertSettingsToMongoType(filterSettings),
+        priceBy: priceBy,
+        priceTo: priceTo,
+        limit: cardsOnPage,
+        page: 1,
+        sortingMode: sortingMode,
+      })
+    );
+    dispatch(setPagesToLoading(1));
+  };
+
+  const onFilterSubmit = () => {
+    filterActions();
+    closeFilter();
+    navigateToUrlWithSettings();
+  };
+
+  useEffect(() => {
+    navigateToUrlWithSettings();
+  }, [sortingMode]);
+
+  useEffect(() => {
+    filterActions();
+    navigateToUrlWithSettings();
+  }, [filterSettings]);
+
+  // Натиск RESET
+  const onResetSubmit = () => {
+    dispatch(setPriceBy(0));
+    dispatch(setPriceTo(0));
+    dispatch(setPagesToLoading(1));
+    dispatch(setCheckboxesSettings([]));
+    closeFilter();
+    dispatch(
+      loadOnePageOfProducts({
+        collection: categoryName,
+        filterSettings: [],
+        priceBy: 0,
+        priceTo: 0,
+        limit: cardsOnPage,
+        page: 1,
+        sortingMode: sortingMode,
+      })
+    );
+    navigateToUrlWithSettingsOnReset();
   };
 
   return (

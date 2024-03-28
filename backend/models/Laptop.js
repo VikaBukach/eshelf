@@ -6,7 +6,6 @@ const colorSchema = new mongoose.Schema({
   products: [
     {
       article: Number,
-      capacity: String,
       quantity: Number,
       price: Number,
       discount_price: Number,
@@ -14,32 +13,32 @@ const colorSchema = new mongoose.Schema({
   ],
 });
 
-const smartphoneSchema = new mongoose.Schema({
+const laptopSchema = new mongoose.Schema({
   brand: String,
   model: String,
   image: String,
   specifications: {
     display: {
-      frequency: String,
-      display_matrix_type: String,
       display_resolution: String,
       screen_diagonal: String,
     },
     processor: {
       type: String,
-      number_of_cores: String,
+      data_drives: String,
     },
     memory: {
       RAM: String,
+      type_of_RAM: String,
     },
     camera: {
-      functions: [String],
       front_camera: String,
-      main_camera: String,
-      number_of_cameras: String,
+    },
+    additional_options: {
+      options: [String],
+      video_card: String,
     },
     battery: {
-      capacity: String,
+      battery_life: String,
       charging_port: String,
     },
     other: {
@@ -51,9 +50,9 @@ const smartphoneSchema = new mongoose.Schema({
     },
   },
   colors: [colorSchema],
-  category: String,
+  category: { type: String, default: "laptops" },
 });
 
-const Smartphone = mongoose.model("Smartphone", smartphoneSchema);
+const Laptop = mongoose.model("laptops", laptopSchema);
 
-module.exports = Smartphone;
+module.exports = Laptop;

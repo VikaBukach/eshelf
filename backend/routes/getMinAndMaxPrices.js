@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getMinAndMaxPrices } = require("../controllers/minAndMaxPrice");
+const { getMinAndMaxPrices } = require("../controllers/getMinAndMaxPrices");
 
 router.get("/", async (req, res) => {
   const { collection, filterSettings } = req.query;

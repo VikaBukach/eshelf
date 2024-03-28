@@ -6,54 +6,54 @@ const colorSchema = new mongoose.Schema({
   products: [
     {
       article: Number,
-      capacity: String,
+      case_size: String,
       quantity: Number,
+      battery: String,
       price: Number,
       discount_price: Number,
     },
   ],
 });
 
-const smartphoneSchema = new mongoose.Schema({
+const smartwatchSchema = new mongoose.Schema({
   brand: String,
   model: String,
+  category: { type: String, default: "smartwatches" },
   image: String,
   specifications: {
     display: {
-      frequency: String,
-      display_matrix_type: String,
       display_resolution: String,
-      screen_diagonal: String,
+      display_matrix_type: String,
     },
     processor: {
+      matrix_type: String,
       type: String,
-      number_of_cores: String,
     },
     memory: {
-      RAM: String,
+      memory: String,
     },
-    camera: {
-      functions: [String],
-      front_camera: String,
-      main_camera: String,
-      number_of_cameras: String,
+    microphone: {
+      availability: String,
     },
-    battery: {
-      capacity: String,
-      charging_port: String,
+    water_resistant: {
+      swimproof: String,
     },
+    connectivity: {
+      gps: [String],
+    },
+  },
+  functions: {
+    features: [String],
     other: {
       weight: String,
-      dimension: String,
     },
     operating_system: {
       type: String,
     },
   },
   colors: [colorSchema],
-  category: String,
 });
 
-const Smartphone = mongoose.model("Smartphone", smartphoneSchema);
+const Smartwatch = mongoose.model("Smartwatch", smartwatchSchema);
 
-module.exports = Smartphone;
+module.exports = Smartwatch;

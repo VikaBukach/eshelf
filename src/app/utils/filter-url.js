@@ -14,8 +14,8 @@ export const createUrlFromFilterSettings = (
     }
   }
 
-  if ((priceBy !== minValue || priceTo !== maxValue)) {
-    filterUrl = filterUrl + "price" + "=" + (priceBy === 0 ? minValue.toString() : priceBy.toString()) + "-" + (priceTo === 0 ? maxValue.toString() : priceTo.toString()) + ";";
+  if ((priceBy !== 0 || priceTo !== 0)) {
+    filterUrl = filterUrl + "price" + "=" + (priceBy !== 0 ? priceBy.toString() : "0") + "-" + (priceTo !== 0 ? priceTo.toString() : "0") + ";";
   }
 
   if (checkedSortingValue !== "Best Seller") {
@@ -25,7 +25,7 @@ export const createUrlFromFilterSettings = (
   return filterUrl.slice(0, -1);
 };
 
-export const createFilterSettingsObjectFromUrl = (minValue, maxValue, locationUrl = false) => {
+export const createFilterSettingsObjectFromUrl = (locationUrl = false) => {
   const filterCheckboxSettings = {};
   const filterPriceSettings = {
     priceBy: 0,
@@ -33,6 +33,7 @@ export const createFilterSettingsObjectFromUrl = (minValue, maxValue, locationUr
   };
   let sortingSettings = "";
   const url = locationUrl ? locationUrl : window.location.search;
+  console.log(url);
 
   if (url) {
     const parametrs = url.substring(1).split(";");

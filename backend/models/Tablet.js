@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const colorSchema = new mongoose.Schema({
   color: String,
-  images: [String],
   products: [
     {
       article: Number,
@@ -14,18 +13,19 @@ const colorSchema = new mongoose.Schema({
   ],
 });
 
-const smartphoneSchema = new mongoose.Schema({
+const tabletSchema = new mongoose.Schema({
   brand: String,
   model: String,
+  category: { type: String, default: "tablets" },
   image: String,
   specifications: {
     display: {
-      frequency: String,
-      display_matrix_type: String,
+      display_size: String,
       display_resolution: String,
-      screen_diagonal: String,
+      technology: String,
     },
     processor: {
+      processor: String,
       type: String,
       number_of_cores: String,
     },
@@ -41,6 +41,7 @@ const smartphoneSchema = new mongoose.Schema({
     battery: {
       capacity: String,
       charging_port: String,
+      battery_life: String,
     },
     other: {
       weight: String,
@@ -51,9 +52,8 @@ const smartphoneSchema = new mongoose.Schema({
     },
   },
   colors: [colorSchema],
-  category: String,
 });
 
-const Smartphone = mongoose.model("Smartphone", smartphoneSchema);
+const Tablet = mongoose.model("tablets", tabletSchema);
 
-module.exports = Smartphone;
+module.exports = Tablet;

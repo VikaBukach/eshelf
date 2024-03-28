@@ -1,112 +1,20 @@
-const mongoose = require("mongoose");
-const Smartphone = require("../models/Smartphone");
+const { filterByPrice } = require("../utils/filterByPrice");
+const { findCollection } = require("../utils/findCollection");
 
 const fillTheFilter = async (collectionModel, filterSettings, filterCriterias, priceBy, priceTo) => {
   try {
-    let collection;
-    switch (collectionModel) {
-      case "smartphones":
-        collection = Smartphone;
-        break;
-      default:
-        break;
-    }
+    const collection = findCollection(collectionModel);
 
-    const priceFilter = {
-      ...(priceBy !== 0 && { "colors.products.price": { $gte: priceBy } }),
-      ...(priceTo !== 0 && { "colors.products.price": { $lte: priceTo } }),
-    };
+    const filteredProductsPipeline =
+      filterSettings && Object.keys(filterSettings).length > 0
+        ? [{ $unwind: "$colors" }, { $match: filterSettings }]
+        : [{ $unwind: "$colors" }];
 
-    // const [filteredProducts, allProducts] = await Promise.all([
+    const filteredProductsOnlyByCheckboxes = await collection.aggregate(filteredProductsPipeline);
 
-    //   filterSettings && Object.keys(filterSettings).length > 0
-    //     ? collection.aggregate([{ $unwind: "$colors" }, { $match: filterSettings }])
-    //     : collection.aggregate([{ $unwind: "$colors" }]),
+    const filteredProducts = filterByPrice(filteredProductsOnlyByCheckboxes, priceBy, priceTo);
 
-    //   collection.aggregate([{ $unwind: "$colors" }])
-    // ]);
-
-    const filterByPrice = (products) => {
-      const filteredProductsArray = [];
-
-      if (priceBy !== 0 && priceTo !== 0) {
-        products.forEach((product) => {
-
-          const prices = product.colors.products.map(item => item.price);
-
-          const minPriceInProduct = Math.min(...prices);
-          const maxPriceInProduct = Math.max(...prices);
-
-          console.log(minPriceInProduct, maxPriceInProduct);
-
-          if (
-            (minPriceInProduct >= priceBy && minPriceInProduct <= priceTo) ||
-            (maxPriceInProduct >= priceBy && maxPriceInProduct <= priceTo) ||
-            (minPriceInProduct <= priceBy && maxPriceInProduct >= priceBy) ||
-            (minPriceInProduct <= priceTo && maxPriceInProduct >= priceTo)
-          ) {
-            filteredProductsArray.push(product);
-          }
-
-        })
-        
-        return filteredProductsArray;
-      } else if (priceBy !== 0) {
-        products.forEach((product) => {
-
-          const prices = product.colors.products.map(item => item.price);
-
-          const maxPriceInProduct = Math.max(...prices);
-
-          console.log(minPriceInProduct, maxPriceInProduct);
-
-          if (
-            (maxPriceInProduct > priceBy) 
-          ) {
-            filteredProductsArray.push(product);
-          }
-
-        })
-        
-        return filteredProductsArray;
-      } else if (priceTo !== 0) {
-        products.forEach((product) => {
-
-          const prices = product.colors.products.map(item => item.price);
-
-          const minPriceInProduct = Math.min(...prices);
-
-          console.log(minPriceInProduct, maxPriceInProduct);
-
-          if (
-            (minPriceInProduct < priceTo) 
-          ) {
-            filteredProductsArray.push(product);
-          }
-
-        })
-        
-        return filteredProductsArray;
-      } else {
-        return products;
-      }
-    }
-
-    const filteredProductsPipeline = filterSettings && Object.keys(filterSettings).length > 0
-    ? [{ $unwind: "$colors" }, { $match: filterSettings }]
-    : [{ $unwind: "$colors" }];
-    
-    const filteredProducts1 = await collection.aggregate(filteredProductsPipeline);
-    
-    filteredProducts = filterByPrice(filteredProducts1);
-
-
-
-
-
-    const allProducts = await collection.aggregate([
-      { $unwind: "$colors" },
-  ]);
+    const allProducts = await collection.aggregate([{ $unwind: "$colors" }]);
 
     const allValuesFromAllProducts = {};
     const allValuesFromFilteredProducts = {};
