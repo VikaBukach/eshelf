@@ -10,7 +10,6 @@ import "./ProductListHomePage.scss";
 import { loadOnePageOfProducts } from "../../../store/slices/productsSlice";
 
 function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfProducts }) {
-  console.log(category);
   const dispatch = useDispatch();
   const { data, status, error } = useSelector((state) => state.products, shallowEqual);
 
@@ -19,7 +18,6 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
       try {
         await dispatch((loadOnePageOfProducts({ collection: "stphones", limit: 5, page: 1})));
       } catch (error) {
-        console.log("Error fetching products:", error);
       }
     };
 
