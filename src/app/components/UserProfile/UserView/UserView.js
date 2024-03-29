@@ -65,6 +65,7 @@ const UserView = () => {
           }
         });
 
+        console.log(newProducts);
         const unique = newProducts.flatMap((arr) => {
           return arr.filter((product, index, self) => index === self.findIndex((p) => p.index === product.index));
         });
