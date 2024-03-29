@@ -40,7 +40,7 @@ const UserDetails = () => {
         accountSettingsClass="account-settings"
         inputContainerClass="input-settings-container"
         labelClass="label-settings"
-        disabled={!isEditing}
+        disabled={!isEditing} // добавлення неактивного стану
         onChange={handleChange}
         disabledInputs={!isEditing}
       />

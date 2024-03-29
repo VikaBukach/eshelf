@@ -19,7 +19,9 @@
   .userprofile-title {
     margin-bottom: 2rem;
     flex-direction: row;
-    font: 400 24px / 1.5 "Inter", sans-serif;
+    font:
+      400 24px / 1.5 "Inter",
+      sans-serif;
     color: #333;
   }
 
@@ -31,7 +33,6 @@
     gap: 1.6rem;
 
     &-sidebar-left {
-
       flex-shrink: 0.3;
       width: 100%;
       background: $secondary-color-grey-card;
@@ -67,7 +68,6 @@
       flex-direction: column;
     }
   }
-
 
   @media screen and (min-width: $desktop) {
     .userprofile {
