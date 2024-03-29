@@ -15,10 +15,11 @@ const DetailsSchema = Yup.object().shape({
 export const ContactDetails = ({
   state,
   setState,
-  setValid,
+  setValid = () => {},
   accountSettingsClass = "",
   inputContainerClass = "",
   labelClass = "",
+  disabledInputs = false,
 }) => {
   const inputs = [
     {
@@ -82,6 +83,7 @@ export const ContactDetails = ({
                     validateFunction={validateField}
                     input={input}
                     state={state}
+                    disabled={disabledInputs}
                     setState={(value) => {
                       setState((prev) => ({
                         ...prev,
@@ -97,6 +99,7 @@ export const ContactDetails = ({
                   <Field
                     className="input_ui__input"
                     name={input.key}
+                    disabled={disabledInputs}
                     value={state[input.key]}
                     onChange={(e) => {
                       setState((prev) => ({
@@ -114,7 +117,7 @@ export const ContactDetails = ({
                   />
                 )}
 
-                {errors[input.key] && <div>{errors[input.key]}</div>}
+                {errors[input.key] && <div className="error-message">{errors[input.key]}</div>}
               </div>
             ))}
           </div>

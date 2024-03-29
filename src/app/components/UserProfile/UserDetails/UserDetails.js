@@ -42,6 +42,7 @@ const UserDetails = () => {
         labelClass="label-settings"
         disabled={!isEditing}
         onChange={handleChange}
+        disabledInputs={!isEditing}
       />
 
       {isEditing ? (

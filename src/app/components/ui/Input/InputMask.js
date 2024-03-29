@@ -2,7 +2,7 @@ import "./Input.scss";
 import { IMaskInput } from "react-imask";
 import { classNames } from "../../../utils/classNames";
 
-export default function InputMask({ input, setState, state, validateFunction = () => true }) {
+export default function InputMask({ input, setState, state, validateFunction = () => true, disabled }) {
   return (
     <>
       <IMaskInput
@@ -13,6 +13,7 @@ export default function InputMask({ input, setState, state, validateFunction = (
         scale={0}
         min={0}
         max={100}
+        disabled={disabled}
         onBlur={(e) => {
           validateFunction(input.key);
         }}

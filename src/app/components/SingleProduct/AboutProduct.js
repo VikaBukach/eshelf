@@ -60,7 +60,9 @@ const AboutProduct = ({ product }) => {
   useEffect(() => {
     let cancelToken = axios.CancelToken.source(); // створюємо токен скасування запиту
     // Робимо запит на створення нового перегляду
+    let submitting = false;
     const fetchData = async () => {
+      submitting = true;
       try {
         const PORT = process.env.REACT_APP_PORT || 5000;
         const REACT_APP_BACK_URL = process.env.REACT_APP_BACK_URL || "http://localhost";
@@ -81,10 +83,12 @@ const AboutProduct = ({ product }) => {
         if (axios.isCancel(error)) {
           console.log("Request canceled:", error.message);
         }
+      } finally {
+        submitting = false;
       }
     };
 
-    if (user) {
+    if (user && !submitting) {
       fetchData();
     }
 
@@ -92,7 +96,7 @@ const AboutProduct = ({ product }) => {
     return () => {
       cancelToken.cancel("Operation canceled due to component unmount.");
     };
-  }, [user, product]);
+  }, []);
 
   return (
     <>
