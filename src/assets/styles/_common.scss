@@ -79,3 +79,11 @@
     transform: rotate(1turn);
   }
 }
+
+.error-message {
+  color: red;
+}
+
+input:disabled {
+  opacity: 0.5;
+}

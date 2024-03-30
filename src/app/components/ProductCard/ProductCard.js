@@ -34,7 +34,6 @@ export default function ProductCard({ id, imageURL, category, title, price, disc
     e.stopPropagation();
 
     const fullProduct = productsList.find((p) => p._id == id);
-
     // dispatch(toggleCompare({ ...fullProduct, id: fullProduct._id, color: fullProduct.colors[0], ...product }));
     dispatch(toggleCompare({ ...fullProduct, category }));
   };

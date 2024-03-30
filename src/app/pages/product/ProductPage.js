@@ -109,7 +109,12 @@ const ProductPage = () => {
             {tabs === "About the product" && <AboutProduct product={product} />}
             {tabs === "Reviews" && (
               // Передаємо стан підрахунку відгуків
-              <ReviewsProduct productId={product._id} totalReviews={totalReviews} setTotalReviews={setTotalReviews} />
+              <ReviewsProduct
+                productId={product._id}
+                setRating={setRating} // та рейтингу
+                totalReviews={totalReviews}
+                setTotalReviews={setTotalReviews}
+              />
             )}
             {tabs === "Characteristic" && <CharacteristicProduct product={product} />}
             {tabs === "Photo and video" && <PhotoVideoProduct />}

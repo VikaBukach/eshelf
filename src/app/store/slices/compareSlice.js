@@ -10,6 +10,7 @@ const compareSlice = createSlice({
   },
   reducers: {
     toggleCompare: (state, action) => {
+      console.log(action.payload);
       const { data, selectedCategory } = state;
       const { _id, category, id: __id } = action.payload;
       const id = _id || __id;
@@ -24,7 +25,6 @@ const compareSlice = createSlice({
             alert("Products shoud be from the same category!");
             return;
           }
-
           state.data = [...data, setCompareProduct(action.payload)];
           state.canAddMore = state.data.length < 2;
         } else {

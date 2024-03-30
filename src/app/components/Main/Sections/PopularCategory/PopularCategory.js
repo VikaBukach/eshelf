@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { NavLink } from "react-router-dom";
 
 function PopularCategory() {
-
   return (
     <>
       <div className="popular_category container">
@@ -84,42 +83,41 @@ function PopularCategory() {
 
         <ul className="popular_category-items">
           <NavLink to={"/smartphones"}>
-          <li className="popular_category-item">
-            <img className="popular_category-item-img" src="/img/popularcategory/smartf.png" alt="Smartphones" />
-            <h4 className="popular_category-title">Smartphones</h4>
-          </li>
-        </NavLink>
+            <li className="popular_category-item">
+              <img className="popular_category-item-img" src="/img/popularcategory/smartf.png" alt="Smartphones" />
+              <h4 className="popular_category-title">Smartphones</h4>
+            </li>
+          </NavLink>
           <NavLink to={"/headphones"}>
-          <li className="popular_category-item">
-            <img className="popular_category-item-img" src="/img/popularcategory/headphone.png" alt="Headphones" />
-            <h4 className="popular_category-title">Headphones</h4>
-          </li>
-        </NavLink>
+            <li className="popular_category-item">
+              <img className="popular_category-item-img" src="/img/popularcategory/headphone.png" alt="Headphones" />
+              <h4 className="popular_category-title">Headphones</h4>
+            </li>
+          </NavLink>
           <NavLink to={"/tablets"}>
-          <li className="popular_category-item">
-            <img className="popular_category-item-img" src="/img/popularcategory/tablets.png" alt="Tablets" />
-            <h4 className="popular_category-title">Tablets</h4>
-          </li>
+            <li className="popular_category-item">
+              <img className="popular_category-item-img" src="/img/popularcategory/tablets.png" alt="Tablets" />
+              <h4 className="popular_category-title">Tablets</h4>
+            </li>
           </NavLink>
           <NavLink to="/smartwatches">
-          <li className="popular_category-item">
-            <img className="popular_category-item-img" src="/img/popularcategory/smartw.png" alt="Smartwatches" />
-            <h4 className="popular_category-title">Smartwatches</h4>
-          </li>
+            <li className="popular_category-item">
+              <img className="popular_category-item-img" src="/img/popularcategory/smartw.png" alt="Smartwatches" />
+              <h4 className="popular_category-title">Smartwatches</h4>
+            </li>
           </NavLink>
           <NavLink to="/laptops">
-          <li className="popular_category-item">
-            <img className="popular_category-item-img" src="/img/popularcategory/mac.png" alt="img" />
-            <h4 className="popular_category-title">Laptops</h4>
-          </li>
+            <li className="popular_category-item">
+              <img className="popular_category-item-img" src="/img/popularcategory/mac.png" alt="img" />
+              <h4 className="popular_category-title">Laptops</h4>
+            </li>
           </NavLink>
           <NavLink to="/quadcopters">
-          <li className="popular_category-item">
-            <img className="popular_category-item-img" src="/img/popularcategory/quadro.png" alt="Quadrocopters" />
-            <h4 className="popular_category-title">Quadrocopters</h4>
-          </li>
+            <li className="popular_category-item">
+              <img className="popular_category-item-img" src="/img/popularcategory/quadro.png" alt="Quadrocopters" />
+              <h4 className="popular_category-title">Quadrocopters</h4>
+            </li>
           </NavLink>
-
         </ul>
       </div>
     </>

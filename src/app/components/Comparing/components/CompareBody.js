@@ -35,10 +35,12 @@ export const CompareBody = ({ data }) => {
                     >
                       <div>{humanizeText(i)}</div>
 
-                      {products[key].map((pi, idx) => {
-                        const val = pi.find((y) => Object.keys(y) == i) || {};
-                        return <div key={idx}>{val[i] || "--"}</div>;
-                      })}
+                      {(products[key].length < 2 && columns == 3 ? [...products[key], []] : products[key]).map(
+                        (pi, idx) => {
+                          const val = pi.find((y) => Object.keys(y) == i) || {};
+                          return <div key={idx}>{val[i] || "--"}</div>;
+                        }
+                      )}
                     </li>
                   ))}
                 </ul>

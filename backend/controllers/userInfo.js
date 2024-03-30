@@ -1,6 +1,21 @@
 const { ObjectId } = require("mongodb");
 const client = require("../../db");
 
+// Групуємо переглянуті продукти в обєкти по даті з полем ревізед, яке містить масив ІД переглянутих товарів
+function groupDataByDate(data) {
+  const groupedData = {};
+
+  data.forEach((entry) => {
+    const date = new Date(entry.createdAt).toDateString();
+    if (!groupedData[date]) {
+      groupedData[date] = { createdAt: date, revised: [] };
+    }
+    groupedData[date].revised.push(entry.productId);
+  });
+
+  return Object.values(groupedData);
+}
+
 const getRevised = async (req, res) => {
   const { userEmail } = req.query;
   const database = client.getDb();
@@ -18,37 +33,66 @@ const getRevised = async (req, res) => {
   const allCollectionNames = allCollections.map((collection) => collection.name.trim());
 
   // Список колекцій, які ви хочете виключити
-  const excludedCollections = ["orders", "users", "reviews"];
+  const excludedCollections = ["orders", "users", "reviews", "revised"];
 
   // Відфільтровані колекції (без виключених)
   const collections = allCollectionNames.filter((collection) => !excludedCollections.includes(collection));
 
+  // Зберігаємо згруповані переглянуті продукти в обєкти по даті з полем ревізед, яке містить масив ІД переглянутих товарів
+  const groupedRevisedData = groupDataByDate(existingRecord.revised);
   // Збереження переглянутих товарів
-  let viewedProducts = [];
+  // let viewedProducts = [];
 
+  // Отримуємо унікальні ІД переглянутих товарів
+  const uniqueIds = [...new Set(productsList)];
+
+  // Створення масиву ObjectId зі списку товарів
+  const objectIds = uniqueIds.map((productId) => new ObjectId(productId));
+
+  let revisedArr = [];
+  let products = [];
   // Проходження по кожній колекції
   for (const collectionName of collections) {
     // Отримання зв'язку з колекцією
     const collection = database.collection(collectionName);
 
-    // Створення масиву ObjectId зі списку товарів
-    const objectIds = productsList.map((productId) => new ObjectId(productId));
-
     // Запит до колекції для отримання переглянутих товарів
     const viewedInCollection = await collection.find({ _id: { $in: objectIds } }).toArray();
 
-    const withReviseDate = viewedInCollection.map((c) => {
-      return {
-        ...c,
-        revisedAt: existingRecord.revised.find((r) => r.productId == c?._id).createdAt,
-      };
-    });
-    // Додавання результатів до загального списку переглянутих товарів
-    viewedProducts = viewedProducts.concat(withReviseDate);
+    // Додаємо товари, які ми переглядали за весь час
+    products = products.concat(viewedInCollection);
+
+    // const withReviseDate = viewedInCollection.map((c) => {
+    //   return {
+    //     ...c,
+    //     revisedAt: existingRecord.revised.find((r) => r.productId == c?._id).createdAt,
+    //   };
+    // });
+    // // Додавання результатів до загального списку переглянутих товарів
+    // viewedProducts = viewedProducts.concat(withReviseDate);
   }
 
+  // Ітеруємось по масиву зрупованих продуктів
+  groupedRevisedData.forEach((r) => {
+    const revisedArrIds = r.revised;
+    // Ітеруємось по масину з ІД переглянутих товарів в даний день
+    revisedArrIds.forEach((revisedId) => {
+      // Шукаємо серед всіх переглянутих товарів продукт по його ІД
+      const product = products.find((item) => item?._id == revisedId);
+      if (product) {
+        const newRevised = {
+          ...product,
+          revisedAt: r.createdAt, // Додаємо поле з датою перегляду товару
+        };
+        // Додаємо товар в масив
+        revisedArr.push(newRevised);
+      }
+    });
+  });
+
   try {
-    res.status(201).send(viewedProducts);
+    // Повертаємо масив з товарів, який містить дані про дату перегляду товару (від більш ранньої до пізньої)
+    res.status(201).send(revisedArr.reverse());
   } catch (error) {
     res.status(201, {
       message: "Something went wrong!",

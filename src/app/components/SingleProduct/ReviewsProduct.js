@@ -7,7 +7,7 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ReviewsProduct = ({ productId, totalReviews, setTotalReviews }) => {
+const ReviewsProduct = ({ productId, totalReviews, setTotalReviews, setRating: setTotalRating }) => {
   const [params, setParams] = useSearchParams();
   const [rating, setRating] = useState(0);
   const [page, setPage] = useState(params.get("page") || 1);
@@ -62,6 +62,10 @@ const ReviewsProduct = ({ productId, totalReviews, setTotalReviews }) => {
         userName: user ? `${user.name} ${user.surname}` : "Guest",
         ...data,
         productId,
+      });
+
+      setTotalRating((prev) => {
+        return prev + +res.data?.rating || 0;
       });
 
       formRef.current.reset();

@@ -1,7 +1,6 @@
 @import "../../../../../assets/styles/variables";
 
 .popular_category {
-
   @media (min-width: $mobile) {
     margin-top: 30px;
     margin-bottom: 40px;
@@ -9,8 +8,9 @@
     &-title {
       margin-top: 20px;
       padding: 0 16px;
-      font: 500 18px / 1.5 "Inter",
-      sans-serif;
+      font:
+        500 18px / 1.5 "Inter",
+        sans-serif;
       color: $primary-color-black;
     }
 
@@ -55,7 +55,6 @@
   }
 
   .popular_category-items {
-
     @media (min-width: $tablet) {
       font-size: 20px;
       padding: 16px;
@@ -97,7 +96,7 @@
     .popular_category-items {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
-       gap: 16px;
+      gap: 16px;
 
       .popular_category-item {
         width: 224px;
@@ -111,10 +110,13 @@
           left: 0;
           right: 0;
           padding: 0 16px;
-          font: 500 18px / 1.5 "Inter", sans-serif;
+          font:
+            500 18px / 1.5 "Inter",
+            sans-serif;
           color: $primary-color-black;
           text-align: center;
         }
       }
     }
-  }}
+  }
+}

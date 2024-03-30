@@ -70,17 +70,26 @@ const OrderPage = () => {
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const cart = useSelector((state) => state.cart.data);
+  const [isValidDetails, setIsValidDetails] = useState(false);
   const orderNumber = useSelector((state) => state.order.orderNumber); // add order number
   // const orderDate = useSelector((state) => state.order.orderDate);
 
   const isFormComplete = () => {
-    const { name, surname, phone, email, city, deliveryMethod, paymentMethod } = state;
-    return name && surname && phone && email && city && deliveryMethod && paymentMethod && cart.length !== 0;
+    const { city, deliveryMethod, paymentMethod, phone, name, surname } = state;
+    return (
+      city &&
+      deliveryMethod &&
+      paymentMethod &&
+      phone.length === 17 &&
+      name.length >= 2 &&
+      surname.length >= 2 &&
+      cart.length !== 0
+    );
   };
 
   useEffect(() => {
-    setButtonDisabled(!isFormComplete() || !validateEmail(state.email));
-  }, [state]);
+    setButtonDisabled(!isFormComplete() || !isValidDetails);
+  }, [state, isValidDetails]);
 
   const { active, close, open } = useModal();
 
@@ -235,7 +244,7 @@ const OrderPage = () => {
             <h2 data-index="1" className={"orderPage__sectionTitle"}>
               Your contact details
             </h2>
-            <ContactDetails setState={setState} state={state} />
+            <ContactDetails setValid={setIsValidDetails} setState={setState} state={state} />
           </div>
           <div>
             <h2 data-index="2" className={"orderPage__sectionTitle"}>
