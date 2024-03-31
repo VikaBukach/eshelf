@@ -213,13 +213,13 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
     );
     dispatch(
       loadOnePageOfProducts({
-        collection: categoryName, // можна строкою, наприклад, "laptops"
-        filterSettings: [],
-        priceBy: 0,
-        priceTo: 0,
-        limit: 10, // Скільки потрібно
+        collection: categoryName,
+        filterSettings: convertSettingsToMongoType(filterCheckboxSettings),
+        priceBy: filterPriceSettings.priceBy,
+        priceTo: filterPriceSettings.priceTo,
+        limit: cardsOnPage,
         page: 1,
-        sortingMode: "",
+        sortingMode: sortingSettings,
       })
     );
     const url = `?${createUrlFromFilterSettings(filterCheckboxSettings, filterPriceSettings.priceBy, filterPriceSettings.priceTo, sortingSettings)}`;

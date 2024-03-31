@@ -37,7 +37,7 @@ const findCollection = (collectionModel) => {
     case "tv":
       return TV;
     default:
-      return createProductModel("especiallyforyou");
+      return createProductModel(collectionModel);
   }
 };
 
