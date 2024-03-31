@@ -1,135 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// Components
 import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
-import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
-import { findValueByPath } from "../../../helpers/catalog";
-import { setCheckboxesSettings, setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
 import { Accordion } from "../../ui/Accordion/Accordion";
+// Slices
+import { setCheckboxesSettings, setPriceBy, setPriceTo, getMinAndMaxPrices, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
+import { setPagesToLoading, loadOnePageOfProducts } from "../../../store/slices/productsSlice";
+// Another
 import { createUrlFromFilterSettings } from "../../../utils/filter-url";
-import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
-import { fetchDataOfProducts } from "../../../store/slices/productsSlice";
+import { convertSettingsToMongoType } from "../../../helpers/catalog";
 
-const CatalogFilter = ({ filterCriterias, pricePath }) => {
+const CatalogFilter = ({ categoryName, filterCriterias, pricePath, changePricePromptFunction }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const products = useSelector((state) => state.products.data);
+  const screenWidth = window.innerWidth;
+
+  // filterSettings
+  const filterCriteriasWithTypes = useSelector((state) => state.filterSettings.filterCriteriasWithTypes);
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
-  const minValue = useSelector((state) => state.filterSettings.minPrice);
-  const maxValue = useSelector((state) => state.filterSettings.maxPrice);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
-  const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
+  // filterSorting
+  const sortingMode = useSelector((state) => state.filterSorting.mode);
+  //products
+  const cardsOnPage = useSelector((state) => state.products.cardsOnPage);
   const fetchStatus = useSelector((state) => state.products.status);
+  const products = useSelector((state) => state.products.data);
+  const pagesToLoading = useSelector((state) => state.products.pagesToLoading);
 
-  const [filterCriteriasWithTypes, setfilterCriteriasWithTypes] = useState([]);
-
-  // ЗАПОВНЕННЯ БЛОКУ ФІЛЬТРУ
-  // Пошук усіх можливих варіантів у товарах та додання результату до критеріїв пошуку
-  const addVariationsToFilterCriterias = () => {
-    const updatedFilterCriterias = [];
-
-    filterCriterias.forEach((criteria) => {
-      criteria.types = [];
-
-      products.forEach((product) => {
-        const { value: findVariations } = findValueByPath(product, criteria.path);
-
-        findVariations.forEach((findVariation) => {
-          if (!criteria.types.includes(findVariation)) {
-            criteria.types.push(findVariation);
-          }
-        });
-      });
-      updatedFilterCriterias.push({ title: criteria.title, types: criteria.types, path: criteria.path });
-    });
-    return updatedFilterCriterias;
-  };
-
-  // ОБРОБКА ФІЛЬТРАЦІЇ (ПІСЛЯ НАТИСКАННЯ КНОПКИ)
-
-  const filterProducts = () => {
-    const filteredProductsArray = [];
-    const entriesOfFilterSettings = Object.entries(filterSettings);
-
-    products.forEach((product) => {
-      let isMatch = true;
-
-      for (const [path, parametersOfSetting] of entriesOfFilterSettings) {
-        const trueValues = parametersOfSetting;
-
-        const { value, arrayOfObjects } = findValueByPath(product, path);
-
-        // Відмічаємо "false" ті продукти, або частини продуктів, які нам НЕ підходять:
-        if (value && trueValues.length > 0) {
-          // Якщо це значення з одним варіантом вибору
-          if (value.length === 1 && !trueValues.includes(value[0]) && !arrayOfObjects) {
-            isMatch = false;
-          }
-          // Якщо це массив значень (Наприклад, список функцій)
-          else if (value.length > 1 && !trueValues.every((key) => value.includes(key)) && !arrayOfObjects) {
-            isMatch = false;
-          }
-          // Якщо є массив об'єктів: фільтрація по КОЛЬОРАХ (адже кожен є ОКРЕМИМ товаром)
-          else if (path === "colors.color" && arrayOfObjects) {
-            const filteredColors = arrayOfObjects.filter((colorObject) => trueValues.includes(colorObject.color));
-            if (filteredColors.length === 0) {
-              isMatch = false;
-            } else {
-              product = { ...product, colors: filteredColors };
-            }
-          }
-          // Якщо є массив об'єктів: фільтрація по іншим критеріям
-          else if (arrayOfObjects && !trueValues.some((trueValue) => value.includes(trueValue))) {
-            isMatch = false;
-          }
-          // Прибираємо всі продукти з пустими значаннями, якщо такі є
-          else if (value.length < 1) {
-            isMatch = false;
-          }
-        }
-      }
-      if (isMatch) {
-        filteredProductsArray.push(product);
-      }
-    });
-    return filteredProductsArray;
-  };
-
-  // Прибираємо розділювальну риску на останнтому елементі
-  const accordions = document.querySelectorAll(".filter .accordion");
-  if (accordions.length > 1) {
-    accordions[accordions.length - 1].style.borderBottom = "0px";
-    accordions[accordions.length - 1].style.marginBottom = "0px";
-  }
-
-  // Фільтр-посилання при ресеті
+  // Фільтр-посилання
   const navigateToUrlWithSettings = () => {
-    const url = `?${createUrlFromFilterSettings([], 0, 0, 0, 0, checkedSortingValue)}`;
+    const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, sortingMode)}`;
     navigate(url);
   };
 
-  // ДІЇ ПО КНОПКАХ
-
-  // Запуск базового фільтру
-  const onFilterSubmit = () => {
-    // dispatch(updateBaseFilterData(filterProducts()));   ПРИ ЗМІНІ ЧЕКБРКСУ ВЖЕ СПРАЦЮВАЛО
-    closeFilter();
-  };
-
-  // Натиск RESET
-  const onResetSubmit = () => {
-    dispatch(setPriceBy(0));
-    dispatch(setPriceTo(0));
-    dispatch(setCheckboxesSettings([]));
-    // dispatch(setMinPrice(0));
-    // dispatch(setMaxPrice(0));
-    // dispatch(setCheckboxesSettings([]));
-
-    closeFilter();
-    navigateToUrlWithSettings();
+  // Фільтр-посилання при ресеті
+  const navigateToUrlWithSettingsOnReset = () => {
+    const url = `?${createUrlFromFilterSettings([], 0, 0, sortingMode)}`;
+    navigate(url);
   };
 
   // Закрити фільтр (мобільна і таблет-версії)
@@ -141,22 +52,92 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
     }
   };
 
-  // ЗМІНА СТАНІВ
+  // Запуск фільтру
+  const filterActions = useMemo(() => {
+    return () => {
+      dispatch(
+        getMinAndMaxPrices({ collection: categoryName, filterSettings: convertSettingsToMongoType(filterSettings) })
+      );
+      dispatch(
+        fillTheFilter({
+          collection: categoryName,
+          filterSettings: convertSettingsToMongoType(filterSettings),
+          filterCriterias: filterCriterias,
+          priceBy: priceBy,
+          priceTo: priceTo,
+        })
+      );
+      dispatch(
+        loadOnePageOfProducts({
+          collection: categoryName,
+          filterSettings: convertSettingsToMongoType(filterSettings),
+          priceBy: priceBy,
+          priceTo: priceTo,
+          limit: cardsOnPage,
+          page: 1,
+          sortingMode: sortingMode,
+        })
+      );
+      if (pagesToLoading !== 1) {
+        dispatch(setPagesToLoading(1));
+      }
+      navigateToUrlWithSettings();
+      changePricePromptFunction();
+    };
+  }, [categoryName, filterCriterias, filterSettings, priceBy, priceTo, cardsOnPage, pagesToLoading, sortingMode]);
 
-  // ------- На початку роботи заповнюємо параметри BASE та PRICE  згідно з товарами у PRODUCTS
-  useEffect(() => {
-    if (fetchStatus === "succeeded") {
-      setfilterCriteriasWithTypes(addVariationsToFilterCriterias());
+  // Натиск кнопки SUBMIT
+  const onFilterSubmit = () => {
+    closeFilter();
+    filterActions();
+    navigateToUrlWithSettings();
+  };
+
+  // Натиск RESET
+  const onResetSubmit = () => {
+    dispatch(setPriceBy(0));
+    dispatch(setPriceTo(0));
+    dispatch(setCheckboxesSettings([]));
+    closeFilter();
+
+    dispatch(getMinAndMaxPrices({ collection: categoryName, filterSettings: [] }));
+    dispatch(
+      fillTheFilter({
+        collection: categoryName,
+        filterSettings: [],
+        filterCriterias: filterCriterias,
+        priceBy: 0,
+        priceTo: 0,
+      })
+    );
+    dispatch(
+      loadOnePageOfProducts({
+        collection: categoryName,
+        filterSettings: [],
+        priceBy: 0,
+        priceTo: 0,
+        limit: cardsOnPage,
+        page: 1,
+        sortingMode: sortingMode,
+      })
+    );
+    if (pagesToLoading !== 1) {
+      dispatch(setPagesToLoading(1));
     }
-  }, [fetchStatus]);
+    navigateToUrlWithSettingsOnReset();
+  };
 
-  // ------- ФІЛЬТРАЦІЯ ПО БАЗОВИМ ФІЛЬТРАМ - виклик функції фільтрації при зміні settings
-  // useEffect(() => {
-  //   dispatch(updateBaseFilterData(filterProducts()));
-  // }, [baseFilterProductsStatus]);
-
+  // Зберігання моду сортування у посиланні
   useEffect(() => {
-    dispatch(updateBaseFilterData(filterProducts()));
+    navigateToUrlWithSettings();
+  }, [sortingMode]);
+
+  // Фільтрація безпосередньо при натисканні чекбоксу для великих екранів
+  useEffect(() => {
+    if (fetchStatus === "succeeded" && products.length > 0 && screenWidth >= 1024) {
+      filterActions();
+      navigateToUrlWithSettings();
+    }
   }, [filterSettings]);
 
   return (
@@ -166,7 +147,7 @@ const CatalogFilter = ({ filterCriterias, pricePath }) => {
         <h1 className="filter__title">Filter</h1>
         <img className="filter__close-btn" src="../assets/icons/close.svg" alt="Close" onClick={closeFilter} />
       </div>
-      <Accordion title="Price" content={<CatalogPriceFilter pricePath={pricePath} />} />
+      <Accordion title="Price" content={<CatalogPriceFilter pricePath={pricePath} onClickFunction={filterActions} />} />
       {filterCriteriasWithTypes.map((criteria, index) => (
         <React.Fragment key={index}>
           <CatalogFilterItem filterTitle={criteria.title} checkBoxNames={criteria.types} criteriaPath={criteria.path} />

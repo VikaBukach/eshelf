@@ -1,89 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// Slices
 import { setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
-import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
-import { selectFilteredProductsStatus } from "../../../store/slices/filteredProductsSlice";
-import { findValueByPath } from "../../../helpers/catalog";
-import { setMinPrice, setMaxPrice } from "../../../store/slices/filterSettingsSlice";
-import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
-import { createUrlFromFilterSettings } from "../../../utils/filter-url";
 
-const CatalogPriceFilter = ({ pricePath }) => {
+const CatalogPriceFilter = ({ onClickFunction }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
   const minValue = useSelector((state) => state.filterSettings.minPrice);
   const maxValue = useSelector((state) => state.filterSettings.maxPrice);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
-  const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
-  const baseFilterProductsStatus = useSelector(selectFilteredProductsStatus);
-  const filteredProducts = useSelector((state) => state.filteredProducts.baseFilter);
 
   const [isPriceByError, setIsPriceByError] = useState(false);
   const [isPriceToError, setIsPriceToError] = useState(false);
 
   // Перевірка валідності значень інпутів
   const ckeckValidation = () => {
-    setIsPriceByError(priceBy < minValue || priceBy > maxValue || priceBy > priceTo);
-    setIsPriceToError(priceTo < minValue || priceTo > maxValue || priceTo < priceBy);
+    setIsPriceByError(
+      priceBy !== 0 && (priceBy < minValue || priceBy > maxValue || (priceTo !== 0 && priceBy > priceTo))
+    );
+    setIsPriceToError(priceTo !== 0 && (priceTo < minValue || priceTo > maxValue || priceTo < priceBy));
   };
 
-  // Визначення мінімальної та максимальної ціни з фільтрованих товарів
-  const findMinAndMaxPrice = (productArray) => {
-    let allPrices = [];
-    productArray.forEach((product) => {
-      allPrices = [...allPrices, ...findValueByPath(product, pricePath).value];
-    });
-    return {
-      minValue: isFinite(Math.min(...allPrices)) ? Math.min(...allPrices) : 0,
-      maxValue: isFinite(Math.max(...allPrices)) ? Math.max(...allPrices) : 0,
-    };
-  };
-
-  // Фільтрація базового масиву по ціні
-  const filterByPrice = () => {
-    const filteredProductsArray = [];
-
-    if (priceBy !== 0 && priceTo !== 0) {
-      filteredProducts.forEach((product) => {
-        const { minValue, maxValue } = findMinAndMaxPrice([product]);
-
-        if (
-          (minValue >= priceBy && minValue <= priceTo) ||
-          (maxValue >= priceBy && maxValue <= priceTo) ||
-          (minValue <= priceBy && maxValue >= priceBy) ||
-          (minValue <= priceTo && maxValue >= priceTo)
-        ) {
-          filteredProductsArray.push(product);
-        }
-      });
-      return filteredProductsArray;
-    } else {
-      return filteredProducts;
-    }
-  };
-
-  // Фільтр-посилання
-  const navigateToUrlWithSettings = () => {
-    const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
-    navigate(url);
-  };
-
-  // ------- ФІЛЬТРАЦІЯ ПО ЦІНІ - по кнопці і при кожній зміні статусу BASE
   const submitFilterByPrice = () => {
-    if (!isPriceByError && !isPriceToError) {
-      dispatch(updateFilteredProductsWithPrice(filterByPrice()));
-      dispatch(setProductsToResrtSorting(filterByPrice()));
-      if (filterSettings.length !== 0 || priceBy !== minValue || priceTo !== maxValue) {
-        navigateToUrlWithSettings();
-      }
+    if (!isPriceByError && !isPriceToError && (priceBy !== minValue || priceTo !== maxValue)) {
+      onClickFunction();
     }
   };
-
-  // ДІЇ ПО КНОПКАХ
 
   // Зміна значень інпутів
   const handleMaxPriceChange = (event) => {
@@ -95,30 +38,6 @@ const CatalogPriceFilter = ({ pricePath }) => {
     const { value } = event.target;
     dispatch(setPriceBy(Number(value)));
   };
-
-  // ЗМІНА СТАНІВ
-
-  useEffect(() => {
-    if (baseFilterProductsStatus === "idle") {
-      dispatch(setMinPrice(findMinAndMaxPrice(filteredProducts).minValue));
-      dispatch(setMaxPrice(findMinAndMaxPrice(filteredProducts).maxValue));
-      if (priceBy === 0 || priceTo === 0) {
-        dispatch(setPriceBy(findMinAndMaxPrice(filteredProducts).minValue));
-        dispatch(setPriceTo(findMinAndMaxPrice(filteredProducts).maxValue));
-      }
-
-      if (priceBy !== 0 || priceTo !== 0) {
-        dispatch(updateFilteredProductsWithPrice(filterByPrice()));
-        dispatch(setProductsToResrtSorting(filterByPrice()));
-      } else if (minValue === 0 || maxValue === 0) {
-        dispatch(updateFilteredProductsWithPrice(filteredProducts));
-        dispatch(setProductsToResrtSorting(filteredProducts));
-      } else {
-        dispatch(updateFilteredProductsWithPrice(filterByPrice()));
-        dispatch(setProductsToResrtSorting(filterByPrice()));
-      }
-    }
-  }, [baseFilterProductsStatus]);
 
   return (
     <div>

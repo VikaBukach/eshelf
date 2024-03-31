@@ -2,7 +2,7 @@ import React from "react";
 import "./EspeciallyForYou.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { fetchDataOfProducts } from "../../../../store/slices/productsSlice";
+import { loadOnePageOfProducts } from "../../../../store/slices/productsSlice";
 import ProductListHomePage from "../../ProductListHomePage/ProductListHomePage";
 
 function EspeciallyForYou() {

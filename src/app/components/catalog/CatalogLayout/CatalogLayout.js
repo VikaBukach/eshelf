@@ -1,33 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+// Components
 import { CatalogProductList } from "../CatalogProductList/CatalogProductList";
 import { CatalogFilter } from "../CatalogFilter/CatalogFilter";
 import { CatalogSorting } from "../CatalogSorting/CatalogSorting";
-import { setCheckboxesSettings } from "../../../store/slices/filterSettingsSlice";
-import { setPriceBy, setPriceTo } from "../../../store/slices/filterSettingsSlice";
+import { CatalogPagination } from "../CatalogPagination/CatalogPagination";
+import { Breadcrumbs } from "../../ui/Breadcrumbs/Breadcrumbs";
+// Slices
+import { setCheckboxesSettings, setPriceBy, setPriceTo, getMinAndMaxPrices, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
+import { setPagesToLoading, loadOnePageOfProducts } from "../../../store/slices/productsSlice";
+// Another
 import { createFilterSettingsObjectFromUrl, createUrlFromFilterSettings } from "../../../utils/filter-url";
-import { updateBaseFilterData } from "../../../store/slices/filteredProductsSlice";
-import { updateFilteredProductsWithPrice } from "../../../store/slices/filteredProductsWithPriceSlice";
-import { setProductsToResrtSorting } from "../../../store/slices/filterSortingSlice";
+import { convertSettingsToMongoType } from "../../../helpers/catalog";
 
-const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
-  const dispatch = useDispatch();
+const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
+  const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  // filterSettings
   const filterSettings = useSelector((state) => state.filterSettings.checkboxes);
-  const products = useSelector((state) => state.products.data);
   const priceBy = useSelector((state) => state.filterSettings.priceBy);
   const priceTo = useSelector((state) => state.filterSettings.priceTo);
-  const minValue = useSelector((state) => state.filterSettings.minPrice);
-  const maxValue = useSelector((state) => state.filterSettings.maxPrice);
-  const checkedSortingValue = useSelector((state) => state.filterSorting.mode);
-  const fetchStatus = useSelector((state) => state.products.status);
+  //products
+  const pagesToLoading = useSelector((state) => state.products.pagesToLoading);
+  const numberOfPages = useSelector((state) => state.products.numberOfPages);
+  const cardsOnPage = useSelector((state) => state.products.cardsOnPage);
+  //filterSorting
+  const sortingMode = useSelector((state) => state.filterSorting.mode);
 
   const [allSettings, setAllSettings] = useState([]);
-
-  // ДІЇ ПО КНОПКАХ
+  const [priceByPrompt, setPriceByPrompt] = useState(0);
+  const [priceToPrompt, setPriceToPrompt] = useState(0);
 
   // Відкрити фільтр
   const openFilter = () => {
@@ -38,6 +44,13 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
     }
   };
 
+  // Кружечок з кількістю фільтрів (мобільна версія)
+  const checkCount = () => {
+    let pricePlus;
+    priceBy > 0 || priceTo > 0 ? (pricePlus = 1) : (pricePlus = 0);
+    return Object.values(filterSettings).flat().length + pricePlus;
+  };
+
   // Видалити критерій фільтру (таблет версія)
   const deleteSetting = (event) => {
     const newFilterSettings = {};
@@ -46,68 +59,185 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
         (item) => item !== event.target.getAttribute("data-value")
       );
     }
-    // dispatch(setCheckboxesSettings(newFilterSettings));
-  };
+    dispatch(setCheckboxesSettings(newFilterSettings));
 
-  // ДОПОМІЖНІ ЕЛЕМЕНТИ
+    dispatch(
+      getMinAndMaxPrices({ collection: categoryName, filterSettings: convertSettingsToMongoType(newFilterSettings) })
+    );
+    dispatch(
+      fillTheFilter({
+        collection: categoryName,
+        filterSettings: convertSettingsToMongoType(newFilterSettings),
+        filterCriterias: filterCriterias,
+        priceBy: priceBy,
+        priceTo: priceTo,
+      })
+    );
+    dispatch(
+      loadOnePageOfProducts({
+        collection: categoryName,
+        filterSettings: convertSettingsToMongoType(newFilterSettings),
+        priceBy: priceBy,
+        priceTo: priceTo,
+        limit: cardsOnPage,
+        page: 1,
+        sortingMode: sortingMode,
+      })
+    );
 
-  // Кружечок з кількістю фільтрів (мобільна версія)
-  const checkCount = () => {
-    let pricePlus;
-    priceBy > minValue || priceTo < maxValue ? (pricePlus = 1) : (pricePlus = 0);
-    return allSettings.length + pricePlus;
-  };
+    if (pagesToLoading !== 1) {
+      dispatch(setPagesToLoading(1));
+    }
 
-  // Фільтр-посилання
-  const navigateToUrlWithSettings = () => {
-    const url = `?${createUrlFromFilterSettings(filterSettings, priceBy, priceTo, minValue, maxValue, checkedSortingValue)}`;
+    const url = `?${createUrlFromFilterSettings(newFilterSettings, priceBy, priceTo, sortingMode)}`;
     navigate(url);
   };
 
-  // ЗМІНА СТАНІВ
+  // Натиск кнопки пагінації
+  const onClickLoadMore = () => {
+    dispatch(
+      loadOnePageOfProducts({
+        collection: categoryName,
+        filterSettings: convertSettingsToMongoType(filterSettings),
+        priceBy: priceBy,
+        priceTo: priceTo,
+        limit: cardsOnPage,
+        page: pagesToLoading + 1,
+        sortingMode: sortingMode,
+      })
+    );
+    dispatch(setPagesToLoading(pagesToLoading + 1));
+  };
 
-  // При завантаженні товарів
-  useEffect(() => {
-    if (fetchStatus === "succeeded") {
-      dispatch(updateBaseFilterData(products));
-      dispatch(updateFilteredProductsWithPrice(products));
-      dispatch(setProductsToResrtSorting(products));
-
-      if (window.location.search !== "") {
-        const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
-          minValue,
-          maxValue
-        );
-
-        if (sortingSettings) {
-          dispatch(setFilterSorting(sortingSettings));
-        }
-        if (filterPriceSettings.priceBy !== 0 && filterPriceSettings.priceTo !== 0) {
-          dispatch(setPriceBy(filterPriceSettings.priceBy));
-          dispatch(setPriceTo(filterPriceSettings.priceTo));
-        }
-        if (Object.keys(filterCheckboxSettings).length !== 0) {
-          dispatch(setCheckboxesSettings(filterCheckboxSettings));
-        }
-      } else {
-      }
+  // Дії при зміні моду сортування
+  const renewLoadedProducts = (sortingMode) => {
+    dispatch(
+      loadOnePageOfProducts({
+        collection: categoryName,
+        filterSettings: convertSettingsToMongoType(filterSettings),
+        priceBy: priceBy,
+        priceTo: priceTo,
+        limit: cardsOnPage,
+        page: 1,
+        sortingMode: sortingMode,
+      })
+    );
+    if (pagesToLoading !== 1) {
+      dispatch(setPagesToLoading(1));
     }
-  }, [fetchStatus]);
+  };
 
+  // Зміна підказок при зміні ціни
+  const changePricePrompt = useMemo(() => {
+    return () => {
+      setPriceByPrompt(priceBy);
+      setPriceToPrompt(priceTo);
+    };
+  }, [priceBy, priceTo]);
+
+  const deletePricePrompt = useMemo(() => {
+    return (priceType) => {
+      const newPriceBy = priceType === "by" ? 0 : priceBy;
+      const newPriceTo = priceType === "to" ? 0 : priceTo;
+
+      setPriceByPrompt(newPriceBy);
+      setPriceToPrompt(newPriceTo);
+
+      dispatch(setPriceBy(newPriceBy));
+      dispatch(setPriceTo(newPriceTo));
+
+      dispatch(
+        fillTheFilter({
+          collection: categoryName,
+          filterSettings: convertSettingsToMongoType(filterSettings),
+          filterCriterias: filterCriterias,
+          priceBy: newPriceBy,
+          priceTo: newPriceTo,
+        })
+      );
+      dispatch(
+        loadOnePageOfProducts({
+          collection: categoryName,
+          filterSettings: convertSettingsToMongoType(filterSettings),
+          priceBy: newPriceBy,
+          priceTo: newPriceTo,
+          limit: cardsOnPage,
+          page: 1,
+          sortingMode: sortingMode,
+        })
+      );
+      if (pagesToLoading !== 1) {
+        dispatch(setPagesToLoading(1));
+      }
+      const url = `?${createUrlFromFilterSettings(filterSettings, newPriceBy, newPriceTo, sortingMode)}`;
+      navigate(url);
+    };
+  }, [
+    priceBy,
+    priceTo,
+    categoryName,
+    filterSettings,
+    filterCriterias,
+    cardsOnPage,
+    pagesToLoading,
+    sortingMode,
+  ]);
+
+  // Дії при ЗАВАНТАЖЕННІ сторінки
+  useEffect(() => {
+    const { filterCheckboxSettings, filterPriceSettings, sortingSettings } = createFilterSettingsObjectFromUrl(
+      location.search
+    );
+
+    dispatch(setCheckboxesSettings(filterCheckboxSettings));
+    dispatch(setPriceBy(filterPriceSettings.priceBy));
+    dispatch(setPriceTo(filterPriceSettings.priceTo));
+    dispatch(setFilterSorting(sortingSettings));
+    setPriceByPrompt(filterPriceSettings.priceBy);
+    setPriceToPrompt(filterPriceSettings.priceTo);
+
+    dispatch(
+      getMinAndMaxPrices({
+        collection: categoryName,
+        filterSettings: convertSettingsToMongoType(filterCheckboxSettings),
+      })
+    );
+    dispatch(
+      fillTheFilter({
+        collection: categoryName,
+        filterSettings: convertSettingsToMongoType(filterCheckboxSettings),
+        filterCriterias: filterCriterias,
+        priceBy: filterPriceSettings.priceBy,
+        priceTo: filterPriceSettings.priceTo,
+      })
+    );
+    dispatch(
+      loadOnePageOfProducts({
+        collection: categoryName, // можна строкою, наприклад, "laptops"
+        filterSettings: [],
+        priceBy: 0,
+        priceTo: 0,
+        limit: 10, // Скільки потрібно
+        page: 1,
+        sortingMode: "",
+      })
+    );
+    const url = `?${createUrlFromFilterSettings(filterCheckboxSettings, filterPriceSettings.priceBy, filterPriceSettings.priceTo, sortingSettings)}`;
+    navigate(url);
+  }, []);
+
+  // Створення підказок з обраних чекбоксів
   useEffect(() => {
     setAllSettings(Object.values(filterSettings).flat());
-    if (filterSettings.length !== 0 || priceBy !== minValue || priceTo !== maxValue) {
-      navigateToUrlWithSettings();
-    }
   }, [filterSettings]);
 
   return (
-    <div className="catalog">
-      <div className="container">
+    <div className="container">
+      <div className="catalog">
         <div className="catalog__shadow"></div>
         <div className="catalog__head-line">
           <div className="catalog__head-line__head">
-            <p className="catalog__head-line__breadcrumb">˂ Breadcrumb</p>
+            <Breadcrumbs />
             <h3 className="catalog__head-line__title">{title}</h3>
           </div>
           <div className="catalog__head-line__container">
@@ -116,7 +246,7 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
               Filter
               <div className="catalog__head-line__filter-btn__count">{checkCount()}</div>
             </button>
-            <CatalogSorting className="catalog__head-line__sorting" />
+            <CatalogSorting className="catalog__head-line__sorting" onChangeFunction={renewLoadedProducts} />
           </div>
           <ul className="catalog__filter-settings">
             {allSettings.map((setting, index) => (
@@ -131,11 +261,41 @@ const CatalogLayout = ({ title, filterCriterias, pricePath }) => {
                 />
               </li>
             ))}
+            {priceByPrompt !== 0 && (
+              <li className="catalog__filter-settings__item" key={"pricebyitem"}>
+                <span>By: ${priceByPrompt}</span>
+                <img
+                  className="catalog__filter-settings__close"
+                  src="../assets/icons/close2.svg"
+                  alt="Icon"
+                  onClick={() => deletePricePrompt("by")}
+                />
+              </li>
+            )}
+            {priceToPrompt !== 0 && (
+              <li className="catalog__filter-settings__item" key={"priceещitem"}>
+                <span>To: ${priceToPrompt}</span>
+                <img
+                  className="catalog__filter-settings__close"
+                  src="../assets/icons/close2.svg"
+                  alt="Icon"
+                  onClick={() => deletePricePrompt("to")}
+                />
+              </li>
+            )}
           </ul>
         </div>
         <div className="catalog__body">
-          <CatalogFilter filterCriterias={filterCriterias} pricePath={pricePath} />
-          <CatalogProductList />
+          <CatalogFilter
+            categoryName={categoryName}
+            filterCriterias={filterCriterias}
+            pricePath={pricePath}
+            changePricePromptFunction={changePricePrompt}
+          />
+          <div className="catalog__body__list">
+            <CatalogProductList />
+            {pagesToLoading !== numberOfPages && <CatalogPagination onClickFunc={onClickLoadMore} />}
+          </div>
         </div>
       </div>
     </div>

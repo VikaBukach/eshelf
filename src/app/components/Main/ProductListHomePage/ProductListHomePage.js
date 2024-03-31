@@ -7,6 +7,7 @@ import Arrow from "../../Main/Arrow/Arrow";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./ProductListHomePage.scss";
+import { loadOnePageOfProducts } from "../../../store/slices/productsSlice";
 
 function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfProducts }) {
   const dispatch = useDispatch();
@@ -15,9 +16,8 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(fetchDataOfProducts(category));
+        await dispatch((loadOnePageOfProducts({ collection: "stphones", limit: 5, page: 1})));
       } catch (error) {
-        console.log("Error fetching products:", error);
       }
     };
 
@@ -67,12 +67,12 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                     {item && (
                       <ProductCard
                         id={item._id}
-                        imageURL={item.colors[0].images[0]}
+                        imageURL={item.colors.images[0]}
                         category={item.category}
                         title={item.brand + " " + item.model}
-                        price={item.colors[0].products[0].price}
+                        price={item.colors.products[0].price}
                         // discountPrice={item.discountPrice}
-                        color={item.colors[0].color}
+                        color={item.colors.color}
                       />
                     )}
                   </div>
@@ -123,20 +123,20 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                     {item && (
                       <ProductCard
                         id={item._id}
-                        imageURL={item.colors[0].images[0]}
+                        imageURL={item.colors.images[0]}
                         category={item.category}
                         title={
                           item.brand +
                           " " +
                           item.model +
                           " " +
-                          item.colors[0].color +
+                          item.colors.color +
                           " " +
-                          item.colors[0].products[0].article
+                          item.colors.products[0].article
                         }
-                        price={item.colors[0].products[0].price}
-                        discountPrice={item.colors[0].products[0]["discount_price"]}
-                        color={item.colors[0].color}
+                        price={item.colors.products[0].price}
+                        discountPrice={item.colors.products[0]["discount_price"]}
+                        color={item.colors.color}
                       />
                     )}
                   </div>

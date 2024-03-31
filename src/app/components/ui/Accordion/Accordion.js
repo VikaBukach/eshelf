@@ -4,6 +4,13 @@ const Accordion = ({ title, content }) => {
   const [isOpen, setIsOpen] = useState(false);
   const contentRef = React.useRef(null);
 
+  // Прибираємо розділювальну риску на останнтому елементі
+  const accordions = document.querySelectorAll(".filter .accordion");
+  if (accordions.length > 1) {
+    accordions[accordions.length - 1].style.borderBottom = "0px";
+    accordions[accordions.length - 1].style.marginBottom = "0px";
+  }
+
   const openAndClose = (event) => {
     setIsOpen(!isOpen);
     event.target.classList.toggle("accordion__open-close--open");
@@ -13,7 +20,12 @@ const Accordion = ({ title, content }) => {
     if (contentRef.current) {
       const contentElement = contentRef.current;
       if (isOpen) {
-        contentElement.style.maxHeight = contentElement.scrollHeight + "px";
+        if (contentElement.scrollHeight > 200) {
+          contentElement.style.maxHeight = "200px";
+          contentElement.style.overflowY = "auto";
+        } else {
+          contentElement.style.maxHeight = contentElement.scrollHeight + "px";
+        }
       } else {
         contentElement.style.maxHeight = "0";
       }

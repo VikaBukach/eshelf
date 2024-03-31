@@ -6,6 +6,7 @@
     @include flex-container(row, space-between, center, nowrap);
     margin-bottom: 16px;
     min-width: 200px;
+    padding-right: 8px;
   }
 
   &__title {
@@ -52,6 +53,8 @@
     max-height: 0px;
     overflow: hidden;
     transition: 1s;
+    overflow-y: auto;
+    padding-right: 8px;
   }
 }
 

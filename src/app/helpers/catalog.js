@@ -58,4 +58,99 @@ const findValueByPath = (product, path) => {
   return { value: result, arrayOfObjects: arrayOfObjects };
 };
 
-export { isContainArrayOfObjects, normalizeValue, findValueByPath };
+// Визначення мінімальної та максимальної ціни з фільтрованих товарів
+const findMinAndMaxPrice = (productArray) => {
+  const pricePath = "colors.products.price";
+  let allPrices = [];
+  productArray.forEach((product) => {
+    allPrices = [...allPrices, ...findValueByPath(product, pricePath).value];
+  });
+  return {
+    minValue: isFinite(Math.min(...allPrices)) ? Math.min(...allPrices) : 0,
+    maxValue: isFinite(Math.max(...allPrices)) ? Math.max(...allPrices) : 0,
+  };
+};
+
+const filterProducts = (products, filterSettings) => {
+  const filteredProductsArray = [];
+  const entriesOfFilterSettings = Object.entries(filterSettings);
+
+  products.forEach((product) => {
+    let isMatch = true;
+
+    for (const [path, parametersOfSetting] of entriesOfFilterSettings) {
+      const trueValues = parametersOfSetting;
+
+      const { value, arrayOfObjects } = findValueByPath(product, path);
+
+      // Відмічаємо "false" ті продукти, або частини продуктів, які нам НЕ підходять:
+      if (value && trueValues.length > 0) {
+        // Якщо це значення з одним варіантом вибору
+        if (value.length === 1 && !trueValues.includes(value[0]) && !arrayOfObjects) {
+          isMatch = false;
+        }
+        // Якщо це массив значень (Наприклад, список функцій)
+        else if (value.length > 1 && !trueValues.every((key) => value.includes(key)) && !arrayOfObjects) {
+          isMatch = false;
+        }
+        // Якщо є массив об'єктів: фільтрація по КОЛЬОРАХ (адже кожен є ОКРЕМИМ товаром)
+        else if (path === "colors.color" && arrayOfObjects) {
+          const filteredColors = arrayOfObjects.filter((colorObject) => trueValues.includes(colorObject.color));
+          if (filteredColors.length === 0) {
+            isMatch = false;
+          } else {
+            product = { ...product, colors: filteredColors };
+          }
+        }
+        // Якщо є массив об'єктів: фільтрація по іншим критеріям
+        else if (arrayOfObjects && !trueValues.some((trueValue) => value.includes(trueValue))) {
+          isMatch = false;
+        }
+        // Прибираємо всі продукти з пустими значаннями, якщо такі є
+        else if (value.length < 1) {
+          isMatch = false;
+        }
+      }
+    }
+    if (isMatch) {
+      filteredProductsArray.push(product);
+    }
+  });
+  return filteredProductsArray;
+};
+
+// Фільтрація базового масиву по ціні
+const filterByPrice = (products, priceBy, priceTo) => {
+  const filteredProductsArray = [];
+
+  if (priceBy !== 0 && priceTo !== 0) {
+    products.forEach((product) => {
+      const { minValue, maxValue } = findMinAndMaxPrice([product]);
+
+      if (
+        (minValue >= priceBy && minValue <= priceTo) ||
+        (maxValue >= priceBy && maxValue <= priceTo) ||
+        (minValue <= priceBy && maxValue >= priceBy) ||
+        (minValue <= priceTo && maxValue >= priceTo)
+      ) {
+        filteredProductsArray.push(product);
+      }
+    });
+    return filteredProductsArray;
+  } else {
+    return products;
+  }
+};
+
+const convertSettingsToMongoType = (settings) => {
+  const mongoFilterSettings = {};
+  for (const path in settings) {
+    if (settings.hasOwnProperty(path)) {
+      const values = settings[path];
+      mongoFilterSettings[path] = { $in: values };
+    }
+  }
+  return mongoFilterSettings;
+};
+
+export { findMinAndMaxPrice, isContainArrayOfObjects, normalizeValue, findValueByPath, filterProducts, filterByPrice, convertSettingsToMongoType };

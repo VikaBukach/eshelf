@@ -1,18 +1,12 @@
-import { useDispatch } from "react-redux";
-import React, { useEffect } from "react";
-import { fetchDataOfProducts } from "../../store/slices/productsSlice";
+import React from "react";
 import { CatalogLayout } from "../../components/catalog/CatalogLayout/CatalogLayout";
 
 const PortableSpeakers = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchDataOfProducts("portable-speakers"));
-  }, [dispatch]);
 
   return (
     <div>
       <CatalogLayout
+        categoryName="portable-speakers"
         title="Portable Speakers"
         filterCriterias={[
           { title: "Brand", path: "brand" },
