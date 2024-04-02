@@ -50,67 +50,78 @@ const Header = () => {
   return (
     <>
       <header className="header">
-        <div className="header__content-container">
-          <BurgerMenuIcon className="burger-icon" onClick={handleToggleMenu} />
-          <NavLink to="/" className="header__logo">
-            <LogoIcon />
-          </NavLink>
-          <div className="header__search-container">
-            <input type="text" className="header__search-input" placeholder="Search..." />
-            <MicrophoneIcon className="microphone-icon" onClick={handleVoiceSearch} />
-            <SearchIcon className="search-icon" />
-          </div>
-          <NavLink to="/" className="header__link-home"></NavLink>
-          <NavLink to="/comparing" className="header__link-comparing">
-            <BalanceIcon />
-            {compareTotal > 0 && <span className="counter-circle">{compareTotal}</span>}
-          </NavLink>
-          <NavLink to="/favorites" className="header__link-favorites">
-            <HeartIcon />
-            {favoritesTotal > 0 && <span className="counter-circle">{favoritesTotal}</span>}
-          </NavLink>
-          <div className="header__link-cart">
-            <Cart
-              activator={
-                <div className="cart-activator" onClick={open}>
-                  <CartIcon />
-                  {windowWidth > 1024 && cartTotal > 0 && <span className="counter">${cartTotal}</span>}
-                  {windowWidth <= 1024 && cartTotal > 0 && <span className="counter-circle"></span>}
-                </div>
-              }
-            />
-          </div>
-
-          {user ? (
-            <NavLink to="/user/myorders" className="header__link-users">
-              <UserIcon />
-              <p>
-                Hello, <span>{user.name}</span>
-              </p>
-            </NavLink>
-          ) : (
-            <div className="header__link-users">
-              <Auth
-                activator={
-                  <div>
-                    <UserIcon />
-                  </div>
-                }
-              />
+        <div className="container">
+          <div className="header__content-container">
+            <div className="header__burger-logo-wrap">
+              <BurgerMenuIcon className="burger-icon" onClick={handleToggleMenu} />
+              <NavLink to="/" className="header__logo">
+                <LogoIcon />
+              </NavLink>
             </div>
-          )}
-          {/* <NavLink to="/users" className="header__link-users">
+            <div className="header__search-container">
+              <input type="text" className="header__search-input" placeholder="Search..." />
+              <div className="microphone-icon-wrap">
+                <MicrophoneIcon className="microphone-icon" onClick={handleVoiceSearch} />
+              </div>
+              <div className="search-icon-wrap">
+                <SearchIcon className="search-icon" />
+              </div>
+            </div>
+            {/* <NavLink to="/" className="header__link-home"></NavLink> */}
+            <div className="header__icons-wrap">
+              <NavLink to="/comparing" className="header__link-comparing">
+                <BalanceIcon />
+                {compareTotal > 0 && <span className="counter-circle">{compareTotal}</span>}
+              </NavLink>
+              <NavLink to="/favorites" className="header__link-favorites">
+                <HeartIcon />
+                {favoritesTotal > 0 && <span className="counter-circle">{favoritesTotal}</span>}
+              </NavLink>
+              <div className="header__link-cart">
+                <Cart
+                  activator={
+                    <div className="cart-activator" onClick={open}>
+                      <CartIcon />
+                      <span className="header__link-cart-name">Basket</span>
+                      {windowWidth > 1024 && cartTotal > 0 && <span className="counter">${cartTotal}</span>}
+                      {windowWidth <= 1024 && cartTotal > 0 && <span className="counter-circle"></span>}
+                    </div>
+                  }
+                />
+              </div>
+            </div>
+
+            {user ? (
+              <NavLink to="/user/myorders" className="header__link-users">
+                <UserIcon />
+                <p>
+                  Hello, <span>{user.name}</span>
+                </p>
+              </NavLink>
+            ) : (
+              <div className="header__link-users">
+                <Auth
+                  activator={
+                    <div className="header__link-users-icon">
+                      <UserIcon />
+                    </div>
+                  }
+                />
+              </div>
+            )}
+            {/* <NavLink to="/users" className="header__link-users">
             <UserIcon />
             {windowWidth > 1024 && <span>Hello, user</span>}
             {windowWidth <= 1024 && userCount > 0 && <span className="counter-circle"></span>}
           </NavLink> */}
 
-          {menuOpen && (
-            <>
-              {windowWidth < 1024 && <BurgerMenu isOpen={menuOpen} onClose={handleToggleMenu} />}
-              {windowWidth > 1024 && <BurgerMenuDesktop isOpen={menuOpen} onClose={handleToggleMenu} />}
-            </>
-          )}
+            {menuOpen && (
+              <>
+                {windowWidth < 1024 && <BurgerMenu isOpen={menuOpen} onClose={handleToggleMenu} />}
+                {windowWidth > 1024 && <BurgerMenuDesktop isOpen={menuOpen} onClose={handleToggleMenu} />}
+              </>
+            )}
+          </div>
         </div>
       </header>
     </>
