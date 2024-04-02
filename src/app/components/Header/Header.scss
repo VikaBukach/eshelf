@@ -1,11 +1,10 @@
-@import "../../../assets/styles/style.scss";
-
 .header {
-  background-color: white;
   width: 100%;
-  height: 56px;
-  padding: 8px 16px;
-  //background-color: $primary-color-gray;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #fff;
+  box-shadow: 0 -15px 19px 6px rgba(26, 42, 62, 0.3);
   .header__logo,
   .header__link-comparing,
   .header__link-favorites,
@@ -14,37 +13,119 @@
   }
 
   @media (min-width: $tablet) {
-    height: 64px;
-    padding: 0px 16px;
-
     .header__logo,
     .header__link-comparing,
     .header__link-favorites,
     .header__link-users {
       display: flex;
     }
+  }
 
-    .header__logo svg {
-      @include logo;
-      width: 100%;
+  &__burger-logo-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    @media (min-width: $tablet) {
+      column-gap: 16px;
+    }
+    @media (min-width: $desktop) {
+      column-gap: 38px;
     }
   }
 
-  @media (min-width: $desktop) {
-    //position: fixed;
-    position: sticky;
-    top: 0;
-    height: 88px;
-    z-index: 1000;
+  &__logo {
+    svg {
+      width: 113px;
+      height: 53px;
+    }
+  }
+
+  &__content-container {
+    min-height: 65px;
+    padding: 8px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    column-gap: 10px;
+
+    @media (min-width: $tablet) {
+      column-gap: 25px;
+    }
+
+    @media (min-width: $desktop) {
+      min-height: 88px;
+      column-gap: 35px;
+    }
+  }
+
+  &__search-container {
+    width: 100%;
+    max-width: 712px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 6px;
+    border: 1px solid #a0a0a08f;
+    border-radius: 10px;
+    height: 40px;
+    color: rgba(160, 160, 160, 0.561);
+
+    @media (min-width: $desktop) {
+      height: 40px;
+      display: flex;
+    }
+  }
+
+  &__search-input {
+    color: $secondary-color-grey;
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
+    @media (min-width: $desktop) {
+      padding-left: 16px;
+    }
+  }
+
+  &__icons-wrap {
+    @media (min-width: $tablet) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 15px;
+    }
+    @media (min-width: $desktop) {
+      column-gap: 35px;
+    }
+  }
+
+  &__link-cart-name {
+    display: none;
+    @media (min-width: $desktop) {
+      position: absolute;
+      top: -3px;
+      right: -44px;
+      display: inline-block;
+      font-size: 14px;
+      color: #8d8d8d;
+      transition: color 0.3s;
+    }
   }
 }
 
-.header__content-container {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-  text-align: center;
-  align-items: center;
+.burger-icon {
+  min-width: 40px;
+  min-height: 40px;
+  cursor: pointer;
+  
+  path {
+    fill: rgba(51, 51, 51, 0.56);
+    transition: fill 0.3s;
+  }
+  &:hover {
+    path {
+      fill: #8119b1;
+    }
+  }
 }
 
 .header__menu {
@@ -55,70 +136,158 @@
   display: block;
 }
 
-.header__search-container {
+.microphone-icon-wrap {
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  gap: 8px;
-  text-align: center;
-  border: 1px solid;
-  border-radius: 10px;
-  height: 40px;
-  font:
-    400 16px / 1.5 "Inter",
-    sans-serif;
-  color: rgba(160, 160, 160, 0.56);
+  height: 100%;
+  padding: 0 10px;
 
-  @media (min-width: $tablet) {
-    width: 323px;
-    justify-content: right;
+  path {
+    stroke: #8d8d8d;
+    transition: all 0.3s;
   }
 
-  @media (min-width: $desktop) {
-    width: 712px;
-    height: 40px;
-    display: flex;
+  &:hover {
+    path {
+      stroke: #8119b1;
+    }
   }
 }
-.header__search-input {
-  font:
-    400 16px / 1.5 "Inter",
-    sans-serif;
-  color: $secondary-color-grey;
-  width: 100%;
-  margin-left: 16px;
+
+.microphone-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+
+  @media (min-width: $tablet) {
+    padding-right: 0;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.search-icon-wrap {
+  display: none;
+  @media (min-width: $tablet) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 64px;
+    background-color: #a3adff;
+    border-radius: 0 10px 10px 0;
+    border: 1px solid #a3adff;
+    box-sizing: content-box;
+    cursor: pointer;
+    svg {
+      path {
+        transition: all 0.3s;
+      }
+    }
+
+    &:hover {
+      svg {
+        path {
+          stroke: #040404;
+        }
+      }
+    }
+  }
 }
 
 .search-icon {
-  display: none;
-
   @media (min-width: $tablet) {
-    display: inline-block;
-    border-radius: 0 10px 10px 0;
-    width: 40px;
-    height: 40px;
-    background: #a3adff;
+    width: 20px;
+    height: 20px;
+
+    path {
+      stroke: #fff;
+      stroke-width: 3;
+    }
   }
 }
 
 .cart-activator {
+  position: relative;
   display: flex;
+  padding: 5px;
+  cursor: pointer;
 }
 
-.counter-circle {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: red;
-  color: white;
+.header__link-users {
+  cursor: pointer;
+  svg {
+    height: 100%;
+  }
+  path {
+    stroke: #8d8d8d;
+    stroke-width: 1.5;
+    transition: all 0.3s;
+  }
+  &:hover {
+    path {
+      stroke: #8119b1;
+    }
+  }
+}
+
+.header__link-users-icon {
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (min-width: $desktop) {
+    margin-left: 45px;
+  }
 }
 
 .header__link-users span {
   margin-left: 5px;
+}
+
+.header__link-comparing,
+.header__link-favorites,
+.header__link-cart {
+  position: relative;
+  padding: 5px;
+  path {
+    stroke: #8d8d8d;
+    stroke-width: 1.5;
+    transition: all 0.3s;
+  }
+  &:hover {
+    path {
+      stroke: #8119b1;
+    }
+  }
+}
+
+.header__link-cart:hover .header__link-cart-name {
+  color: #8119b1;
+} 
+
+.counter-circle {
+  position: absolute;
+  top: 0px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #ff4343;
+  color: white;
+}
+
+.counter {
+  position: absolute;
+  top: 19px;
+  right: -49px;
+  font-weight: 600;
+  color: #333;
 }
 
 // .header__menu-mobile {
