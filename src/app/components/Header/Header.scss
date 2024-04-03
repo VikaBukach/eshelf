@@ -22,9 +22,9 @@
   }
 
   &__burger-logo-wrap {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     @media (min-width: $tablet) {
       column-gap: 16px;
     }
@@ -116,7 +116,7 @@
   min-width: 40px;
   min-height: 40px;
   cursor: pointer;
-  
+
   path {
     fill: rgba(51, 51, 51, 0.56);
     transition: fill 0.3s;
@@ -264,7 +264,7 @@
 
 .header__link-cart:hover .header__link-cart-name {
   color: #8119b1;
-} 
+}
 
 .counter-circle {
   position: absolute;

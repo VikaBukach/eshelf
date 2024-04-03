@@ -5,7 +5,7 @@ const EReaders = () => {
   return (
     <div>
       <CatalogLayout
-      categoryName="e-readers"
+        categoryName="e-readers"
         title="E-Readers"
         filterCriterias={[
           { title: "Brand", path: "brand" },

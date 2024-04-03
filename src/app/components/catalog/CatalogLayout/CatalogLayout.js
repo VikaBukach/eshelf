@@ -8,7 +8,13 @@ import { CatalogSorting } from "../CatalogSorting/CatalogSorting";
 import { CatalogPagination } from "../CatalogPagination/CatalogPagination";
 import { Breadcrumbs } from "../../ui/Breadcrumbs/Breadcrumbs";
 // Slices
-import { setCheckboxesSettings, setPriceBy, setPriceTo, getMinAndMaxPrices, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
+import {
+  setCheckboxesSettings,
+  setPriceBy,
+  setPriceTo,
+  getMinAndMaxPrices,
+  fillTheFilter,
+} from "../../../store/slices/filterSettingsSlice";
 import { setFilterSorting } from "../../../store/slices/filterSortingSlice";
 import { setPagesToLoading, loadOnePageOfProducts } from "../../../store/slices/productsSlice";
 // Another
@@ -172,16 +178,7 @@ const CatalogLayout = ({ categoryName, title, filterCriterias, pricePath }) => {
       const url = `?${createUrlFromFilterSettings(filterSettings, newPriceBy, newPriceTo, sortingMode)}`;
       navigate(url);
     };
-  }, [
-    priceBy,
-    priceTo,
-    categoryName,
-    filterSettings,
-    filterCriterias,
-    cardsOnPage,
-    pagesToLoading,
-    sortingMode,
-  ]);
+  }, [priceBy, priceTo, categoryName, filterSettings, filterCriterias, cardsOnPage, pagesToLoading, sortingMode]);
 
   // Дії при ЗАВАНТАЖЕННІ сторінки
   useEffect(() => {

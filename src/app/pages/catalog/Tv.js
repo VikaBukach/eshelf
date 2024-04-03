@@ -2,7 +2,6 @@ import React from "react";
 import { CatalogLayout } from "../../components/catalog/CatalogLayout/CatalogLayout";
 
 const TV = () => {
-
   return (
     <div>
       <CatalogLayout

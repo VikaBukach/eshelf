@@ -153,4 +153,12 @@ const convertSettingsToMongoType = (settings) => {
   return mongoFilterSettings;
 };
 
-export { findMinAndMaxPrice, isContainArrayOfObjects, normalizeValue, findValueByPath, filterProducts, filterByPrice, convertSettingsToMongoType };
+export {
+  findMinAndMaxPrice,
+  isContainArrayOfObjects,
+  normalizeValue,
+  findValueByPath,
+  filterProducts,
+  filterByPrice,
+  convertSettingsToMongoType,
+};
