@@ -64,9 +64,7 @@ const ReviewsProduct = ({ productId, totalReviews, setTotalReviews, setRating: s
         productId,
       });
 
-      setTotalRating((prev) => {
-        return prev + +res.data?.rating || 0;
-      });
+      setTotalRating(+res.data?.newAvgRating);
 
       formRef.current.reset();
       setRating(0);

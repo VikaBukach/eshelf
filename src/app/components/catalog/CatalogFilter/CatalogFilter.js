@@ -6,7 +6,13 @@ import { CatalogFilterItem } from "../CatalogFilterItem/CatalogFilterItem";
 import { CatalogPriceFilter } from "../CatalogPriceFilter/CatalogPriceFilter";
 import { Accordion } from "../../ui/Accordion/Accordion";
 // Slices
-import { setCheckboxesSettings, setPriceBy, setPriceTo, getMinAndMaxPrices, fillTheFilter } from "../../../store/slices/filterSettingsSlice";
+import {
+  setCheckboxesSettings,
+  setPriceBy,
+  setPriceTo,
+  getMinAndMaxPrices,
+  fillTheFilter,
+} from "../../../store/slices/filterSettingsSlice";
 import { setPagesToLoading, loadOnePageOfProducts } from "../../../store/slices/productsSlice";
 // Another
 import { createUrlFromFilterSettings } from "../../../utils/filter-url";

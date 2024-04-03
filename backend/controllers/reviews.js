@@ -1,15 +1,24 @@
-const client = require("../../db");
+const Review = require("../models/Review");
 
 const createReview = async (req, res) => {
   const reviewData = req.body;
-  const database = client.getDb();
-  const reviewsCollection = database.collection("reviews");
-
   const data = { ...reviewData, createdAt: new Date(Date.now()).toISOString() };
-
   try {
-    await reviewsCollection.insertOne(data);
-    res.status(201).send(data);
+    await Review.create(data);
+
+    const count = await Review.countDocuments({
+      productId: reviewData.productId,
+    });
+    const result = await Review.find({
+      productId: reviewData.productId,
+    });
+    const avg = Math.round(
+      result.reduce((prev, curr) => {
+        return +prev + +curr.rating;
+      }, 0) / count
+    );
+
+    res.status(201).send({ ...data, newAvgRating: avg });
   } catch (error) {
     console.error("Error saving review:", error);
     res.status(500, {
@@ -20,20 +29,15 @@ const createReview = async (req, res) => {
 
 const loadReviews = async (req, res) => {
   const { productId, skip, take } = req.query;
-
-  const database = client.getDb();
-  const reviewsCollection = database.collection("reviews");
   try {
-    const result = await reviewsCollection
-      .find({
-        productId,
-      })
+    const result = await Review.find({
+      productId,
+    })
       .limit(+take)
       .skip(+skip)
-      .sort({ createdAt: -1 })
-      .toArray();
+      .sort([["createdAt", -1]]);
 
-    const count = await reviewsCollection.countDocuments({
+    const count = await Review.countDocuments({
       productId,
     });
     res.status(200).send({
@@ -50,26 +54,18 @@ const loadReviews = async (req, res) => {
 
 const loadReviewsTotals = async (req, res) => {
   const { productId } = req.query;
-
-  const database = client.getDb();
-  const reviewsCollection = database.collection("reviews");
   try {
-    const count = await reviewsCollection.countDocuments({
+    const count = await Review.countDocuments({
       productId,
     });
-
-    const result = await reviewsCollection
-      .find({
-        productId,
-      })
-      .toArray();
-
+    const result = await Review.find({
+      productId,
+    });
     const avg = Math.round(
       result.reduce((prev, curr) => {
         return +prev + +curr.rating;
       }, 0) / count
     );
-
     res.status(200).send({
       avgRating: avg,
       reviewsCount: count,

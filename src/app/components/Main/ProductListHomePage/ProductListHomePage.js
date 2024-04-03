@@ -16,9 +16,9 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch((loadOnePageOfProducts({ collection: "stphones", limit: 5, page: 1})));
-      } catch (error) {
-      }
+        // fix name
+        await dispatch(loadOnePageOfProducts({ collection: "smartphones", limit: 5, page: 1 }));
+      } catch (error) {}
     };
 
     fetchData();
@@ -116,7 +116,6 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
             <Slider {...settings} ref={sliderRef}>
               {status === "loading" && <div>Loading...</div>}
               {status === "failed" && <div>Error: {error} </div>}
-
               {status === "succeeded" && data.length > 0 ? (
                 data.map((item, index) => (
                   <div className="section-especially-item-desktop" key={index}>

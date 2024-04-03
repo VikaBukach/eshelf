@@ -113,7 +113,7 @@ const BurgerMenuDesktop = ({ onClose, history }) => {
                 >
                   <div className="category-link-wrapper">
                     <MobileIcon className={`category-image ${activeCategories[category] ? "active" : "not-active"}`} />
-                    <NavLink to={`/${category}`}  onClick={handleNavLinkClick}>
+                    <NavLink to={`/${category}`} onClick={handleNavLinkClick}>
                       {category.charAt(0).toUpperCase() + category.slice(1)}
                     </NavLink>
                   </div>

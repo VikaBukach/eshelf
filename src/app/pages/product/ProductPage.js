@@ -111,9 +111,9 @@ const ProductPage = () => {
               // Передаємо стан підрахунку відгуків
               <ReviewsProduct
                 productId={product._id}
-                setRating={setRating} // та рейтингу
                 totalReviews={totalReviews}
                 setTotalReviews={setTotalReviews}
+                setRating={setRating}
               />
             )}
             {tabs === "Characteristic" && <CharacteristicProduct product={product} />}
