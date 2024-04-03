@@ -16,7 +16,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 require("dotenv").config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.REACT_APP_PORT || 5000;
 const MONGO_URI = "mongodb+srv://finalprojectfe23:finalprojectfe23@project.x9zghkg.mongodb.net/products";
 
 const app = express();

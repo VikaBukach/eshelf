@@ -1,30 +1,30 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const client = require('../../db');
+const client = require("../../db");
 
 const fetchAndLogModels = async () => {
-    try {
-        const database = client.getDb();
-        const productsCollection = database.collection("smartphones");
+  try {
+    const database = client.getDb();
+    const productsCollection = database.collection("smartphones");
 
-        // Получаем список уникальных моделей
-        const models = await productsCollection.distinct("model");
+    // Получаем список уникальных моделей
+    const models = await productsCollection.distinct("model");
 
-        // Выводим список моделей в консоль
-        console.log("Unique models:");
-        models.forEach(model => {
-            console.log(model);
-        });
-    } catch (error) {
-        // Если произошла ошибка, выводим сообщение об ошибке в консоль
-        console.error("Error fetching models:", error);
-    }
+    // Выводим список моделей в консоль
+    console.log("Unique models:");
+    models.forEach((model) => {
+      console.log(model);
+    });
+  } catch (error) {
+    // Если произошла ошибка, выводим сообщение об ошибке в консоль
+    console.error("Error fetching models:", error);
+  }
 };
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log('Server is running...');
-    fetchAndLogModels(); // Здесь функция вызывается после успешного запуска сервера
-});
+// app.listen(process.env.PORT || 3000, () => {
+//     console.log('Server is running...');
+//     fetchAndLogModels(); // Здесь функция вызывается после успешного запуска сервера
+// });
 // const createReview = async (req, res) => {
 //   const reviewData = req.body;
 //   const database = client.getDb();

@@ -42,7 +42,10 @@ const loadOnePageOfProducts = async (
     const paginatedProducts1 = filteredProducts.splice(skip);
     const paginatedProducts = paginatedProducts1.splice(0, limit);
 
-    return { paginatedProducts, numberOfPages };
+    return {
+      paginatedProducts,
+      numberOfPages,
+    };
   } catch (error) {
     console.error("Error fetching page of products (by controller)", error);
     throw error;

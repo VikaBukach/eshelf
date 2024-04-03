@@ -56,13 +56,14 @@ const AboutProduct = ({ product }) => {
 
   // Отримуємо обєкт користувача
   const user = useSelector((state) => state.user.data);
-
+  // Внeсені зміни по запиту на перегляд товару
   useEffect(() => {
-    let cancelToken = axios.CancelToken.source(); // створюємо токен скасування запиту
-    // Робимо запит на створення нового перегляду
-    let submitting = false;
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
     const fetchData = async () => {
-      submitting = true;
+      const productId = product?._id;
+      localStorage.setItem("revised_token", productId);
       try {
         const PORT = process.env.REACT_APP_PORT || 5000;
         const REACT_APP_BACK_URL = process.env.REACT_APP_BACK_URL || "http://localhost";
@@ -74,27 +75,24 @@ const AboutProduct = ({ product }) => {
             productId: product?._id,
           },
           {
-            cancelToken: cancelToken.token, // передаємо токен для скасування запиту
+            cancelToken: source.token, // Передаємо кенсел токен
           }
         );
 
         // ловимо помилки
       } catch (error) {
-        if (axios.isCancel(error)) {
-          console.log("Request canceled:", error.message);
-        }
-      } finally {
-        submitting = false;
+        console.log("Request canceled:", error.message);
       }
     };
 
-    if (user && !submitting) {
+    if (!localStorage.getItem("revised_token")) {
       fetchData();
     }
 
     // Скасовуємо запит при видаленні сторінки
     return () => {
-      cancelToken.cancel("Operation canceled due to component unmount.");
+      source.cancel("Request canceled by user");
+      localStorage.removeItem("revised_token");
     };
   }, []);
 

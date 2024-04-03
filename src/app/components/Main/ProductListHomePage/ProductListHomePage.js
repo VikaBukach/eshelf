@@ -16,9 +16,9 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch((loadOnePageOfProducts({ collection: "stphones", limit: 5, page: 1})));
-      } catch (error) {
-      }
+        // fix name
+        await dispatch(loadOnePageOfProducts({ collection: "smartphones", limit: 5, page: 1 }));
+      } catch (error) {}
     };
 
     fetchData();
@@ -67,12 +67,12 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                     {item && (
                       <ProductCard
                         id={item._id}
-                        imageURL={item.colors.images[0]}
+                        imageURL={item.colors[0].images[0]}
                         category={item.category}
                         title={item.brand + " " + item.model}
-                        price={item.colors.products[0].price}
+                        price={item.colors[0].products[0].price}
                         // discountPrice={item.discountPrice}
-                        color={item.colors.color}
+                        color={item.colors[0].color}
                       />
                     )}
                   </div>
@@ -116,27 +116,27 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
             <Slider {...settings} ref={sliderRef}>
               {status === "loading" && <div>Loading...</div>}
               {status === "failed" && <div>Error: {error} </div>}
-
               {status === "succeeded" && data.length > 0 ? (
                 data.map((item, index) => (
                   <div className="section-especially-item-desktop" key={index}>
                     {item && (
                       <ProductCard
                         id={item._id}
-                        imageURL={item.colors.images[0]}
+                        // FIX added colors[0]
+                        imageURL={item.colors[0].images[0]}
                         category={item.category}
                         title={
                           item.brand +
                           " " +
                           item.model +
                           " " +
-                          item.colors.color +
+                          item.colors[0].color +
                           " " +
-                          item.colors.products[0].article
+                          item.colors[0].products[0].article
                         }
-                        price={item.colors.products[0].price}
-                        discountPrice={item.colors.products[0]["discount_price"]}
-                        color={item.colors.color}
+                        price={item.colors[0].products[0].price}
+                        discountPrice={item.colors[0].products[0]["discount_price"]}
+                        color={item.colors[0].color}
                       />
                     )}
                   </div>
