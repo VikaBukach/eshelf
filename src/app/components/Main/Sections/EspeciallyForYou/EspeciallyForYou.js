@@ -12,7 +12,7 @@ function EspeciallyForYou() {
       category="tablets"
       // category="especiallyforyou"
       initialItemsToShow={5}
-      // fetchDataOfProducts={() => fetchDataOfProducts("tablets")}
+      /* fetchDataOfProducts={() => fetchDataOfProducts("tablets")} */
       // fetchDataOfProducts={() => fetchDataOfProducts("especiallyforyou")}
     />
   );
