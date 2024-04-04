@@ -137,14 +137,15 @@
   &__color-active {
     &::before {
       content: "";
-      width: 48px;
-      height: 48px;
+      width: 55px;
+      height: 55px;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      border: 1px solid rgba(0, 0, 0, 0.2);
+      border: 1px solid #a3adff;
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
     }
   }
 
@@ -214,6 +215,7 @@
     padding: 8px;
     border-radius: 5px;
     border: 1px solid rgba(51, 51, 51, 0.2);
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.25);
     cursor: pointer;
     &:hover {
       border-color: $main-background;

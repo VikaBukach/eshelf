@@ -18,13 +18,13 @@ const ProductTablets = ({ product }) => {
       <GalleryProduct product={product} />
 
       <div className="product-details-body__info info-details">
-        {product.colors.products && (
+        {product.colors[activeColorIndex]?.products && (
           <div className="info-details__wrap">
             <div className="info-details__header">
               Main
-              {product.colors.products[activeMemoryIndex].article && (
+              {product.colors[activeColorIndex].products[activeMemoryIndex].article && (
                 <span className="info-details__article">
-                  Code: {product.colors.products[activeMemoryIndex].article}
+                  Code: {product.colors[activeColorIndex].products[activeMemoryIndex].article}
                 </span>
               )}
             </div>
@@ -63,12 +63,12 @@ const ProductTablets = ({ product }) => {
                 </div>
               </div>
             )}
-            {product.specifications?.camera && (
+            {product.specifications.camera?.main_camera && (
               <div className="info-details__characteristics-item">
                 <AboutCameraIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
                   <div className="info-details__characteristics-title">Camera</div>
-                  <span>{product.specifications.camera}</span>
+                  <span>{product.specifications.camera.main_camera}</span>
                 </div>
               </div>
             )}

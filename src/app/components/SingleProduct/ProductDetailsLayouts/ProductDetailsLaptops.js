@@ -14,16 +14,16 @@ const ProductDetailsLaptops = ({ product }) => {
           <span>{product.model}</span>
         </div>
 
-        {product.colors && (
+        {product.colors[activeColorIndex] && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Color</h3>
             <dl className="characteristic-body__list">
-              {product.colors?.color && (
+              {product.colors[activeColorIndex].color && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Color</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.colors.color}</li>
+                      <li>{product.colors[activeColorIndex].color}</li>
                     </ul>
                   </dd>
                 </div>

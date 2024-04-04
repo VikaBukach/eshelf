@@ -13,20 +13,18 @@ import { PhotoVideoProduct } from "../../components/SingleProduct/PhotoVideoProd
 import { ReviewsProduct } from "../../components/SingleProduct/ReviewsProduct";
 import Rating from "../../components/SingleProduct/components/Rating";
 import axios from "axios";
+import { loadOneProduct } from "../../store/slices/singleProductSlice";
 
 const ProductPage = () => {
-  const { id, color } = useParams();
+  const { collection, id, color } = useParams();
 
   const dispatch = useDispatch();
-
-  const storedProduct = JSON.parse(localStorage.getItem("product"));
 
   const regColor = (color) => {
     return color.includes(" ") ? color.replace(/\s+/g, "-") : color;
   };
 
-  const products = useSelector((state) => state.products.data);
-  const product = products.find((item) => item._id === id && item.colors.color === regColor(color)) || storedProduct;
+  const { product } = useSelector((state) => state.product.data);
 
   const { tabs } = useSelector((state) => state.product);
 
@@ -59,17 +57,31 @@ const ProductPage = () => {
   }, [product, PORT]);
 
   useEffect(() => {
-    dispatch(setActiveColorIndex(0));
-    localStorage.setItem("product", JSON.stringify(product));
+    dispatch(loadOneProduct({ collection, id }));
+    /* return () => {
+      dispatch(loadOneProduct(null));
+    }; */
+    
+  }, []);
 
+  useEffect(() => {
+    if (product && product.colors && color) {
+      const colorIndex = product.colors.findIndex((c) => regColor(c.color) === regColor(color));
+      if (colorIndex !== -1) {
+        dispatch(setActiveColorIndex(colorIndex));
+      } else {
+        // Если цвет не был найден, устанавливаем индекс активного цвета в 0
+        dispatch(setActiveColorIndex(0));
+      }
+    }
     return () => {
       dispatch(changeTabs("About the product"));
       dispatch(setActiveColorIndex(0));
       dispatch(setActiveMemoryIndex(0));
       dispatch(setActiveImageIndex(0));
-      //localStorage.removeItem("product");
     };
-  }, [dispatch]);
+  }, [product, color, dispatch]);
+
 
   const handleTabClick = (tabName) => {
     dispatch(changeTabs(tabName));

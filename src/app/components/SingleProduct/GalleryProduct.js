@@ -14,10 +14,10 @@ const GalleryProduct = ({ product }) => {
   return (
     <div className="product-details-body__slider">
       <div className="product-details-body__img-big">
-        <img src={`${product.colors.images[activeImageIndex]}`} alt={`${product.model}`} />
+        <img src={`${product.colors[activeColorIndex]?.images[activeImageIndex]}`} alt={`${product.model}`} />
       </div>
       <div className="product-details-body__img-wrap">
-        {product.colors.images.map((image, i) => (
+        {product.colors[activeColorIndex]?.images.map((image, i) => (
           <div key={i} className="product-details-body__img-small" onClick={() => handleSmallImageClick(i)}>
             <img src={`${image}`} alt={`${product.model}`} />
           </div>

@@ -1,7 +1,9 @@
 import React from "react";
 import { CharacteristicBuy } from "../CharacteristicBuy";
+import { useSelector } from "react-redux";
 
 const ProductDetailsHeadphones = ({ product }) => {
+  const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
   return (
     <div className="characteristic-body">
       <div className="characteristic-body__info">
@@ -11,88 +13,93 @@ const ProductDetailsHeadphones = ({ product }) => {
           <span>{product.model}</span>
         </div>
 
-        {product.specifications && (
+        {product.colors && (
           <section className="characteristic-body__group">
-            <h3 className="characteristic-body__heading">Details</h3>
+            <h3 className="characteristic-body__heading">Color</h3>
             <dl className="characteristic-body__list">
-              {product.specifications?.type && (
+              {product.colors[activeColorIndex]?.color && (
                 <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Type</dt>
+                  <dt className="characteristic-body__label">Color</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.type}</li>
+                      <li>{product.colors[activeColorIndex].color}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.noise_cancelling && (
+            </dl>
+          </section>
+        )}
+        {product.specifications.characteristics && (
+          <section className="characteristic-body__group">
+            <h3 className="characteristic-body__heading">Details</h3>
+            <dl className="characteristic-body__list">
+              {product.specifications.characteristics?.type_connection && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Type connection</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.specifications.characteristics.type_connection}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
+              {product.specifications.characteristics?.noise_cancelling && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Noise cancelling</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.noise_cancelling}</li>
+                      <li>{product.specifications.characteristics.noise_cancelling === true ? "true" : "false"}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.wireless && (
+              {product.specifications.characteristics?.wireless && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">wireless</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.wireless === true ? "true" : "false"}</li>
+                      <li>{product.specifications.characteristics.wireless === true ? "true" : "false"}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.bluetooth_version && (
+              {product.specifications.characteristics?.bluetooth_version && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Bluetooth version</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.bluetooth_version}</li>
+                      <li>{product.specifications.characteristics.bluetooth_version}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.battery_life && (
+              {product.specifications.characteristics?.battery_life && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Battery life</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.battery_life}</li>
+                      <li>{product.specifications.characteristics.battery_life}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.quick_charge && (
+              {product.specifications.characteristics?.quick_charge && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Quick charge</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.quick_charge}</li>
+                      <li>{product.specifications.characteristics.quick_charge}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.colors_available && (
+              {product.specifications.characteristics?.range_of_action && (
                 <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Colors available</dt>
+                  <dt className="characteristic-body__label">Range of action</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      {product.specifications.colors_available.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-                  </dd>
-                </div>
-              )}
-              {product.specifications?.weight && (
-                <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Weight</dt>
-                  <dd className="characteristic-body__value">
-                    <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.weight}</li>
+                      <li>{product.specifications.characteristics?.range_of_action}</li>
                     </ul>
                   </dd>
                 </div>

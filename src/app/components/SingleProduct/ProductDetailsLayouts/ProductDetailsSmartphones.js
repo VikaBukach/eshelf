@@ -14,7 +14,7 @@ const ProductDetailsSmartphones = ({ product }) => {
           <span>{product.brand} </span>
           <span>{product.model}</span>
         </div>
-        {product.specifications.display && (
+        {product.specifications?.display && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Display</h3>
             <dl className="characteristic-body__list">
@@ -62,7 +62,7 @@ const ProductDetailsSmartphones = ({ product }) => {
           </section>
         )}
 
-        {product.specifications.operating_system && (
+        {product.specifications?.operating_system && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Operating system</h3>
             <dl className="characteristic-body__list">
@@ -80,7 +80,7 @@ const ProductDetailsSmartphones = ({ product }) => {
           </section>
         )}
 
-        {product.specifications.processor && (
+        {product.specifications?.processor && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Processor</h3>
             <dl className="characteristic-body__list">
@@ -108,7 +108,7 @@ const ProductDetailsSmartphones = ({ product }) => {
           </section>
         )}
 
-        {product.specifications.memory && (
+        {product.specifications?.memory && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Memory</h3>
             <dl className="characteristic-body__list">
@@ -122,12 +122,12 @@ const ProductDetailsSmartphones = ({ product }) => {
                   </dd>
                 </div>
               )}
-              {product.colors.products[activeMemoryIndex].capacity && (
+              {product.colors[activeColorIndex].products[activeMemoryIndex].capacity && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">The amount of built-in memory is</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.colors.products[activeMemoryIndex].capacity}</li>
+                      <li>{product.colors[activeColorIndex].products[activeMemoryIndex].capacity}</li>
                     </ul>
                   </dd>
                 </div>
@@ -136,7 +136,25 @@ const ProductDetailsSmartphones = ({ product }) => {
           </section>
         )}
 
-        {product.specifications.camera && (
+        {product.colors && (
+          <section className="characteristic-body__group">
+            <h3 className="characteristic-body__heading">Color</h3>
+            <dl className="characteristic-body__list">
+              {product.colors[activeColorIndex]?.color && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Color</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.colors[activeColorIndex].color}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </section>
+        )}
+
+        {product.specifications?.camera && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Camera</h3>
             <dl className="characteristic-body__list">
@@ -186,7 +204,7 @@ const ProductDetailsSmartphones = ({ product }) => {
           </section>
         )}
 
-        {product.specifications.battery && (
+        {product.specifications?.battery && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Battery</h3>
             <dl className="characteristic-body__list">
@@ -214,7 +232,7 @@ const ProductDetailsSmartphones = ({ product }) => {
           </section>
         )}
 
-        {product.specifications.other && (
+        {product.specifications?.other && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Dimensions</h3>
             <dl className="characteristic-body__list">

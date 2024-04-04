@@ -13,6 +13,7 @@ export default function ProductCard({ id, imageURL, category, title, price, disc
   const formatColor = color.includes(" ") ? color.replace(/\s+/g, "-") : color;
 
   const urlProduct = `/${category}/${id}/${formatColor}`;
+  //const urlProduct = `/${category}/${id}`;
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
