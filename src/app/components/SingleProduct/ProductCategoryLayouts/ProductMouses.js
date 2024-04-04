@@ -20,13 +20,13 @@ const ProductMouses = ({ product }) => {
       <GalleryProduct product={product} />
 
       <div className="product-details-body__info info-details">
-        {product.colors?.products && (
+        {product.colors[activeColorIndex]?.products && (
           <div className="info-details__wrap">
             <div className="info-details__header">
               Details
-              {product.colors.products[activeMemoryIndex]?.article && (
+              {product.colors[activeColorIndex].products[activeMemoryIndex]?.article && (
                 <span className="info-details__article">
-                  Code: {product.colors.products[activeMemoryIndex].article}
+                  Code: {product.colors[activeColorIndex].products[activeMemoryIndex].article}
                 </span>
               )}
             </div>
@@ -74,12 +74,12 @@ const ProductMouses = ({ product }) => {
                 </div>
               </div>
             )}
-            {product.colors.products[activeMemoryIndex]?.connection && (
+            {product.colors[activeColorIndex].products[activeMemoryIndex]?.connection && (
               <div className="info-details__characteristics-item">
                 <AboutConnectIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
                   <div className="info-details__characteristics-title">Connection</div>
-                  <span>{product.colors.products[activeMemoryIndex].connection}</span>
+                  <span>{product.colors[activeColorIndex].products[activeMemoryIndex].connection}</span>
                 </div>
               </div>
             )}

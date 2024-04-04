@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorites } from "../../store/slices/favoritesSlice";
 import { toggleCompare } from "../../store/slices/compareSlice";
@@ -18,8 +18,13 @@ const BuyProduct = ({ product }) => {
   const dispatch = useDispatch();
 
   const { _id: id, colors, category, model: title } = product;
-  // FIX
-  const { images, products, color } = colors;
+
+  if (!colors || colors.length === 0 || !colors[activeColorIndex]) {
+    return null;
+  }
+
+  const activeColor = colors[activeColorIndex];
+  const { images, products, color } = activeColor;
   const { price, discount_price: discountPrice } = products[activeMemoryIndex];
   const imageURL = images[activeImageIndex];
 
@@ -47,35 +52,37 @@ const BuyProduct = ({ product }) => {
 
   return (
     <>
-      {product.colors.products[activeMemoryIndex]?.discount_price && (
-        <div className="info-details__wrap">
-          <div className="info-details__header">Price</div>
-          <div className="info-details__price-block">
-            <div className="info-details__price-old">{product.colors.products[activeMemoryIndex].price}$</div>
-            <div className="info-details__price-wrap">
-              <div className="info-details__price-body">
-                <div className="info-details__price">{product.colors.products[activeMemoryIndex].discount_price}$</div>
-                <ButtonBuy onClick={handleAddToCart} />
+      <div className="info-details__wrap">
+        <div className="info-details__header">Price</div>
+        <div className="info-details__price-block">
+          <div className="info-details__price-old">
+            {product.colors[activeColorIndex]?.products[activeMemoryIndex].price}$
+          </div>
+          <div className="info-details__price-wrap">
+            <div className="info-details__price-body">
+              <div className="info-details__price">
+                {product.colors[activeColorIndex]?.products[activeMemoryIndex].discount_price}$
               </div>
+              <ButtonBuy onClick={handleAddToCart} />
+            </div>
 
-              <div className="info-details__price-icon-wrap">
-                <div
-                  className={`info-details__price-icon ${compare.findIndex((item) => item.id === product._id) > -1 ? "info-details__icon-favorites info-details__icon-active" : ""}`}
-                  onClick={handleAddToCompare}
-                >
-                  <AboutComparingIcon />
-                </div>
-                <div
-                  className={`info-details__price-icon ${favorites.findIndex((item) => item.id === product._id) > -1 ? "info-details__icon-favorites info-details__icon-active" : ""}`}
-                  onClick={handleAddToFavorites}
-                >
-                  <AboutFavoritesIcon />
-                </div>
+            <div className="info-details__price-icon-wrap">
+              <div
+                className={`info-details__price-icon ${compare.findIndex((item) => item.id === product._id) > -1 ? "info-details__icon-favorites info-details__icon-active" : ""}`}
+                onClick={handleAddToCompare}
+              >
+                <AboutComparingIcon />
+              </div>
+              <div
+                className={`info-details__price-icon ${favorites.findIndex((item) => item.id === product._id) > -1 ? "info-details__icon-favorites info-details__icon-active" : ""}`}
+                onClick={handleAddToFavorites}
+              >
+                <AboutFavoritesIcon />
               </div>
             </div>
           </div>
         </div>
-      )}
+      </div>
       <WeAccept />
     </>
   );

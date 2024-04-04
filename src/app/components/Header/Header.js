@@ -24,8 +24,8 @@ const Header = () => {
   const user = useSelector((state) => state.user.data);
   const selectCartTotal = (state) => state.menu.cartTotal;
   const cartTotal = useSelector(selectCartTotal);
-  const favoritesTotal = useSelector((state) => state.menu.favoritesTotal);
-  const compareTotal = useSelector((state) => state.menu.compareTotal);
+  const favoritesTotal = useSelector((state) => state.favorites.data).length;
+  const compareTotal = useSelector((state) => state.compare.data).length;
 
   const windowWidth = useWindowWidth();
   // Скидувало cartTotal

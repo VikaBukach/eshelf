@@ -58,24 +58,29 @@ const ProductPage = () => {
 
   useEffect(() => {
     dispatch(loadOneProduct({ collection, id }));
-    return () => {
+    /* return () => {
       dispatch(loadOneProduct(null));
-    };
+    }; */
     
   }, []);
 
   useEffect(() => {
-    if (product && product.colors) {
+    if (product && product.colors && color) {
       const colorIndex = product.colors.findIndex((c) => regColor(c.color) === regColor(color));
-      dispatch(setActiveColorIndex(colorIndex));
+      if (colorIndex !== -1) {
+        dispatch(setActiveColorIndex(colorIndex));
+      } else {
+        // Если цвет не был найден, устанавливаем индекс активного цвета в 0
+        dispatch(setActiveColorIndex(0));
+      }
     }
     return () => {
       dispatch(changeTabs("About the product"));
       dispatch(setActiveColorIndex(0));
       dispatch(setActiveMemoryIndex(0));
       dispatch(setActiveImageIndex(0));
-    }
-  }, []);
+    };
+  }, [product, color, dispatch]);
 
 
   const handleTabClick = (tabName) => {

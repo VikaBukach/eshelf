@@ -21,13 +21,13 @@ const ProductMonitors = ({ product }) => {
       <GalleryProduct product={product} />
 
       <div className="product-details-body__info info-details">
-        {product.colors?.products && (
+        {product.colors[activeColorIndex]?.products && (
           <div className="info-details__wrap">
             <div className="info-details__header">
               Details
-              {product.colors.products[activeMemoryIndex]?.article && (
+              {product.colors[activeColorIndex]?.products[activeMemoryIndex]?.article && (
                 <span className="info-details__article">
-                  Code: {product.colors.products[activeMemoryIndex].article}
+                  Code: {product.colors[activeColorIndex]?.products[activeMemoryIndex].article}
                 </span>
               )}
             </div>

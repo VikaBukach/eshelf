@@ -143,18 +143,26 @@ const ProductDetailsMonitors = ({ product }) => {
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Delivery set</h3>
             <dl className="characteristic-body__list">
-              {
+              {product.specifications.delivery_set?.cable && (
                 <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Options</dt>
+                  <dt className="characteristic-body__label">Cable</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      {product.specifications.delivery_set.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
+                      <li>{product.specifications.delivery_set.cable}</li>
                     </ul>
                   </dd>
                 </div>
-              }
+              )}
+              {product.specifications.delivery_set?.charging_port && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Charging port</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.specifications.delivery_set.charging_port}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
             </dl>
           </section>
         )}

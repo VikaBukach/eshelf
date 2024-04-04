@@ -65,26 +65,6 @@ const ProductDetailsTablets = ({ product }) => {
                   </dd>
                 </div>
               )}
-              {product.specifications?.camera && (
-                <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Camera</dt>
-                  <dd className="characteristic-body__value">
-                    <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.camera}</li>
-                    </ul>
-                  </dd>
-                </div>
-              )}
-              {product.specifications?.front_camera && (
-                <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Front camera</dt>
-                  <dd className="characteristic-body__value">
-                    <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.front_camera}</li>
-                    </ul>
-                  </dd>
-                </div>
-              )}
               {product.specifications?.battery_life && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Battery life</dt>

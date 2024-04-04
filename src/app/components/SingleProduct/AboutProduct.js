@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ProductSmartphones } from "./ProductCategoryLayouts/ProductSmartphones";
 import { ProductSmartwatches } from "./ProductCategoryLayouts/ProductSmartwatches";
 import { ProductMonitors } from "./ProductCategoryLayouts/ProductMonitors";
@@ -32,7 +32,7 @@ const AboutProduct = ({ product }) => {
     case "quadcopters":
       ProductComponent = ProductQuadcopters;
       break;
-    case "tv":
+    case "tvs":
       ProductComponent = ProductTv;
       break;
     case "tablets":

@@ -15,72 +15,82 @@ const ProductDetailsEReaders = ({ product }) => {
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Details</h3>
             <dl className="characteristic-body__list">
-              {product.specifications?.display_size && (
+              {product.specifications.characteristics?.display_size && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Display size</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.display_size}</li>
+                      <li>{product.specifications.characteristics.display_size}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.display_resolution && (
+              {product.specifications.characteristics?.display_resolution && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Display resolution</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.display_resolution}</li>
+                      <li>{product.specifications.characteristics.display_resolution}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.display_type && (
+              {product.specifications.characteristics?.display_type && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Display type</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.display_type}</li>
+                      <li>{product.specifications.characteristics.display_type}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.storage && (
+              {product.specifications.memory?.memory && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Storage</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.storage}</li>
+                      <li>{product.specifications.memory.memory}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.connectivity && (
+              {product.specifications.characteristics?.connectivity && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Connectivity</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.connectivity}</li>
+                      <li>{product.specifications.characteristics.connectivity}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.battery_life && (
+              {product.specifications.characteristics?.battery_life && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Battery life</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.battery_life}</li>
+                      <li>{product.specifications.characteristics.battery_life}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.specifications?.weight && (
+              {product.specifications.battery?.battery_capacity && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Battery capacity</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.specifications.battery.battery_capacity}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
+              {product.specifications.other?.weight && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Weight</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.weight}</li>
+                      <li>{product.specifications.other.weight}</li>
                     </ul>
                   </dd>
                 </div>
@@ -89,7 +99,7 @@ const ProductDetailsEReaders = ({ product }) => {
           </section>
         )}
 
-        {product?.guarantee && (
+        {product.specifications.other?.guarantee && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Guarantee</h3>
             <dl className="characteristic-body__list">
@@ -98,7 +108,7 @@ const ProductDetailsEReaders = ({ product }) => {
                   <dt className="characteristic-body__label">Period</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.guarantee}</li>
+                      <li>{product.specifications.other.guarantee}</li>
                     </ul>
                   </dd>
                 </div>

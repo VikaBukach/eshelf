@@ -18,13 +18,13 @@ const ProductEReaders = ({ product }) => {
       <GalleryProduct product={product} />
 
       <div className="product-details-body__info info-details">
-        {product.colors.products && (
+        {product.colors[activeColorIndex]?.products && (
           <div className="info-details__wrap">
             <div className="info-details__header">
               Main
-              {product.colors.products[activeMemoryIndex].article && (
+              {product.colors[activeColorIndex].products[activeMemoryIndex].article && (
                 <span className="info-details__article">
-                  Code: {product.colors.products[activeMemoryIndex].article}
+                  Code: {product.colors[activeColorIndex].products[activeMemoryIndex].article}
                 </span>
               )}
             </div>
@@ -36,39 +36,39 @@ const ProductEReaders = ({ product }) => {
         <div className="info-details__wrap">
           <div className="info-details__header">Characteristics</div>
           <div className="info-details__characteristics-block">
-            {product.specifications?.display_size && (
+            {product.specifications.characteristics?.display_size && (
               <div className="info-details__characteristics-item">
                 <AboutDiagonalIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
                   <div className="info-details__characteristics-title">Display size</div>
-                  <span>{product.specifications.display_size}</span>
+                  <span>{product.specifications.characteristics.display_size}</span>
                 </div>
               </div>
             )}
-            {product.specifications?.storage && (
+            {product.specifications.memory?.memory && (
               <div className="info-details__characteristics-item">
                 <AboutMemoryIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
                   <div className="info-details__characteristics-title">Storage</div>
-                  <span>{product.specifications.storage}</span>
+                  <span>{product.specifications.memory.memory}</span>
                 </div>
               </div>
             )}
-            {product.specifications?.display_resolution && (
+            {product.specifications.characteristics?.display_resolution && (
               <div className="info-details__characteristics-item">
                 <AboutMonitorIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
                   <div className="info-details__characteristics-title">Resolution</div>
-                  <span>{product.specifications.display_resolution}</span>
+                  <span>{product.specifications.characteristics.display_resolution}</span>
                 </div>
               </div>
             )}
-            {product.specifications?.battery_life && (
+            {product.specifications.characteristics?.battery_life && (
               <div className="info-details__characteristics-item">
                 <AboutBatteryIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
                   <div className="info-details__characteristics-title">Battery life</div>
-                  <span>{product.specifications.battery_life}</span>
+                  <span>{product.specifications.characteristics.battery_life}</span>
                 </div>
               </div>
             )}

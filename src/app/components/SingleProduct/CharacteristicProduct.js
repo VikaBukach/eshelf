@@ -30,7 +30,7 @@ const CharacteristicProduct = ({ product }) => {
     case "quadcopters":
       DetailsComponent = ProductDetailsQuadcopters;
       break;
-    case "tv":
+    case "tvs":
       DetailsComponent = ProductDetailsTv;
       break;
     case "tablets":
