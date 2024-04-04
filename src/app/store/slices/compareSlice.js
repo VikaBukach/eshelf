@@ -10,7 +10,6 @@ const compareSlice = createSlice({
   },
   reducers: {
     toggleCompare: (state, action) => {
-      console.log(action.payload);
       const { data, selectedCategory } = state;
       const { _id, category, id: __id } = action.payload;
       const id = _id || __id;

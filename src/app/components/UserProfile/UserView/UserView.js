@@ -45,7 +45,6 @@ const UserView = () => {
         const response = await axios.get(`${REACT_APP_BACK_URL}:${PORT}/getRevised`, {
           params: { userEmail: user.email },
         });
-        console.log(response);
 
         const newProducts = response.data.map((product) => {
           if (product.colors) {
@@ -66,7 +65,6 @@ const UserView = () => {
           }
         });
 
-        console.log(newProducts);
         const unique = newProducts.flatMap((arr) => {
           return arr.filter((product, index, self) => index === self.findIndex((p) => p.index === product.index));
         });

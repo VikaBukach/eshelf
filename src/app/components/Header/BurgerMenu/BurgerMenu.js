@@ -50,7 +50,8 @@ const BurgerMenu = ({ onClose, history }) => {
 
   const handleNavLinkClick = () => {
     handleCloseMenu();
-    history.push("/");
+    // FIX
+    // history.push("/");
   };
 
   const toggleMobileCategories = (category) => {
