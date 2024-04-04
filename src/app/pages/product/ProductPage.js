@@ -26,9 +26,7 @@ const ProductPage = () => {
   };
 
   const products = useSelector((state) => state.products.data);
-  const product =
-    products.find((item) => item._id === id && item.colors.some((c) => regColor(c.color) === regColor(color))) ||
-    storedProduct;
+  const product = products.find((item) => item._id === id && item.colors.color === regColor(color)) || storedProduct;
 
   const { tabs } = useSelector((state) => state.product);
 
@@ -61,7 +59,7 @@ const ProductPage = () => {
   }, [product, PORT]);
 
   useEffect(() => {
-    dispatch(setActiveColorIndex(product.colors.findIndex((c) => regColor(c.color) === regColor(color))));
+    dispatch(setActiveColorIndex(0));
     localStorage.setItem("product", JSON.stringify(product));
 
     return () => {

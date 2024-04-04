@@ -50,14 +50,19 @@ const ChooseColor = ({ product }) => {
         <div className="info-details__wrap">
           <div className="info-details__header">Choose color</div>
           <div className="info-details__color-block">
-            {product.colors.map((item, i) => (
+            <div
+              onClick={() => handleColorItemClick(0, product.colors.color)}
+              style={{ backgroundColor: `${colorMap[product.colors.color] || product.colors.color}` }}
+              className={`info-details__color-item ${0 === activeColorIndex ? "info-details__color-active" : ""}`}
+            ></div>
+            {/* {product.colors.map((item, i) => (
               <div
                 key={i}
                 onClick={() => handleColorItemClick(i, item.color)}
                 style={{ backgroundColor: `${colorMap[item.color] || item.color}` }}
                 className={`info-details__color-item ${i === activeColorIndex ? "info-details__color-active" : ""}`}
               ></div>
-            ))}
+            ))} */}
           </div>
         </div>
       )}

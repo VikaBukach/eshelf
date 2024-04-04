@@ -18,7 +18,8 @@ const BuyProduct = ({ product }) => {
   const dispatch = useDispatch();
 
   const { _id: id, colors, category, model: title } = product;
-  const { images, products, color } = colors[activeColorIndex];
+  // FIX
+  const { images, products, color } = colors;
   const { price, discount_price: discountPrice } = products[activeMemoryIndex];
   const imageURL = images[activeImageIndex];
 
@@ -46,18 +47,14 @@ const BuyProduct = ({ product }) => {
 
   return (
     <>
-      {product.colors[activeColorIndex].products[activeMemoryIndex]?.discount_price && (
+      {product.colors.products[activeMemoryIndex]?.discount_price && (
         <div className="info-details__wrap">
           <div className="info-details__header">Price</div>
           <div className="info-details__price-block">
-            <div className="info-details__price-old">
-              {product.colors[activeColorIndex].products[activeMemoryIndex].price}$
-            </div>
+            <div className="info-details__price-old">{product.colors.products[activeMemoryIndex].price}$</div>
             <div className="info-details__price-wrap">
               <div className="info-details__price-body">
-                <div className="info-details__price">
-                  {product.colors[activeColorIndex].products[activeMemoryIndex].discount_price}$
-                </div>
+                <div className="info-details__price">{product.colors.products[activeMemoryIndex].discount_price}$</div>
                 <ButtonBuy onClick={handleAddToCart} />
               </div>
 
