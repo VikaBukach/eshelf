@@ -54,6 +54,7 @@ const cartSlice = createSlice({
       if (product.quantity == 1) {
         const newState = state.data.filter((p) => p.id != action.payload);
         state.data = newState;
+        localStorage.setItem("cart", JSON.stringify(newState));
       } else {
         const newState = state.data.map((p) => {
           if (p.id == action.payload) {

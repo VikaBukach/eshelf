@@ -14,7 +14,7 @@ const ProductDetailsMouses = ({ product }) => {
           <span>{product.brand} </span>
           <span>{product.model}</span>
         </div>
-        {product.colors[activeColorIndex].products[activeMemoryIndex]?.connection && (
+        {product.colors.products[activeMemoryIndex]?.connection && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Connection</h3>
             <dl className="characteristic-body__list">
@@ -23,7 +23,7 @@ const ProductDetailsMouses = ({ product }) => {
                   <dt className="characteristic-body__label">Connection</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.colors[activeColorIndex].products[activeMemoryIndex].connection}</li>
+                      <li>{product.colors.products[activeMemoryIndex].connection}</li>
                     </ul>
                   </dd>
                 </div>

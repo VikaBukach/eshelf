@@ -15,26 +15,26 @@ const ProductDetailsSmartwatches = ({ product }) => {
           <span>{product.model}</span>
         </div>
 
-        {product.colors[activeColorIndex].products[activeMemoryIndex] && (
+        {product.colors.products[activeMemoryIndex] && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Main details</h3>
             <dl className="characteristic-body__list">
-              {product.colors[activeColorIndex].products[activeMemoryIndex]?.case_size && (
+              {product.colors.products[activeMemoryIndex]?.case_size && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Case size</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.colors[activeColorIndex].products[activeMemoryIndex].case_size}</li>
+                      <li>{product.colors.products[activeMemoryIndex].case_size}</li>
                     </ul>
                   </dd>
                 </div>
               )}
-              {product.colors[activeColorIndex].products[activeMemoryIndex]?.battery && (
+              {product.colors.products[activeMemoryIndex]?.battery && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Duration of work</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.colors[activeColorIndex].products[activeMemoryIndex].battery}</li>
+                      <li>{product.colors.products[activeMemoryIndex].battery}</li>
                     </ul>
                   </dd>
                 </div>
@@ -43,16 +43,16 @@ const ProductDetailsSmartwatches = ({ product }) => {
           </section>
         )}
 
-        {product.colors[activeColorIndex] && (
+        {product.colors && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Color</h3>
             <dl className="characteristic-body__list">
-              {product.colors[activeColorIndex]?.color && (
+              {product.colors?.color && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Color</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.colors[activeColorIndex].color}</li>
+                      <li>{product.colors.color}</li>
                     </ul>
                   </dd>
                 </div>

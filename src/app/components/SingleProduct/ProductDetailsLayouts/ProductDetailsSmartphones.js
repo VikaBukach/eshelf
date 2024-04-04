@@ -122,12 +122,12 @@ const ProductDetailsSmartphones = ({ product }) => {
                   </dd>
                 </div>
               )}
-              {product.colors[activeColorIndex].products[activeMemoryIndex].capacity && (
+              {product.colors.products[activeMemoryIndex].capacity && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">The amount of built-in memory is</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.colors[activeColorIndex].products[activeMemoryIndex].capacity}</li>
+                      <li>{product.colors.products[activeMemoryIndex].capacity}</li>
                     </ul>
                   </dd>
                 </div>
