@@ -50,7 +50,8 @@ const BurgerMenuDesktop = ({ onClose, history }) => {
 
   const handleNavLinkClick = () => {
     handleCloseMenu();
-    history.push("/");
+    // FIX
+    // history.push("/");
   };
 
   const toggleCategories = (category, isActive) => {
