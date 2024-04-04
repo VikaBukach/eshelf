@@ -230,6 +230,12 @@
       stroke: #8119b1;
     }
   }
+  p {
+    white-space: nowrap;
+  }
+  @media (min-width: $desktop) {
+    margin-left: 45px;
+  }
 }
 
 .header__link-users-icon {
