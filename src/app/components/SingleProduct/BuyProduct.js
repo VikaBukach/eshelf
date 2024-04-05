@@ -38,12 +38,34 @@ const BuyProduct = ({ product }) => {
     color,
   };
 
+  // FIX data
+  const formatedData = {
+    id: product?._id || product?.id,
+    imageURL,
+    color: product.colors[activeColorIndex].color,
+    price,
+    title: product?.model + " " + product.colors[activeColorIndex]?.color,
+    discountPrice,
+    ...product,
+    specifications: {
+      ...product.specifications,
+      ...(products[activeMemoryIndex]?.capacity
+        ? {
+            memory: {
+              ...(product.specifications?.memory || {}),
+              capacity: products[activeMemoryIndex]?.capacity,
+            },
+          }
+        : {}),
+    },
+  };
+
   const handleAddToFavorites = () => {
-    dispatch(toggleFavorites(productDetails));
+    dispatch(toggleFavorites(formatedData));
   };
 
   const handleAddToCompare = () => {
-    dispatch(toggleCompare(product));
+    dispatch(toggleCompare(formatedData));
   };
 
   const handleAddToCart = () => {

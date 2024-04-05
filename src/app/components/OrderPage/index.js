@@ -150,7 +150,7 @@ const OrderPage = () => {
           setLoading(false);
         });
 
-      dispatch(setOrderDate(new Date())); // add save current date
+      // dispatch(setOrderDate(new Date())); // add save current date
       dispatch(saveFormData(state)); // save form data before opening modal
       open();
     };

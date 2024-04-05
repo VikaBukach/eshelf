@@ -59,11 +59,13 @@ export const CompareBody = ({ data }) => {
             <ProductCard
               key={idx}
               id={item.id}
-              imageURL={item.image}
+              imageURL={item.imageURL}
               category={item.category}
               title={item.title}
               price={Number(item.price)}
               discountPrice={Number(item.discountPrice)}
+              specifications={item.specifications}
+              color={item.color}
             />
           ))}
         </div>
@@ -73,19 +75,32 @@ export const CompareBody = ({ data }) => {
 
   const compareProductsData = getFieldData(data);
 
-  const firstColumnKeys = getFirstColumnKeys(data[0].specifications);
+  function deepMerge(obj1, obj2) {
+    const merged = { ...obj1 };
+
+    for (const key in obj2) {
+      if (typeof obj2[key] === "object" && obj2[key] !== null && !Array.isArray(obj2[key])) {
+        if (typeof merged[key] === "object" && merged[key] !== null) {
+          merged[key] = deepMerge(merged[key], obj2[key]);
+        } else {
+          merged[key] = { ...obj2[key] };
+        }
+      } else {
+        merged[key] = obj2[key];
+      }
+    }
+
+    return merged;
+  }
+  let keys = data[0].specifications;
+
+  if (data.length === 2) {
+    keys = deepMerge(data[0].specifications, data[1].specifications);
+  }
+
+  const firstColumnKeys = getFirstColumnKeys(keys);
+
   const columnsCount = data.length + 1;
 
-  const headerData = data.map((item) => {
-    return {
-      id: item.id,
-      title: item.title,
-      image: item.image,
-      price: item.price,
-      discountPrice: item.discountPrice,
-      category: item.category,
-    };
-  });
-
-  return getCompareBody(firstColumnKeys, compareProductsData, headerData, columnsCount);
+  return getCompareBody(firstColumnKeys, compareProductsData, data, columnsCount);
 };
