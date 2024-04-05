@@ -11,8 +11,11 @@ const compareSlice = createSlice({
   reducers: {
     toggleCompare: (state, action) => {
       const { data, selectedCategory } = state;
-      const { _id, category, id: __id } = action.payload;
-      const id = _id || __id;
+      const { category } = action.payload;
+
+      console.log(action.payload);
+
+      const id = action.payload?._id || action.payload?.id;
 
       const productAlreadyAdded = data.findIndex((i) => i.id === id) >= 0;
 
@@ -24,7 +27,7 @@ const compareSlice = createSlice({
             alert("Products shoud be from the same category!");
             return;
           }
-          state.data = [...data, setCompareProduct(action.payload)];
+          state.data = [...data, { id, ...setCompareProduct(action.payload) }];
           state.canAddMore = state.data.length < 2;
         } else {
           alert("Two products already added to compare!");
@@ -37,7 +40,9 @@ const compareSlice = createSlice({
         }
       }
 
-      localStorage.setItem("compare", JSON.stringify(state));
+      const newState = { ...state };
+
+      localStorage.setItem("compare", JSON.stringify(newState));
     },
   },
 });

@@ -58,6 +58,7 @@ const UserView = () => {
               productItem.priceBy = color.products[0].price;
               productItem.discountPriceBy = color.products[0].discount_price;
               productItem.colorIndex = color.color;
+              productItem.specifications = product.specifications;
               return productItem;
             });
           } else {
@@ -100,6 +101,7 @@ const UserView = () => {
                     price={productItem.priceBy}
                     discountPrice={productItem.discountPriceBy}
                     color={productItem.colorIndex}
+                    specifications={productItem.specifications}
                   />
                 ))}
               </div>

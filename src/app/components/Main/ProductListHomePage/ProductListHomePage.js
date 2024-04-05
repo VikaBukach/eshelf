@@ -73,6 +73,7 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                         price={item.colors.products[0].price}
                         // discountPrice={item.discountPrice}
                         color={item.colors.color}
+                        specifications={item.specifications}
                       />
                     )}
                   </div>
@@ -136,6 +137,7 @@ function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfP
                         price={item.colors.products[0].price}
                         discountPrice={item.colors.products[0]["discount_price"]}
                         color={item.colors.color}
+                        specifications={item.specifications}
                       />
                     )}
                   </div>

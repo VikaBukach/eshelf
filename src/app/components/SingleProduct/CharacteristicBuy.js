@@ -38,7 +38,11 @@ export const CharacteristicBuy = ({ product }) => {
             <img src={`${product.colors[activeColorIndex].images[0]}`} alt={`${product.model}`} />
           </div>
           <div className="characteristic-aside__details">
-            {product.model && <div className="characteristic-aside__title">{product.brand} {product.model}</div>}
+            {product.model && (
+              <div className="characteristic-aside__title">
+                {product.brand} {product.model}
+              </div>
+            )}
             {product.colors[activeColorIndex].products[activeMemoryIndex].article && (
               <div className="characteristic-aside__article">
                 Code: <span>{product.colors[activeColorIndex].products[activeMemoryIndex].article}</span>

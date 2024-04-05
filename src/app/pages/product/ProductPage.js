@@ -61,7 +61,6 @@ const ProductPage = () => {
     /* return () => {
       dispatch(loadOneProduct(null));
     }; */
-    
   }, []);
 
   useEffect(() => {
@@ -81,7 +80,6 @@ const ProductPage = () => {
       dispatch(setActiveImageIndex(0));
     };
   }, [product, color, dispatch]);
-
 
   const handleTabClick = (tabName) => {
     dispatch(changeTabs(tabName));

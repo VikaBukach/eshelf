@@ -7,8 +7,17 @@ import { toggleFavorites } from "../../store/slices/favoritesSlice";
 import { classNames } from "../../utils/classNames";
 import { toggleCompare } from "../../store/slices/compareSlice";
 
-export default function ProductCard({ id, imageURL, category, title, price, discountPrice, color = "" }) {
-  const product = { id, imageURL, category, title, price, discountPrice };
+export default function ProductCard({
+  id,
+  imageURL,
+  category,
+  title,
+  price,
+  discountPrice,
+  specifications,
+  color = "",
+}) {
+  const product = { id, imageURL, category, title, price, discountPrice, specifications, color };
 
   const formatColor = color.includes(" ") ? color.replace(/\s+/g, "-") : color;
 
@@ -24,19 +33,20 @@ export default function ProductCard({ id, imageURL, category, title, price, disc
 
   const favorites = useSelector((state) => state.favorites.data);
   const compare = useSelector((state) => state.compare.data);
-  const productsList = useSelector((state) => state.products.data);
+  // const productsList = useSelector((state) => state.products.data);
 
   const toggleFavoritesHandle = (e) => {
     e.stopPropagation();
 
-    dispatch(toggleFavorites(product));
+    dispatch(toggleFavorites({ ...product, category }));
   };
   const toggleCompareHandler = (e) => {
     e.stopPropagation();
 
-    const fullProduct = productsList.find((p) => p._id == id);
-    // dispatch(toggleCompare({ ...fullProduct, id: fullProduct._id, color: fullProduct.colors[0], ...product }));
-    dispatch(toggleCompare({ ...fullProduct, category }));
+    // const fullProduct = productsList.find((p) => p._id == id);
+    // dispatch(toggleCompare({ ...fullProduct, id: fullProduct._id, color: fullProduct.colors, ...product }));
+    // Removed fullProduct
+    dispatch(toggleCompare({ ...product, category }));
   };
 
   const isFavorites = favorites.findIndex((f) => f.id == id) >= 0;

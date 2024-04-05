@@ -22,7 +22,7 @@ export const CompareItemHeader = ({ item }) => {
           />
         </svg>
       </button>
-      <img src={item.image} alt={item.title} />
+      <img src={item.imageURL} alt={item.title} />
       <p>{item.title}</p>
     </div>
   );

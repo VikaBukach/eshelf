@@ -20,6 +20,7 @@ const CatalogProductList = () => {
       let l = product.colors.products.length - 1;
       productItem.priceTo = product.colors.products[l].price;
       productItem.discountPriceBy = product.colors.products[0].discount_price;
+      productItem.specifications = product.specifications;
 
       productItems.push(productItem);
     });
@@ -37,6 +38,7 @@ const CatalogProductList = () => {
             price={productItem.priceBy}
             discountPrice={productItem.discountPriceBy}
             color={productItem.colorIndex}
+            specifications={productItem.specifications}
           />
         </li>
       ))}
