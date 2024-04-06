@@ -42,3 +42,9 @@ main {
   display: flex;
   flex-direction: column;
 }
+
+@supports selector(:has(div)) {
+  body:has(.modal) {
+    overflow: hidden;
+  }
+}

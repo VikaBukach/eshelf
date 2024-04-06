@@ -20,12 +20,11 @@ export const CompareBody = ({ data }) => {
           ))}
         </div>
         <div className="comparing__content-row">
-          {arr.map((obj, idx) =>
-            Object.entries(obj).map(([key, val]) => (
-              <div key={idx + key}>
-                <h2 className="comparing__content-row-header">{humanizeText(key)}</h2>
-                <ul className="comparing__content-row-list">
-                  {val.map((i, idx) => (
+          {arr.map((obj, idx) => {
+            if (typeof obj !== "object" && typeof obj === "string") {
+              return (
+                <div>
+                  <ul className="comparing__content-row-list --with-border">
                     <li
                       key={idx}
                       className="comparing__grid comparing__table"
@@ -33,20 +32,51 @@ export const CompareBody = ({ data }) => {
                         "--cols": columns,
                       }}
                     >
-                      <div>{humanizeText(i)}</div>
-
-                      {(products[key].length < 2 && columns == 3 ? [...products[key], []] : products[key]).map(
+                      <h2 className="comparing__content-row-header --black --remove-border">{humanizeText(obj)}</h2>
+                      {(products[obj].length < 2 && columns == 3 ? [...products[obj], []] : products[obj]).map(
                         (pi, idx) => {
-                          const val = pi.find((y) => Object.keys(y) == i) || {};
-                          return <div key={idx}>{val[i] || "--"}</div>;
+                          return (
+                            <div key={idx}>{typeof pi === "boolean" ? (pi ? "Yes" : "No") : pi.toString() || "--"}</div>
+                          );
                         }
                       )}
                     </li>
-                  ))}
-                </ul>
-              </div>
-            ))
-          )}
+                  </ul>
+                </div>
+              );
+            }
+
+            return Object.entries(obj).map(([key, val]) => {
+              if (val.length === 0) {
+                return null;
+              }
+              return (
+                <div key={idx + key}>
+                  <h2 className="comparing__content-row-header">{humanizeText(key)}</h2>
+                  <ul className="comparing__content-row-list">
+                    {val.map((i, idx) => (
+                      <li
+                        key={idx}
+                        className="comparing__grid comparing__table"
+                        style={{
+                          "--cols": columns,
+                        }}
+                      >
+                        <div>{humanizeText(i)}</div>
+
+                        {(products[key].length < 2 && columns == 3 ? [...products[key], []] : products[key]).map(
+                          (pi, idx) => {
+                            const val = pi.find((y) => Object.keys(y) == i) || {};
+                            return <div key={idx}>{val[i] || "--"}</div>;
+                          }
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            });
+          })}
         </div>
         <div
           className="comparing__grid comparing__product-card"
