@@ -103,8 +103,8 @@
   }
 
   .banner_main-img {
-    margin-left: 4rem;
-    margin-right: 4rem;
+    //margin-left: 4rem;
+    //margin-right: 4rem;
     @media (min-width: $desktop) {
       display: none;
     }
@@ -187,8 +187,8 @@
 
   .arrow-svg-container-prev {
     cursor: pointer;
-    left: 30px;
-    transform: translateY(-350%) translateX(90%);
+    //left: 30px;
+    transform: translateY(-350%) translateX(100%);
 
     @media (min-width: $desktop) {
     }

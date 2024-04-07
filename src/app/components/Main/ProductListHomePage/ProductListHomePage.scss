@@ -50,7 +50,7 @@
 
   .section-especially-items {
     display: grid;
-    grid-template-columns: repeat(1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
 
     @media screen and (min-width: 480px) {

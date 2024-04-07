@@ -35,7 +35,7 @@ function BannerMain({ product }) {
       url: "/quadcopters/66128153c6b6a27a34ab2967/black", //  перехід на стор цього товару
     },
     {
-      title: "Apple MacBook Pro 15.3 Space Gray",
+      title: "Apple MacBook Pro 15.3",
       description:
         "The MacBook Pro 15 is one of the benchmarks for power, quality, compact and easy-to-use ultrabook. High performance, low weight and excellent autonomy. This model is fast and quite easy to use. The classic design, made of excellent aluminum in space gray color, will certainly suit any design. The case is resistant to scratches and damage. Feel free to take it with you everywhere!",
       oldPrice: "2149 $",
@@ -66,7 +66,7 @@ function BannerMain({ product }) {
             <h1 className="banner_main-title">{slide.title}</h1>
             <h4 className="banner_main-descr">{slide.description}</h4>
             <div className="arrow-svg-container-next">
-              <Arrow direction="next" onClick={() => sliderRef.current.slickNext()} />
+              <Arrow direction="next" onClick={() => sliderRef.current.slickPrev()} />
             </div>
 
             <div className="banner_main-img-container">
@@ -76,7 +76,7 @@ function BannerMain({ product }) {
               </Link>
             </div>
             <div className="arrow-svg-container-prev">
-              <Arrow direction="prev" onClick={() => sliderRef.current.slickPrev()} />
+              <Arrow direction="prev" onClick={() => sliderRef.current.slickNext()} />
             </div>
             <div className="banner_main-price">
               <div className="banner_main-old-price">{slide.oldPrice}</div>
