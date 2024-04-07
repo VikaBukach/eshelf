@@ -58,8 +58,6 @@ const getRevised = async (req, res) => {
 
   // Зберігаємо згруповані переглянуті продукти в обєкти по даті з полем ревізед, яке містить масив ІД переглянутих товарів
   const groupedRevisedData = groupDataByDate([...existingRecord.revised]);
-  // Збереження переглянутих товарів
-  // let viewedProducts = [];
 
   // Отримуємо унікальні ІД переглянутих товарів
   const uniqueIds = [...new Set(productsList)];
@@ -68,21 +66,11 @@ const getRevised = async (req, res) => {
   let products = [];
   // Проходження по кожній колекції
   for (const collectionName of allCollections) {
-    // console.log(collectionName);
     // Запит до колекції для отримання переглянутих товарів
     const viewedInCollection = await collectionName.find({ _id: { $in: uniqueIds } });
 
     // Додаємо товари, які ми переглядали за весь час
     products = products.concat(deepClone(viewedInCollection));
-
-    // const withReviseDate = viewedInCollection.map((c) => {
-    //   return {
-    //     ...c,
-    //     revisedAt: existingRecord.revised.find((r) => r.productId == c?._id).createdAt,
-    //   };
-    // });
-    // // Додавання результатів до загального списку переглянутих товарів
-    // viewedProducts = viewedProducts.concat(withReviseDate);
   }
 
   // Ітеруємось по масиву зрупованих продуктів
@@ -174,7 +162,6 @@ const postRevised = async (req, res) => {
         revised: [{ productId, createdAt: new Date() }],
       });
 
-      console.log(response);
       res.status(201).send({ message: "New record created successfully." });
     }
   } catch (error) {

@@ -13,8 +13,6 @@ const compareSlice = createSlice({
       const { data, selectedCategory } = state;
       const { category } = action.payload;
 
-      console.log(action.payload);
-
       const id = action.payload?._id || action.payload?.id;
 
       const productAlreadyAdded = data.findIndex((i) => i.id === id) >= 0;

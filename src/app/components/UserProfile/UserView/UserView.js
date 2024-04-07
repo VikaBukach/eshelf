@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./UserView.scss";
-import FavoritesPage from "../../Favorites";
 import ProductCard from "../../ProductCard/ProductCard";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -35,7 +34,6 @@ const REACT_APP_BACK_URL = process.env.REACT_APP_BACK_URL || "http://localhost";
 const UserView = () => {
   const user = useSelector((state) => state.user.data);
   const PORT = process.env.REACT_APP_PORT || 5000;
-  // const revisedProducts = localStorage.getItem("revised") ?? "";
   const [productsViews, setProductsViews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -114,30 +112,3 @@ const UserView = () => {
 };
 
 export default UserView;
-
-// console.log(revised);
-// console.log("products", products);
-
-// const filteredProductsWithPrice = products.filter((productItem) => {
-//   console.log(productItem);
-//   console.log(revised.includes(productItem._id));
-// });
-
-// const productsViews = filteredProductsWithPrice.map((product) => {
-//   if (product.colors) {
-//     return product.colors.map((color) => {
-//       const cloneProduct = JSON.parse(JSON.stringify(product));
-//       delete cloneProduct.colors;
-//       const productItem = { ...cloneProduct, color };
-//       productItem.fullName = product.brand + " " + product.model + " " + color.color;
-//       productItem.index = product._id;
-//       productItem.colorIndex = color.color;
-//       productItem.image = color.images[0];
-//       productItem.category = product.category;
-//       productItem.priceBy = color.products[0].price;
-//       let l = color.products.length - 1;
-//       productItem.priceTo = color.products[l].price;
-//       productItem.discountPriceBy = color.products[0].discount_price;
-//     });
-//   }
-// });
