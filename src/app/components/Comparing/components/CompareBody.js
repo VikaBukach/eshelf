@@ -1,7 +1,6 @@
 import { humanizeText, getFirstColumnKeys, getFieldData } from "../helpers";
 import "../Comparing.scss";
 import { CompareItemHeader } from "./CompareItemHeader";
-import { classNames } from "../../../utils/classNames";
 import ProductCard from "../../ProductCard/ProductCard";
 
 export const CompareBody = ({ data }) => {
