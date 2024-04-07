@@ -30,21 +30,20 @@ function BannerMain({ product }) {
       newPrice: "3299 $",
       validOffer: "The offer is valid from 25.03 to 29.04",
       imagePath:
-        "/img/mainbanner/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3 1.png",
+        "/img/mainbanner/mavic.png",
       imagePathDesktop: "/img/mainbanner/mavic-big.png",
-      url: "http://localhost:3000/quadcopters/66128153c6b6a27a34ab2967/black", //  перехід на стор цього товару
-      // url: "/quadcopters/", //  перехід на стор цього товару
+      url: "/quadcopters/66128153c6b6a27a34ab2967/black", //  перехід на стор цього товару
     },
     {
-      title: "iPhone 15 Pro Max",
+      title: "Apple MacBook Pro 15.3 Space Gray",
       description:
-        "As part of our efforts to reach carbon neutrality by 2030, iPhone 15 Pro and iPhone 15 Pro Max do not include a power adapter or EarPods. Included in the box is a USB‑C Charge Cable that supports fast charging and is compatible with USB‑C power adapters and computer ports.We encourage you to use any compatible USB‑C power adapter. If you need a new Apple power adapter or headphones, they are available for purchase",
-      oldPrice: "999 $",
-      newPrice: "988 $",
+        "The MacBook Pro 15 is one of the benchmarks for power, quality, compact and easy-to-use ultrabook. High performance, low weight and excellent autonomy. This model is fast and quite easy to use. The classic design, made of excellent aluminum in space gray color, will certainly suit any design. The case is resistant to scratches and damage. Feel free to take it with you everywhere!",
+      oldPrice: "2149 $",
+      newPrice: "2099 $",
       validOffer: "The offer is valid from 25.03 to 29.04",
-      imagePath: "/img/mainbanner/ipnall.png",
-      imagePathDesktop: "/img/mainbanner/ipnallbig.png",
-      url: "/smartphones/",
+      imagePath: "/img/mainbanner/mac15sm.png",
+      imagePathDesktop: "/img/mainbanner/mac15p.png",
+      url: "/laptops/6602e11894ad092ebc80fb6a/starlight",
     },
     {
       title: "Apple Watch Series 9 GPS",
@@ -55,7 +54,7 @@ function BannerMain({ product }) {
       validOffer: "The offer is valid from 05.03 to 31.03",
       imagePath: "/img/mainbanner/appwatchall.png",
       imagePathDesktop: "/img/mainbanner/applewatchbigbanner.png",
-      url: "/smartwatches/",
+      url: "/smartwatches/65ea3be2c0ec8c764e385d64/red",
     },
   ]; //add sliders
 
