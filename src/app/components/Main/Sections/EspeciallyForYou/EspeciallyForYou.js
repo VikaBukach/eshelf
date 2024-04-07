@@ -1,18 +1,33 @@
-import React from "react";
-import "./EspeciallyForYou.scss";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { loadOnePageOfProducts } from "../../../../store/slices/productsSlice";
+import React, { useState, useEffect } from "react";
+import {loadOnePageOfProducts, selectProducts} from "../../../../store/slices/productsSlice";
 import ProductListHomePage from "../../ProductListHomePage/ProductListHomePage";
+import {useDispatch, useSelector} from "react-redux";
+
 
 function EspeciallyForYou() {
-  return (
-    <ProductListHomePage
-      title="Espessially for you"
-      // category="tvs"
-      initialItemsToShow={5}
-    />
-  );
+    const  dispatch = useDispatch();
+    const products = useSelector(selectProducts);
+    const [especiallyForYouData, setEspeciallyForYouData] = useState([]);
+
+    useEffect(() => {
+        dispatch(loadOnePageOfProducts({ collection: "tvs", limit: 10, page: 1 }));
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (products.length > 0) {
+            setEspeciallyForYouData(products);
+        }
+    }, [products]);
+
+    return (
+        <ProductListHomePage
+            title="Especially for you"
+            category="tvs"
+            initialItemsToShow={5}
+            data={especiallyForYouData}
+        />
+    );
 }
 
 export default EspeciallyForYou;
+

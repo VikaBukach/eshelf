@@ -9,19 +9,9 @@ import "slick-carousel/slick/slick-theme.css";
 import "./ProductListHomePage.scss";
 import { loadOnePageOfProducts } from "../../../store/slices/productsSlice";
 
-function ProductListHomePage({ title, category }) {
+function ProductListHomePage({ title, data, category, initialItemsToShow }) {
   const dispatch = useDispatch();
-  const { data, status, error } = useSelector((state) => state.products, shallowEqual);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(loadOnePageOfProducts({ collection: "tvs", limit: 10, page: 1 }));
-      } catch (error) {}
-    };
-
-    fetchData();
-  }, [dispatch, category]);
+  const { status, error } = useSelector((state) => state.products, shallowEqual);
 
   const [itemsToShow, setItemsToShow] = useState(window.innerWidth >= 768 ? 3 : 2);
 
@@ -35,6 +25,11 @@ function ProductListHomePage({ title, category }) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+
+    dispatch(loadOnePageOfProducts({ category, limit: initialItemsToShow, page: 1 }));
+  }, [dispatch, category, initialItemsToShow]);
 
   const showMoreCards = () => {
     setItemsToShow((prevItems) => prevItems + (window.innerWidth >= 768 ? 3 : 2));
