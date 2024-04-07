@@ -46,7 +46,7 @@ function ProductListHomePage({ title, data, category, initialItemsToShow }) {
 
   return (
     <>
-      <div className="section_especially">
+      <div className="section_especially container">
         <div className="section_especially-wrap">
           <h6 className="section_especially-title">{title}</h6>
         </div>
