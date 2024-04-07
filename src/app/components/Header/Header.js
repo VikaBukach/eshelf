@@ -44,7 +44,15 @@ const Header = () => {
 
   const { open } = useModal();
   const handleVoiceSearch = () => {
-    // Функція обробки голосового повідомлення
+    const recognition = new window.webkitSpeechRecognition();
+
+    recognition.lang = 'en-US'; 
+    recognition.start(); 
+  
+    recognition.onresult = function(event) { 
+      const searchText = event.results[0][0].transcript; 
+      document.querySelector('.header__search-input').value = searchText;
+    };
   };
 
   return (
