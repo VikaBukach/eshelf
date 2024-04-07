@@ -23,16 +23,17 @@ function BannerMain({ product }) {
 
   const slides = [
     {
-      title: " DJI Mavic 3 Pro V2",
+      title: " Phantom 4 Pro V2.0",
       description:
-        "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos the Phantom 3 Pro V2.0 grants filmmakers absolute creative freedom.  A wide array of intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial imaging solution, designed for the professional creator.",
+        "Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos the Phantom 4 Pro V2.0 grants filmmakers absolute creative freedom.  A wide array of intelligent features makes flying that much easier. The Phantom 4 Pro V2.0 is a complete aerial imaging solution, designed for the professional creator.",
       oldPrice: "3400 $",
       newPrice: "3299 $",
       validOffer: "The offer is valid from 25.03 to 29.04",
       imagePath:
         "/img/mainbanner/kisspng-mavic-pro-dji-phantom-4-pro-dji-phantom-4-pro-unma-dji-phantom-5b51f93fbeb6f3 1.png",
       imagePathDesktop: "/img/mainbanner/mavic-big.png",
-      url: "/quadcopters/", //  перехід на стор цього товару
+      url: "http://localhost:3000/quadcopters/66128153c6b6a27a34ab2967/black", //  перехід на стор цього товару
+      // url: "/quadcopters/", //  перехід на стор цього товару
     },
     {
       title: "iPhone 15 Pro Max",
