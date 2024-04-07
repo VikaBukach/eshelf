@@ -9,15 +9,14 @@ import "slick-carousel/slick/slick-theme.css";
 import "./ProductListHomePage.scss";
 import { loadOnePageOfProducts } from "../../../store/slices/productsSlice";
 
-function ProductListHomePage({ title, category, initialItemsToShow, fetchDataOfProducts }) {
+function ProductListHomePage({ title, category }) {
   const dispatch = useDispatch();
   const { data, status, error } = useSelector((state) => state.products, shallowEqual);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // fix name
-        await dispatch(loadOnePageOfProducts({ collection: "smartphones", limit: 5, page: 1 }));
+        await dispatch(loadOnePageOfProducts({ collection: "tvs", limit: 10, page: 1 }));
       } catch (error) {}
     };
 
