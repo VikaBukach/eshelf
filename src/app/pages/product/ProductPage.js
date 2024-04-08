@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {
   changeTabs,
   setActiveColorIndex,
@@ -14,6 +14,8 @@ import { ReviewsProduct } from "../../components/SingleProduct/ReviewsProduct";
 import Rating from "../../components/SingleProduct/components/Rating";
 import axios from "axios";
 import { loadOneProduct } from "../../store/slices/singleProductSlice";
+import {Breadcrumbs} from "../../components/ui/Breadcrumbs/Breadcrumbs";
+
 
 const ProductPage = () => {
   const { collection, id, color } = useParams();
@@ -93,6 +95,7 @@ const ProductPage = () => {
     <>
       <section className="product-details">
         <div className="container">
+          <Link to="/"><img className="breadcrumbs__home-img" src="../../../assets/icons/home-page.svg" alt="Icon"/>Home</Link>
           <h1 className="product-details__title">
             {product.brand} {product.model}
           </h1>
