@@ -20,7 +20,7 @@ export const loadOneProduct = createAsyncThunk("products/loadOneProduct", async 
 const singleProductSlice = createSlice({
   name: "product",
   initialState: {
-    data: { product: {} },
+    data: [],
     tabs: "About the product",
     activeColorIndex: 0,
     activeImageIndex: 0,

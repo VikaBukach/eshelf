@@ -15,7 +15,25 @@ const ProductDetailsSmartwatches = ({ product }) => {
           <span>{product.model}</span>
         </div>
 
-        {product.colors[activeColorIndex].products[activeMemoryIndex] && (
+        {product?.colors && (
+          <section className="characteristic-body__group">
+            <h3 className="characteristic-body__heading">Color</h3>
+            <dl className="characteristic-body__list">
+              {product.colors[activeColorIndex]?.color && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Color</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.colors[activeColorIndex].color}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </section>
+        )}
+
+        {product.colors[activeColorIndex]?.products[activeMemoryIndex] && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Main details</h3>
             <dl className="characteristic-body__list">
@@ -35,24 +53,6 @@ const ProductDetailsSmartwatches = ({ product }) => {
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
                       <li>{product.colors[activeColorIndex].products[activeMemoryIndex].battery}</li>
-                    </ul>
-                  </dd>
-                </div>
-              )}
-            </dl>
-          </section>
-        )}
-
-        {product.colors && (
-          <section className="characteristic-body__group">
-            <h3 className="characteristic-body__heading">Color</h3>
-            <dl className="characteristic-body__list">
-              {product.colors?.color && (
-                <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Color</dt>
-                  <dd className="characteristic-body__value">
-                    <ul className="characteristic-body__sub-list">
-                      <li>{product.colors.color}</li>
                     </ul>
                   </dd>
                 </div>
@@ -211,6 +211,18 @@ const ProductDetailsSmartwatches = ({ product }) => {
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
                       {product.functions.features.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+                  </dd>
+                </div>
+              )}
+              {product.functions?.sensors && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Sensors</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      {product.functions.sensors.map((item, i) => (
                         <li key={i}>{item}</li>
                       ))}
                     </ul>

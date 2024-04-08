@@ -26,6 +26,7 @@ const Header = () => {
   const cartTotal = useSelector(selectCartTotal);
   const favoritesTotal = useSelector((state) => state.favorites.data).length;
   const compareTotal = useSelector((state) => state.compare.data).length;
+  const cartTotalNumber = useSelector((state) => state.cart.data).length;
 
   const windowWidth = useWindowWidth();
   // Скидувало cartTotal
@@ -90,9 +91,11 @@ const Header = () => {
                   activator={
                     <div className="cart-activator" onClick={open}>
                       <CartIcon />
-                      <span className="header__link-cart-name">Basket</span>
+                      <span className={`header__link-cart-name ${cartTotalNumber > 0 ? "header__link-cart-name-active" : ""}`}>Basket</span>
                       {windowWidth > 1024 && cartTotal > 0 && <span className="counter">${cartTotal}</span>}
-                      {windowWidth <= 1024 && cartTotal > 0 && <span className="counter-circle"></span>}
+                      {windowWidth <= 1024 && cartTotal > 0 && (
+                        <span className="counter-circle">{cartTotalNumber}</span>
+                      )}
                     </div>
                   }
                 />

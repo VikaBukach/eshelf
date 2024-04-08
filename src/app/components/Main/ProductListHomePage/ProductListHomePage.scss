@@ -14,10 +14,9 @@
   }
 
   &-title {
-    padding: 0 16px;
-    font:
-      500 18px / 1.5 "Inter",
-      sans-serif;
+    padding: 30px 0 16px;
+    font: 500 18px / 1.5 "Inter",
+    sans-serif;
     color: $primary-color-black;
   }
 
@@ -38,31 +37,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    //flex-wrap: wrap;
     gap: 16px;
-    //justify-content: center;
     width: 100%;
-
-    /* .section-especially-item {
-      display: flex;
-    } */
   }
 
   .section-especially-items {
     display: grid;
-    grid-template-columns: repeat(1fr);
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 16px;
-
-    @media screen and (min-width: 480px) {
-      grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    @media (min-width: $mobile) {
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
     }
-    @media screen and (min-width: $tablet) {
-      grid-template-columns: repeat(3, 1fr);
+    @media (min-width: 500px) {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
-  }
-
-  .section-especially-item {
-    //width: 50%;
+    @media (min-width: 650px) {
+      grid-template-columns: repeat(auto-fit, minmax(234px, 1fr));
+    }
   }
 
   .section_especially-products-btn {
@@ -78,9 +70,11 @@
     @media (min-width: $tablet) {
       margin-top: 24px;
     }
+
     .btn-text {
       color: $secondary-color-purple;
     }
+
     .btn-svg {
       padding-left: 8px;
     }
@@ -90,9 +84,9 @@
     display: none;
 
     @media (min-width: $desktop) {
+      position: relative;
       display: inline-block;
       width: 100%;
-      position: relative;
 
       &-arrows {
         display: flex;
@@ -112,11 +106,15 @@
           cursor: pointer;
         }
       }
-      //.section-especially-item-desktop {
-      //  flex: 0 0 auto;
-      //  width: 319px;
-      //  max-width: 100%;
-      //}
+      .section-especially-item-desktop {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+      }
     }
+
+    .slick-slide {
+      padding: 0 10px;
+    }
+
   }
 }
