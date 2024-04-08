@@ -1,0 +1,128 @@
+//@import "../../../../assets/styles/style.scss";
+
+.burger-menu_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+
+  @media (min-width: $desktop) {
+    background: none;
+  }
+}
+
+.burger-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: -1;
+  overflow-y: hidden;
+
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+
+    @media (min-width: $tablet) {
+      display: none;
+    }
+  }
+
+  &_button {
+    width: 24px;
+    height: 24px;
+  }
+
+  &_links {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    border-bottom: 1px solid rgba(160, 160, 160, 0.56);
+
+    @media (min-width: $tablet) {
+      display: none;
+    }
+  }
+
+  &__categories h2 {
+    @include header-h2;
+    margin: 20px 10px;
+    display: flex;
+  }
+
+  &__categories li {
+    @include header-h3;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 10px;
+    align-items: center;
+    font:
+      400 16px / 1.5 "Inter",
+      sans-serif;
+    color: rgba(160, 160, 160, 0.56);
+    border-bottom: 1px solid rgba(160, 160, 160, 0.56);
+
+    @media (min-width: $desktop) {
+      font:
+        200 14px / 1.5 "Inter",
+        sans-serif;
+    }
+  }
+
+  @media (min-width: $tablet) {
+    top: 15%;
+    left: 20%;
+    width: 60%;
+    height: 75%;
+    border-radius: 10px;
+  }
+  @media (min-width: $desktop) {
+    top: 12%;
+    left: 1%;
+    width: 30%;
+    height: 80%;
+    border-radius: 0;
+  }
+}
+
+.category-link-wrapper {
+  display: flex;
+}
+
+.category-link:hover {
+  @media (min-width: $desktop) {
+    background-color: #a3adff;
+  }
+}
+
+.subcategory-menu {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 999;
+
+  @media (min-width: $tablet) {
+    top: 2%;
+  }
+
+  @media (min-width: $desktop) {
+    position: fixed;
+    top: 12%;
+    left: 31%;
+    width: 30%;
+    height: 80%;
+  }
+
+  &_link {
+    display: flex;
+  }
+}

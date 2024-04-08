@@ -1,0 +1,122 @@
+.filter {
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 0%;
+  height: 100vh;
+  padding: 0px;
+  background-color: $secondary-color-white;
+  transition: 1s;
+  &--open {
+    width: 100%;
+    padding: 16px;
+
+    .filter__buttons {
+      width: calc(100% - 32px);
+    }
+  }
+
+  &__header {
+    @include flex-container(row, space-between, center, nowrap);
+    margin-bottom: 36px;
+
+    &__img {
+      display: none;
+    }
+  }
+
+  &__title {
+    @include header-h1;
+  }
+
+  &__buttons {
+    position: fixed;
+    @include grid-container(2, 8px);
+    bottom: 11px;
+    width: 0px;
+    overflow: hidden;
+    transition: 1s;
+  }
+
+  &__btn {
+    height: 48px;
+    border-radius: 27px;
+    min-width: 140px;
+    border: 1px solid $secondary-color-blue-light;
+  }
+
+  &__reset {
+    background-color: $secondary-color-white;
+    color: $secondary-color-blue-light;
+  }
+
+  &__submit {
+    background-color: $secondary-color-blue-light;
+    color: $secondary-color-white;
+  }
+}
+
+.body-to-filter {
+  overflow: hidden;
+  height: 100%;
+}
+
+@media screen and (min-width: $tablet) {
+  .filter {
+    &--open {
+      width: 320px;
+
+      .filter__buttons {
+        width: 288px;
+        bottom: 11px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .filter {
+    position: static;
+    width: 30%;
+    min-width: 320px;
+    max-width: 397px;
+    height: auto;
+    padding: 16px;
+    background-color: $secondary-color-grey-card;
+    border-radius: 10px;
+    transition: 1s;
+
+    &__header {
+      margin-bottom: 24px;
+      @include flex-container(row, flex-start, center, nowrap);
+
+      &__img {
+        display: block;
+        margin-right: 18px;
+      }
+    }
+
+    &__close-btn {
+      display: none;
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    &__buttons {
+      position: static;
+      width: 100%;
+      margin-top: 16px;
+      @include flex-container(row, center, center, nowrap);
+    }
+
+    &__submit {
+      display: none;
+    }
+  }
+}

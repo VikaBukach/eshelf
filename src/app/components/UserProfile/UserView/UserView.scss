@@ -1,0 +1,40 @@
+@import "../../../../assets/styles/style";
+
+.user-viewed {
+  &__box {
+  }
+
+  &__title {
+    margin-bottom: 0.8rem;
+    font-size: 2rem;
+    color: $primary-color-black;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 4rem;
+
+    .card-product {
+      background-color: $secondary-color-white;
+      min-width: 25rem;
+      max-width: 30rem;
+      min-height: 37rem;
+      flex: 1 0 22%;
+    }
+  }
+
+  @media screen and (min-width: $tablet) {
+    .user-viewed {
+      &__list {
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  @media screen and (min-width: $desktop) {
+  }
+}

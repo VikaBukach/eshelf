@@ -1,71 +1,110 @@
 @mixin logo {
-    color:$primary-color-blue;
-};
+  width: 32px;
+  height: 32px;
+  color: $primary-color-blue;
+}
 
 @function rem($px) {
-    @return calc($px / 10) * 1rem;
+  @return calc($px / 10) * 1rem;
 }
 
 // Adaptive value: @include adaptiveValue("padding-top", 30, 70)
 $minScreen: 32rem;
 $maxScreen: 171.2rem;
 
-@mixin adaptiveValue ($property, $minValue, $maxValue) {
-    #{$property}: clamp(rem($minValue), (((rem($maxValue) - rem($minValue)) * 100 / ($maxScreen - $minScreen)) * 1vw) + (($minScreen * rem($maxValue)) - ($maxScreen * rem($minValue))) / ($minScreen - $maxScreen), rem($maxValue));
+@mixin adaptiveValue($property, $minValue, $maxValue) {
+  #{$property}: clamp(
+    rem($minValue),
+    (((rem($maxValue) - rem($minValue)) * 100 / ($maxScreen - $minScreen)) * 1vw) +
+      (($minScreen * rem($maxValue)) - ($maxScreen * rem($minValue))) / ($minScreen - $maxScreen),
+    rem($maxValue)
+  );
 }
 
 // Gradient
 @mixin gradient {
-    background: $main-background;
-    background: $main-gradient;
+  background: $main-background;
+  background: $main-gradient;
 }
 
 // Headers
 
 @mixin header-h1 {
-    font-size: 20px;
-    font-weight: 600;
-    @media (min-width: $desktop) {
-        font-size: 36px;
-    }
+  font-size: 20px;
+  font-weight: 600;
+
+  @media (min-width: $desktop) {
+    font-size: 36px;
+  }
 }
 
 @mixin header-h2 {
-    font-size: 18px;
-    font-weight: 600;
-    @media (min-width: $desktop) {
-        font-size: 32px;
-    }
+  font-size: 18px;
+  font-weight: 600;
+
+  @media (min-width: $desktop) {
+    font-size: 32px;
+  }
 }
 
 @mixin header-h3 {
-    font-size: 16px;
-    font-weight: 600;
-    @media (min-width: $desktop) {
-        font-size: 24px;
-    }
+  font-size: 16px;
+  font-weight: 600;
+
+  @media (min-width: $desktop) {
+    font-size: 24px;
+  }
 }
 
 @mixin header-h4 {
-    font-size: 14px;
-    font-weight: 600;
-    @media (min-width: $desktop) {
-        font-size: 20px;
-    }
+  font-size: 14px;
+  font-weight: 600;
+
+  @media (min-width: $desktop) {
+    font-size: 20px;
+  }
 }
 
 @mixin header-h5 {
-    font-size: 14px;
-    font-weight: 600;
-    @media (min-width: $desktop) {
-        font-size: 18px;
-    }
+  font-size: 14px;
+  font-weight: 600;
+
+  @media (min-width: $desktop) {
+    font-size: 18px;
+  }
 }
 
 @mixin header-h6 {
-    font-size: 14px;
-    font-weight: 600;
-    @media (min-width: $desktop) {
-        font-size: 16px;
-    }
+  font-size: 14px;
+  font-weight: 600;
+
+  @media (min-width: $desktop) {
+    font-size: 16px;
+  }
+}
+
+@mixin flex-container($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+@mixin flex-item($flex: 1, $order: 0, $align-self: auto) {
+  flex: $flex;
+  order: $order;
+  align-self: $align-self;
+}
+
+@mixin grid-container($columns: auto, $gap: 10px) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+@mixin grid-item($column-span: 1, $row-span: 1) {
+  grid-column: span $column-span;
+  grid-row: span $row-span;
+  align-items: stretch;
 }

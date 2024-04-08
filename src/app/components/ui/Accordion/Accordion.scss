@@ -1,0 +1,67 @@
+.accordion {
+  border-bottom: 1px solid rgba($secondary-color-blue-light, 0.2);
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  &__head {
+    @include flex-container(row, space-between, center, nowrap);
+    margin-bottom: 16px;
+    min-width: 200px;
+    padding-right: 8px;
+  }
+
+  &__title {
+    @include header-h2;
+    font-weight: 400;
+  }
+
+  &__open-close {
+    position: relative;
+    width: 24px;
+    height: 24px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      top: calc(50% - 1px);
+      left: 0;
+      height: 2px;
+      width: 24px;
+      background: $secondary-color-blue-light;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      display: block;
+      top: 0;
+      left: calc(50% - 1px);
+      height: 24px;
+      width: 2px;
+      background: $secondary-color-blue-light;
+      transition: 0.3s;
+    }
+
+    &--open {
+      &::before {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  &__content {
+    max-height: 0px;
+    overflow: hidden;
+    transition: 1s;
+    overflow-y: auto;
+    padding-right: 8px;
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .accordion {
+    &__title {
+      font-size: 18px;
+    }
+  }
+}

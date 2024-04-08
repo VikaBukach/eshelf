@@ -1,0 +1,70 @@
+@import "../../../../assets/styles/style";
+
+.user-orders {
+  @media screen and (min-width: $desktop) {
+    padding: 20px;
+
+    &-title {
+      font:
+        400 20px / 1.5 "Inter",
+        sans-serif;
+      color: $primary-color-black;
+      margin-top: 20px;
+    }
+    .user-orders-dayoforder {
+      display: block;
+      text-align: right;
+      font:
+        400 16px / 1.5 "Inter",
+        sans-serif;
+      color: $primary-color-black;
+    }
+    .user-orders-info-items {
+      .user-orders-info-item {
+        display: grid;
+        grid-template-columns: 200px 500px;
+        margin-top: 10p;
+        margin-bottom: 10px;
+      }
+    }
+    .user-orders-status-items {
+      margin-top: 50px;
+      display: flex;
+      justify-content: space-between;
+
+      .user-orders-status-item {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        gap: 10px;
+
+        .user-orders-status-item-date {
+          font:
+            400 14px / 1.5 "Inter",
+            sans-serif;
+          color: rgba(51, 51, 51, 0.56);
+        }
+
+        .user-orders-status-item-descr {
+          font:
+            400 16px / 1.5 "Inter",
+            sans-serif;
+          color: #333;
+        }
+      }
+    }
+    .user-orders-total-items {
+      margin-top: 70px;
+      margin-left: auto;
+      width: max-content;
+
+      .user-orders-total-item {
+        display: grid;
+        grid-template-columns: 200px 200px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

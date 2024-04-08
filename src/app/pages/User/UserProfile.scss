@@ -1,0 +1,82 @@
+@import "../../../assets/styles/style";
+
+.user-info {
+  display: flex;
+  margin-top: 30px;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.userprofile_container {
+  min-height: 100vh;
+  // width: 100vw;
+  position: relative;
+  padding-bottom: 3rem;
+
+  .userprofile-title {
+    margin-bottom: 2rem;
+    flex-direction: row;
+    font:
+      400 24px / 1.5 "Inter",
+      sans-serif;
+    color: #333;
+  }
+
+  .userprofile {
+    display: flex;
+    align-items: self-start;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.6rem;
+
+    &-sidebar-left {
+      flex-shrink: 0.3;
+      width: 100%;
+      background: $secondary-color-grey-card;
+      border-radius: 20px;
+      transition:
+        width 0.5s ease,
+        height 0.5s ease;
+    }
+
+    &-sidebar-right {
+      border-radius: 20px;
+      max-width: 1124px;
+      padding: 2rem;
+      width: 100%;
+      min-height: 577px;
+      background: $secondary-color-grey-card;
+      transition:
+        width 0.5s ease,
+        height 0.5s ease;
+    }
+  }
+
+  // @media screen and (max-width: 1124px) {
+  //   .userprofile {
+  //     align-items: stretch;
+  //     flex-direction: column;
+  //   }
+  // }
+
+  @media screen and (min-width: $tablet) {
+    .userprofile {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (min-width: $desktop) {
+    .userprofile {
+      align-items: flex-start;
+      flex-direction: row;
+
+      &-sidebar-left {
+        flex-basis: 540px;
+      }
+    }
+  }
+}

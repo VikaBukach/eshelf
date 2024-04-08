@@ -1,37 +1,50 @@
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.5;
-    color: $primary-color-black;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $primary-color-black;
 }
 
 .container {
-    max-width: $maxWidthScreen;
-    padding: 0 16px;
-    margin: 0 auto;
+  max-width: $maxWidthScreen;
+  width: 100%;
+  padding: 0 16px;
+  margin: 0 auto;
 }
 
 .visibility-hidden {
-    visibility: hidden;
-    position: absolute;
-    z-index: -1;
-    width: 0;
-    height: 0;
-    opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  opacity: 0;
 }
 
 #root {
-    min-height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+@supports selector(:has(div)) {
+  body:has(.modal) {
+    overflow: hidden;
+  }
 }

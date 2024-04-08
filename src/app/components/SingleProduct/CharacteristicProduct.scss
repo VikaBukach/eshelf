@@ -1,0 +1,139 @@
+.characteristic-body {
+  display: flex;
+  flex-direction: column;
+  gap: 50px 30px;
+  border-radius: 10px;
+
+  @media screen and (min-width: $tablet) {
+    padding: 10px 20px 30px 20px;
+    //background-color: $secondary-color-grey-card;
+  }
+
+  @media screen and (min-width: $desktop) {
+    flex-direction: row;
+    padding: 24px 32px;
+  }
+
+  &__info {
+    @media screen and (min-width: $desktop) {
+      flex: 0 1 50%;
+      padding-right: 30px;
+      border-right: 1px solid rgba(163, 174, 255, 0.2);
+    }
+  }
+  &__title {
+    @include adaptiveValue("margin-bottom", 10, 40);
+    font-weight: 500;
+    span {
+      font-weight: 400;
+    }
+  }
+
+  &__group {
+    &:not(:last-child) {
+      margin-bottom: 32px;
+    }
+  }
+  &__heading {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+
+    @media screen and (min-width: $tablet) {
+      font-size: 18px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    column-gap: 10px;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+  &__label {
+    width: 50%;
+    font-size: 14px;
+    color: rgba(51, 51, 51, 0.56);
+
+    @media screen and (min-width: $tablet) {
+      font-size: 16px;
+    }
+  }
+  &__value {
+    width: 50%;
+    font-size: 14px;
+    color: #333;
+
+    @media screen and (min-width: $tablet) {
+      font-size: 16px;
+    }
+  }
+
+  &__buy {
+    @media screen and (min-width: $desktop) {
+      flex: 0 1 50%;
+    }
+  }
+
+  &__carriage {
+    @media screen and (min-width: $desktop) {
+      position: sticky;
+      top: 100px;
+    }
+  }
+}
+
+.characteristic-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px 32px;
+
+  @media screen and (min-width: $tablet) {
+    flex-direction: row;
+  }
+
+  &__img {
+    flex: 0 1 45%;
+    flex-shrink: 0;
+    max-width: 200px;
+    @media screen and (min-width: $tablet) {
+      max-width: 300px;
+    }
+    @media screen and (min-width: $desktop) {
+      max-width: none;
+    }
+  }
+
+  &__details {
+    flex: 0 1 55%;
+  }
+  &__title {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  &__article {
+    @include adaptiveValue("margin-bottom", 20, 32);
+    font-size: 16px;
+    color: rgba(51, 51, 51, 0.56);
+  }
+  &__price-old {
+    margin-bottom: 8px;
+    text-decoration: line-through;
+    color: $secondary-color-grey;
+  }
+  &__price {
+    @include adaptiveValue("font-size", 20, 36);
+    font-weight: 600;
+    margin-bottom: 26px;
+  }
+
+  &__button {
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+}

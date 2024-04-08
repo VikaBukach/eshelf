@@ -1,0 +1,152 @@
+@import "../../../assets/styles/variables";
+
+.cart {
+  $silver: #a0a0a08f;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  &__cartWrapper {
+    max-height: 90vh;
+    font-size: 1rem;
+    padding: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: $primary-color-black;
+
+    @media screen and (min-width: $tablet) {
+      padding: 2.3rem 4rem;
+    }
+
+    .cart__line {
+      display: block;
+      height: 1px;
+      background-color: $secondary-color-grey-card;
+      margin: 0 0 2rem 0;
+    }
+
+    .cart__list {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      //max-height: 40vh;
+      overflow-y: auto;
+      padding: 2rem;
+      gap: 3.6rem;
+
+      @media screen and (min-width: $tablet) {
+        gap: 2.6rem;
+        padding-right: 2rem;
+      }
+    }
+  }
+
+  &__heading {
+    font-size: 2rem;
+    font-weight: medium;
+
+    @media screen and (min-width: $tablet) {
+      font-size: 2.4rem;
+    }
+  }
+
+  &__product {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-direction: column;
+
+    @media screen and (min-width: $tablet) {
+      flex-direction: row;
+    }
+  }
+
+  &__productImage {
+    img {
+      width: 12.6rem;
+      max-width: 100%;
+      min-width: 0.9rem;
+      aspect-ratio: 1;
+      object-fit: contain;
+    }
+  }
+
+  &__productContent {
+    flex: 1;
+
+    * {
+      line-height: 1;
+    }
+
+    & > h3 {
+      margin-bottom: 1.5rem;
+    }
+
+    & > p {
+      margin-bottom: 2.2rem;
+    }
+
+    p {
+      color: $silver;
+    }
+  }
+
+  &__price {
+    font-size: 2.4rem;
+    font-weight: bold;
+    min-width: 10rem;
+    text-align: right;
+    max-width: 100%;
+    margin-right: 0;
+  }
+
+  &__productQuantity {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1.6rem;
+
+    & > .cart__price {
+      text-align: left;
+    }
+  }
+
+  &__quantity {
+    display: flex;
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: bold;
+    gap: 3.2rem;
+
+    .cart__quantityControllers {
+      display: flex;
+      align-items: center;
+      gap: 2.4rem;
+
+      div {
+        cursor: pointer;
+      }
+
+      * {
+        color: $secondary-color-grey;
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  @media screen and (min-width: $tablet) {
+    &__footer {
+      gap: 4rem;
+    }
+  }
+}

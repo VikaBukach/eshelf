@@ -1,0 +1,51 @@
+@import "../../../../assets/styles/variables";
+
+.custom-checkbox {
+  display: flex;
+  width: 100%;
+  position: relative;
+
+  --size: 2.4rem;
+  --gap: 1rem;
+
+  input {
+    height: 1px;
+    width: 1px;
+    position: absolute;
+    margin: -1px;
+    opacity: 0;
+    pointer-events: none;
+    left: calc(var(--size) / 2);
+    top: 0;
+  }
+
+  label {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    padding-left: calc(var(--size) + var(--gap));
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: var(--size);
+      aspect-ratio: 1;
+      border: 1px solid $main-background;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+  }
+
+  &:has(input:checked) {
+    label::before {
+      background-color: $main-background;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: url("../../../../../public/assets/icons/checked-icon.svg");
+    }
+  }
+}

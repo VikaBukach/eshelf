@@ -1,0 +1,117 @@
+@import "../../../../assets/styles/style";
+
+.delivery-to-user-content {
+  @media screen and (min-width: $desktop) {
+    gap: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    max-width: 370px;
+
+    .delivery-to-user {
+      position: relative;
+      max-width: 300px;
+
+      &-btn-visible {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        font:
+          400 15px / 1.5 "Inter",
+          sans-serif;
+        color: $primary-color-black;
+        width: 100%;
+        cursor: pointer;
+
+        span {
+          margin-right: auto;
+          padding-right: 40px;
+          font-size: 15px;
+        }
+
+        svg {
+          width: 20px;
+          transition: transform 0.2s ease-in-out;
+        }
+      }
+
+      .delivery-to-user-btn-toggle {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 100%;
+        height: 700px;
+        font-size: 18px;
+        opacity: 0;
+        transition:
+          opacity 0.3s ease-in-out,
+          width 0.3s 0.3s ease-in-out;
+        color: $primary-color-black;
+      }
+
+      .animated {
+        margin: 0;
+        opacity: 1;
+        width: 760px;
+        transition:
+          width 0.3s ease-in-out,
+          opacity 0.3s 0.3s ease-in-out;
+      }
+
+      .delivery-to-user-text {
+        margin: 0;
+        padding: 10px 10px;
+        pointer-events: none;
+        font:
+          400 14px / 1.5 "Inter",
+          sans-serif;
+        color: $primary-color-black;
+      }
+
+      .delivery-to-user-posts {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+      }
+
+      .delivery-to-user-posts h6 {
+        padding-left: 20px;
+        font:
+          500 17px / 1.5 "Inter",
+          sans-serif;
+        color: #333;
+      }
+
+      .delivery-to-user-list {
+        list-style: disc inside;
+        padding-left: 20px;
+      }
+
+      .delivery-to-user-list li {
+        margin-bottom: 10px;
+        font:
+          400 14px / 1.5 "Inter",
+          sans-serif;
+        color: $primary-color-black;
+      }
+
+      .delivery-to-user-list li span {
+        font:
+          400 14px / 1.5 "Inter",
+          sans-serif;
+        color: #8119b1;
+      }
+
+      .delivery-to-user-text span {
+        font:
+          400 15px / 1.5 "Inter",
+          sans-serif;
+        color: #8119b1;
+      }
+    }
+  }
+}

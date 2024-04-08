@@ -1,0 +1,122 @@
+@import "../../../../../assets/styles/variables";
+
+.popular_category {
+  @media (min-width: $mobile) {
+    margin-top: 30px;
+    margin-bottom: 40px;
+
+    &-title {
+      margin-top: 20px;
+      padding: 0 16px;
+      font:
+        500 18px / 1.5 "Inter",
+        sans-serif;
+      color: $primary-color-black;
+    }
+
+    &-btn {
+      display: flex;
+      flex-direction: column;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      gap: 16px;
+      align-items: center;
+
+      &-smartpnones,
+      &-components,
+      &-tablets,
+      &-others {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 1px solid $secondary-color-purple;
+        border-radius: 5px;
+        padding: 12px 32px;
+        width: 288px;
+        height: 40px;
+
+        .btn-text {
+          color: $secondary-color-purple;
+        }
+
+        .btn-svg {
+          padding-left: 10px;
+        }
+      }
+
+      @media (min-width: $tablet) {
+        display: none;
+      }
+    }
+    .popular_category-items {
+      display: none;
+    }
+  }
+
+  .popular_category-items {
+    @media (min-width: $tablet) {
+      font-size: 20px;
+      padding: 16px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 234px);
+      grid-auto-rows: 233px;
+      gap: 16px;
+
+      .popular_category-item {
+        border-radius: 10px;
+        padding: 16px 0px 24px 0px;
+        width: 234px;
+        height: 233px;
+        cursor: pointer;
+        border: 1.8px solid $secondary-color-purple-light;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+
+        .popular_category-item-img {
+          padding-top: 16px;
+          margin: 0 auto;
+        }
+        .popular_category-title {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media (min-width: $desktop) {
+    .popular_category-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+      gap: 16px;
+
+      .popular_category-item {
+        width: 224px;
+        height: 224px;
+        position: relative;
+
+        .popular_category-title {
+          display: block;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 0 16px;
+          font:
+            500 18px / 1.5 "Inter",
+            sans-serif;
+          color: $primary-color-black;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

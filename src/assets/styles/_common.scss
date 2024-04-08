@@ -1,1 +1,89 @@
 // Загальні БЕМ блоки та інше...
+
+.primary-btn {
+  background-color: $secondary-color-purple;
+  color: #fff;
+  font-size: 1.6rem;
+  padding: 1.2rem 8rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.primary-btn:disabled {
+  opacity: 0.5;
+}
+
+.star-rating {
+  position: relative;
+  --star-size: 1.6rem;
+  --star-gap: 0.35rem;
+  --star-count: 5;
+  --rating: 1;
+  --gap-calc: calc((var(--star-count, 0) - 1) * var(--star-gap));
+
+  width: calc(var(--star-count, 0) * var(--star-size) + var(--gap-calc));
+  height: var(--star-size);
+  // background-image: url("./img/star-outline.svg");
+  background-repeat: space no-repeat;
+  background-size: var(--star-size);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    --star-count: var(--rating);
+    --gap-calc: calc((var(--star-count, 0) - 1) * var(--star-gap));
+
+    width: calc(var(--star-count, 0) * var(--star-size) + var(--gap-calc));
+    height: var(--star-size);
+    // background-image: url("./img/star-filled.svg");
+    background-repeat: space no-repeat;
+    background-size: var(--star-size);
+  }
+}
+
+/* HTML: <div class="loader"></div> */
+// .loader {
+//   width: 50px;
+//   padding: 8px;
+//   aspect-ratio: 1;
+//   border-radius: 50%;
+//   background: $primary-color-blue;
+//   --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+//   -webkit-mask: var(--_m);
+//   mask: var(--_m);
+//   -webkit-mask-composite: source-out;
+//   mask-composite: subtract;
+//   animation: l3 1s infinite linear;
+// }
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  padding: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(farthest-side, $primary-color-blue 94%, #0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%, $primary-color-blue);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: l3 1s infinite linear;
+}
+
+@keyframes l3 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.error-message {
+  color: red;
+}
+
+input:disabled {
+  opacity: 0.5;
+}
