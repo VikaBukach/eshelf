@@ -14,10 +14,9 @@
   }
 
   &-title {
-    padding: 0 16px;
-    font:
-      500 18px / 1.5 "Inter",
-      sans-serif;
+    padding: 30px 0 16px;
+    font: 500 18px / 1.5 "Inter",
+    sans-serif;
     color: $primary-color-black;
   }
 
@@ -68,9 +67,11 @@
     @media (min-width: $tablet) {
       margin-top: 24px;
     }
+
     .btn-text {
       color: $secondary-color-purple;
     }
+
     .btn-svg {
       padding-left: 8px;
     }
@@ -80,9 +81,9 @@
     display: none;
 
     @media (min-width: $desktop) {
+      position: relative;
       display: inline-block;
       width: 100%;
-      position: relative;
 
       &-arrows {
         display: flex;
@@ -104,8 +105,13 @@
       }
       .section-especially-item-desktop {
         display: grid;
-        grid-template-columns: repeat(2, 300px);
+        grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
       }
     }
+
+    .slick-slide {
+      padding: 0 10px;
+    }
+
   }
 }
