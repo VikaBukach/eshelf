@@ -1,7 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { CharacteristicBuy } from "../CharacteristicBuy";
 
 const ProductDetailsQuadcopters = ({ product }) => {
+
+  const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
+
   return (
     <div className="characteristic-body">
       <div className="characteristic-body__info">
@@ -10,6 +14,24 @@ const ProductDetailsQuadcopters = ({ product }) => {
           <span>{product.brand} </span>
           <span>{product.model}</span>
         </div>
+
+        {product?.colors && (
+          <section className="characteristic-body__group">
+            <h3 className="characteristic-body__heading">Color</h3>
+            <dl className="characteristic-body__list">
+              {product.colors[activeColorIndex]?.color && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Color</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.colors[activeColorIndex].color}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </section>
+        )}
         {product.specifications?.characteristics && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Characteristics</h3>
@@ -143,6 +165,16 @@ const ProductDetailsQuadcopters = ({ product }) => {
                   </dd>
                 </div>
               )}
+              {product.specifications.additional_options?.delivery_set && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Delivery set</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.specifications.additional_options?.delivery_set}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
             </dl>
           </section>
         )}
@@ -165,7 +197,7 @@ const ProductDetailsQuadcopters = ({ product }) => {
             </dl>
           </section>
         )}
-        {product?.guarantee && (
+        {product.specifications?.other?.guarantee && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Guarantee</h3>
             <dl className="characteristic-body__list">
@@ -174,7 +206,7 @@ const ProductDetailsQuadcopters = ({ product }) => {
                   <dt className="characteristic-body__label">Period</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.guarantee}</li>
+                      <li>{product.specifications.other.guarantee}</li>
                     </ul>
                   </dd>
                 </div>

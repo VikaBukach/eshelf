@@ -14,6 +14,25 @@ const ProductDetailsSmartphones = ({ product }) => {
           <span>{product.brand} </span>
           <span>{product.model}</span>
         </div>
+
+        {product.colors && (
+          <section className="characteristic-body__group">
+            <h3 className="characteristic-body__heading">Color</h3>
+            <dl className="characteristic-body__list">
+              {product.colors[activeColorIndex]?.color && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Color</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.colors[activeColorIndex].color}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </section>
+        )}
+
         {product.specifications?.display && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Display</h3>
@@ -62,52 +81,6 @@ const ProductDetailsSmartphones = ({ product }) => {
           </section>
         )}
 
-        {product.specifications?.operating_system && (
-          <section className="characteristic-body__group">
-            <h3 className="characteristic-body__heading">Operating system</h3>
-            <dl className="characteristic-body__list">
-              {product.specifications.operating_system?.type && (
-                <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Operating system</dt>
-                  <dd className="characteristic-body__value">
-                    <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.operating_system.type}</li>
-                    </ul>
-                  </dd>
-                </div>
-              )}
-            </dl>
-          </section>
-        )}
-
-        {product.specifications?.processor && (
-          <section className="characteristic-body__group">
-            <h3 className="characteristic-body__heading">Processor</h3>
-            <dl className="characteristic-body__list">
-              {product.specifications.processor?.number_of_cores && (
-                <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">The number of processor cores is</dt>
-                  <dd className="characteristic-body__value">
-                    <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.processor.number_of_cores}</li>
-                    </ul>
-                  </dd>
-                </div>
-              )}
-              {product.specifications.processor?.type && (
-                <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Processor frequency</dt>
-                  <dd className="characteristic-body__value">
-                    <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.processor.type}</li>
-                    </ul>
-                  </dd>
-                </div>
-              )}
-            </dl>
-          </section>
-        )}
-
         {product.specifications?.memory && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Memory</h3>
@@ -136,16 +109,16 @@ const ProductDetailsSmartphones = ({ product }) => {
           </section>
         )}
 
-        {product.colors && (
+        {product.specifications?.operating_system && (
           <section className="characteristic-body__group">
-            <h3 className="characteristic-body__heading">Color</h3>
+            <h3 className="characteristic-body__heading">Operating system</h3>
             <dl className="characteristic-body__list">
-              {product.colors[activeColorIndex]?.color && (
+              {product.specifications.operating_system?.type && (
                 <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Color</dt>
+                  <dt className="characteristic-body__label">Operating system</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.colors[activeColorIndex].color}</li>
+                      <li>{product.specifications.operating_system.type}</li>
                     </ul>
                   </dd>
                 </div>
@@ -196,6 +169,34 @@ const ProductDetailsSmartphones = ({ product }) => {
                       {product.specifications.camera.functions.map((item, i) => (
                         <li key={i}>{item}</li>
                       ))}
+                    </ul>
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </section>
+        )}
+
+        {product.specifications?.processor && (
+          <section className="characteristic-body__group">
+            <h3 className="characteristic-body__heading">Processor</h3>
+            <dl className="characteristic-body__list">
+              {product.specifications.processor?.number_of_cores && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">The number of processor cores is</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.specifications.processor.number_of_cores}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
+              {product.specifications.processor?.type && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Processor frequency</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.specifications.processor.type}</li>
                     </ul>
                   </dd>
                 </div>

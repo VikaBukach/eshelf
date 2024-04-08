@@ -1,7 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { CharacteristicBuy } from "../CharacteristicBuy";
 
 const ProductDetailsMonitors = ({ product }) => {
+  
+  const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
+
   return (
     <div className="characteristic-body">
       <div className="characteristic-body__info">
@@ -10,6 +14,24 @@ const ProductDetailsMonitors = ({ product }) => {
           <span>{product.brand} </span>
           <span>{product.model}</span>
         </div>
+
+        {product.colors && (
+          <section className="characteristic-body__group">
+            <h3 className="characteristic-body__heading">Color</h3>
+            <dl className="characteristic-body__list">
+              {product.colors[activeColorIndex]?.color && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Color</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.colors[activeColorIndex].color}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </section>
+        )}
 
         {product.specifications?.display && (
           <section className="characteristic-body__group">
@@ -167,20 +189,30 @@ const ProductDetailsMonitors = ({ product }) => {
           </section>
         )}
 
-        {product?.guarantee && (
+        {product.specifications?.other && (
           <section className="characteristic-body__group">
-            <h3 className="characteristic-body__heading">Guarantee</h3>
+            <h3 className="characteristic-body__heading">Other</h3>
             <dl className="characteristic-body__list">
-              {
+              {product.specifications.other?.guarantee && (
                 <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Period</dt>
+                  <dt className="characteristic-body__label">Guarantee</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.guarantee}</li>
+                      <li>{product.specifications.other.guarantee}</li>
                     </ul>
                   </dd>
                 </div>
-              }
+              )}
+              {product.specifications.other?.dimension && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Dimension</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.specifications.other.dimension}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
             </dl>
           </section>
         )}

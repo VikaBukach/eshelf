@@ -9,6 +9,8 @@ import { ReactComponent as AboutDisplayIcon } from "../../../../assets/images/pr
 import { ReactComponent as AboutProcessorIcon } from "../../../../assets/images/product-icons/Hardware.svg";
 import { ReactComponent as AboutStorageIcon } from "../../../../assets/images/product-icons/Memory.svg";
 import { ReactComponent as AboutHardwareIcon } from "../../../../assets/images/product-icons/Hardware.svg";
+import { ReactComponent as AboutCameraIcon } from "../../../../assets/images/product-icons/Camera.svg";
+import { ReactComponent as AboutOperatingIcon } from "../../../../assets/images/product-icons/Refresh.svg";
 
 const ProductLaptops = ({ product }) => {
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
@@ -73,12 +75,21 @@ const ProductLaptops = ({ product }) => {
                 </div>
               </div>
             )}
+            {product.specifications.camera?.front_camera && (
+              <div className="info-details__characteristics-item">
+                <AboutCameraIcon className="info-details__characteristics-icon" />
+                <div className="info-details__characteristics-wrap">
+                  <div className="info-details__characteristics-title">Front camera</div>
+                  <span>{product.specifications.camera.front_camera}</span>
+                </div>
+              </div>
+            )}
             {product.specifications.operating_system?.type && (
               <div className="info-details__characteristics-item">
-                <AboutHardwareIcon className="info-details__characteristics-icon" />
+                <AboutOperatingIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
-                  <div className="info-details__characteristics-title">Video card</div>
-                  <span>{product.specifications.operating_system.type}</span>
+                  <div className="info-details__characteristics-title">Operating system</div>
+                  <span>{product.specifications.operating_system?.type}</span>
                 </div>
               </div>
             )}

@@ -33,6 +33,6 @@ const portableSpeakerSchema = new mongoose.Schema({
   colors: [colorSchema],
 });
 
-const PortableSpeaker = mongoose.model("portable_speakers", portableSpeakerSchema);
+const PortableSpeaker = mongoose.model("portable-speakers", portableSpeakerSchema);
 
 module.exports = PortableSpeaker;
