@@ -30,10 +30,20 @@ const ProductDetailsHeadphones = ({ product }) => {
             </dl>
           </section>
         )}
-        {product.specifications.characteristics && (
+        {product.specifications?.characteristics && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Details</h3>
             <dl className="characteristic-body__list">
+              {product.specifications.characteristics?.features && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Features</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.specifications.characteristics.features}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
               {product.specifications.characteristics?.type_connection && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Type connection</dt>
@@ -108,20 +118,22 @@ const ProductDetailsHeadphones = ({ product }) => {
           </section>
         )}
 
-        {product?.guarantee && (
+        {product.specifications?.additional_options && (
           <section className="characteristic-body__group">
-            <h3 className="characteristic-body__heading">Guarantee</h3>
+            <h3 className="characteristic-body__heading">Additional options</h3>
             <dl className="characteristic-body__list">
-              {
+              {product.specifications.additional_options?.options && (
                 <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Period</dt>
+                  <dt className="characteristic-body__label">Features</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.guarantee}</li>
+                      {product.specifications.additional_options.options.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
                     </ul>
                   </dd>
                 </div>
-              }
+              )}
             </dl>
           </section>
         )}

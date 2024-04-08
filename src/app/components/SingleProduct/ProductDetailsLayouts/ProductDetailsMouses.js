@@ -14,7 +14,25 @@ const ProductDetailsMouses = ({ product }) => {
           <span>{product.brand} </span>
           <span>{product.model}</span>
         </div>
-        {product.colors[activeColorIndex].products[activeMemoryIndex]?.connection && (
+
+        {product?.colors && (
+          <section className="characteristic-body__group">
+            <h3 className="characteristic-body__heading">Color</h3>
+            <dl className="characteristic-body__list">
+              {product.colors[activeColorIndex]?.color && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Color</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.colors[activeColorIndex].color}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </section>
+        )}
+        {product.colors[activeColorIndex]?.products[activeMemoryIndex]?.connection && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Connection</h3>
             <dl className="characteristic-body__list">

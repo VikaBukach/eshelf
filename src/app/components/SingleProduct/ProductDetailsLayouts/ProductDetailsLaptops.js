@@ -14,11 +14,11 @@ const ProductDetailsLaptops = ({ product }) => {
           <span>{product.model}</span>
         </div>
 
-        {product.colors[activeColorIndex] && (
+        {product?.colors[activeColorIndex] && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Color</h3>
             <dl className="characteristic-body__list">
-              {product.colors[activeColorIndex].color && (
+              {product.colors[activeColorIndex]?.color && (
                 <div className="characteristic-body__item">
                   <dt className="characteristic-body__label">Color</dt>
                   <dd className="characteristic-body__value">
@@ -59,30 +59,42 @@ const ProductDetailsLaptops = ({ product }) => {
             </dl>
           </section>
         )}
+
         {product.specifications?.processor && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Processor</h3>
             <dl className="characteristic-body__list">
-              {
+              {product.specifications.processor?.type && (
                 <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Value</dt>
+                  <dt className="characteristic-body__label">Type</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.processor}</li>
+                      <li>{product.specifications.processor.type}</li>
                     </ul>
                   </dd>
                 </div>
-              }
+              )}
+              {product.specifications.processor?.data_drives && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Data drives</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.specifications.processor.data_drives}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
             </dl>
           </section>
         )}
+
         {product.specifications?.memory && (
           <section className="characteristic-body__group">
             <h3 className="characteristic-body__heading">Memory</h3>
             <dl className="characteristic-body__list">
               {product.specifications.memory?.RAM && (
                 <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">The amount of RAM is</dt>
+                  <dt className="characteristic-body__label">RAM</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
                       <li>{product.specifications.memory.RAM}</li>
@@ -92,7 +104,7 @@ const ProductDetailsLaptops = ({ product }) => {
               )}
               {product.specifications.memory?.type_of_RAM && (
                 <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Type of RAM</dt>
+                  <dt className="characteristic-body__label">type_of_RAM</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
                       <li>{product.specifications.memory.type_of_RAM}</li>
@@ -113,6 +125,35 @@ const ProductDetailsLaptops = ({ product }) => {
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
                       <li>{product.specifications.camera.front_camera}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </section>
+        )}
+        {product.specifications?.additional_options && (
+          <section className="characteristic-body__group">
+            <h3 className="characteristic-body__heading">Additional options</h3>
+            <dl className="characteristic-body__list">
+              {product.specifications.additional_options?.options && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Options</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      {product.specifications.additional_options.options.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+                  </dd>
+                </div>
+              )}
+              {product.specifications.additional_options?.video_card && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Video card</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.specifications.additional_options.video_card}</li>
                     </ul>
                   </dd>
                 </div>
@@ -149,11 +190,21 @@ const ProductDetailsLaptops = ({ product }) => {
         )}
         {product.specifications?.other && (
           <section className="characteristic-body__group">
-            <h3 className="characteristic-body__heading">Dimensions</h3>
+            <h3 className="characteristic-body__heading">Other</h3>
             <dl className="characteristic-body__list">
+              {product.specifications.other?.weight && (
+                <div className="characteristic-body__item">
+                  <dt className="characteristic-body__label">Weight</dt>
+                  <dd className="characteristic-body__value">
+                    <ul className="characteristic-body__sub-list">
+                      <li>{product.specifications.other.weight}</li>
+                    </ul>
+                  </dd>
+                </div>
+              )}
               {product.specifications.other?.dimension && (
                 <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Dimensions (HxWxD)</dt>
+                  <dt className="characteristic-body__label">Dimension</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
                       <li>{product.specifications.other.dimension}</li>
@@ -161,12 +212,19 @@ const ProductDetailsLaptops = ({ product }) => {
                   </dd>
                 </div>
               )}
-              {product.specifications.other?.weight && (
+            </dl>
+          </section>
+        )}
+        {product.specifications?.operating_system && (
+          <section className="characteristic-body__group">
+            <h3 className="characteristic-body__heading">Operating system</h3>
+            <dl className="characteristic-body__list">
+              {product.specifications.operating_system?.type && (
                 <div className="characteristic-body__item">
-                  <dt className="characteristic-body__label">Body weight</dt>
+                  <dt className="characteristic-body__label">Type</dt>
                   <dd className="characteristic-body__value">
                     <ul className="characteristic-body__sub-list">
-                      <li>{product.specifications.other.weight}</li>
+                      <li>{product.specifications.operating_system.type}</li>
                     </ul>
                   </dd>
                 </div>

@@ -72,6 +72,43 @@ const ProductSpeakers = ({ product }) => {
                 </div>
               </div>
             )}
+
+            {product.specifications.characteristics?.battery_life && (
+              <div className="info-details__characteristics-item">
+                <AboutBatteryIcon className="info-details__characteristics-icon" />
+                <div className="info-details__characteristics-wrap">
+                  <div className="info-details__characteristics-title">Battery life</div>
+                  <span>{product.specifications.characteristics.battery_life}</span>
+                </div>
+              </div>
+            )}
+            {product.specifications.characteristics?.connectivity && (
+              <div className="info-details__characteristics-item">
+                <AboutConnectIcon className="info-details__characteristics-icon" />
+                <div className="info-details__characteristics-wrap">
+                  <div className="info-details__characteristics-title">Connectivity</div>
+                  <span>{product.specifications.characteristics.connectivity}</span>
+                </div>
+              </div>
+            )}
+            {product.specifications.characteristics?.output_power && (
+              <div className="info-details__characteristics-item">
+                <AboutPowerIcon className="info-details__characteristics-icon" />
+                <div className="info-details__characteristics-wrap">
+                  <div className="info-details__characteristics-title">Output power</div>
+                  <span>{product.specifications.characteristics.output_power}</span>
+                </div>
+              </div>
+            )}
+            {product.specifications.characteristics?.frequency_response && (
+              <div className="info-details__characteristics-item">
+                <AboutAudioIcon className="info-details__characteristics-icon" />
+                <div className="info-details__characteristics-wrap">
+                  <div className="info-details__characteristics-title">Frequency response</div>
+                  <span>{product.specifications.characteristics.frequency_response}</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

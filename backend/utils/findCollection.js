@@ -26,7 +26,7 @@ const findCollection = (collectionModel) => {
     case "mouses":
       return Mouse;
       case "portable-speakers":
-        case "portable_speakers":
+        /* case "portable_speakers": */
           return PortableSpeaker;
     case "quadcopters":
       return Quadcopter;
