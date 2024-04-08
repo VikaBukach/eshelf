@@ -10,7 +10,7 @@ function EspeciallyForYou() {
     const [especiallyForYouData, setEspeciallyForYouData] = useState([]);
 
     useEffect(() => {
-        dispatch(loadOnePageOfProducts({ collection: "tvs", limit: 10, page: 1 }));
+        dispatch(loadOnePageOfProducts({ collection: "laptops", limit: 15, page: 1 }));
     }, [dispatch]);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ function EspeciallyForYou() {
     return (
         <ProductListHomePage
             title="Especially for you"
-            category="tvs"
+            category="laptops"
             initialItemsToShow={5}
             data={especiallyForYouData}
         />
