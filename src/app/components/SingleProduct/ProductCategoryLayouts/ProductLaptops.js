@@ -8,9 +8,7 @@ import { BuyProduct } from "../BuyProduct";
 import { ReactComponent as AboutDisplayIcon } from "../../../../assets/images/product-icons/Diagonal.svg";
 import { ReactComponent as AboutProcessorIcon } from "../../../../assets/images/product-icons/Hardware.svg";
 import { ReactComponent as AboutStorageIcon } from "../../../../assets/images/product-icons/Memory.svg";
-import { ReactComponent as AboutRAMIcon } from "../../../../assets/images/product-icons/Matrix.svg";
-import { ReactComponent as AboutGraphicIcon } from "../../../../assets/images/product-icons/screen-full.svg";
-import { ReactComponent as AboutBatteryIcon } from "../../../../assets/images/product-icons/Battery.svg";
+import { ReactComponent as AboutHardwareIcon } from "../../../../assets/images/product-icons/Hardware.svg";
 
 const ProductLaptops = ({ product }) => {
   const activeColorIndex = useSelector((state) => state.product.activeColorIndex);
@@ -66,30 +64,21 @@ const ProductLaptops = ({ product }) => {
                 </div>
               </div>
             )}
-            {product.specifications?.RAM && (
+            {product.specifications.additional_options?.video_card && (
               <div className="info-details__characteristics-item">
-                <AboutRAMIcon className="info-details__characteristics-icon" />
+                <AboutHardwareIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
-                  <div className="info-details__characteristics-title">RAM</div>
-                  <span>{product.specifications.RAM}</span>
+                  <div className="info-details__characteristics-title">Video card</div>
+                  <span>{product.specifications.additional_options.video_card}</span>
                 </div>
               </div>
             )}
-            {product.specifications?.graphics && (
+            {product.specifications.operating_system?.type && (
               <div className="info-details__characteristics-item">
-                <AboutGraphicIcon className="info-details__characteristics-icon" />
+                <AboutHardwareIcon className="info-details__characteristics-icon" />
                 <div className="info-details__characteristics-wrap">
-                  <div className="info-details__characteristics-title">Graphics</div>
-                  <span>{product.specifications.graphics}</span>
-                </div>
-              </div>
-            )}
-            {product.specifications?.battery_life && (
-              <div className="info-details__characteristics-item">
-                <AboutBatteryIcon className="info-details__characteristics-icon" />
-                <div className="info-details__characteristics-wrap">
-                  <div className="info-details__characteristics-title">Battery life</div>
-                  <span>{product.specifications.battery_life}</span>
+                  <div className="info-details__characteristics-title">Video card</div>
+                  <span>{product.specifications.operating_system.type}</span>
                 </div>
               </div>
             )}

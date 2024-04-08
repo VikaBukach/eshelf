@@ -60,7 +60,7 @@
       padding: 16px;
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(3, 234px);
+      grid-template-columns: repeat(3, 1fr);
       grid-auto-rows: 233px;
       gap: 16px;
 

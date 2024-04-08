@@ -242,9 +242,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (min-width: $desktop) {
-    margin-left: 45px;
-  }
 }
 
 .header__link-users span {
@@ -269,6 +266,10 @@
 }
 
 .header__link-cart:hover .header__link-cart-name {
+  color: #7307a5;
+}
+
+.header__link-cart-name-active {
   color: #8119b1;
 }
 
@@ -291,7 +292,7 @@
 .counter {
   position: absolute;
   top: 19px;
-  right: -49px;
+  left: 42px;
   font-weight: 600;
   color: #333;
 }
