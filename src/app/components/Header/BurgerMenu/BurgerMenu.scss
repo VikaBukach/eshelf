@@ -54,6 +54,10 @@
     @include header-h2;
     margin: 20px 10px;
     display: flex;
+
+    @media (min-width: $desktop) {
+      display: none;
+    }
   }
 
   &__categories li {
@@ -61,17 +65,29 @@
     display: flex;
     justify-content: space-between;
     margin: 10px 10px;
+    padding: 9px;
     align-items: center;
     font:
       400 16px / 1.5 "Inter",
       sans-serif;
     color: rgba(160, 160, 160, 0.56);
-    border-bottom: 1px solid rgba(160, 160, 160, 0.56);
+    border-bottom: 1px solid rgba(160, 160, 160, 0.5);
+
+    @media (min-width: $tablet) {
+      padding: 5px;
+
+    }
 
     @media (min-width: $desktop) {
       font:
-        200 14px / 1.5 "Inter",
+        400 16px / 1.5 "Inter",
         sans-serif;
+        border-bottom: none;
+
+    }
+
+    .category-link-page{
+      color: black;
     }
   }
 
@@ -85,9 +101,8 @@
   @media (min-width: $desktop) {
     top: 12%;
     left: 1%;
-    width: 30%;
-    height: 80%;
-    border-radius: 0;
+    width: 20%;
+    height: 71%;
   }
 }
 
