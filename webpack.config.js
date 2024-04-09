@@ -26,20 +26,41 @@ module.exports = {
         ],
       },
       {
-        test: /\.svg$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[contenthash].[ext]',
-            outputPath: 'assets/icons/',
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        include: [
+          path.resolve(__dirname, 'public'),
+          path.resolve(__dirname, 'src', 'assets', 'images'),
+        ],
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[contenthash].[ext]',
+              context: path.resolve(__dirname, 'src'),
+            },
           },
-        },
+        ],
+      },
+      {
+        test: /\.json$/,
+        type: 'javascript/auto',
+        include: path.resolve(__dirname, 'public'),
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[contenthash].[ext]',
+              context: path.resolve(__dirname, 'public'),
+            },
+          },
+        ],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      favicon: './public/favicon.ico', // Путь к favicon, если нужно
     }),
   ],
 };
