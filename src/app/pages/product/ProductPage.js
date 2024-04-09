@@ -95,7 +95,9 @@ const ProductPage = () => {
     <>
       <section className="product-details">
         <div className="container">
+          <div className="product-details-link-home">
           <Link to="/"><img className="breadcrumbs__home-img" src="../../../assets/icons/home-page.svg" alt="Icon"/>Home</Link>
+          </div>
           <h1 className="product-details__title">
             {product.brand} {product.model}
           </h1>

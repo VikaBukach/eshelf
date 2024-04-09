@@ -1,5 +1,6 @@
 .product-details {
   @include adaptiveValue("margin-bottom", 40, 70);
+
   &__title {
     @include adaptiveValue("font-size", 16, 24);
     @include adaptiveValue("padding-top", 30, 50);
@@ -58,5 +59,10 @@
   &__tabs-active {
     border-color: $primary-color-blue;
     color: $primary-color-blue;
+  }
+  .product-details-link-home {
+    @media screen and (min-width: $desktop) {
+      display: none;
+    }
   }
 }
