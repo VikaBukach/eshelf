@@ -60,9 +60,25 @@
     border-color: $primary-color-blue;
     color: $primary-color-blue;
   }
-  .product-details-link-home {
+  .product-details-link-home .breadcrumbs__link {
+  margin-top: 10px;
+    display: inline-block;
     @media screen and (min-width: $desktop) {
       display: none;
     }
   }
+
+  .product-details-link-home .breadcrumbs__home-img {
+    padding-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .product-details-link-home .breadcrumbs__text {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+
+
 }
