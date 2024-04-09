@@ -7,6 +7,9 @@
     flex-wrap: wrap;
     justify-content: center;
     position: relative;
+    @media (min-width: $desktop) {
+      justify-content: space-around;
+    }
 
     .contact-form-footer-info,
     .contact-form {
@@ -22,6 +25,16 @@
           margin-right: 10px;
         }
       }
+      @media (min-width: $desktop) {
+        width: calc(33.33% - 10px);
+        margin-bottom: 20px;
+      }
+    }
+
+    .contact-form-footer-info{
+      @media (min-width: $desktop) {
+       margin-left: 400px;
+      }
     }
 
     .contact-form-footer-info {
@@ -34,6 +47,12 @@
         @media (min-width: $tablet) {
           font: 600 20px / 1.5 "Inter", sans-serif;
         }
+        @media (min-width: $desktop) {
+          font: 400 20px / 1.5 "Inter", sans-serif;
+          text-align: left;
+          color: #fff;
+        }
+
       }
 
       .contact-form-footer-text {
@@ -67,7 +86,7 @@
           font-size: 16px;
 
           &:disabled {
-            background-color: #f0f0f0;
+            background-color: $secondary-color-white;
           }
         }
 
@@ -97,20 +116,19 @@
     .contact-form-footer-svg {
       display: none;
 
-
       @media (min-width: $tablet) {
-
         justify-content: left;
         display: block;
         left: 0;
         top: -30px;
-
-
         width: 45%;
         fill: rgba(255, 255, 255, 0.2);
         position: absolute;
-
-
+      }
+      @media (min-width: $desktop) {
+        left: -100px;
+       top: -30;
+        width: 45%;
       }
     }
   }
