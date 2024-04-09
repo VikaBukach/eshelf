@@ -39,23 +39,26 @@ function ContactForm(props) {
     return (
         <div className="contact-form-footer">
             <div className="container">
-                <h2 className="contact-form-footer-title">NEED ADVICE?</h2>
-                <p className="contact-form-footer-text">Enter your details and write your question, we will contact you
-                    within 3 working days</p>
-                <Formik
-                    validationSchema={DetailsSchema}
-                    initialValues={{
-                        name: state.name,
-                        phone: state.phone,
-                    }}
-                    onSubmit={(values, {setFieldValue}) => {
-                        setFieldValue("name", values.name);
-                        setFieldValue("phone", values.phone);
-                    }}
-                >
-                    {({errors}) => (
-                        <Form>
-                            <div className="contact-form">
+                <div className="contact-form-footer-info">
+                    <h2 className="contact-form-footer-title">NEED ADVICE?</h2>
+                    <p className="contact-form-footer-text">Enter your details and write your question, we will contact
+                        you
+                        within 3 working days</p>
+                </div>
+                <div className="contact-form">
+                    <Formik
+                        validationSchema={DetailsSchema}
+                        initialValues={{
+                            name: state.name,
+                            phone: state.phone,
+                        }}
+                        onSubmit={(values, {setFieldValue}) => {
+                            setFieldValue("name", values.name);
+                            setFieldValue("phone", values.phone);
+                        }}
+                    >
+                        {({errors}) => (
+                            <Form>
                                 {inputs.map(input => (
                                     <div className="contact-form-input" key={input.key}>
                                         <label htmlFor={input.key} className="contact-form-label">{input.label}</label>
@@ -94,18 +97,18 @@ function ContactForm(props) {
                                         {errors[input.key] && <div className="error-message">{errors[input.key]}</div>}
                                     </div>
                                 ))}
-                            </div>
-                            <Button
-                                btnClass="contact-form-btn"
-                                type="submit"
-                                text={"Send a request"}
-                            />
-                        </Form>
-                    )}
-                </Formik>
+                                <Button
+                                    btnClass="contact-form-btn"
+                                    type="submit"
+                                    text={"Send a request"}
+                                />
+                            </Form>
+                        )}
+                    </Formik>
+                </div>
             </div>
         </div>
-    );
-}
+            );
+            }
 
-export default ContactForm;
+            export default ContactForm;

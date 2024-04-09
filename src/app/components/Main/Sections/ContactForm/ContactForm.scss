@@ -1,47 +1,87 @@
 @import "../../../../../assets/styles/style";
-
 .contact-form-footer {
-  display: flex;
-  //align-items: center;
-  //justify-content: flex-start;
-  //flex-direction: column;
-  margin-top: 30px;
+  .container {
+    background-color: $secondary-color-lavand-light;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 
-background-color: $secondary-color-lavand-light;
-  &-title {
-    margin-top: 15px;
-    margin-bottom: 8px;
-    font: 600 20px / 1.5 "Inter", sans-serif;
-    text-align: center;
-    color: $secondary-color-white;
-  }
+    .contact-form-footer-info,
+    .contact-form {
+      width: 100%;
+      margin-bottom: 20px;
 
-  &-text {
-    color: $secondary-color-white;
-    opacity: 0.9;
-    margin-bottom: 30px;
-  }
-  .contact-form {
+      @media (min-width: 768px) {
+        width: calc(50% - 10px);
+        margin-bottom: 0;
 
-    &-input {
-      margin-bottom: 30px;
+        &:first-child {
+          margin-right: 10px;
+        }
+      }
     }
-    &-label {
-      color: $secondary-color-white;
-    }
-  }
 
-  .contact-form-btn {
-    background-color: $secondary-color-purple;
-    border-radius: 5px;
-    padding: 12px 32px;
-    max-width: 100%;
-    width: 100%;
-    height: 40px;
-    margin-bottom: 16px;
-  }
-  .btn-text {
-    color: $secondary-color-white;
-    padding-left: 18px;
+    .contact-form-footer-info {
+      .contact-form-footer-title {
+        font: 600 20px / 1.5 "Inter", sans-serif;
+        text-align: center;
+        color: $secondary-color-white;
+        margin-top: 15px;
+        margin-bottom: 10px;
+      }
+
+      .contact-form-footer-text {
+        font: 400 14px / 1.5 "Inter", sans-serif;
+        color: $secondary-color-white;
+        opacity: 0.9;
+        margin-bottom: 20px;
+      }
+    }
+
+    .contact-form {
+      .contact-form-input {
+        margin-bottom: 20px;
+
+        .contact-form-label {
+          display: block;
+          font: 400 16px / 1.5 "Inter", sans-serif;
+          color: $secondary-color-white;
+          margin-bottom: 5px;
+        }
+
+        .input_ui__input {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 16px;
+
+          &:disabled {
+            background-color: #f0f0f0;
+          }
+        }
+
+        .error-message {
+          color: red;
+          font-size: 14px;
+          margin-top: 5px;
+        }
+      }
+
+      .contact-form-btn {
+
+        width: 100%;
+        padding: 12px 80px;
+        margin-top: 16px;
+        background-color: $secondary-color-purple;
+        border-radius: 5px;
+      }
+      .btn-text {
+        font: 400 16px / 1.5 "Inter", sans-serif;
+        color: $secondary-color-white;
+        flex-direction: row;
+
+      }
+    }
   }
 }
