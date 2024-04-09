@@ -1,0 +1,53 @@
+@import "../../../../../assets/styles/style";
+
+.contact-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: 30px;
+
+background-color: $secondary-color-lavand-light;
+  &-title {
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font: 600 20px / 1.5 "Inter", sans-serif;
+    text-align: center;
+    color: $secondary-color-white;
+  }
+
+  &-text {
+    color: $secondary-color-white;
+    opacity: 0.9;
+    margin-bottom: 30px;
+  }
+  .contact-form {
+
+    &-input {
+
+      margin-bottom: 30px;
+    }
+    &-label {
+      color: $secondary-color-white;
+    }
+  }
+
+  .contact-form-btn {
+    margin-top: 16px;
+    background-color: $secondary-color-purple;
+    border-radius: 5px;
+    padding: 12px 32px;
+    width: 288px;
+    height: 40px;
+  }
+  .btn-text {
+    color: $secondary-color-white;
+    padding-left: 18px;
+  }
+
+
+
+
+
+
+}

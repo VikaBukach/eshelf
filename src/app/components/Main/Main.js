@@ -5,6 +5,7 @@ import "./Main.scss";
 import EspeciallyForYou from "./Sections/EspeciallyForYou/EspeciallyForYou";
 import BannerTopProduct from "./Sections/BannerTopProduct/BannerTopProduct";
 import PopularCategory from "./Sections/PopularCategory/PopularCategory";
+import ContactForm from "./Sections/ContactForm/ContactForm";
 // import TopProduct from "./Sections/TopProduct/TopProduct";
 // import SalesWeek from "./Sections/SalesWeek/SalesWeek";
 
@@ -18,6 +19,7 @@ const Main = () => {
       {/*<TopProduct/>*/}
       {/*<SalesWeek />*/}
       <PopularCategory />
+        <ContactForm />
     </div>
   );
 };
