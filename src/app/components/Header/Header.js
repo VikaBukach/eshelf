@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu, setCartTotal } from "../../store/slices/navMenuSlice";
 import { ReactComponent as BurgerMenuIcon } from "../../../assets/images/Burger.svg";
@@ -27,6 +27,7 @@ const Header = () => {
   const favoritesTotal = useSelector((state) => state.favorites.data).length;
   const compareTotal = useSelector((state) => state.compare.data).length;
   const cartTotalNumber = useSelector((state) => state.cart.data).length;
+  const navigate = useNavigate();
 
   const windowWidth = useWindowWidth();
   // Скидувало cartTotal
@@ -45,7 +46,99 @@ const Header = () => {
 
   const { open } = useModal();
   const handleVoiceSearch = () => {
-    // Функція обробки голосового повідомлення
+    const recognition = new window.webkitSpeechRecognition();
+
+    recognition.lang = "en-US";
+    recognition.start();
+
+    recognition.onresult = function (event) {
+      const searchText = event.results[0][0].transcript.toLowerCase();
+      document.querySelector(".header__search-input").value = searchText;
+      switch (searchText) {
+        case "home":
+          navigate("/");
+          break;
+        case "smartphones":
+          navigate("/smartphones");
+          break;
+        case "e-readers":
+          navigate("/e-readers");
+          break;
+        case "headphones":
+          navigate("/headphones");
+          break;
+          case "laptops":
+            navigate("/laptops");
+            break;
+          case "monitors":
+            navigate("/monitors");
+            break;
+          case "mouses":
+            navigate("/mouses");
+            break;
+          case "portable-speakers":
+            navigate("/portable-speakers");
+            break;
+            case "quadcopters":
+              navigate("/quadcopters");
+              break;
+            case "smartwatches":
+              navigate("/smartwatches");
+              break;
+            case "tablets":
+              navigate("/tablets");
+              break;
+            case "tv":
+              navigate("/tv");
+              break;
+        default:
+          break;
+      }
+    };
+  };
+  const handleSubmitSearch = (event) => {
+    event.preventDefault();
+    const searchText = document.querySelector(".header__search-input").value.toLowerCase();
+    switch (searchText) {
+      case "home":
+        navigate("/");
+        break;
+      case "smartphones":
+        navigate("/smartphones");
+        break;
+      case "e-readers":
+        navigate("/e-readers");
+        break;
+      case "headphones":
+        navigate("/headphones");
+        break;
+      case "laptops":
+        navigate("/laptops");
+        break;
+      case "monitors":
+        navigate("/monitors");
+        break;
+      case "mouses":
+        navigate("/mouses");
+        break;
+      case "portable-speakers":
+        navigate("/portable-speakers");
+        break;
+      case "quadcopters":
+        navigate("/quadcopters");
+        break;
+      case "smartwatches":
+        navigate("/smartwatches");
+        break;
+      case "tablets":
+        navigate("/tablets");
+        break;
+      case "tv":
+        navigate("/tv");
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -59,15 +152,15 @@ const Header = () => {
                 <LogoIcon />
               </NavLink>
             </div>
-            <div className="header__search-container">
+            <form className="header__search-container" onSubmit={handleSubmitSearch}>
               <input type="text" className="header__search-input" placeholder="Search..." />
               <div className="microphone-icon-wrap">
                 <MicrophoneIcon className="microphone-icon" onClick={handleVoiceSearch} />
               </div>
               <div className="search-icon-wrap">
-                <SearchIcon className="search-icon" />
+                <SearchIcon className="search-icon" onClick={handleSubmitSearch}/>
               </div>
-            </div>
+            </form>
             {/* <NavLink to="/" className="header__link-home"></NavLink> */}
             <div className="header__icons-wrap">
               <NavLink to="/comparing" className="header__link-comparing">
@@ -83,7 +176,11 @@ const Header = () => {
                   activator={
                     <div className="cart-activator" onClick={open}>
                       <CartIcon />
-                      <span className={`header__link-cart-name ${cartTotalNumber > 0 ? "header__link-cart-name-active" : ""}`}>Basket</span>
+                      <span
+                        className={`header__link-cart-name ${cartTotalNumber > 0 ? "header__link-cart-name-active" : ""}`}
+                      >
+                        Basket
+                      </span>
                       {windowWidth > 1024 && cartTotal > 0 && <span className="counter">${cartTotal}</span>}
                       {windowWidth <= 1024 && cartTotal > 0 && (
                         <span className="counter-circle">{cartTotalNumber}</span>
