@@ -1,11 +1,12 @@
 @import "../../../../../assets/styles/style";
+
 .contact-form-footer {
   .container {
     background-color: $secondary-color-lavand-light;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
+    position: relative;
 
     .contact-form-footer-info,
     .contact-form {
@@ -14,7 +15,7 @@
 
       @media (min-width: $tablet) {
         width: calc(50% - 10px);
-        margin-top: 32px;
+        margin-top: 30px;
         margin-bottom: 0;
 
         &:first-child {
@@ -85,10 +86,31 @@
         border-radius: 5px;
         margin-bottom: 16px;
       }
+
       .btn-text {
         font: 400 16px / 1.5 "Inter", sans-serif;
         color: $secondary-color-white;
         flex-direction: row;
+      }
+    }
+
+    .contact-form-footer-svg {
+      display: none;
+
+
+      @media (min-width: $tablet) {
+
+        justify-content: left;
+        display: block;
+        left: 0;
+        top: -30px;
+
+
+        width: 45%;
+        fill: rgba(255, 255, 255, 0.2);
+        position: absolute;
+
+
       }
     }
   }
