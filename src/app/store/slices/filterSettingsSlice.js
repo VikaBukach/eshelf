@@ -2,12 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const PORT = process.env.REACT_APP_PORT || 5000;
+const REACT_APP_BACK_URL = process.env.REACT_APP_BACK_URL || "http://localhost";
 
 export const getMinAndMaxPrices = createAsyncThunk(
   "filterSettings/getMinAndMaxPrices",
   async ({ collection, filterSettings }, { dispatch }) => {
     try {
-      const res = await axios.get(`http://localhost:${PORT}/get-min-and-max-prices/?collection=${collection}`, {
+      const res = await axios.get(`${REACT_APP_BACK_URL}:${PORT}/get-min-and-max-prices/?collection=${collection}`, {
         params: {
           filterSettings: filterSettings,
         },
@@ -31,7 +32,7 @@ export const fillTheFilter = createAsyncThunk(
         filterCriteriasArray.push(criteria.path);
       });
 
-      const res = await axios.get(`http://localhost:${PORT}/fill-the-filter/?collection=${collection}`, {
+      const res = await axios.get(`${REACT_APP_BACK_URL}:${PORT}/fill-the-filter/?collection=${collection}`, {
         params: {
           filterSettings: filterSettings,
           filterCriterias: filterCriteriasArray,

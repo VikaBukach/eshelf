@@ -2,13 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const PORT = process.env.REACT_APP_PORT || 5000;
+const REACT_APP_BACK_URL = process.env.REACT_APP_BACK_URL || "http://localhost";
 
 export const selectProducts = (state) => state.products.data;
 
 // Завантаження ОДНОГО товару згідно коллекції і id
 export const loadOneProduct = createAsyncThunk("products/loadOneProduct", async ({ collection, id }, { dispatch }) => {
   try {
-    const res = await axios.get(`http://localhost:${PORT}/load-one-product/?collection=${collection}`, {
+    const res = await axios.get(`${REACT_APP_BACK_URL}:${PORT}/load-one-product/?collection=${collection}`, {
       params: {
         id: id,
       },
@@ -25,7 +26,7 @@ export const loadOnePageOfProducts = createAsyncThunk(
   "products/loadOnePageOfProducts",
   async ({ collection, filterSettings, priceBy, priceTo, limit, page, sortingMode }, { dispatch, getState }) => {
     try {
-      const res = await axios.get(`http://localhost:${PORT}/load-one-page-of-products/?collection=${collection}`, {
+      const res = await axios.get(`${REACT_APP_BACK_URL}:${PORT}/load-one-page-of-products/?collection=${collection}`, {
         params: {
           filterSettings: filterSettings,
           priceBy: priceBy,
