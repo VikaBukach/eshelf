@@ -148,6 +148,9 @@
       border-radius: 8px;
       width: 234px;
       height: 40px;
+      &:hover {
+        background-color: darken($secondary-color-purple, 10%);
+      }
     }
     @media (min-width: $desktop) {
       border-radius: 5px;

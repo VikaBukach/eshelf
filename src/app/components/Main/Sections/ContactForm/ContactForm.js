@@ -13,8 +13,8 @@ function ContactForm(props) {
     });
 
     const DetailsSchema = Yup.object().shape({
-        name: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-        phone: Yup.string().length(17).required("Required"),
+        name: Yup.string().min(2, "Too Short!").max(50, "Too Long!"),
+        phone: Yup.string().length(17),
     });
 
     const [disabledInputs, swtDisabledInputs] = useState(false);
@@ -65,12 +65,15 @@ function ContactForm(props) {
                             name: state.name,
                             phone: state.phone,
                         }}
-                        onSubmit={(values, {setFieldValue}) => {
-                            setFieldValue("name", values.name);
-                            setFieldValue("phone", values.phone);
-                        }}
+                        onSubmit={(values, { setSubmitting, resetForm }) => {
+                            setTimeout(() => {
+                                resetForm();
+                                setSubmitting(false);
+                            }, 400);
+                        }
+                    }
                     >
-                        {({errors}) => (
+                        {({errors, isSubmitting}) => (
                             <Form>
                                 {inputs.map(input => (
                                     <div className="contact-form-input" key={input.key}>
@@ -87,7 +90,6 @@ function ContactForm(props) {
                                                         ...prev,
                                                         [input.key]: value,
                                                     }));
-                                                    // setFieldValue(input.key, value);
                                                 }}
                                             />
                                         ) : (
@@ -113,6 +115,13 @@ function ContactForm(props) {
                                 <Button
                                     btnClass="contact-form-btn"
                                     type="submit"
+                                    disabled={isSubmitting}
+                                    onClick={() => {
+                                        if (!state.name || !state.phone) {
+                                            alert("Please fill in all required fields");
+                                            return;
+                                        }
+                                    }}
                                     text={"Send a request"}
                                 />
                             </Form>

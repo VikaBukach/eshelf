@@ -104,6 +104,11 @@
         background-color: $secondary-color-purple;
         border-radius: 5px;
         margin-bottom: 16px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken($secondary-color-purple, 10%);
+        }
       }
 
       .btn-text {
